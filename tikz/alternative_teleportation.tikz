@@ -1,0 +1,48 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (0) at (1.25, -3.25) {};
+		\node [style=none] (1) at (3.25, -3.25) {};
+		\node [style=none] (4) at (1.25, -1.75) {};
+		\node [style=none] (5) at (1.25, -0.75) {};
+		\node [style=none] (6) at (3.25, -1.75) {};
+		\node [style=none] (7) at (1.25, -4.25) {};
+		\node [style=none] (8) at (3.25, -4.25) {};
+		\node [style=fat box] (9) at (2.25, -2.5) {CNOT};
+		\node [style=none] (10) at (3.25, -0.75) {};
+		\node [style=medium box] (11) at (1.25, -0.25) {H};
+		\node [style=medium box] (12) at (1.25, 2) {Z};
+		\node [style=medium box] (13) at (3.25, 2) {Z};
+		\node [style=black circle] (14) at (1.25, 3.5) {};
+		\node [style=black circle] (15) at (3.25, 3.5) {};
+		\node [style=white square] (16) at (-3, 1.5) {};
+		\node [style=none] (17) at (-3.75, -4.25) {};
+		\node [style=none] (18) at (-3.75, -0.75) {};
+		\node [style=none] (19) at (-1.75, -0.75) {};
+		\node [style=none] (20) at (-1.75, -0.75) {};
+		\node [style=none] (21) at (-1.75, -4.25) {};
+		\node [style=fat box] (22) at (-2.75, 0) {Bell};
+		\node [style=none] (23) at (-3.75, 0.75) {};
+		\node [style=none] (24) at (-1.75, 0.75) {};
+		\node [style=black circle] (25) at (-3.75, 3.5) {};
+		\node [style=black circle] (26) at (-1.75, 3.5) {};
+		\node [style=white square] (28) at (-0.25, 0) {$\Rightarrow$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (7.center) to (0.center);
+		\draw (8.center) to (1.center);
+		\draw (4.center) to (5.center);
+		\draw (6.center) to (10.center);
+		\draw (5.center) to (11);
+		\draw (5.center) to (11);
+		\draw (5.center) to (11);
+		\draw (11) to (12);
+		\draw (10.center) to (13);
+		\draw (12) to (14);
+		\draw (13) to (15);
+		\draw (17.center) to (18.center);
+		\draw (19.center) to (20.center);
+		\draw (20.center) to (21.center);
+		\draw (23.center) to (25);
+		\draw (24.center) to (26);
+	\end{pgfonlayer}
+\end{tikzpicture}

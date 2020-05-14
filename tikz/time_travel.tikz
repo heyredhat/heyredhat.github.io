@@ -1,0 +1,72 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (1) at (-13.5, -4.5) {};
+		\node [style=none] (2) at (-11.5, -4.5) {};
+		\node [style=none] (3) at (-11.5, -10) {};
+		\node [style=none] (4) at (-9.5, -10) {};
+		\node [style=none] (5) at (-9.5, -3.5) {};
+		\node [style=medium box] (6) at (-11.5, -7.25) {$U$};
+		\node [style=circle] (7) at (-12.5, 0) {$A$};
+		\node [style=medium box] (8) at (-2, 0) {$U^{T}$};
+		\node [style=none] (9) at (8.5, 0) {};
+		\node [style=none] (14) at (-7.5, -4.5) {};
+		\node [style=none] (15) at (-5.5, -4.5) {};
+		\node [style=none] (16) at (-5.5, -10) {};
+		\node [style=none] (17) at (-3.5, -10) {};
+		\node [style=none] (18) at (-3.5, -3.5) {};
+		\node [style=medium box] (19) at (-5.5, -7.25) {$U$};
+		\node [style=none] (21) at (-7.5, -11) {};
+		\node [style=none] (22) at (-1.5, -4.5) {};
+		\node [style=none] (23) at (0.5, -4.5) {};
+		\node [style=none] (24) at (0.5, -10) {};
+		\node [style=none] (25) at (2.5, -10) {};
+		\node [style=none] (26) at (2.5, -3.5) {};
+		\node [style=medium box] (27) at (0.5, -7.25) {$U$};
+		\node [style=none] (29) at (-1.5, -11) {};
+		\node [style=none] (30) at (-8.5, -7) {$\Rightarrow$};
+		\node [style=none] (31) at (-2.5, -7) {$\Rightarrow$};
+		\node [style=none] (32) at (3.5, -7) {$\Rightarrow$};
+		\node [style=none] (33) at (4.5, -4.5) {};
+		\node [style=none] (34) at (6.5, -4.5) {};
+		\node [style=none] (35) at (6.5, -10) {};
+		\node [style=none] (36) at (8.5, -10) {};
+		\node [style=none] (37) at (8.5, -3.5) {};
+		\node [style=medium box] (38) at (6.5, -7.25) {$U$};
+		\node [style=none] (40) at (4.5, -11) {};
+		\node [style=moving] (42) at (-13.5, -8.5) {$A$};
+		\node [style=moving] (43) at (-5.5, -5.25) {$\bar{A}$};
+		\node [style=moving] (44) at (0.5, -9.5) {$U^{\dagger}\bar{A}$};
+		\node [style=moving] (45) at (8.5, -5.5) {$U^{T}A$};
+		\node [style=circle] (46) at (-13.5, -11) {$A$};
+		\node [style=bluemoving] (47) at (-7.75, 0) {$A$};
+		\node [style=bluemoving] (48) at (4.75, 0) {$U^{T}A$};
+		\node [style=none] (49) at (-2, 1.75) {A's time};
+		\node [style=none] (50) at (-2, -2.5) {Your time};
+		\node [style=none] (51) at (-2, -13.75) {*For spins, also multiply time reversed states by Y, and conjugate operators by Y.};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [bend left=90, looseness=1.75] (1.center) to (2.center);
+		\draw (2.center) to (3.center);
+		\draw [bend right=90, looseness=1.75] (3.center) to (4.center);
+		\draw (4.center) to (5.center);
+		\draw (7) to (8);
+		\draw (8) to (9.center);
+		\draw [bend left=90, looseness=1.75] (14.center) to (15.center);
+		\draw (15.center) to (16.center);
+		\draw [bend right=90, looseness=1.75] (16.center) to (17.center);
+		\draw (17.center) to (18.center);
+		\draw (21.center) to (14.center);
+		\draw [bend left=90, looseness=1.75] (22.center) to (23.center);
+		\draw (23.center) to (24.center);
+		\draw [bend right=90, looseness=1.75] (24.center) to (25.center);
+		\draw (25.center) to (26.center);
+		\draw (29.center) to (22.center);
+		\draw [bend left=90, looseness=1.75] (33.center) to (34.center);
+		\draw (34.center) to (35.center);
+		\draw [bend right=90, looseness=1.75] (35.center) to (36.center);
+		\draw (36.center) to (37.center);
+		\draw (40.center) to (33.center);
+		\draw (1.center) to (42);
+		\draw (46) to (42);
+	\end{pgfonlayer}
+\end{tikzpicture}

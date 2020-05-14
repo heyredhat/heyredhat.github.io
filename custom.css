@@ -1,0 +1,29 @@
+#logo {
+	position: absolute; 
+	top: -350px; 
+	right: -50px;
+	transition: 0.07s;
+}
+
+#logo:hover {
+	opacity: 0.75;
+}
+
+#logo img {
+	width: 650px;
+	animation: rotation 100s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.container {
+	position: relative;
+	top: 125px;
+}

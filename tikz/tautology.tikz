@@ -1,0 +1,53 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (0) at (0, 2.75) {$(A \otimes B) \times (C \otimes D) = (A \times C) \otimes (B \times D)$};
+		\node [style=medium box] (1) at (-3, -1.75) {$A$};
+		\node [style=medium box] (2) at (-1.25, -1.75) {$B$};
+		\node [style=medium box] (3) at (-3, 0) {$C$};
+		\node [style=medium box] (4) at (-1.25, 0) {$D$};
+		\node [style=none] (5) at (-3, -0.5) {};
+		\node [style=none] (6) at (-3, -1.25) {};
+		\node [style=none] (7) at (-1.25, -0.5) {};
+		\node [style=none] (8) at (-1.25, -1.25) {};
+		\node [style=none] (9) at (-3, 0.5) {};
+		\node [style=none] (10) at (-3, 1) {};
+		\node [style=none] (11) at (-1.25, 1) {};
+		\node [style=none] (12) at (-1.25, 0.5) {};
+		\node [style=none] (13) at (-3, -2.25) {};
+		\node [style=none] (14) at (-3, -2.75) {};
+		\node [style=none] (15) at (-1.25, -2.25) {};
+		\node [style=none] (16) at (-1.25, -2.75) {};
+		\node [style=none] (17) at (0, -0.75) {$=$};
+		\node [style=medium box] (18) at (1.25, -1.75) {$A$};
+		\node [style=medium box] (19) at (3, -1.75) {$B$};
+		\node [style=medium box] (20) at (1.25, 0) {$C$};
+		\node [style=medium box] (21) at (3, 0) {$D$};
+		\node [style=none] (22) at (1.25, -0.5) {};
+		\node [style=none] (23) at (1.25, -1.25) {};
+		\node [style=none] (24) at (3, -0.5) {};
+		\node [style=none] (25) at (3, -1.25) {};
+		\node [style=none] (26) at (1.25, 0.5) {};
+		\node [style=none] (27) at (1.25, 1) {};
+		\node [style=none] (28) at (3, 1) {};
+		\node [style=none] (29) at (3, 0.5) {};
+		\node [style=none] (30) at (1.25, -2.25) {};
+		\node [style=none] (31) at (1.25, -2.75) {};
+		\node [style=none] (32) at (3, -2.25) {};
+		\node [style=none] (33) at (3, -2.75) {};
+		\node [style=none] (34) at (0, 1.75) {$\downarrow$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (14.center) to (13.center);
+		\draw (16.center) to (15.center);
+		\draw (6.center) to (5.center);
+		\draw (8.center) to (4);
+		\draw (9.center) to (10.center);
+		\draw (12.center) to (11.center);
+		\draw (31.center) to (30.center);
+		\draw (33.center) to (32.center);
+		\draw (23.center) to (22.center);
+		\draw (25.center) to (21);
+		\draw (26.center) to (27.center);
+		\draw (29.center) to (28.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

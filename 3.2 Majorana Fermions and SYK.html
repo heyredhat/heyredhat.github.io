@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>index</title>
+<title>3.2 Majorana Fermions and SYK</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13077,54 +13077,725 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><a href="https://github.com/heyredhat/heyredhat.github.io"><img align="center" src="img/front_logo.png" /></a></p>
+<h1 id="How-to-Continue-Making-a-Wormhole">How to Continue Making a Wormhole<a class="anchor-link" href="#How-to-Continue-Making-a-Wormhole">&#182;</a></h1><h2 id="Part-2:-Majorana-Fermions-and-SYK">Part 2: Majorana Fermions and SYK<a class="anchor-link" href="#Part-2:-Majorana-Fermions-and-SYK">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To approach SYK (the Sachdev-Ye-Kitaev) model, first we need to understand about fermions.</p>
+<p>As you may know, we (often) classify particles in terms of whether they are bosons or fermions. Generally speaking, bosons are like force particles: examples are the photon, the gluon. Any number of bosons can be in the same state: hence, a laser beam. And the bosonic particles are in themselves indistinguishable: they are permutation symmetric. In many cases, we can use quantum harmonic oscillators to easily keep track of bosonic degrees of freedom. We assign a harmonic oscillator to each degree of freedom of the particle, and the number operator of each oscillator keeps track of how many particles are in <em>that state</em>. The use of harmonic oscillators automatically imposes for us that the particles be permutation symmetric. We won't go into the details of this here, but save that for a later meeting. For now, let's just observe that in practice, if we work in finite dimensions, we can just cap the maximum number of quanta in a given harmonic oscillator, and get finite dimensional "creation" and "annihilation" operators, which add and subtract quanta from each oscillator--and although they are not hermitian, they can be used as building blocks for hermitian operators. If we have multiple oscillators, we can just tensor these creation and annihilation operators with identities so they act on the appropriate subspaces. These operators obey the following commutation relations:</p>
+$$ [b_{i}, b_{j}] = [b^{\dagger}_{i}, b^{\dagger}_{j}] = 0 $$$$ [b_{i}, b^{\dagger}_{j}] = \delta^{i}_{j} $$<p>Where $ b^{\dagger} $ is a creation operator, $ b $ is an annihilation operator, and: the commutator is $ [A, B] = AB - BA $. By the way, the anticommutator is $ \{A, B\} = AB + BA $.</p>
+<p>If we want to do the same thing for fermions, we have to make some changes. First, our oscillators can only have 0 or 1 excitations. In other words, at maximum only 1 fermion can be in a given state. This is the Pauli exclusion principle at work. Indeed, the tensor product has to work differently: the whole thing has to do with how fermions are permutation <em>antisymmetric</em> particles, unlike bosons which are permutation <em>symmetric</em>. So it doesn't matter the order in which we create bosons, but if for fermions: $ f^{\dagger}_{i} f^{\dagger}_{j} \mid 0 \rangle = -f^{\dagger}_{i} f^{\dagger}_{j} \mid 0 \rangle $, where $ \mid 0 \rangle $ is the fermion vacuum aka the state of all oscillators having 0 quanta.</p>
+<p>The upshot is that the commutation relations between fermions involve the anticommutator instead of the commutator.</p>
+$$ \{f_{i}, f_{j}\} = \{f^{\dagger}_{i}, f^{\dagger}_{j}\} = 0 $$$$ \{f_{i}, f^{\dagger}_{j}\} = \delta^{i}_{j} $$<p>So it's not hard to do implement this. Suppose we have 5 fermions. The standard 2x2 matrices for creation and annihilation operators are just:</p>
+$$ f^{\dagger} = \begin{pmatrix} 0 &amp; 0 \\ 1 &amp; 0 \end{pmatrix} $$$$ f = \begin{pmatrix} 0 &amp; 1 \\ 0 &amp; 0 \end{pmatrix} $$<p>To get 5 pairs of creation and annihilation operators with the correct commutation relations, and so which preserve the antisymmetry of the fermions:</p>
+$$ f_{0} = f \otimes I \otimes I \otimes I \otimes I $$$$ f_{1} = Z \otimes f \otimes I \otimes I \otimes I $$$$ f_{2} = Z \otimes Z \otimes f \otimes I \otimes I $$$$ f_{3} = Z \otimes Z \otimes Z \otimes f \otimes I $$$$ f_{4} = Z \otimes Z \otimes Z \otimes Z \otimes f $$<p>The idea is that there is a "normal ordering" for the fermions. When the operators are applied to the vacuum in the descending order, the Z's in $ f_{4} $, say, don't matter since there are no excitations in those oscillators: we're in the vacuum after all. But when the operators are applied in the reverse order, they pick up a negative sign from the Z's. You can check that this works</p>
 
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">anticommutator</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">a</span>
+
+<span class="c1">#########################################################################################</span>
+
+<span class="k">def</span> <span class="nf">fermion_operators</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">destroy</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span>\
+                <span class="k">else</span> <span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">()</span> <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span>\
+                    <span class="k">else</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>\
+                        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>\
+                            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+
+<span class="k">def</span> <span class="nf">test_fermion_operators</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)):</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">test1</span> <span class="o">=</span> <span class="n">anticommutator</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">.</span><span class="n">full</span><span class="p">()</span>
+            <span class="n">test2</span> <span class="o">=</span> <span class="n">anticommutator</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">())</span><span class="o">.</span><span class="n">full</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> \
+                <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">test1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">d</span><span class="p">,</span><span class="n">d</span><span class="p">)))</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>\
+                    <span class="ow">and</span> \
+                <span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">test2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">d</span><span class="p">,</span><span class="n">d</span><span class="p">)))</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">)</span>\
+                        <span class="ow">or</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">test2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="p">))</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">))):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+<span class="c1">#########################################################################################</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">IDn</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">n</span><span class="p">)</span>
+<span class="n">IDn</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">]</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">fermion_operators</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">test_fermion_operators</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">f</span><span class="p">])</span> <span class="c1"># number operator</span>
+<span class="n">I</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># vacuum state</span>
+<span class="n">I</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Essays-on-Quantum-Physics"><div align="center">Essays on Quantum Physics</div><a class="anchor-link" href="#Essays-on-Quantum-Physics">&#182;</a></h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ol>
-<li><a href="1%20Introduction.html">Introduction</a> (<a href="1%20Introduction.ipynb">notebook</a>)</li>
-<li><a href="2.1%20Yanking.html"><em>How to Make a Wormhole</em>: Yanking</a> (<a href="2.1%20Yanking.ipynb">notebook</a>)</li>
-<li><a href="2.2%20Teleportation.html"><em>How to Make a Wormhole</em>: Teleportation</a> (<a href="2.2%20Teleportation.ipynb">notebook</a>)</li>
-<li><a href="2.3%20Time%20Evolution.html"><em>How to Make a Wormhole</em>: Time Evolution</a> (<a href="2.3%20Time%20Evolution.ipynb">notebook</a>)</li>
-<li><a href="2.4%20The%20TFD.html"><em>How to Make a Wormhole</em>: The TFD</a> (<a href="2.4%20The%20TFD.ipynb">notebook</a>)</li>
-<li><a href="2.5%20Scrambling%20and%20Winding.html"><em>How to Make a Wormhole</em>: Scrambling and Winding</a> (<a href="2.5%20Scrambling%20and%20Winding.ipynb">notebook</a>)</li>
-<li><a href="2.6%20Wormhole%20Experiments.html"><em>How to Make a Wormhole</em>: Wormhole Experiments</a> (<a href="2.6%20Wormhole%20Experiments.ipynb">notebook</a>)</li>
-<li><a href="2.7%20Geometrical%20Sketch.html"><em>How to Make a Wormhole</em>: Geometrical Sketch</a> (<a href="2.7%20Geometrical%20Sketch.ipynb">notebook</a>)</li>
-<li><a href="3.1%20Philosophical%20Interlude.html"><em>How to Continue Making a Wormhole</em>: Philosophical Interlude</a> (<a href="3.1%20Philosophical%20Interlude.ipynb">notebook</a>)</li>
-<li><a href="3.2%20Majorana%20Fermions%20and%20SYK.html"><em>How to Continue Making a Wormhole</em>: Majorana Fermions and SYK</a> (<a href="3.2%20Majorana%20Fermions%20and%20SYK.ipynb">notebook</a>)</li>
-<li><a href="3.3%20A%20Really%20Existing%20Quantum%20Computer.html"><em>How to Continue Making a Wormhole</em>: A Really Existing Quantum Computer</a> (<a href="3.3%20A%20Really%20Existing%20Quantum%20Computer.ipynb">notebook</a>)</li>
-<li><a href="4.1%20Spheres.html"><em>How to Think about Entanglement</em>: Spheres</a> (<a href="4.1%20Spheres.ipynb">notebook</a>)</li>
-<li><a href="4.2%20Quantum%20Clocks.html"><em>How to Think about Entanglement</em>: Quantum Clocks</a> (<a href="4.2%20Quantum%20Clocks.ipynb">notebook</a>) [in progress]</li>
-<li><a href="4.3%20Representations.html"><em>How to Think about Entanglement</em>: Representations</a> (<a href="4.3%20Representations.ipynb">notebook</a>) [in progress]</li>
-<li>...</li>
-</ol>
+<p>So we have some fermions. Now we're going to do a crazy thing. It turns out we can split a fermion into two "majorana fermions." The idea is that a majorana fermion is its own antiparticle: its creation and annihilation operators <em>are the same operator</em>. In some sense, we can think of them like the "square roots" of fermions. Just as we can split any normal fermion into two majoranas, we can fuse any two majoranas into a new fermion.</p>
+<p>Given normal fermion operators $f$ and $f^{\dagger}$, we form majorana operators:</p>
+$$ \psi_{L} = \frac{1}{\sqrt{2}} (f + f^{\dagger}) $$$$ \psi_{R} = \frac{i}{\sqrt{2}} (f - f^{\dagger}) $$<p>Here $ \psi $ is the standard way of referring to a majorana operator. We've chosen to call the two majoranas we get as a result by "left" and "right" for reasons we shall shortly see. And by the way, they are hermitian.</p>
+<p>So we we have n fermions, we could imagine splitting them all into majoranas. They'll obey the commutation relations:</p>
+$$ \{ \psi_{i}, \psi_{j} \}  = \delta_{i}^{j}$$<p>Then, for example, we could create new normal fermions out of the majoranas on the left, and then on the right.</p>
 
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">majorana_operators</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="n">L</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)):</span>
+        <span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()))</span>
+        <span class="n">R</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="mi">1</span><span class="n">j</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span><span class="o">*</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="n">L</span><span class="p">,</span> <span class="n">R</span>
+
+<span class="k">def</span> <span class="nf">test_majorana_operators</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)):</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">test</span> <span class="o">=</span> <span class="n">anticommutator</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">m</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">.</span><span class="n">full</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">((</span><span class="n">i</span> <span class="o">==</span> <span class="n">j</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="p">))</span><span class="o">.</span><span class="n">all</span><span class="p">())</span> <span class="ow">or</span>\
+                <span class="p">(</span><span class="n">i</span> <span class="o">!=</span> <span class="n">j</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">d</span><span class="p">,</span><span class="n">d</span><span class="p">)))</span><span class="o">.</span><span class="n">all</span><span class="p">())):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+<span class="k">def</span> <span class="nf">majoranas_to_fermions</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[(</span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span>\
+            <span class="p">[(</span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
+
+<span class="k">def</span> <span class="nf">test_fermion_operators2</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fdag</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)):</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">test1</span> <span class="o">=</span> <span class="n">anticommutator</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">.</span><span class="n">full</span><span class="p">()</span>
+            <span class="n">test2</span> <span class="o">=</span> <span class="n">anticommutator</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">fdag</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">.</span><span class="n">full</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> \
+                <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">test1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">d</span><span class="p">,</span><span class="n">d</span><span class="p">)))</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>\
+                    <span class="ow">and</span> \
+                <span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">test2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">d</span><span class="p">,</span><span class="n">d</span><span class="p">)))</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">)</span>\
+                        <span class="ow">or</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">test2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="p">))</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">))):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+<span class="c1">#########################################################################################</span>
+
+<span class="n">mL</span><span class="p">,</span> <span class="n">mR</span> <span class="o">=</span> <span class="n">majorana_operators</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">test_majorana_operators</span><span class="p">(</span><span class="n">mL</span><span class="o">+</span><span class="n">mR</span><span class="p">))</span>
+
+<span class="n">Lf</span><span class="p">,</span> <span class="n">Lfdag</span> <span class="o">=</span> <span class="n">majoranas_to_fermions</span><span class="p">(</span><span class="n">mL</span><span class="p">)</span>
+<span class="n">NLf</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">Lfdag</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">Lf</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Lf</span><span class="p">))])</span> <span class="c1"># L number operator</span>
+<span class="n">Rf</span><span class="p">,</span> <span class="n">Rfdag</span> <span class="o">=</span> <span class="n">majoranas_to_fermions</span><span class="p">(</span><span class="n">mR</span><span class="p">)</span>
+<span class="n">NRf</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">Rfdag</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">Rf</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Rf</span><span class="p">))])</span> <span class="c1"># R number operator</span>
+                                   
+<span class="nb">print</span><span class="p">(</span><span class="n">test_fermion_operators2</span><span class="p">(</span><span class="n">Lf</span><span class="p">,</span> <span class="n">Lfdag</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">test_fermion_operators2</span><span class="p">(</span><span class="n">Rf</span><span class="p">,</span> <span class="n">Rfdag</span><span class="p">))</span>
+
+<span class="n">NLR</span> <span class="o">=</span> <span class="n">NLf</span><span class="o">+</span><span class="n">NRf</span>
+<span class="n">NLRl</span><span class="p">,</span> <span class="n">NLRv</span> <span class="o">=</span> <span class="n">NLR</span><span class="o">.</span><span class="n">eigenstates</span><span class="p">()</span>
+<span class="n">CB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">v</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">NLRv</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+<span class="n">ILR</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">CB</span><span class="p">)</span> <span class="c1"># The vacuum from the L/R perspective</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">ILR</span><span class="o">.</span><span class="n">ptrace</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span> <span class="c1"># ...</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ILR</span><span class="o">.</span><span class="n">ptrace</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">entropy_vn</span><span class="p">(</span><span class="n">ILR</span><span class="o">.</span><span class="n">ptrace</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">))))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">entropy_vn</span><span class="p">(</span><span class="n">ILR</span><span class="o">.</span><span class="n">ptrace</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">))))</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div align="center">&copy; 2020 heyredhat @ gmail.com</div>
+<p>The first thing we need to realize is that the majorana operators form a basis for the whole space of operators.</p>
+<p>We consider all combinations of majoranas of different lengths (eg. $ I, \psi_{0}, \psi_{1}, \psi_{2}, \psi_{0}\psi_{1}, \psi_{0}\psi_{2}, \psi_{1}\psi_{2}, \psi_{0}\psi_{1}\psi_{2} $) and take the inner product of our operator with each of them in turn.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+
+<span class="k">def</span> <span class="nf">to_majorana_basis</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">terms</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">tr</span><span class="p">()</span><span class="o">/</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">pr</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)),</span> <span class="n">n</span><span class="p">):</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="p">[</span><span class="n">m</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pr</span><span class="p">])</span>
+                <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">s</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">op</span><span class="p">)</span><span class="o">.</span><span class="n">tr</span><span class="p">()</span><span class="o">*</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">terms</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">from_majorana_basis</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+    <span class="n">op</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">terms</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">op</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="n">terms</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dims</span>
+            <span class="n">c</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">pr</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)),</span> <span class="n">n</span><span class="p">):</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="p">[</span><span class="n">m</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pr</span><span class="p">])</span>
+                <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">op</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">*</span><span class="n">s</span><span class="p">)</span>
+                <span class="n">terms</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dims</span>
+                <span class="n">c</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now suppose we want to consider a system of n fermions, which will split into n/2 left fermions and n/2 right fermions via the majoranas.</p>
+<p>So actually, first we consider a system of n/2 fermions.
+We form majoranas out of them, not really caring about left and right.</p>
+<p>We're interested in an operator O which is n/2 x n/2.</p>
+<p>First we expand it in a basis of n/2 majoranas, and get a series of coefficients. We then take the n/2 majoranas on the left side of our larger system and multiply them all by those coefficicents and sum. And now we've upgraded our operator to act only on the left majoranas. In this world, we can't simply do $ O \otimes I $ vs $ I \otimes O$.</p>
+<p>So we can upgrade our operator to act with either left majoranas or right majoranas. But we also have to take the transpose of our operator on the right. It turns out here we don't take the transpose of the original matrix anymore. To get the right relation, it suffices to multiply all the right majoranas by i. In other words, instead of doing a 90 degree rotation in "matrix world," somehow in this basis, this translates into a 90 degree rotation in the complex plane. It makes sense: since in each original fermion dwell a left and a right part, each separated by a mere local rotation.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">n_</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">f_</span> <span class="o">=</span> <span class="n">fermion_operators</span><span class="p">(</span><span class="n">n_</span><span class="p">)</span>
+<span class="n">m_</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">,</span> <span class="n">majorana_operators</span><span class="p">(</span><span class="n">f_</span><span class="p">))</span>
+
+<span class="n">O</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_unitary</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">n_</span><span class="p">)</span>
+<span class="n">O</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n_</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n_</span><span class="p">]</span>
+
+<span class="n">OL</span> <span class="o">=</span> <span class="n">from_majorana_basis</span><span class="p">(</span><span class="n">to_majorana_basis</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">m_</span><span class="p">),</span> <span class="n">mL</span><span class="p">)</span>
+<span class="n">OR</span> <span class="o">=</span> <span class="n">from_majorana_basis</span><span class="p">(</span><span class="n">to_majorana_basis</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">m_</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">mR</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">to_majorana_basis</span><span class="p">(</span><span class="n">OR</span><span class="p">,</span> <span class="n">mL</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">to_majorana_basis</span><span class="p">(</span><span class="n">OL</span><span class="p">,</span> <span class="n">mR</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">OL</span><span class="o">*</span><span class="n">I</span> <span class="o">==</span> <span class="n">OR</span><span class="o">*</span><span class="n">I</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now before we sort of waved our hands when it came to choosing the coupling operator in the wormhole model, saying that the ZZ coupling is a good proxy for a "size" operator. Here there is a literal size operator which we can use. It turns out just as we've seen before, if we take an operator and apply it to the left side, it unwinds out as a vector across the left and right--and here's the twist: <em>the total number operator of the original fermions</em> turns out to be the size operator. And the individual number operators count the numbers of majoranas themselves "inside" an operator.</p>
+<p>The construction is that we take an operator that acts on n/2 x n/2 fermions, upgrade it to a double sided state by acting on the left on the "complex fermion vacuum" (as we'll call the original fermion vacuum), which splays it out--since the complex fermion vacuum is the maximally entangled state when seen from the "left/right" point of view. We then look at the expectation value of the number operator(s) on that state. Easy as pie!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">f</span><span class="p">,</span> <span class="n">mL</span><span class="p">,</span> <span class="n">m_</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">N</span>
+    <span class="n">majorana_state</span> <span class="o">=</span> <span class="p">(</span><span class="n">from_majorana_basis</span><span class="p">(</span><span class="n">to_majorana_basis</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">m_</span><span class="p">),</span> <span class="n">mL</span><span class="p">)</span><span class="o">*</span><span class="n">I</span><span class="p">)</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">majorana_state</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">majorana_state</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">m_</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">m_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">m_</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">m_</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">m_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">m_</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">m_</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">m_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">m_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">m_</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">m_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">m_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">m_</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">m_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">m_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we're ready to define the SYK hamiltonian.</p>
+<p>$ E_{SYK} = -\frac{1}{4!} \sum_{i}^{m} \sum_{j}^{m} \sum_{k}^{m} \sum_{l}^{m} c_{i,j,k,l} \psi_{i}\psi_{j}\psi_{k}\psi_{l} $ for $ i &lt; j &lt; k &lt; l $</p>
+<p>It's a sum of four term interactions between majorana fermions, in other words, the interactions are 4-local. The coefficients are normally distributed.</p>
+<p>Before, once we'd decided on an energy operator, we formed $ E_{L}$ and $ E_{R} $, where the latter was also the transpose. Here we build SYK energy operators out of left majoranas and right majoranas, and the right ones are multiplied by i.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="k">def</span> <span class="nf">random_syk_couplings</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="n">J</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">k</span> <span class="ow">and</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">l</span><span class="p">:</span>
+                        <span class="n">J</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">)]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">J</span>
+
+<span class="k">def</span> <span class="nf">syk_ham</span><span class="p">(</span><span class="n">couplings</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+    <span class="n">Jterms</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ijkl</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">couplings</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="n">ijkl</span>
+        <span class="n">Jterms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="o">*</span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">m</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">m</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">m</span><span class="p">[</span><span class="n">l</span><span class="p">])</span>
+    <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">4</span><span class="p">)))</span><span class="o">*</span><span class="nb">sum</span><span class="p">(</span><span class="n">Jterms</span><span class="p">)</span>
+
+<span class="n">J</span> <span class="o">=</span> <span class="n">random_syk_couplings</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">E</span> <span class="o">=</span> <span class="n">syk_ham</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="n">m_</span><span class="p">)</span>
+<span class="n">EL</span> <span class="o">=</span> <span class="n">syk_ham</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="n">mL</span><span class="p">)</span>
+<span class="n">ER</span> <span class="o">=</span> <span class="n">syk_ham</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">mR</span><span class="p">])</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">EL</span><span class="o">*</span><span class="n">I</span> <span class="o">==</span> <span class="n">ER</span><span class="o">*</span><span class="n">I</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we can evolve our operator $ O $ in time!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">OLt</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">EL</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">expm</span><span class="p">()</span><span class="o">*</span><span class="n">OL</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">EL</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">expm</span><span class="p">()</span>
+<span class="n">ORt</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">ER</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">expm</span><span class="p">()</span><span class="o">*</span><span class="n">OR</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">ER</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">expm</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">OLt</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span><span class="o">*</span><span class="n">I</span> <span class="o">==</span> <span class="n">ORt</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">*</span><span class="n">I</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Similarly, we can construct the TFD state at inverse temperature $ \beta $ by "splaying" $ \rho $ across left and right.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">construct_thermal_dm</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="n">beta</span><span class="o">*</span><span class="n">H</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">expm</span><span class="p">()</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="o">-</span><span class="n">beta</span><span class="o">*</span><span class="n">H</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">expm</span><span class="p">()</span><span class="o">.</span><span class="n">tr</span><span class="p">())</span>
+
+<span class="n">rho</span> <span class="o">=</span> <span class="n">construct_thermal_dm</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">rhoR</span> <span class="o">=</span> <span class="n">from_majorana_basis</span><span class="p">(</span><span class="n">to_majorana_basis</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">m_</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">mR</span><span class="p">])</span>
+<span class="n">TFD</span> <span class="o">=</span> <span class="p">(</span><span class="n">rhoR</span><span class="o">*</span><span class="n">I</span><span class="p">)</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We could use the TFD instead of the complex fermion vacuum to get a temperature dependent notion of size!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">cold_size</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">f</span><span class="p">,</span> <span class="n">mL</span><span class="p">,</span> <span class="n">m_</span><span class="p">,</span> <span class="n">TFD</span><span class="p">,</span> <span class="n">N</span>
+    <span class="n">majorana_state</span> <span class="o">=</span> <span class="p">(</span><span class="n">from_majorana_basis</span><span class="p">(</span><span class="n">to_majorana_basis</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">m_</span><span class="p">),</span> <span class="n">mL</span><span class="p">)</span><span class="o">*</span><span class="n">TFD</span><span class="p">)</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">majorana_state</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">majorana_state</span><span class="p">)</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="n">cold_size</span><span class="p">(</span><span class="n">m_</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cold_size</span><span class="p">(</span><span class="n">m_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">m_</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cold_size</span><span class="p">(</span><span class="n">m_</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">m_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">m_</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cold_size</span><span class="p">(</span><span class="n">m_</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">m_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">m_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cold_size</span><span class="p">(</span><span class="n">m_</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">m_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">m_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cold_size</span><span class="p">(</span><span class="n">m_</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">m_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">m_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Moreover, consider:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">OLt</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span><span class="o">*</span><span class="n">TFD</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ORt</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">*</span><span class="n">TFD</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As you can see, they're pretty close up to phase shifts on the components at finite temperature! And check it out at infinite temperature, and try it with unitaries vs hermitian operators. This is what is meant by ~ perfect size winding. We can get close to an identity between left and right operators at different temperatures by a diagonal phase shift. And indeed, the total number operator of the complex fermions is diagonal in the basis we're working in.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">OLt</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span><span class="o">*</span><span class="n">TFD</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">ORt</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">*</span><span class="n">TFD</span>
+<span class="n">A_</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">B_</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">D_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">B_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">A_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A_</span><span class="p">))])</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">D_</span><span class="p">))</span> <span class="c1"># our e^{igV}</span>
+<span class="n">D</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[</span><span class="n">A</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">A</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">D</span><span class="o">*</span><span class="n">A</span> <span class="o">==</span> <span class="n">B</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Okay, so we've got a wormhole for operators. But what about for states? Before we just inserted our qubit using a SWAP operation. But that won't work here: we're working in the complex fermion basis where each fermion encodes left and right! But of course, we can gather up the left and right majoranas to form left and right fermions. We could imagine swapping our qubit for the leftmost fermion, but that's kind of weird since although both are 2d vector spaces, they have different interpretations: in the case of a spin, the basis vectors refer to spin along or against the axis of quanization, and in the case of an oscillator, the basis vectors refer to the number of excitations.</p>
+<p>So here's a little geometry. You can kinda think of the fermions as being different directions in space, pairs of fermions forming "bivectors" (in the plane) between them, triples of fermions forming some kind of volume... Let's not get into specifics. The point is: we can grab three majorana fermions and turn them into a qubit.</p>
+$$ X = -i\psi_{x}\psi_{z} $$$$ Y = -i\psi_{z}\psi_{y} $$$$ Z = -i\psi_{y}\psi_{x} $$<p>These indeed follow the correct commutation relations for the Pauli operators.</p>
+$$ [X, Y] = iZ $$$$ [Y, Z] = iX $$$$ [Z, X] = iY $$$$ [X, X] = [Y, Y] = [Z, Z] = 0 $$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">commutator</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span> <span class="o">-</span> <span class="n">b</span><span class="o">*</span><span class="n">a</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">m_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">m_</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">m_</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">m_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">m_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">m_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">commutator</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">Z</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">commutator</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">X</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">commutator</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">Y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">commutator</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span> <span class="o">==</span> <span class="n">commutator</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span> <span class="o">==</span> <span class="n">commutator</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">Z</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">commutator</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">norm</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Cool! So let's start our wormhole protocol. We start with a msg in the spin up state. It of course has its XYZ operators.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">msg</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">big_I</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span>
+<span class="n">big_TFD</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">TFD</span><span class="p">)</span>
+
+<span class="n">msgXYZ</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;I&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">IDn</span><span class="p">),</span>\
+          <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">(),</span> <span class="n">IDn</span><span class="p">),</span>\
+          <span class="s2">&quot;Y&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmay</span><span class="p">(),</span> <span class="n">IDn</span><span class="p">),</span>\
+          <span class="s2">&quot;Z&quot;</span><span class="p">:</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">(),</span> <span class="n">IDn</span><span class="p">)}</span>
+
+<span class="k">def</span> <span class="nf">Ostar</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">msgXYZ</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">msgXYZ</span><span class="p">[</span><span class="n">o</span><span class="p">],</span> <span class="n">state</span><span class="p">)</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="s2">&quot;Z&quot;</span><span class="p">]]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Then we can form XYZ operators that act on the "first" qubit of the left black hole and XYZ operators that act on the "first" qubit of the right black hole. And let's make some helper functions that give us the rotation axis of each of the spins.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">LXYZ</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;I&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">IDn</span><span class="p">),</span>\
+        <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">from_majorana_basis</span><span class="p">(</span><span class="n">to_majorana_basis</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">m_</span><span class="p">),</span> <span class="n">mL</span><span class="p">)),</span>\
+        <span class="s2">&quot;Y&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">from_majorana_basis</span><span class="p">(</span><span class="n">to_majorana_basis</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">m_</span><span class="p">),</span> <span class="n">mL</span><span class="p">)),</span>\
+        <span class="s2">&quot;Z&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">from_majorana_basis</span><span class="p">(</span><span class="n">to_majorana_basis</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">m_</span><span class="p">),</span> <span class="n">mL</span><span class="p">))}</span>
+
+<span class="n">RXYZ</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;I&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">IDn</span><span class="p">),</span>\
+        <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">from_majorana_basis</span><span class="p">(</span><span class="n">to_majorana_basis</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">m_</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">mR</span><span class="p">])),</span>\
+        <span class="s2">&quot;Y&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">from_majorana_basis</span><span class="p">(</span><span class="n">to_majorana_basis</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">m_</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">mR</span><span class="p">])),</span>\
+        <span class="s2">&quot;Z&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">from_majorana_basis</span><span class="p">(</span><span class="n">to_majorana_basis</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">m_</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">mR</span><span class="p">]))}</span>
+
+<span class="k">def</span> <span class="nf">Lstar</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">LXYZ</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">LXYZ</span><span class="p">[</span><span class="n">o</span><span class="p">],</span><span class="n">state</span><span class="p">)</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="s2">&quot;Z&quot;</span><span class="p">]]</span>
+
+<span class="k">def</span> <span class="nf">Rstar</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">RXYZ</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">RXYZ</span><span class="p">[</span><span class="n">o</span><span class="p">],</span><span class="n">state</span><span class="p">)</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="s2">&quot;Z&quot;</span><span class="p">]]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So we have our XYZ operators. Now we need our swap. Well, here's an idea. We can take the normal swap operator and express it in the Pauli basis. We have two sets Pauli matrices for the message qubit and the left black hole qubit, and so we can rebuild the swap operator out of them!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+<span class="kn">from</span> <span class="nn">qutip.qip.operations.gates</span> <span class="kn">import</span> <span class="n">swap</span>
+
+<span class="k">def</span> <span class="nf">pauli_basis</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">IXYZ</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;I&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">(),</span> <span class="s2">&quot;Y&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmay</span><span class="p">(),</span> <span class="s2">&quot;Z&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">()}</span>
+    <span class="n">names</span><span class="p">,</span> <span class="n">ops</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">P</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="n">IXYZ</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">P</span><span class="p">))</span>
+        <span class="n">ops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">IXYZ</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">P</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">names</span><span class="p">,</span> <span class="n">ops</span>
+
+<span class="k">def</span> <span class="nf">to_pauli</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">Pops</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">o</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">op</span><span class="p">)</span><span class="o">.</span><span class="n">tr</span><span class="p">()</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">Pops</span><span class="p">])</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Pops</span><span class="p">))</span>
+
+<span class="c1">############################################</span>
+
+<span class="n">SWAP</span> <span class="o">=</span> <span class="n">swap</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">targets</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">Pnames</span><span class="p">,</span> <span class="n">Pops</span> <span class="o">=</span> <span class="n">pauli_basis</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">SWAPp</span> <span class="o">=</span> <span class="n">to_pauli</span><span class="p">(</span><span class="n">SWAP</span><span class="p">,</span> <span class="n">Pops</span><span class="p">)</span>
+
+<span class="n">INSERT</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">SWAPp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">msgXYZ</span><span class="p">[</span><span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">*</span><span class="n">LXYZ</span><span class="p">[</span><span class="n">name</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">Pnames</span><span class="p">)])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">Ostar</span><span class="p">(</span><span class="n">big_TFD</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Lstar</span><span class="p">(</span><span class="n">big_TFD</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Ostar</span><span class="p">(</span><span class="n">INSERT</span><span class="o">*</span><span class="n">big_TFD</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Lstar</span><span class="p">(</span><span class="n">INSERT</span><span class="o">*</span><span class="n">big_TFD</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Ostar</span><span class="p">(</span><span class="n">INSERT</span><span class="o">*</span><span class="n">INSERT</span><span class="o">*</span><span class="n">big_TFD</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Lstar</span><span class="p">(</span><span class="n">INSERT</span><span class="o">*</span><span class="n">INSERT</span><span class="o">*</span><span class="n">big_TFD</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So now we have all the ingredients in place.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> notebook
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">state</span> <span class="o">=</span> <span class="n">big_TFD</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">big_EL</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">EL</span><span class="p">)</span>
+<span class="n">big_ER</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">ER</span><span class="p">)</span>
+
+<span class="c1">#tiny_N skips first cmplx fermion</span>
+<span class="n">tiny_N</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">:]])</span>
+<span class="n">big_N</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">tiny_N</span><span class="p">)</span>
+<span class="c1">#big_N = qt.tensor(qt.identity(2), N)</span>
+
+<span class="k">def</span> <span class="nf">teleportation</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">big_EL</span><span class="p">,</span> <span class="n">big_ER</span><span class="p">,</span> <span class="n">big_N</span><span class="p">,</span> <span class="n">INSERT</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">big_ER</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">expm</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">g</span><span class="o">*</span><span class="n">big_N</span><span class="p">)</span><span class="o">.</span><span class="n">expm</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">big_EL</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">expm</span><span class="p">()</span><span class="o">*</span><span class="n">INSERT</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">big_EL</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">expm</span><span class="p">()</span><span class="o">*</span><span class="n">state</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">Zs</span> <span class="o">=</span> <span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">RXYZ</span><span class="p">[</span><span class="s2">&quot;Z&quot;</span><span class="p">],</span> <span class="n">teleportation</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">g</span><span class="p">))</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">G</span><span class="p">]</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">G</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">Zs</span><span class="p">)]</span>
+
+<span class="n">state2</span> <span class="o">=</span> <span class="n">teleportation</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+<span class="n">exiting_star</span> <span class="o">=</span> <span class="n">Rstar</span><span class="p">(</span><span class="n">state2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">exiting_star</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">Zs</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>And there you have it. We iterate over possible values g of the coupling, and then: evolve back in time on the left, swap in our message, evolve forward in time on the left, couple, and then evolve in time on the right, and look at the x/y/z expectation values on the right qubit.</p>
+<p>Finally, we can define geometric operators:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">BOOST</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">ER</span> <span class="o">-</span> <span class="n">EL</span><span class="p">)</span>
+<span class="n">ETA</span> <span class="o">=</span> <span class="n">EL</span> <span class="o">+</span> <span class="n">ER</span> <span class="o">-</span> <span class="n">g</span><span class="o">*</span><span class="n">N</span> <span class="c1">#or tiny_N</span>
+<span class="n">TE</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">ETA</span> <span class="o">-</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">ETA</span><span class="p">,</span> <span class="n">TFD</span><span class="p">))</span>
+<span class="n">PR</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="o">-</span><span class="n">ER</span> <span class="o">-</span> <span class="n">g</span><span class="o">*</span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">PL</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="o">-</span><span class="n">EL</span> <span class="o">-</span> <span class="n">g</span><span class="o">*</span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">P</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">commutator</span><span class="p">(</span><span class="n">BOOST</span><span class="p">,</span> <span class="n">TE</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>And now a word of philosophy.</p>
+<p>So we have this interesting construction. From one perspective, that of the complex fermions, we have a vacuum state with no excitations. From another perspective, that of the left/right fermions, we have two maximally entangled systems. In other words, whether something is in a cup state is somewhat in the eye of the beholder.</p>
+<p>Now in quantum field theory, one often works in the approximation where special relativity holds. Great effort is spent obtaining unitary representations of the Poincare group of space/time translations, rotations and boosts, and the resulting Minkowski vacuum is Poincare invariant. In other words, all observers who are just translated, rotated and boosted from each other agree on the vacuum state, and hence: on what constitutes a particle.</p>
+<p>But when we consider curved spacetimes and in general accelerated reference frames, it turns out  observers disagree on the vacuum state, and on what constitutes a particle. A famous example is the Unruh radiation. It is predicted that compared to an observer moving inertially, an accelerated observer moving through the same space will detect particles, whereas the inertial observer wouldn't. An observer moving with a constant acceleration divides the world into parts: for example, those parts in the past which can't ever catch up to this observer, and those parts in the future the observer will never be able to reach, due to the finite speed of light, and the fact of they're accelerating. And speaking very broadly, there's a map from the creation and annihilation operators in the inertial frame to creation and annihilation operators in the accelerated frame, and they're related by a linear Bogoliobov transformation, which is a symplectic transformation, which means that it preserves the relationship between position and momentum, creation and annihilation, for all the operators: so that the commutation relations are satisfied on both sides. And there is a whole very deep theory there. In the end, it's like the vacuum in one frame is built out of particle states in the other frame, and particle states in the one frame might correspond to the vacuum state of another. The same trick is used in condensed matter systems. A Bogoliubov transformation can diagonalize any quadratic energy operator: but one ends up with a system "made" of different kinds of particles!</p>
+<p>In our wormhole case specifically, we have one frame: the frame, as it were, from outside the whole system, where the left black hole and the right black hole can be distinguished, and our qubit enters on the left, and comes out on the right. And before things begin, the two black holes (at infinite temperature) are in the maximally entangled CUP state. But there's another frame where the complex fermion number operator is diagonal: there, before the qubit insertion, we're just sitting in the vacuum, a vacuum which is made of equal parts left and right from the other perspective. After all, if you lived your whole life inside the wormhole, you'd never even know there was necessarily a "left" and "right" side. And the whole wormhole protocol works because we, from the outside, are able to implement the number operator coupling, which is precisely diagonal "from the inside perspective." There's two ways to over come left and right: to be "inside" it and so unaware of the difference, or to be "outside" it by bringing left and right together to interact.</p>
+<p>Moreover, if we think about the left and right sides as the "doubled Hilbert space" of an operator, then the number operator, which acts across left an right, measures the size of that operator... I was wondering whether you can relate this to the fact that in Ads/CFT, the former is of a dimension higher than the latter.</p>
+<p>So: whether something is a cup or a cap depends on the particular observer. Different observers in general motion can disagree about what consitutes a particle, disagree about the string diagram that represents the situation. Different observers may join unlike things, cleave other things apart, open themselves up for entry here, closing themselves off there... (So maybe our friend trapped in a loop behind an entangler gate might be able to escape after all, by a complete reconceptualization at the atomic level.)</p>
+<p>Finally, for more: see <a href="code/syk_animated.py">syk_animated.py</a>.</p>
+<p>(And incidentally, in the general case, not all vacua are unitarily equivalent!)</p>
+
 </div>
 </div>
 </div>
     </div>
   </div>
 </body>
-
- 
-
-
-</html>
+        <div id="logo">
+            <a href="index.html"><img src="img/logo.png"/></a>
+        </div>
+        

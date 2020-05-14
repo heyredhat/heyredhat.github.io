@@ -1,0 +1,25 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (3) at (-0.75, -1.25) {};
+		\node [style=none] (4) at (5.25, -1.25) {};
+		\node [style=none] (5) at (2.25, -4.25) {};
+		\node [style=none] (6) at (2.25, -2) {Preparation};
+		\node [style=none] (8) at (-0.75, 2.75) {};
+		\node [style=none] (9) at (5.25, 2.75) {};
+		\node [style=none] (10) at (2.25, 5.75) {};
+		\node [style=none] (12) at (2.25, 3.75) {Test};
+		\node [style=none] (13) at (2.25, 2.75) {};
+		\node [style=none] (14) at (2.25, -1.25) {};
+		\node [style=medium box] (15) at (2.25, 0.75) {Time};
+		\node [style=none] (16) at (2.25, -5.75) {amplitude};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (3.center) to (5.center);
+		\draw (5.center) to (4.center);
+		\draw (4.center) to (3.center);
+		\draw (8.center) to (10.center);
+		\draw (10.center) to (9.center);
+		\draw (9.center) to (8.center);
+		\draw (13.center) to (14.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

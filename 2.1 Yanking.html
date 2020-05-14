@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>index</title>
+<title>2.1 Yanking</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13077,54 +13077,241 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><a href="https://github.com/heyredhat/heyredhat.github.io"><img align="center" src="img/front_logo.png" /></a></p>
+<h1 id="How-to-Make-a-Wormhole">How to Make a Wormhole<a class="anchor-link" href="#How-to-Make-a-Wormhole">&#182;</a></h1><h2 id="Part-1:-Yanking">Part 1: Yanking<a class="anchor-link" href="#Part-1:-Yanking">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+$$\begin{pmatrix}1 &amp; 0\\\ 0 &amp; 1\end{pmatrix}$$<p>We begin with the 2x2 identity matrix, which has the property:</p>
+$$\begin{pmatrix}1 &amp; 0\\\ 0 &amp; 1\end{pmatrix} \begin{pmatrix}a \\\ b\end{pmatrix} = \begin{pmatrix}a \\\ b\end{pmatrix}$$<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's "unfurl" the 2x2 identity matrix into a 4x1 vector.</p>
+$$\begin{pmatrix}1 &amp; 0\\\ 0 &amp; 1\end{pmatrix} \Rightarrow \begin{pmatrix}1 \\ 0 \\ 0 \\ 1\end{pmatrix}$$<p>How can we interpret this?</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Suppose we have two qubits A and B.</p>
+$$
+A = a\mid\uparrow\rangle + b\mid\downarrow\rangle
+\\
+B = c\mid\uparrow\rangle + d\mid\downarrow\rangle
+\\
+$$<p>where $\mid\uparrow\rangle = \begin{pmatrix}1 \\\ 0\end{pmatrix} $,
+$\mid\downarrow\rangle = \begin{pmatrix}0 \\\ 1\end{pmatrix} $, 
+and $a, b, c, d \in \mathbb{C}$.</p>
+<hr> 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Their tensor product $ A \otimes B $ lives in:</p>
+$$
+\alpha\mid\uparrow\uparrow\rangle + \beta\mid\uparrow\downarrow\rangle + \gamma\mid\downarrow\uparrow\rangle + \delta\mid\downarrow\downarrow\rangle
+$$<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can therefore interpret $ \begin{pmatrix}1 \\ 0 \\ 0 \\ 1\end{pmatrix} $ as:
+$$A,B$$
+$$
+\begin{matrix} \mid\uparrow\uparrow\rangle \\ \mid\uparrow\downarrow\rangle \\ \mid\downarrow\uparrow\rangle \\ \mid\downarrow\downarrow\rangle \end{matrix}
+\begin{pmatrix} 1 \\ 0 \\ 0 \\ 1\end{pmatrix}
+$$</p>
+<p>In other words, as: $\mid\uparrow\uparrow\rangle \ + \mid\downarrow\downarrow\rangle$, one of the four maximally entangled states of two qubits. There's an equal probability for both qubits to be in the up state or both qubits to be in the down state: but if one is up, then the other must be up, and vice versa.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A word on "bra/ket" formalism:</p>
+$$
+\mid ket \rangle \  \Rightarrow \begin{pmatrix}a \\ b \\ c \\ \vdots \end{pmatrix}
+$$<p>$
+\langle bra \mid \ \Rightarrow \begin{pmatrix}a^{*} &amp; b^{*} &amp; c^{*} &amp; \dots \end{pmatrix} 
+$, where $a^{*}$ is complex conjugation: $x+iy \to x-iy$.</p>
+<p>The inner product: $\langle bra \mid ket \rangle \Rightarrow \begin{pmatrix}a^{*} &amp; b^{*} &amp; c^{*} &amp; \dots \end{pmatrix} \begin{pmatrix}a \\ b \\ c \\ \vdots \end{pmatrix} \Rightarrow a^{*}a \ + b^{*}b \ + c^{*}c \ + \dots $</p>
+<p>The outer product: $\mid ket \rangle \langle bra \mid \ \Rightarrow \begin{pmatrix}a \\ b \\ c \\ \vdots \end{pmatrix} \begin{pmatrix}a^{*} &amp; b^{*} &amp; c^{*} &amp; \dots \end{pmatrix}  \Rightarrow \begin{pmatrix} aa^{*} &amp; ab^{*} &amp; ac^{*} &amp; \dots \\ ba^{*} &amp; bb^{*} &amp; bc^{*} &amp; \dots \\ ca^{*} &amp; cb^{*} &amp; cc^{*} &amp; \dots \\ \vdots &amp; \vdots &amp; \vdots &amp; \vdots \end{pmatrix} $</p>
+$$\mid\uparrow\uparrow\rangle \Rightarrow \begin{pmatrix}1 \\\ 0\end{pmatrix} \otimes \begin{pmatrix}1 \\\ 0\end{pmatrix} \Rightarrow \begin{pmatrix}1 \\\ 0 \\\ 0 \\\ 0\end{pmatrix}$$<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Expectation value of operator O: $\langle bra\mid O \mid ket \rangle $</p>
+<p>Projectors onto up state: $ \mid \uparrow \rangle \langle \uparrow \mid \ \Rightarrow \begin{pmatrix}1 &amp; 0 \\\ 0 &amp; 0\end{pmatrix}$ and down state: $ \mid \downarrow \rangle \langle \downarrow \mid \ \Rightarrow \begin{pmatrix}0 &amp; 0 \\\ 0 &amp; 1\end{pmatrix}$</p>
+<p>Probability: $\langle bra \mid projector \mid ket \rangle $.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If we have two qubits, A on the left and B on the right, we can consider operators that act only on the left or the right.</p>
+$$O_{L} = O \otimes I \Rightarrow \begin{pmatrix}a &amp; b \\\ c &amp; d\end{pmatrix} \otimes \begin{pmatrix}1 &amp; 0 \\\ 0 &amp; 1\end{pmatrix} \Rightarrow \begin{pmatrix}a &amp; 0 &amp; b &amp; 0 \\\ 0 &amp; a &amp; 0 &amp; b \\ c &amp; 0 &amp; d &amp; 0 \\ 0 &amp; c &amp; 0 &amp; d\end{pmatrix}\\ \\$$$$O_{R} = I \otimes O \Rightarrow \begin{pmatrix}1 &amp; 0 \\\ 0 &amp; 1\end{pmatrix} \otimes \begin{pmatrix}a &amp; b \\\ c &amp; d\end{pmatrix} \Rightarrow \begin{pmatrix}a &amp; b &amp; 0 &amp; 0 \\\ c &amp; d &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; a &amp; b \\ 0 &amp; 0 &amp; c &amp; d\end{pmatrix}$$<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For example, let's see what happens if we act with an $\uparrow$ projector on the left half of our maximally entangled state:</p>
+$$ 
+(\mid \uparrow \rangle \langle \uparrow \mid \otimes I)(\mid\uparrow\uparrow\rangle \ + \mid\downarrow\downarrow\rangle) \Rightarrow \big( \begin{pmatrix}1 &amp; 0 \\\ 0 &amp; 0\end{pmatrix} \otimes \begin{pmatrix}1 &amp; 0 \\\ 0 &amp; 1\end{pmatrix} \big) \big( \begin{pmatrix}1 \\ 0 \\ 0 \\ 0\end{pmatrix} + \begin{pmatrix}0 \\ 0 \\ 0 \\ 1\end{pmatrix}\big) \Rightarrow \begin{pmatrix}1 &amp; 0 &amp; 0 &amp; 0 \\\ 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0\end{pmatrix}\begin{pmatrix}1 \\ 0 \\ 0 \\ 1\end{pmatrix} \Rightarrow \begin{pmatrix}1 \\ 0 \\ 0 \\ 0\end{pmatrix} = \ \mid\uparrow\uparrow\rangle
+$$<p>And with the $\downarrow$ projector:</p>
+$$ 
+(\mid \downarrow \rangle \langle \downarrow \mid \otimes I)(\mid\uparrow\uparrow\rangle \ + \mid\downarrow\downarrow\rangle) \Rightarrow \big( \begin{pmatrix}0 &amp; 0 \\\ 0 &amp; 1\end{pmatrix} \otimes \begin{pmatrix}1 &amp; 0 \\\ 0 &amp; 1\end{pmatrix} \big) \big( \begin{pmatrix}1 \\ 0 \\ 0 \\ 0\end{pmatrix} + \begin{pmatrix}0 \\ 0 \\ 0 \\ 1\end{pmatrix}\big) \Rightarrow \begin{pmatrix}0 &amp; 0 &amp; 0 &amp; 0 \\\ 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1\end{pmatrix}\begin{pmatrix}1 \\ 0 \\ 0 \\ 1\end{pmatrix} \Rightarrow \begin{pmatrix}0 \\ 0 \\ 0 \\ 1\end{pmatrix} = \ \mid\downarrow\downarrow\rangle
+$$<p>And symmetrically with the projectors on the right side:</p>
+$$ 
+(I \otimes \mid \uparrow \rangle \langle \uparrow \mid)(\mid\uparrow\uparrow\rangle \ + \mid\downarrow\downarrow\rangle) \Rightarrow \big( \begin{pmatrix}1 &amp; 0 \\\ 0 &amp; 1\end{pmatrix} \otimes \begin{pmatrix}1 &amp; 0 \\\ 0 &amp; 0\end{pmatrix} \big) \begin{pmatrix}1 \\ 0 \\ 0 \\ 1\end{pmatrix} \Rightarrow \begin{pmatrix}1 &amp; 0 &amp; 0 &amp; 0 \\\ 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0\end{pmatrix}\begin{pmatrix}1 \\ 0 \\ 0 \\ 1\end{pmatrix} \Rightarrow \begin{pmatrix}1 \\ 0 \\ 0 \\ 0\end{pmatrix} = \ \mid\uparrow\uparrow\rangle
+$$$$ 
+(I \otimes \mid \downarrow \rangle \langle \downarrow \mid)(\mid\uparrow\uparrow\rangle \ + \mid\downarrow\downarrow\rangle) \Rightarrow \big( \begin{pmatrix}1 &amp; 0 \\\ 0 &amp; 1\end{pmatrix} \otimes \begin{pmatrix}0 &amp; 0 \\\ 0 &amp; 1\end{pmatrix} \big) \begin{pmatrix}1 \\ 0 \\ 0 \\ 1\end{pmatrix} \Rightarrow \begin{pmatrix}0 &amp; 0 &amp; 0 &amp; 0 \\\ 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1\end{pmatrix}\begin{pmatrix}1 \\ 0 \\ 0 \\ 1\end{pmatrix} \Rightarrow \begin{pmatrix}0 \\ 0 \\ 0 \\ 1\end{pmatrix} = \ \mid\downarrow\downarrow\rangle
+$$<p>Meanwhile, the probability of getting $\uparrow$ on the left side. Note that to get the right answer we have to normalize our state so that probabilities sum to 1: $ \frac{1}{\sqrt{2}} (\mid\uparrow\uparrow\rangle \ + \mid\downarrow\downarrow\rangle) $.</p>
+$$ 
+\frac{1}{\sqrt{2}}(\langle \uparrow\uparrow\mid + \ \langle\downarrow\downarrow\mid)(\mid \uparrow \rangle \langle \uparrow \mid \otimes I)\frac{1}{\sqrt{2}}(\mid\uparrow\uparrow\rangle \ + \mid\downarrow\downarrow\rangle) \Rightarrow \begin{pmatrix}\frac{1}{\sqrt{2}} &amp; 0 &amp; 0 &amp; \frac{1}{\sqrt{2}}\end{pmatrix} \begin{pmatrix}1 &amp; 0 &amp; 0 &amp; 0 \\\ 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0\end{pmatrix}\begin{pmatrix}\frac{1}{\sqrt{2}} \\ 0 \\ 0 \\ \frac{1}{\sqrt{2}}\end{pmatrix} \Rightarrow \frac{1}{2}
+$$<p>The same is true on the up projector on the right side, and for the down projectors on the left and right.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's consider the difference between a general 2x2 operator $ O = \begin{pmatrix}a &amp; b \\ c &amp; d\end{pmatrix} $ acting on the left vs the right on our maximally entangled state, which we should give a name: $\mid \phi^{+} \rangle$.</p>
+$$O_{L}\mid \phi^{+} \rangle = \big( \begin{pmatrix}a &amp; b \\\ c &amp; d\end{pmatrix} \otimes \begin{pmatrix}1 &amp; 0 \\\ 0 &amp; 1\end{pmatrix} \big) \begin{pmatrix}1 \\ 0 \\ 0 \\ 1\end{pmatrix} \Rightarrow \begin{pmatrix}a &amp; 0 &amp; b &amp; 0 \\\ 0 &amp; a &amp; 0 &amp; b \\ c &amp; 0 &amp; d &amp; 0 \\ 0 &amp; c &amp; 0 &amp; d\end{pmatrix}\begin{pmatrix}1 \\ 0 \\ 0 \\ 1\end{pmatrix} \Rightarrow \begin{pmatrix}a \\ b \\ c \\ d\end{pmatrix}$$<p>We get the 2x2 operator O unfurled as a 4x1 vector!</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>What about on the right?</p>
+$$O_{R}\mid \phi^{+} \rangle = \big( \begin{pmatrix}1 &amp; 0 \\\ 0 &amp; 1\end{pmatrix} \otimes \begin{pmatrix}a &amp; b \\\ c &amp; d\end{pmatrix}  \big) \begin{pmatrix}1 \\ 0 \\ 0 \\ 1\end{pmatrix} \Rightarrow \begin{pmatrix}a &amp; b &amp; 0 &amp; 0 \\\ c &amp; d &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; a &amp; b \\ 0 &amp; 0 &amp; c &amp; d\end{pmatrix}\begin{pmatrix}1 \\ 0 \\ 0 \\ 1\end{pmatrix} \Rightarrow \begin{pmatrix}a \\ c \\ b \\ d\end{pmatrix}$$<p>Let's define $O^{T}$ to be the transpose of O. In other words, interchange rows and columns.</p>
+$$O^{T} = \begin{pmatrix}a &amp; c \\\ b &amp; d\end{pmatrix} $$<p>We observe that:</p>
+$$O_{R}^{T}\mid \phi^{+} \rangle = \big( \begin{pmatrix}1 &amp; 0 \\\ 0 &amp; 1\end{pmatrix} \otimes \begin{pmatrix}a &amp; c \\\ b &amp; d\end{pmatrix}  \big) \begin{pmatrix}1 \\ 0 \\ 0 \\ 1\end{pmatrix} \Rightarrow \begin{pmatrix}a &amp; c &amp; 0 &amp; 0 \\\ b &amp; d &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; a &amp; c \\ 0 &amp; 0 &amp; b &amp; d\end{pmatrix}\begin{pmatrix}1 \\ 0 \\ 0 \\ 1\end{pmatrix} \Rightarrow \begin{pmatrix}a \\ b \\ c \\ d\end{pmatrix}$$<p>And conclude:</p>
+$$ O_{L}\mid \phi^{+} \rangle = O_{R}^{T}\mid \phi^{+} \rangle$$<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Introducing the diagram language.</p>
+$$\mid\uparrow\uparrow\rangle\ + \mid\downarrow\downarrow\rangle \ \Rightarrow \cup $$$$\langle\uparrow\uparrow\mid + \langle\downarrow\downarrow\mid \ \Rightarrow \cap $$$$ \begin{pmatrix}1 &amp; 0 \\\ 0 &amp; 1\end{pmatrix} \Rightarrow \ \mid $$$$ \begin{matrix} \fbox{A} &amp; \fbox{B} \end{matrix} \Rightarrow A \otimes B $$$$ \begin{matrix} \fbox{A} \\ \fbox{B} \end{matrix} \Rightarrow A * B $$<p><img src="img/swap.png" width="100" style="float:left;"/> $ \Rightarrow \begin{pmatrix}1 &amp; 0 &amp; 0 &amp; 0\\\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp;1\end{pmatrix}  $</p>
+<p><br /></p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The yanking equation.</p>
+<p><img src="img/yanking_equation.png" alt=""></p>
+<p>We can interpret this by slicing the diagram horizontally, and moving from bottom to top.</p>
+<p>So in the first layer, we have a wire next to a cup: $I \otimes \mid \phi^{+} \rangle$.</p>
+<p>In the second layer, we have cap next to a wire: $ \langle \phi^{+} \mid \otimes I $.</p>
+<p>The yanking equation says that $  \big( \langle \phi^{+} \mid \otimes I \big) \big( I \otimes \mid \phi^{+} \rangle \big) = I $.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's check:</p>
+$$  \big( \begin{pmatrix}1 &amp; 0 &amp; 0 &amp; 1\end{pmatrix} \otimes \begin{pmatrix}1 &amp; 0 \\\ 0 &amp; 1\end{pmatrix} \big) \big( \begin{pmatrix}1 &amp; 0 \\\ 0 &amp; 1\end{pmatrix} \otimes \begin{pmatrix}1 \\ 0 \\ 0 \\  1\end{pmatrix} \big) = \begin{pmatrix}1 &amp; 0 \\\ 0 &amp; 1\end{pmatrix} $$$$  
+\begin{pmatrix}1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0\\ 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1\end{pmatrix} 
+\begin{pmatrix}1 &amp; 0 \\ 0 &amp; 0 \\ 0 &amp; 0 \\ 1 &amp; 0 \\ 0 &amp; 1 \\ 0 &amp; 0 \\ 0 &amp; 0 \\ 0 &amp; 1\end{pmatrix} = \begin{pmatrix}1 &amp; 0 \\\ 0 &amp; 1\end{pmatrix} $$<p>Indeed for some state A entering the wire: $  \big( \langle \phi^{+} \mid \otimes I \big) \big( A \otimes \mid \phi^{+} \rangle \big) = A $.</p>
+$$  \big( \begin{pmatrix}1 &amp; 0 &amp; 0 &amp; 1\end{pmatrix} \otimes \begin{pmatrix}1 &amp; 0 \\\ 0 &amp; 1\end{pmatrix} \big) \big( \begin{pmatrix}a &amp; b \\\ c &amp; d\end{pmatrix} \otimes \begin{pmatrix}1 \\ 0 \\ 0 \\  1\end{pmatrix} \big) = \begin{pmatrix}a &amp; b \\\ c &amp; d\end{pmatrix} $$$$  
+\begin{pmatrix}1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0\\ 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1\end{pmatrix} 
+\begin{pmatrix}a &amp; b \\ 0 &amp; 0 \\ 0 &amp; 0 \\ a &amp; b \\ c &amp; d \\ 0 &amp; 0 \\ 0 &amp; 0 \\ c &amp; d\end{pmatrix} = \begin{pmatrix}a &amp; b \\\ c &amp; d\end{pmatrix} $$<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Recall our discovery that:</p>
+$$ O_{L}\mid \phi^{+} \rangle = O_{R}^{T}\mid \phi^{+} \rangle$$<p>where</p>
+$$O^{T} = \begin{pmatrix}a &amp; c \\\ b &amp; d\end{pmatrix} $$<p>We can express this in diagrams:</p>
+<p><img src="img/cup_slide.png" alt=""></p>
+<p>The idea is we can slide operators up and down wires and around cups and caps, which transpose them (just like in real life!).</p>
+<p><img src="img/yanking_slide.png" alt=""></p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>One useful thing to be able to do is take a partial trace. If we have two qubits A and B, we can trace over B to get the partial state of A, or trace over A to get the partial state of B. These partial states will be density matrices, a 2x2 Hermitian density matrix for A and B each. It's easy to see how to do this with the diagrams. First recall that a density matrix can be formed from a pure state vector by taking the outer product. In our case:</p>
+$$
+\rho_{A,B} = \mid\phi^{+}\rangle\langle\phi^{+}\mid
+$$<p><img src="img/Apartial.png" alt=""></p>
+<p>In other words, $ \rho_{A} = \big( I \otimes \cap \big) \big(\rho_{A,B} \otimes I \big) \big( I \otimes \cup \big) $.</p>
+<p><img src="img/Bpartial.png" alt=""></p>
+<p>Aka: $ \rho_{B} = \big( \cap \otimes I \big) \big( I \otimes \rho_{A,B} \big) \big( \cup \otimes I \big) $.</p>
+<p>On that note, the expectation value of an operator O on a density matrix $\rho$ is $tr(\rho O) $, where the trace is the sum along the diagonal of the matrix.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Let&#39;s try it out in python.</span>
+<span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Essays-on-Quantum-Physics"><div align="center">Essays on Quantum Physics</div><a class="anchor-link" href="#Essays-on-Quantum-Physics">&#182;</a></h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ol>
-<li><a href="1%20Introduction.html">Introduction</a> (<a href="1%20Introduction.ipynb">notebook</a>)</li>
-<li><a href="2.1%20Yanking.html"><em>How to Make a Wormhole</em>: Yanking</a> (<a href="2.1%20Yanking.ipynb">notebook</a>)</li>
-<li><a href="2.2%20Teleportation.html"><em>How to Make a Wormhole</em>: Teleportation</a> (<a href="2.2%20Teleportation.ipynb">notebook</a>)</li>
-<li><a href="2.3%20Time%20Evolution.html"><em>How to Make a Wormhole</em>: Time Evolution</a> (<a href="2.3%20Time%20Evolution.ipynb">notebook</a>)</li>
-<li><a href="2.4%20The%20TFD.html"><em>How to Make a Wormhole</em>: The TFD</a> (<a href="2.4%20The%20TFD.ipynb">notebook</a>)</li>
-<li><a href="2.5%20Scrambling%20and%20Winding.html"><em>How to Make a Wormhole</em>: Scrambling and Winding</a> (<a href="2.5%20Scrambling%20and%20Winding.ipynb">notebook</a>)</li>
-<li><a href="2.6%20Wormhole%20Experiments.html"><em>How to Make a Wormhole</em>: Wormhole Experiments</a> (<a href="2.6%20Wormhole%20Experiments.ipynb">notebook</a>)</li>
-<li><a href="2.7%20Geometrical%20Sketch.html"><em>How to Make a Wormhole</em>: Geometrical Sketch</a> (<a href="2.7%20Geometrical%20Sketch.ipynb">notebook</a>)</li>
-<li><a href="3.1%20Philosophical%20Interlude.html"><em>How to Continue Making a Wormhole</em>: Philosophical Interlude</a> (<a href="3.1%20Philosophical%20Interlude.ipynb">notebook</a>)</li>
-<li><a href="3.2%20Majorana%20Fermions%20and%20SYK.html"><em>How to Continue Making a Wormhole</em>: Majorana Fermions and SYK</a> (<a href="3.2%20Majorana%20Fermions%20and%20SYK.ipynb">notebook</a>)</li>
-<li><a href="3.3%20A%20Really%20Existing%20Quantum%20Computer.html"><em>How to Continue Making a Wormhole</em>: A Really Existing Quantum Computer</a> (<a href="3.3%20A%20Really%20Existing%20Quantum%20Computer.ipynb">notebook</a>)</li>
-<li><a href="4.1%20Spheres.html"><em>How to Think about Entanglement</em>: Spheres</a> (<a href="4.1%20Spheres.ipynb">notebook</a>)</li>
-<li><a href="4.2%20Quantum%20Clocks.html"><em>How to Think about Entanglement</em>: Quantum Clocks</a> (<a href="4.2%20Quantum%20Clocks.ipynb">notebook</a>) [in progress]</li>
-<li><a href="4.3%20Representations.html"><em>How to Think about Entanglement</em>: Representations</a> (<a href="4.3%20Representations.ipynb">notebook</a>) [in progress]</li>
-<li>...</li>
-</ol>
+<span class="n">I</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">cup</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
+<span class="n">cup</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
+<span class="n">cap</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span>
 
+<span class="n">rhoAB</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">bell_state</span><span class="p">(</span><span class="s2">&quot;00&quot;</span><span class="p">)</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">bell_state</span><span class="p">(</span><span class="s2">&quot;00&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
+<span class="n">rhoA</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">cap</span><span class="p">)</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">rhoAB</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">cup</span><span class="p">)</span>
+<span class="n">rhoB</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">cap</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">rhoAB</span><span class="p">)</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">cup</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span>
+
+<span class="c1"># Compare with qutip&#39;s builtin function.</span>
+<span class="n">rhoA_</span> <span class="o">=</span> <span class="n">rhoAB</span><span class="o">.</span><span class="n">ptrace</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">rhoB_</span> <span class="o">=</span> <span class="n">rhoAB</span><span class="o">.</span><span class="n">ptrace</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">rhoA</span> <span class="o">==</span> <span class="n">rhoA_</span> <span class="ow">and</span> <span class="n">rhoB</span> <span class="o">==</span> <span class="n">rhoB_</span><span class="p">)</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div align="center">&copy; 2020 heyredhat @ gmail.com</div>
-</div>
-</div>
+
 </div>
     </div>
   </div>
 </body>
-
- 
-
-
-</html>
+        <div id="logo">
+            <a href="index.html"><img src="img/logo.png"/></a>
+        </div>
+        

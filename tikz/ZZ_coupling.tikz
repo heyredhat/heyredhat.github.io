@@ -1,0 +1,27 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (0) at (-5.75, 0) {$A_{L}$};
+		\node [style=none] (1) at (-4.25, 0) {$B_{0, L}$};
+		\node [style=none] (2) at (-2.5, 0) {$B_{1, L}$};
+		\node [style=none] (3) at (-1, 0) {$B_{2, L}$};
+		\node [style=none] (4) at (2, 0) {$B_{0, R}$};
+		\node [style=none] (5) at (3.75, 0) {$B_{1, R}$};
+		\node [style=none] (6) at (5.25, 0) {$B_{2, R}$};
+		\node [style=none] (7) at (6.75, 0) {$A_{R}$};
+		\node [style=none] (8) at (-4.25, 0.75) {};
+		\node [style=none] (9) at (-2.5, 0.75) {};
+		\node [style=none] (10) at (-1, 0.75) {};
+		\node [style=none] (11) at (2, 0.75) {};
+		\node [style=none] (12) at (3.75, 0.75) {};
+		\node [style=none] (13) at (5.25, 0.75) {};
+		\node [style=none] (15) at (0.5, 5.5) {$ZZ$};
+		\node [style=none] (16) at (0.5, 4) {$ZZ$};
+		\node [style=none] (17) at (0.5, 2.75) {$ZZ$};
+		\node [style=none] (18) at (-5.25, 3.25) {$\sum$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [bend left=90, looseness=1.50] (8.center) to (13.center);
+		\draw [bend left=90, looseness=1.50] (9.center) to (12.center);
+		\draw [bend left=90, looseness=1.75] (10.center) to (11.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

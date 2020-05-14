@@ -1,0 +1,52 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (0) at (-7.5, -2) {};
+		\node [style=none] (1) at (-8.25, 0) {};
+		\node [style=none] (2) at (-6.75, 1.25) {};
+		\node [style=none] (3) at (-5.25, 0) {};
+		\node [style=none] (4) at (-6, -1) {};
+		\node [style=none] (5) at (-6.75, -1) {};
+		\node [style=none] (6) at (-3.75, -1) {};
+		\node [style=none] (7) at (-4.5, 1) {};
+		\node [style=none] (8) at (-7.5, 0) {};
+		\node [style=none] (9) at (-6, 0) {};
+		\node [style=none] (10) at (-5.25, -2.25) {};
+		\node [style=none] (11) at (-4.5, -1) {};
+		\node [style=none] (12) at (-6.75, 0.5) {$f$};
+		\node [style=none] (13) at (-5.25, -1.5) {$g$};
+		\node [style=none] (14) at (-3.25, 0) {$\Rightarrow$};
+		\node [style=none] (15) at (-1.5, -2) {};
+		\node [style=none] (19) at (0, -1) {};
+		\node [style=none] (22) at (1.5, 1) {};
+		\node [style=none] (23) at (-1.5, 0) {};
+		\node [style=none] (24) at (0, 0) {};
+		\node [style=none] (26) at (1.5, -1) {};
+		\node [style=medium box] (29) at (-1.5, -0.5) {$F$};
+		\node [style=medium box] (31) at (1.5, -0.5) {$G$};
+		\node [style=none] (32) at (4.75, -4) {};
+		\node [style=none] (33) at (4.75, 3) {};
+		\node [style=medium box] (34) at (4.75, -1.75) {$F$};
+		\node [style=medium box] (35) at (4.75, 0.75) {$G$};
+		\node [style=none] (36) at (3.25, 0) {$\Rightarrow$};
+		\node [style=none] (38) at (-1.5, -5.5) {for $f$ and $g$ maximally entangled};
+		\node [style=none] (39) at (-1.5, -6.25) {$\to$ $F$ and $G$ unitary};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (0.center) to (8.center);
+		\draw (1.center) to (8.center);
+		\draw (1.center) to (2.center);
+		\draw (2.center) to (3.center);
+		\draw (3.center) to (8.center);
+		\draw (9.center) to (4.center);
+		\draw (5.center) to (6.center);
+		\draw (6.center) to (10.center);
+		\draw (10.center) to (5.center);
+		\draw (11.center) to (7.center);
+		\draw (15.center) to (23.center);
+		\draw (24.center) to (19.center);
+		\draw (26.center) to (22.center);
+		\draw [bend right=90, looseness=2.25] (19.center) to (26.center);
+		\draw [bend left=90, looseness=2.25] (23.center) to (24.center);
+		\draw (32.center) to (33.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

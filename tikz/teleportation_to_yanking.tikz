@@ -1,0 +1,43 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (1) at (-5.5, -1) {};
+		\node [style=none] (2) at (-3.5, -1) {};
+		\node [style=none] (3) at (-3.5, -1) {};
+		\node [style=none] (4) at (-0.25, -1) {};
+		\node [style=none] (5) at (-0.25, 5) {};
+		\node [style=fat box] (7) at (-4.5, -0.25) {Measurement};
+		\node [style=none] (8) at (-5.5, 0.5) {};
+		\node [style=none] (9) at (-3.5, 0.5) {};
+		\node [style=none] (12) at (-5.5, 1.25) {};
+		\node [style=none] (13) at (-3.5, 1.25) {};
+		\node [style=circle] (14) at (-5.5, -5.5) {A};
+		\node [style=white square] (15) at (1, 0) {$\Rightarrow$};
+		\node [style=none] (16) at (3.25, -1) {};
+		\node [style=none] (17) at (5.25, -1) {};
+		\node [style=none] (18) at (5.25, -1) {};
+		\node [style=none] (19) at (8.5, -1) {};
+		\node [style=fat box] (21) at (4.25, -0.25) {Measurement};
+		\node [style=none] (22) at (3.25, 0.5) {};
+		\node [style=none] (23) at (5.25, 0.5) {};
+		\node [style=none] (24) at (3.25, 1.25) {};
+		\node [style=none] (25) at (5.25, 1.25) {};
+		\node [style=circle] (27) at (8.5, 5) {A};
+		\node [style=none] (28) at (3.25, -5.5) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (2.center) to (3.center);
+		\draw [bend right=90, looseness=1.75] (3.center) to (4.center);
+		\draw (8.center) to (12.center);
+		\draw (9.center) to (13.center);
+		\draw [bend left=270, looseness=1.50] (13.center) to (12.center);
+		\draw (5.center) to (4.center);
+		\draw (14) to (1.center);
+		\draw (17.center) to (18.center);
+		\draw [bend right=90, looseness=1.75] (18.center) to (19.center);
+		\draw (22.center) to (24.center);
+		\draw (23.center) to (25.center);
+		\draw [bend left=270, looseness=1.50] (25.center) to (24.center);
+		\draw (28.center) to (16.center);
+		\draw (27) to (19.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

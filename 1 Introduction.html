@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>index</title>
+<title>1 Introduction</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13077,7 +13077,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><a href="https://github.com/heyredhat/heyredhat.github.io"><img align="center" src="img/front_logo.png" /></a></p>
+<p><img align="center" src="img/wormhole.jpeg"></p>
 
 </div>
 </div>
@@ -13085,46 +13085,83 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Essays-on-Quantum-Physics"><div align="center">Essays on Quantum Physics</div><a class="anchor-link" href="#Essays-on-Quantum-Physics">&#182;</a></h1>
+<h1 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ol>
-<li><a href="1%20Introduction.html">Introduction</a> (<a href="1%20Introduction.ipynb">notebook</a>)</li>
-<li><a href="2.1%20Yanking.html"><em>How to Make a Wormhole</em>: Yanking</a> (<a href="2.1%20Yanking.ipynb">notebook</a>)</li>
-<li><a href="2.2%20Teleportation.html"><em>How to Make a Wormhole</em>: Teleportation</a> (<a href="2.2%20Teleportation.ipynb">notebook</a>)</li>
-<li><a href="2.3%20Time%20Evolution.html"><em>How to Make a Wormhole</em>: Time Evolution</a> (<a href="2.3%20Time%20Evolution.ipynb">notebook</a>)</li>
-<li><a href="2.4%20The%20TFD.html"><em>How to Make a Wormhole</em>: The TFD</a> (<a href="2.4%20The%20TFD.ipynb">notebook</a>)</li>
-<li><a href="2.5%20Scrambling%20and%20Winding.html"><em>How to Make a Wormhole</em>: Scrambling and Winding</a> (<a href="2.5%20Scrambling%20and%20Winding.ipynb">notebook</a>)</li>
-<li><a href="2.6%20Wormhole%20Experiments.html"><em>How to Make a Wormhole</em>: Wormhole Experiments</a> (<a href="2.6%20Wormhole%20Experiments.ipynb">notebook</a>)</li>
-<li><a href="2.7%20Geometrical%20Sketch.html"><em>How to Make a Wormhole</em>: Geometrical Sketch</a> (<a href="2.7%20Geometrical%20Sketch.ipynb">notebook</a>)</li>
-<li><a href="3.1%20Philosophical%20Interlude.html"><em>How to Continue Making a Wormhole</em>: Philosophical Interlude</a> (<a href="3.1%20Philosophical%20Interlude.ipynb">notebook</a>)</li>
-<li><a href="3.2%20Majorana%20Fermions%20and%20SYK.html"><em>How to Continue Making a Wormhole</em>: Majorana Fermions and SYK</a> (<a href="3.2%20Majorana%20Fermions%20and%20SYK.ipynb">notebook</a>)</li>
-<li><a href="3.3%20A%20Really%20Existing%20Quantum%20Computer.html"><em>How to Continue Making a Wormhole</em>: A Really Existing Quantum Computer</a> (<a href="3.3%20A%20Really%20Existing%20Quantum%20Computer.ipynb">notebook</a>)</li>
-<li><a href="4.1%20Spheres.html"><em>How to Think about Entanglement</em>: Spheres</a> (<a href="4.1%20Spheres.ipynb">notebook</a>)</li>
-<li><a href="4.2%20Quantum%20Clocks.html"><em>How to Think about Entanglement</em>: Quantum Clocks</a> (<a href="4.2%20Quantum%20Clocks.ipynb">notebook</a>) [in progress]</li>
-<li><a href="4.3%20Representations.html"><em>How to Think about Entanglement</em>: Representations</a> (<a href="4.3%20Representations.ipynb">notebook</a>) [in progress]</li>
+<p>Welcome to the repository of quantum tutorials!</p>
+<p>What follows is a series of essays mixing code, images, mathematics, and philosophy. They are a work in progress!
+This site is dedicated to the <a href="https://www.meetup.com/brooklyn_quantum/">BROOKLYN QUANTUM MEETUP</a>; you can find recordings of our get togethers on <a href="https://www.youtube.com/channel/UCC2OaOMwZ7HkrAm1yHuD9sg">youtube</a>. Join us!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Prerequisites">Prerequisites<a class="anchor-link" href="#Prerequisites">&#182;</a></h1><p>Quantum physics is notorious from pretty much all perspectives. But fear not-- it's the 21st century! If you're handy with python, you can implement much of the crucial machinery with just a few lines of code and a little imagination. And even if you aren't a programmer, it <em>is</em> possible to visualize what's going on, even if in unfamiliar ways--and I've written code to do just that for you.</p>
+<p>The difficulty with quantum mechanics at a foundational level is not that it's complicated. It's actually dizzyingly simple when expressed in the right language. But to pick up this lingo requires immersion, immersion in the cloud of vector spaces, linear transformations, string diagrams... Once you have that in you, however, the words and the grammar, it becomes impossible to ignore the sweet sounds of this poem which nature has written for us.</p>
+<p>With that in mind, we'll take the time to spell out our calculations step-by-step, especially at first, so that even if you don't know yet <em>why</em> something is happening, you can at least be sure <em>what</em> is happening. The problem with most popular accounts of quantum physics is that they move across the subject at a more-or-less verbal level, introducing you to the fantasias of physicists, but without giving you the tools to interrogate what you've learned, access to the underlying forms against which we can actually <em>test</em> our thinking about nature. On the other side, the problem with the most sophisticated accounts is that the motivations behind them and their philosophical principles are often obscured under the weight of technical detail. We'll try to find a happy medium between these two poles, although such a place, perhaps, doesn't exist. In the end, this is a world you're going to have to spend time in to really feel it in your gut. The point is these essays is to give you the tools to start playing around.</p>
+<p>The essays are organized thematically, not necessarily from simplest to most difficult. We'll circle around and around certain topics again and again, elaborating them as time goes by. We begin with traversible wormholes, taking a detour around the bend of string diagrams, and are now trying to make pictures of quantum entanglement. More to come!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="The-Python-Environment">The Python Environment<a class="anchor-link" href="#The-Python-Environment">&#182;</a></h1><p>To take the full advantage of these tutorials, you should run them at home as python notebooks. First, make sure to install <a href="https://docs.conda.io/">conda</a>. Then run in the shell:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+<pre><code>conda create --name heyredhat
+conda activate heyredhat
+conda install vpython jupyterlab nodejs qutip matplotlib
+jupyter labextension install vpython</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Then run <code>jupyter lab</code>. A word about vpython, which we use for 3D graphics. When you use it in a jupyter notebook, you should call vpython.rate(some_rate) afer each update to the graphics. Also, right click the notebook and select "Disable Scrolling for Outputs." When used outside a jupyter notebook, vpython will open up a browser window alongside the console to display its graphics: vpython.rate isn't needed. We'll primarily use vpython outside of the notebook environment when we really want to interact with our visualizations.</p>
+<p>Eventually, I hope to make the online notebooks live.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Links">Links<a class="anchor-link" href="#Links">&#182;</a></h1><p>The images were made with <a href="https://tikzit.github.io/">tikzit</a>.</p>
+<p>Some recent lectures worth checking out:</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=9VT9U4tDK-w">Quantum Teleportation in the Lab, Stefan Leichenauer</a>.</li>
+<li><a href="https://www.youtube.com/watch?v=o8r56S-nXbI">A Quantum Circuit Interpretation of Evaporating Black Hole Geometry, Ying Zhao</a>.</li>
+<li><a href="https://www.youtube.com/watch?v=-hfcApA9s8Q">New roles for wormholes, Douglas Standford</a>.</li>
+<li><a href="https://www.youtube.com/watch?v=mL-hWbwVphk">Quantum Natural Language Processing, Bob Coecke</a>.<ul>
+<li>Check out this <a href="https://medium.com/cambridge-quantum-computing/quantum-natural-language-processing-748d6f27b31d">medium post</a> and this <a href="https://github.com/oxford-quantum-group/discopy">repository</a>. A word to the wise is to install pytket==0.4.1 with python 3.7, and also pytket-qiskit==0.3.6. </li>
+</ul>
+</li>
 <li>...</li>
-</ol>
+</ul>
 
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div align="center">&copy; 2020 heyredhat @ gmail.com</div>
 </div>
 </div>
 </div>
     </div>
   </div>
 </body>
-
- 
-
-
-</html>
+        <div id="logo">
+            <a href="index.html"><img src="img/logo.png"/></a>
+        </div>
+        

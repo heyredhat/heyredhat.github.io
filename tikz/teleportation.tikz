@@ -1,0 +1,46 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (0) at (0, -4.25) {};
+		\node [style=none] (1) at (0, 0.5) {};
+		\node [style=none] (2) at (2, 0.5) {};
+		\node [style=none] (3) at (2, 0.25) {};
+		\node [style=none] (4) at (4, 0) {};
+		\node [style=none] (5) at (4, 6) {};
+		\node [style=white square] (6) at (5.75, 0.25) {};
+		\node [style=white square] (7) at (5, 0) {$\Rightarrow$};
+		\node [style=none] (8) at (7, -4.25) {};
+		\node [style=none] (9) at (7, 0) {};
+		\node [style=none] (10) at (9, 0) {};
+		\node [style=none] (11) at (9, 0) {};
+		\node [style=none] (12) at (12.25, 0) {};
+		\node [style=none] (13) at (12.25, 6) {};
+		\node [style=medium box] (16) at (12.25, 4.75) {Correction};
+		\node [style=fat box] (17) at (8, 0.75) {Measurement};
+		\node [style=none] (18) at (7, 1.5) {};
+		\node [style=none] (19) at (9, 1.5) {};
+		\node [style=black circle] (20) at (7, 2.25) {};
+		\node [style=black circle] (21) at (9, 2.25) {};
+		\node [style=none] (22) at (10.5, 5.25) {};
+		\node [style=none] (23) at (10.5, 4.25) {};
+		\node [style=black circle] (24) at (9.75, 5.25) {};
+		\node [style=black circle] (25) at (9.75, 4.25) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (0.center) to (1.center);
+		\draw [bend left=90, looseness=1.75] (1.center) to (2.center);
+		\draw (2.center) to (3.center);
+		\draw [bend right=90, looseness=1.75] (3.center) to (4.center);
+		\draw (4.center) to (5.center);
+		\draw (8.center) to (9.center);
+		\draw (10.center) to (11.center);
+		\draw [bend right=90, looseness=1.75] (11.center) to (12.center);
+		\draw (13.center) to (16);
+		\draw (12.center) to (16);
+		\draw (18.center) to (20);
+		\draw (19.center) to (21);
+		\draw (24) to (22.center);
+		\draw (25) to (23.center);
+		\draw [style=dashh, bend left=285, looseness=1.50] (24) to (20);
+		\draw [style=dashh, bend left=90, looseness=2.00] (21) to (25);
+	\end{pgfonlayer}
+\end{tikzpicture}

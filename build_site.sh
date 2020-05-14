@@ -1,9 +1,6 @@
 echo "converting notebooks..."
 
-mv custom.css temp.css
 jupyter nbconvert --to html 'index.ipynb' --template='full.tpl'
-mv temp.css custom.css
-
 jupyter nbconvert --to html '1 Introduction.ipynb' --template=config/web.tpl
 jupyter nbconvert --to html '2.1 Yanking.ipynb' --template=config/web.tpl
 jupyter nbconvert --to html '2.2 Teleportation.ipynb' --template=config/web.tpl

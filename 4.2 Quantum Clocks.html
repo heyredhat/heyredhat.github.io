@@ -13077,70 +13077,17 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="UNFINISHED-NOTES-How-to-Think-about-Entanglement">UNFINISHED NOTES How to Think about Entanglement<a class="anchor-link" href="#UNFINISHED-NOTES-How-to-Think-about-Entanglement">&#182;</a></h1><h2 id="Part-2:-Clocks">Part 2: Clocks<a class="anchor-link" href="#Part-2:-Clocks">&#182;</a></h2>
+<h1 id="How-to-Think-about-Entanglement">How to Think about Entanglement<a class="anchor-link" href="#How-to-Think-about-Entanglement">&#182;</a></h1><h2 id="Part-2:-Clocks">Part 2: Clocks<a class="anchor-link" href="#Part-2:-Clocks">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>there's our physical principles, and then there's the question of their mathematical representation. we want to find mathematical representations that don't make unnecessary distinctions so that we don't have to "solve" anything, but the solution-ness is imposed by the very structure, the very form we are filling out.</p>
-
-<pre><code>So it's like we have a big tensor network, and it has some open edges: and these represent the places where we'll plug in the answers: and we can determine say all but one edge, and then get the steered state for that guy. Or we can determine them all and get an amplitude.
-
-It's like we have all possible histories encoded here, in a way independent of space/time/individual outcomes. Etc.
-
-And indeed, I claim that all these can be reduced down to the standard form of a cup a wire and a cap.
-
-</code></pre>
-<p>-&gt; Time in quantum mechanics. Ie: steering in the temporal case, steering thru solutions of the schrodinger equation.
-                -&gt; cf longer essay
-    In the normal formulation of quantum mechanics, time enters the equations as a classical variable. As we've seen, we can introduce time dependence to a state by writing:
-|       ψ(t)⟩ = e−iEt|ψ⟩,
-    where E is the energy operator and t is the apparently classical time measured in your lab. But time should be quantized like everything else right? Rumor has it that just as position and momentum are conjugate variables, energy and time are supposed to be conjugate to each other. Concretely, if we Fourier transform the position operator, we get the momentum operator: and if we Fourier transform the energy operator, we should get a “time operator.”</p>
-
-<pre><code>Indeed, the Fourier transform in our context is just a matrix. X and Z are Fourier transforms of each other etc.  
-
-But it’s not clear how the "time operator" relates to the classical time variable.
-
-As a first step, we can consider a Feynman computer. We discretize the time evolution of a system into unitary chunks. And then we create a hamiltonian that couples transitions in the clock to these unitary chunks in the other. When we evolve the system from the starting state, the clock tracks the evolution of the system, and when we measure the clock to show time t, we always find the other state in the correct place re: the normal schrodinger equation. 
-
-We can go further and build a Kitaev computer. We add an extra few terms, and then find the ground state of the Hamiltonian. In this ground state, the states of the clock are correctly entangled with the states of the system--all at once! So it seems like anything we can do over time, we can also encode in some time independent spatial state.
-
-So that's a good start. But there's an even more general observation that we can make. We now consider something called the “Page-Wootters mechanism.” 
-
-But let's also back up and consider some philsophical reasoning. Hundreds of years ago Leibniz famously reasoned that if we moved every clock in the universe ahead 5 minutes, no one in the universe could tell the difference, and that therefore the universe as a whole has “no time,” in other words, that time is relational. And if we buy this a) we have to represent our clock as a quantum system in the universe as well, and b) that we have to take E|ψ⟩ = 0: in other words, the overall state of the universe has to be in the 0-energy eigenspace of its energy operator: in other words, the overall energy of the universe has to be just 0. (Remember that energy eigenstates don’t evolve in time (except for a phase, and the states with 0 energy don’t even have that!)) So the quantum state of the universe should be timeless. Or better said, time independent: since what we find is that the condition E|ψ⟩ = 0 leads to some interesting structure in |ψ⟩. Crucially, if we have two systems (like a clock (A) and a spin (B)), each with separate/commuting energy operators so that E = EA + EB, then |ψ⟩ will be a maximally entangled state between the two systems, with the property that projections onto the eigenstates of the time operator of the clock A project the spin B into exactly the state predicted by the normal Schrodinger evolution of B at the classical time t, now interpreted as an eigenvalue of the other systems’s time operator. Cool! So independent subsystems constrained to exist in a time-independent universe together automatically parameterize each other’s time evolution! And there's entanglement between things that doesn't result from interaction, but due to a "superselection rule", due to an overall symmetry consideration. Ps we can consider to be "gauge invariant" or really real observables only those observables that commute with the hamiltonian. These operators generate gauge transformations: they preserve the 0 energy subspace, etc.
-
-So we can have clocks that interact, clocks who statically record time evolution with entanglement via interaction, and clocks which statically record time evolution with entanglement not via interaction but just because they share the universe together.
-
-So I want to say, by the by, that we could say there's three pictures of quantum mechanics.
-
-In the first picture, it's relative to you. You determine the preparations, the measurements, nature responds, you decide what to do in the meantime evolving your schrodinger equation, etc. 
-
-Let's say the second picture, is the timeless picture: we have the whole history of the universe encoded in this big timeless state: but we still haven't inputed any of the decisions: but we've encoded, as it were, all the logic, all the dependencies.
-
-And then finally, the third picture, is like the tensor network picture, where in the end we've determined every choice, and in the end: we get an amplitude. And we can just consider anything we can do to the tensor network that leaves the amplitude and the input states the same.
-
-Like in real life, we retain the freedom to act differently. in the second picture, we've given up the freedom to set things up differently (we'd have to consider a different universe, etc, a different story), but we still don't determine any of the outcomes: all these can be plugged in independently of each other regardless of space/time. And of course, projecting might lead you out of the 0 subspace, but it's okay: all you need is the probability. The thing isn't going to "evolve." If you want to have it evolve and then make a later choice, you have to move to a bigger universe, with a clock that keeps track of that whole thing. And then finally, in the fully contracted tensor network picture, we've determined the possibilities and the outcomes, and we get an amplitude for that whole story, and after that, it's: god's choice. And we can think of all the ways of rewriting that story etc that lead to the same thing. 
-
-So my point is, you can't represent the great quantum state in the sky here on earth. Even if it exists as the great unitary completion of it all, here on earth it can only be proposed only to be revised as we discover new things and make new choices. Nevertheless it's a fact that subsystems of the universe can encode "time evolution" in a time independent all at once way, and that's true whether we can actually nail down its Platonic parent or not. And even if the Platonic quantum state exists in all its completion, it still only determines the outcomes of our lifes up to a coin flip. So that neither perspective: the local or the global can exist without each other.
-
-To wit, in the end, because our position is as a subsystem of the universe, we live in the first picture. And we experience life as a combination of will and chance over the course of space and time.
-
-        and the global property E|psi&gt; = 0 is really pseudo global: it imposes a relativity relation.
-
-        so we get what we observe: that any sufficiently isolated system acts as a clock w/r/t the rest of the universe
-
----
-
-(If entanglement a private relation, then how can entanglement change via boost, etc)
-or is it more like: the reference by which you judge their entanglement is changing
-
-
-</code></pre>
-<p>--
-Or maybe the surprising thing is we think of relations like orientation, etc, but things can have "discrete orientation": like I got this eigenvalue etc.</p>
-<p>--</p>
+<p>In the normal formulation of quantum mechanics, time enters the equations as a classical variable. For example, we can introduce time dependence to a state by writing:</p>
+<p>$|\psi(t)\rangle = e^{-iEt} |\psi\rangle$,</p>
+<p>where E is the energy operator and t is the apparently classical time measured in your lab. But time should be quantized like everything else right? Rumor has it that just as position and momentum are conjugate variables, energy and time are supposed to be conjugate to each other. Concretely, if we Fourier transform the position operator, we get the momentum operator: and if we Fourier transform the energy operator, we should get a "time operator." But it's not clear how this operator relates to the classical time variable.</p>
+<p>The answer to the question is provided by something called the "Page-Wootters mechanism." Hundreds of years ago Leibniz famously reasoned that if we moved every clock in the universe ahead 5 minutes, no one <em>in</em> the universe could tell the difference, and that therefore the universe as a whole has "no time," in other words, that time is relational. If we buy this a) we have to represent our clock as a quantum system <em>in</em> the universe as well, and b) that we have to take $E|\psi\rangle = 0$: in other words, the overall state of the universe has to be in the 0-energy eigenspace of its energy operator: in other words, the overall energy of the universe has to be just 0. (Remember that energy eigenstates don't evolve in time (except for a phase, and the states with 0 energy don't even have that!)) So the quantum state of the universe should be timeless. Or better said, time independent: since what we find is that the condition $E|\psi\rangle = 0$ leads to some interesting structure in $|\psi\rangle$. Crucially, if we have two systems (like a clock (A) and a spin (B)), each with separate/commuting energy operators so that $E = E_A + E_B$, then $|\psi\rangle$ will be a maximally entangled state between the two systems, with the property that projections onto the eigenstates of the time operator of the clock A project the spin B into exactly the state predicted by the normal Schrodinger evolution of B at the classical time t, now interpreted as an eigenvalue of the <em>other systems</em>'s time operator. Cool! So independent subsystems constrained to exist in a time-independent universe together automatically parameterize each other's time evolution! We'll discuss what this implies about different interpretations of quantum mechanics...</p>
 
 </div>
 </div>

@@ -15,6 +15,7 @@ jupyter nbconvert --to html '3.3 A Really Existing Quantum Computer.ipynb' --tem
 jupyter nbconvert --to html '4.1 Spheres.ipynb' --template=config/web.tpl
 jupyter nbconvert --to html '4.2 Quantum Clocks.ipynb' --template=config/web.tpl
 jupyter nbconvert --to html '4.3 Representations.ipynb' --template=config/web.tpl
+jupyter nbconvert --to html '5.1 Majorana Stars.ipynb' --template=config/web.tpl
 
 echo "uploading..."
 

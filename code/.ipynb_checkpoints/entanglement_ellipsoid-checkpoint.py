@@ -2,7 +2,7 @@ import qutip as qt
 import numpy as np
 import vpython as vp
 from itertools import product
-scene = vp.canvas(background=vp.color.white)
+scene = vp.canvas(background=vp.color.white, height=600, width=1000)
 
 #######################################
 
@@ -86,7 +86,7 @@ if show_both:
 
 #######################################
 
-def review(normalize=True):
+def review(normalize=False):
     global LXYZ, RXYZ, TXYZs, vBts, vAarrow, vBarrow, state, R, show_both
 
     for i, txyz in enumerate(TXYZs):

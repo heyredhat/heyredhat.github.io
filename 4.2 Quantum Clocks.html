@@ -13086,8 +13086,178 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In the normal formulation of quantum mechanics, time enters the equations as a classical variable. For example, we can introduce time dependence to a state by writing:</p>
 <p>$|\psi(t)\rangle = e^{-iEt} |\psi\rangle$,</p>
-<p>where E is the energy operator and t is the apparently classical time measured in your lab. But time should be quantized like everything else right? Rumor has it that just as position and momentum are conjugate variables, energy and time are supposed to be conjugate to each other. Concretely, if we Fourier transform the position operator, we get the momentum operator: and if we Fourier transform the energy operator, we should get a "time operator." But it's not clear how this operator relates to the classical time variable.</p>
-<p>The answer to the question is provided by something called the "Page-Wootters mechanism." Hundreds of years ago Leibniz famously reasoned that if we moved every clock in the universe ahead 5 minutes, no one <em>in</em> the universe could tell the difference, and that therefore the universe as a whole has "no time," in other words, that time is relational. If we buy this a) we have to represent our clock as a quantum system <em>in</em> the universe as well, and b) that we have to take $E|\psi\rangle = 0$: in other words, the overall state of the universe has to be in the 0-energy eigenspace of its energy operator: in other words, the overall energy of the universe has to be just 0. (Remember that energy eigenstates don't evolve in time (except for a phase, and the states with 0 energy don't even have that!)) So the quantum state of the universe should be timeless. Or better said, time independent: since what we find is that the condition $E|\psi\rangle = 0$ leads to some interesting structure in $|\psi\rangle$. Crucially, if we have two systems (like a clock (A) and a spin (B)), each with separate/commuting energy operators so that $E = E_A + E_B$, then $|\psi\rangle$ will be a maximally entangled state between the two systems, with the property that projections onto the eigenstates of the time operator of the clock A project the spin B into exactly the state predicted by the normal Schrodinger evolution of B at the classical time t, now interpreted as an eigenvalue of the <em>other systems</em>'s time operator. Cool! So independent subsystems constrained to exist in a time-independent universe together automatically parameterize each other's time evolution! We'll discuss what this implies about different interpretations of quantum mechanics...</p>
+<p>where E is the energy operator and t is the apparently classical time measured in your lab. But time should be quantized like everything else, right? Rumor has it that just as position and momentum are conjugate variables, energy and time are supposed to be conjugate to each other. Concretely, if we Fourier transform the position operator, we get the momentum operator: so if we Fourier transform the energy operator, we should get a "time operator." But it's not clear how this operator relates to the classical time variable in the Schrodinger equation above.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The answer, ultimately, is that we need to consider the clock itself as a quantum system which is entangled with our quantum system of interest. We shall see how the ideas we developed in the last section (re: steering) come into play in a very natural way.</p>
+<p>In other words, suppose we have a quantum system $A$, with an associated energy operator $E_{A}$. Ultimately, we'd like a quantum clock $C$ to parameterize the time evolved states of our system A via entanglement, so that if we project the clock $C$ into all of its "clock states," and look to see how $A$ is steered due to entanglement, we want to find $A$ to be in the appropriately time evolved state re: the Schrodinger equation.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As a first attempt, let's explore a very nice construction due to Feynman of a joint system + clock Hamiltonian such that transitions in the clock drive some chosen unitary evolution on the system, leading to the desired entanglement.</p>
+<p>The idea was first proposed in the context of quantum computation. Suppose I have some qubits, and I want to run a certain quantum circuit, which consists of a series of unitaries, step by step, acting on the qubits. This could be seen as evolution under a time dependent energy operator. Could we describe the same process using a time independent energy operator? Yes, if we include a clock.</p>
+<p>If we label the "pointer states" of the clock by $\mid t \rangle$, and the unitaries in the circuit by $U_{t}$ for the unitary at time $t$, aka $U_{0}, U_{1}, U_{2}$, then the Feynman Clock Hamiltonian is:</p>
+$$ E_{Feynman} = \sum_{t} U_{t} \otimes \mid t+1 \rangle \langle t \mid + \ U_{t}^{\dagger} \otimes \mid t \rangle \langle t+1 \mid$$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If you stare at it for a second, you realize: it couples forward transitions in the clock $ t \rightarrow t+1 $ to unitary evolution $ U_{t} $ and backwards transitions in the clock $ t+1 \rightarrow t $ to the reverse unitary evolution $ U_{t}^{\dagger} $. The $U_{t}$ could all be different from each other, or they could all be the same. For instance, you could imagine discretizing via $e^{iHdt}$ for some tiny $dt$ and a clock with many, many clock states. You could imagine a clock with an infinite number of clock states and then the clock is basically: a free particle on the line.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Suppose we have a qubit and a clock. If we start the clock at $t=0$ and put the qubit in some desired initial state, and then turn on that energy function, the clock begins to tick synchronized to the evolution of the qubit. Eventually, the system reaches an entangled state such that that projecting the clock with $\mid t \rangle\langle t \mid$ gives the state of the system after the unitaries $U_{0} \ldots U_{t}$ have been applied.</p>
+<p>Check out <a href="code/feynman_clock.py">feynman_clock.py</a>!</p>
+<p>To the left, you'll see our qubit, with its expected spin axis represented just for fun in two ways, as an arrow pointing to a point within the sphere, and as two antipodal points on the surface of the sphere with different opacity, where the two antipodes are given by the two eigenvectors of the qubit's density matrix, and the opacities are given by the eigenvalues (aka probabilities).</p>
+<p>To the right, you'll see the clock. Each clock state is represented by a possible location of the hand of the clock, the probability of the clock being in that state shown by the opacity. The expected/average time shown by the clock is given by the red dot: we just add up those arrows in the plane weighted by their probability. Surrounding the clock are the states of the qubit evolved via the Schrodinger equation, given the initial state and qubit energy operator--if our construction works right, these are the <em>correct</em> states of the qubit given the clock time, just for reference!</p>
+<p>You can toggle the time evolution by pressing "q", return to the initial state with "p", look at a random joint state with "o", and display a help screen with "h".</p>
+<p>Stop the clock and try rotating the spin and shifting the clock independently with each other with "a/d s/w z/w" for X, Y, Z rotations respectively, and 9/0 for shifting the clock.</p>
+<p>You can measure the clock with "c", measure the spin along the Z-axis with "v" and measure the total energy with "b". The state will be collapsed into an eigenstate with the correct probability.</p>
+<p>Finally, the important part: Use "r" to toggle the clock projection, and "e/t" to tick back and forward. This projects the clock into a clock state, and shows you the corresponding state the qubit is steered to: in real time!</p>
+<p>Trying playing around with it! Adjust the number of clock states... Explore how shifting the clock plays with the projections. And finally, observe how <em>very very quickly</em> we evolve to an entangled state that gives us the right projections from the initial unentangled state.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Okay, now let's talk about a very similar construction due to Kitaev. We're going to encode the clock + system entanglement in the timeless ground state of the following Hamiltonian:</p>
+$$ E_{Kitaev} = \sum_{t} \begin{matrix} - \ U_{t} \otimes \mid t+1 \rangle \langle t \mid \\
+                         - \ U_{t}^{\dagger} \otimes \mid t \rangle \langle t+1 \mid \\
+                         + \ I \otimes \mid t \rangle \langle t \mid \\
+                         + \ I \otimes \mid t+1 \rangle \langle t+1 \mid \\
+                         + \ (I- \mid initial \rangle \langle initial \mid \otimes \mid 0 \rangle \langle 0 \mid \end{matrix}$$<p>We can see that the first two terms are just the same as in Feynman's hamiltonian, but now they have a negative sign. They are counter balanced by terms that act on the clock, and a final term that imposes the boundary condition: $\mid initial \rangle$ is the initial state of the system, and $\mid 0 \rangle$ is the 0th clock state.</p>
+<p>This energy operator will have a zero energy eigenstate, which precisely corresponds to an entangled state which encodes the whole history of evolution of the system relative to the clock: the states of the clock parameterize the states of the quantum system of interest, evolving under $U_{0}$, then $U_{1}$, then $U_{2}$, etc, starting from $\mid initial \rangle \otimes \mid 0 \rangle$.</p>
+<p>Incidentally, it’s worth mentioning that we can have a circular clock, if we add terms for $\mid 0 \rangle \langle n-1 \mid$ and $\mid n-1 \rangle \langle 0 \mid$ on the clock, but only if the product of all the $U_{t}$’s is the identity! In other words, only if the computation is done and then undone over the course of the clock can we use a circular clock.</p>
+<p>For that matter, in principle one could use more complicated clocks: instead of states on a line or a circle, why not states on a network, where unitaries parameterize shifts between nodes in a graph along edges? The same rule about computations needing to be uncomputed applies for any loops. And then you have the beginnings of something like a "gauge theory"-- as transitions from place to place drive unitaries on relevant systems.</p>
+<p>The Kitaev model is a particularly useful method of “adiabatic” quantum computation. The idea is that suppose you can adjust the energy operator of your quantum computer by turning some dials. You start off with some simple hamiltonian and you start cooling the system down to its lowest energy eigenstate. This requires some effort, but it's easier to cool the simpler it is. You then very, very slowly turn the dials on the machine to transition the simple energy operator to the complicated one specified by Kitaev. If you do this slowly enough, then at the end the system will still be in the lowest energy state, but now the 0 state of the Kitaev energy operator! Then you can access any moment of your computation by just measuring the clock! All the difficulty of running the computation is traded for the difficulty of cooling the initial system, and ascertaining through measurement that the Kitaev computer actually is in the 0 energy state, after which it’s guaranteed to stay there if there aren’t any interactions. The whole history of the computation is encoded timelessly in the ground state of the system, and from there you can read out which answers you’re interested in via measurement. And you can recover from errors by just cooling the system back down to 0.</p>
+<p>Check out <a href="code/kitaev_clock.py">kitaev_clock.py</a> for an example!</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So this idea is very interesting: we've encoded the entire history of a system relative to a clock in a 0-energy eigenstate, which is left invariant by the overall energy operator completely, even down to the phase. We can take a temporal sequence and express it "all at once" and indeed "timelessly" in terms of spatial entanglement between a system and a clock. This is something you can do in the lab! (Cf. <a href="https://arxiv.org/abs/1310.4691">Time from Quantum Entanglement</a>.)</p>
+<p>Now let's think a bit philosophically.</p>
+<p>Hundreds of years ago Leibniz famously developed some thought experiments as he was carrying on his argument for a relational picture of space and time as against Newton's absolute conception. Who could tell if someone moved everything in the universe 3 feet to the left? Nobody! No one in the universe could tell, since everything would have moved equally as everything else. Therefore, although things in the universe have distances relative to each other, the universe as a whole is “nowhere”— there is nothing outside the universe such that a difference of three feet to the left could be noticed. Similarly, who could tell if someone pushed all the clocks forward 5 minutes? There’s no clock outside the universe by which this change could be registered. So things inside the universe change relative to each other; but the universe as a whole has no time: it is timeless or perhaps better yet: time independent.</p>
+<p>Now we know that in quantum mechanics, time evolution is given by the Schrodinger equation. Given the energy operator E, we evolve a state by acting on it with $e^{-iEt}$. Consider the eigenstates of the energy operator: on these states, $e^{-iEt}$ acts merely as a phase evolution of the state. A state of definite energy is in this sense “timeless”; only superpositions of energy states evolve in time. If, moreover, the state is an eigenstate with eigenvalue 0, in other words, the state is in the 0 energy subspace of the energy operator, then the quantum state will be completely invariant over time, since the phase evolution is just multiplication by 1.</p>
+<p>So if we want to make a quantum model of the entire universe, we should demand that the whole be completely time independent:</p>
+$$E\mid \psi \rangle = 0$$<p>where $\mid \psi \rangle$ is the global quantum state of the entire universe, indeed which contains the very clocks with reference to which things evolve in time relative to each other <em>in the universe</em>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now here's an interesting fact. Before we considered the Feynman and Kitaev constructions, which instigate interactions between the clock and the system in question, which lead to the desired entanglement. What if we do something almost absurdly simpler? What if we demand that the clock and the system have completely separate, independent energy operators? In other words, that they have nothing to do with each other! Indeed, this is more like our traditional conception of a clock, which should just tick away imperviously to what's going on around it.</p>
+<p>It turns out that if we have two systems, like a clock and a spin each with separate/commuting energy operators so that the total energy is $E = E_{clock} + E_{spin}$, and if then on "relativistic grounds" we demand that $E\mid \psi \rangle = 0$, then $\mid\psi\rangle$ will be a maximally entangled state between the two systems, with the property that projections onto the eigenstates of the "time operator" of the clock A project the spin B into exactly the state predicted by the normal Schrodinger evolution of B at the classical time t, now interpreted as an eigenvalue of the <em>other systems</em>'s time operator. What's the time operator? It's the Fourier transform of the system's energy operator. Cool! So independent subsystems constrained to exist in a time-independent universe together automatically parameterize each other's time evolution!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is known as the "Page-Wootters mechanism."</p>
+<hr>
+
+<p>So we have two systems $A$ and $B$, with individual energy operators $E_{A}$ and $E_{B}$ so that the total energy operator $E = E_{A} \otimes I_{B} + I_{A} \otimes E_{B} $ where I've written out the tensor product structure, which guarantees that these operators will commute. It's worth noting we can't always assume a tensor product structure, even if we can find some commuting operators.</p>
+<p>Here's a few initial observations. We demand that the global quantum state of the universe is in the zero energy eigenspace of E. Now first of all, depending on $E_{A}$, and $E_{B}$, there might not be any zero energy eigenstates! Maybe you have to rescale some eigenvalues, etc. If there's no 0 eigenvalues, then you could say: those two systems couldn't coexist in the same universe. On the other hand, there might be more than one 0 energy eigenvalue, so that the zero energy subspace is given by linear combinations of the degenerate eigenstates. Now: the conserved quantities of a quantum system are represented by Hermitian operators that commute with the energy operator. And so all operators that commute with our global energy function are timelessly conserved quantities. We can consider evolving the global state via $e^{-iGt}$, for one such operator G with $[G, E] = 0$. This operator will keep us in the zero energy eigenspace, but if there are degeneracies, then this evolution may take us to some superposition of 0 energy eigenstates. This will have no effect on any of the globally conserved quantities, but it does have an effect in terms of the description of relative quantities in the universe. Such transformations are called “gauge transformations.”</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><hr>
+Now we have to take a detour to discuss conjugate variables. The classical example of conjugate variables is position and momentum. Their commutator is</p>
+$$[P, Q] = i$$<p>To wit, localization in position leads to a spread in momentum, localization in momentum leads to a spread in position. The relationship between the two is given by a Fourier transform. If I have a quantum state expressed in the position basis, and I take the Fourier transform of that state, I get that state expressed in the momentum basis. If Fourier transform the position operator, I get the momentum operator; and vice versa.</p>
+<p>Now the position operator is the generator of translations in momentum (aka boosts: $e^{-iQt}$) and the momentum operator is the generator of translations in position (aka translations: $e^{-iPt}$). The whole idea of conjugate operators is that they generate translations in each other’s eigenspaces. For various important reasons, which we won’t dwell on now, in the case of P and Q, they must be infinite dimensional operators, and the Fourier transform is applied via an integral as the correct commutation relationship $[P, Q] = i$ can’t be satisfied by any finite dimensional matrix.</p>
+<p>So let’s consider a finite dimensional example instead for concreteness. Being a linear transformation, the Fourier transform is easily expressed as an n x n matrix in the finite dimensional case.</p>
+$$ W = \frac{1}{\sqrt{n}}
+\begin{pmatrix}
+    1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; \ldots &amp; 1 \\
+    1 &amp; w &amp; w^{2} &amp; w^{3} &amp; w^{4} &amp; \ldots &amp; w^{n-1} \\
+    1 &amp; w^{2} &amp; w^{4} &amp; w^{6} &amp; w^{8} &amp; \ldots &amp; w^{2(n-1)} \\
+    1 &amp; w^{3} &amp; w^{6} &amp; w^{9} &amp; w^{12} &amp; \ldots &amp; w^{3(n-1)} \\
+    1 &amp; w^{n-1} &amp; \dots &amp; \dots &amp; \dots &amp; \dots &amp; w^{(n-1)^2} 
+\end{pmatrix}$$<p>Let’s consider the 2d case, also known as the Hadamard matrix.</p>
+$$ H = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{pmatrix} $$<p>Consider again a spin. We know that the 3 Pauli operators X, Y, Z don’t commute in a way that mirrors the non-commutation of 3d rotations. Try rotating a sphere around the X axis, then the Z axis, versus the other way around.</p>
+<p>Another way of thinking about this is to realize that X and Z are Fourier transforms of each other. In other words: $ X = H^{\dagger}ZH$ and $ Z = H^{\dagger}XH$.</p>
+<p>Indeed, rotations around the Z axis generate (cyclical) translations in the X eigenspace. If I start with a point at (1,0,0), I can rotate around the Z-axis to get (-1,0,0), and then again to return to (1,0,0). Of course this applies to any pair of axes. Once, however, we've made a choice of assigning X, Y, and Z to the cardinal directions, the direction we’ve chosen to be Y has a special distinction, because the Fourier transform of the Pauli Y operator is just itself times -1: in other words, Pauli Y is an eigenvector of the Fourier transform with eigenvalue -1.</p>
+<p>To sum up, given some operator, we can construct a conjugate operator to it via the Fourier transform. So what if we construct an operator conjugate to the energy? We think we know that time and energy should be complementary, so we conjecture this operator is the “time operator.”</p>
+<p>In other words, a state of definite energy is in a superposition of all time states. A state of definite “time” is a superposition over all energy states.</p>
+<p>If we are considering a single system in isolation, governed by the Schrodinger equation, we parameterize the time evolution by $e^{-iEt}$, where t is a classical clock variable. To be in an energy eigenstate is to be unchanging with respect to the external t; to be in a time eigenstate is to be maximally changing with respect to the external t: and both perspective provide a complete basis for the system.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So we have a universe consisting of two spins A and B, with an energy operator:</p>
+$$ E = E_{A} \otimes I_{B} + I_{A} \otimes E_{B} $$<p>with the constraint that</p>
+$$E\mid \psi \rangle = 0 $$<p>The energies of the two systems will be constrained in such a way that positives and negatives must all cancel out to 0, and $\mid \psi \rangle$ encodes all the ways that this can happen. The systems will be correlated via entanglement so that no matter what the energy of A is measured to be, B gives just the opposite. But what effect does this have if instead we measure the time operator instead of the energy?</p>
+<hr>
+
+<p>So let's now consider $T_{A}$ and $T_{B}$, the time operators for $A$ and $B$, conjugate to their individual energies. And let’s consider the projectors onto $A$’s time eigenstates. They are each labeled by an eigenvalue which we’ll call “t”. Let’s project the global state with each of A’s time projectors, and see where B is steered to due to the entanglement. For each “t” on A, we have a state of B. And it turns out that relative to this “t”, B looks like it is evolving under its energy operator $E_{B}$ as if “t” were the external time variable in the local picture of Schrodinger evolution! And the same goes for B: if we project onto B’s time states in turn, A appears to evolve according to $E_{A}$. Because of the 0 energy constraint, and the fact that they are non-interacting, A and B are entangled in such a way that their entanglement encodes the time evolution of the other: they act as clocks for each other. In the case of two spins, this is of course a discrete clock with just two states, but just the same.</p>
+<p>In the general case, if you have a global state $E\mid \psi \rangle = 0$ consisting of several non-interacting subsystems, each with their own energy function, then the subsystems will be in an entangled state, such that each independent subsystem parameterizes the time evolution of the whole rest of the universe. Each independent subsystem can be regarded as a clock for the rest.</p>
+<p>And so, out of the timeless picture, we are able to recover time as a relationship between parts: we are now modeling clocks themselves with quantum mechanics. The clock could be a spin, a free particle, anything: what’s important is the conjugate relationship between time and energy and the global entanglement.</p>
+<p>That’s not all: one might wonder, well okay, so each independent subsystem is entangled so that its time states parameterize the Schrodinger evolution of the rest of the universe according to the rest’s own energy operator, but what determines the initial state at time “0”?</p>
+<p>Well, the initial state basically depends on how the symmetries of the individual subsystems fit into each other. In other words, the question of “what’s the initial state” is replaced with “what is the timeless state” and then, the initial state for each observer is entirely determined by what systems it shares the universe with. In other words, the initial state for each observer is determined entirely by the relations between subsystems as well.</p>
+<p>By the way, it's worth noting that the Page-Wootters argument only applies to independent subsystems. Not to interacting subsystems, nor to groups of independent subsystems.</p>
+<p>It very much brings to mind Leibniz’s own picture of the monads. The monads are all separate from each other, each in their own place, but they each in their own way reflect the whole, so that despite being non-interacting, by a pre-established harmony, they are correlated as if they were.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So in “global” quantum mechanics, we condition all our probabilities on a clock (or clocks) showing a certain time. Suppose we take A as our clock, and A shows t=1: we project A into that time state, and ask about the probabilities of the outcomes of an X measurement on B resulting in $\uparrow$ or $\downarrow$?</p>
+<p>But crucially notice, we’re still just calculating probabilities. We have a timeless global state of the universe, but individual outcomes in the universe are still determined up to probabilities. These outcomes are only available to observers in the universe, although the global picture encodes all the information about all the conditional probabilities over the entire history of the universe.</p>
+<p>Indeed, if our global picture is really global, it includes all our apparatuses, our measuring devices, our memories, encoding in entangled superposition all the choices of measurements we might make and the resulting dependencies, corresponding to different unitary transformations entangling spins and apparatuses and memory devices, the whole structure of possibility, but in the end, the state encodes none of the outcomes. The "observer" is just as important as the "global state": the global state gives probabilites with reference to different observers in the universe, while being independent of all of them.</p>
+<p>It's worth considering that if we were to project the global system as if we were measuring it "from outside the universe," it's not a guarantee that the resulting state will be in the 0 energy eigenspace of the total energy operator! That would be the case if the measurement operator commuted with the energy operator, leading to a gauge transformations, which don't change anything physically.</p>
+<p>Metaphysically, it's like: if we "later" decide we want to make a measurement in the universe, we have to construct a different universe that contains a measuring apparatus entangled with the phenomenon so that its states correspond to the correct readings of the instrument. Presumably, the idea is that if we can do that, we actually were always in the larger universe, we just didn't know it yet, so to speak.</p>
+<hr>
+
+<p>In the standard local Schrodinger picture of quantum mechanics, we regard the experimenter as free to choose what to measure, and nature as free to respond in its outcomes to those measurements, up to probabilities. The global picture is obtained as it were by giving up the freedom to choose what to measure, all choices and branching evolution encoded timelessly in the global state. But nature still has the freedom to choose outcomes: the global theory only predicts probabilities for what local observers observe.</p>
+<p>It all naturally brings up the question: How realistic is it that the whole universe has a law which never changes? Was Leibniz actually right? For example, suppose the laws could change conditioned on our choices? So that although there might be a global state, it would always be provisional.</p>
+<p>On this note: it's kind of funny to me how similar the global picture is to certain Judeo-Christian conceptions of the world: that God set up the whole world timelessly in the sense that God lies outside time, set up the world in all its relationships, knowing the beginning and the end, the alpha and the omega, and yet: doesn’t know any of the specific choices that we’ll make: in other words, we nevertheless have free will, and the consequences of the choices made by us and by all of nature cascade through the ages.</p>
+<p>But as I say, it seems to be not necessary the there really be in ontological fact a global state at all. After all, we observe that subsytems of the universe can be in 0-energy eigenstates, timeless with regard to us. From the perspective of that system, we are like a "God" standing transcendentally outside it: beyond all of its history, which for us is simultaneous. So how do we know that any given "universe" isn't  yet another 0 energy subspace in some larger universe? And do we always have to regard that larger universe as "always having been there" or could it be new, novel, grown, so to speak?</p>
+<p>In other words, we could imagine an ontologically complete global state of which we are necessarily ignorant, us being parts and all, so that our choices and everyone's choices are quantum outcomes, rhyming in accordance with eternal timeless law. Or we could imagine that the universe is constantly growing in some sense, changing its law--of course, from within the universe, we'd never know per se: since it would appear from within like it had always been that way.</p>
+<p>I guess it's a way of asking: does the universe have an eternal memory? Or can it change in unaccountable ways, bringing novel things into being?</p>
+<p>It's a tricky metaphysical question which no one can answer!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<p>Check out <a href="code/universe.py">universe.py</a> which lets you play around with different universes containing clocks and miscellaneous quantum systems!</p>
 
 </div>
 </div>

@@ -13191,7 +13191,7 @@ $$E\mid \psi \rangle = 0$$<p>where $\mid \psi \rangle$ is the global quantum sta
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><hr>
 Now we have to take a detour to discuss conjugate variables. The classical example of conjugate variables is position and momentum. Their commutator is</p>
-$$[P, Q] = i$$<p>To wit, localization in position leads to a spread in momentum, localization in momentum leads to a spread in position. The relationship between the two is given by a Fourier transform. If I have a quantum state expressed in the position basis, and I take the Fourier transform of that state, I get that state expressed in the momentum basis. If Fourier transform the position operator, I get the momentum operator; and vice versa.</p>
+$$[P, Q] = i$$<p>To wit, localization in position leads to a spread in momentum, localization in momentum leads to a spread in position. The relationship between the two is given by a Fourier transform. If I have a quantum state expressed in the position basis, and I take the Fourier transform of that state, I get that state expressed in the momentum basis. If Fourier transform the position operator, I get the momentum operator; and vice versa. For a fun reminder of the magic of the Fourier transform check out (audio.py)[code/audio.py]. You'll need to install pyaudio.</p>
 <p>Now the position operator is the generator of translations in momentum (aka boosts: $e^{-iQt}$) and the momentum operator is the generator of translations in position (aka translations: $e^{-iPt}$). The whole idea of conjugate operators is that they generate translations in each other’s eigenspaces. For various important reasons, which we won’t dwell on now, in the case of P and Q, they must be infinite dimensional operators, and the Fourier transform is applied via an integral as the correct commutation relationship $[P, Q] = i$ can’t be satisfied by any finite dimensional matrix.</p>
 <p>So let’s consider a finite dimensional example instead for concreteness. Being a linear transformation, the Fourier transform is easily expressed as an n x n matrix in the finite dimensional case.</p>
 $$ W = \frac{1}{\sqrt{n}}
@@ -13257,7 +13257,7 @@ $$E\mid \psi \rangle = 0 $$<p>The energies of the two systems will be constraine
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 
-<p>Check out <a href="code/universe.py">universe.py</a> which lets you play around with different universes containing clocks and miscellaneous quantum systems!</p>
+<p>Check out <a href="code/universe.py">universe.py</a> which lets you play around with different universes containing clocks and miscellaneous quantum systems! The code is kind of unweildy, but try uncommenting the different example universes at the end of the file. More documentation on it will follow.</p>
 
 </div>
 </div>

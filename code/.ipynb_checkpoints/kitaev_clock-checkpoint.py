@@ -29,9 +29,12 @@ spin_history = [psi_t(t*dt) for t in range(clock_n)]
 
 ################################################################################
 
-H = sum([qt.tensor(spin_U, qt.basis(clock_n, t+1)*qt.basis(clock_n, t).dag())\
-	    +qt.tensor(spin_U.dag(), qt.basis(clock_n, t)*qt.basis(clock_n, t+1).dag())\
-		 	for t in range(clock_n-1)])
+H = sum([-qt.tensor(spin_U, qt.basis(clock_n, t+1)*qt.basis(clock_n, t).dag())\
+	     -qt.tensor(spin_U.dag(), qt.basis(clock_n, t)*qt.basis(clock_n, t+1).dag())\
+		 +qt.tensor(qt.identity(spin_n), qt.basis(clock_n, t)*qt.basis(clock_n, t).dag())\
+	 	 +qt.tensor(qt.identity(spin_n), qt.basis(clock_n, t+1)*qt.basis(clock_n, t+1).dag())\
+		 +qt.tensor(qt.identity(spin_n) - spin_initial*spin_initial.dag(), qt.basis(clock_n, 0)*qt.basis(clock_n,0).dag())\
+		for t in range(clock_n-1)])
 HL, HV = H.eigenstates()
 H_projs = [v*v.dag() for v in HV]
 
@@ -46,7 +49,11 @@ SHIFT = qt.tensor(qt.identity(spin_n), qt.Qobj(SHIFT))
 
 ################################################################################
 
-initial = qt.tensor(spin_initial, qt.basis(clock_n, 0))
+zero_eigenstates = []
+for i, l in enumerate(HL):
+	if np.isclose(l, 0):
+		zero_eigenstates.append(HV[i])
+initial = sum(zero_eigenstates).unit()
 state = initial.copy()
 
 spin_part = state.ptrace(0)

@@ -13162,7 +13162,7 @@ $$ \begin{matrix}II &amp; IX &amp; IY &amp; IZ \\
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">product</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
 
 <span class="k">def</span> <span class="nf">pauli_basis</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">IXYZ</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;I&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">(),</span> <span class="s2">&quot;Y&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmay</span><span class="p">(),</span> <span class="s2">&quot;Z&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">()}</span>

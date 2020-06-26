@@ -15,8 +15,13 @@ jupyter nbconvert --to html '3.3 A Really Existing Quantum Computer.ipynb' --tem
 jupyter nbconvert --to html '4.1 Spheres.ipynb' --template=config/web.tpl
 jupyter nbconvert --to html '4.2 Quantum Clocks.ipynb' --template=config/web.tpl
 jupyter nbconvert --to html '4.3 Representations.ipynb' --template=config/web.tpl
-jupyter nbconvert --to html '5.1 Majorana Stars.ipynb' --template=config/web.tpl
-jupyter nbconvert --to html '5.1 Atoms.ipynb' --template=config/web.tpl
+jupyter nbconvert --to html '5.1 Atoms 0.ipynb' --template=config/web.tpl
+jupyter nbconvert --to html '5.2 Atoms 1.ipynb' --template=config/web.tpl
+jupyter nbconvert --to html '5.3 Atoms 2.ipynb' --template=config/web.tpl
+jupyter nbconvert --to html '5.4 Atoms 3.ipynb' --template=config/web.tpl
+jupyter nbconvert --to html '5.5 Atoms 4.ipynb' --template=config/web.tpl
+jupyter nbconvert --to html '5.6 Atoms 5.ipynb' --template=config/web.tpl
+jupyter nbconvert --to html '5.7 Atoms 6.ipynb' --template=config/web.tpl
 
 echo "uploading..."
 

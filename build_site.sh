@@ -22,6 +22,7 @@ jupyter nbconvert --to html '5.4 Atoms 3.ipynb' --template=config/web.tpl
 jupyter nbconvert --to html '5.5 Atoms 4.ipynb' --template=config/web.tpl
 jupyter nbconvert --to html '5.6 Atoms 5.ipynb' --template=config/web.tpl
 jupyter nbconvert --to html '5.7 Atoms 6.ipynb' --template=config/web.tpl
+jupyter nbconvert --to html '5.8 Atoms 7.ipynb' --template=config/web.tpl
 
 echo "uploading..."
 

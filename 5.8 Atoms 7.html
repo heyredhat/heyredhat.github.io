@@ -13209,9 +13209,8 @@ Matrices can be used to solve systems of linear equations.</p>
 <p>A bit more:</p>
 <p>$\hat{H}$ is a differential operator: some expression involving the variables and the operator $\hat{D}$, which takes a derivative. In a simple, single variable case:</p>
 <p>E.g, $y'' + y' - 2y = 0 \rightarrow (\hat{D}^{2} + \hat{D} -  2)y = 0$</p>
-<p>Let's consider the polynomial $d^{2} + d - 2 = (d-1)(d+2) = 0$. It has roots at $\{1, -2\}$. The above equation is true if you plug in $\hat{D}$ and $d_{i}$. So we can think about this as the characteristic polynomial of some linear transformation $\hat{H}$:</p>
+<p>Let's consider the polynomial $d^{2} + d - 2 = (d-1)(d+2) = 0$. It has roots at $\{1, -2\}$. The above equation is true if you plug in $\hat{D}$ and $d_{i}$. So we can think about this as the characteristic polynomial of some linear transformation with this matrix:</p>
 <p>$ \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -2 \end{pmatrix}$</p>
-<p>We're implictly working in the diagonal basis.</p>
 <p>If $\lambda$ is a root of the polynomial, then $e^{\lambda x}$ is a solution to the differential equation.</p>
 <p>$\frac{d^{2} e^{\lambda x}}{dx^{2}} + \frac{de^{\lambda x}}{dx} - 2e^{\lambda x} = \lambda^{2}e^{\lambda x} + \lambda e^{\lambda x} -2e^{\lambda x} = \lambda^{2} + \lambda - 2 = 0$</p>
 <p>So we have two roots and two equations: $e^{x}$ and $e^{-2x}$, and therefore a general solution is a linear combination of them $y = ae^{x} + be^{-2x}$. The solution space forms a two dimensional vector space, and you can freely choose $a$ and $b$ and what you get will satisfy the different equation. If you wanted, you could keep track of that $a$'s and $b$'s separately:</p>
@@ -13421,7 +13420,7 @@ Matrices can be used to solve systems of linear equations.</p>
 <p>Before we stuck an $i$ in the exponential and got: a parameterization of 2D rotations: $e^{i\theta} = cos(\theta) + i sin(\theta)$. As $\theta$ goes on, $e^{i\theta}$ winds around the circle, tracing out a cosine along the x-axis and a sine along the y-axis.</p>
 <p>Similarly, if we stick an $i$ in the matrix exponential and use our Pauli's, we can get a 3D rotation. For example: $e^{-iX\frac{\theta}{2}}$ implements a 3D rotation around the X axis by an angle $\theta$. $e^{-iY\frac{\theta}{2}}$ similarly rotates around the Y-axis. The minus sign is conventional, and the $\frac{1}{2}$ is there because SU(2) is the double cover of SO(3) (the group of normal 3D rotations), but we'll leave it to the side for now, but shows up in the way that the overall phase rotates during a rotation of the sphere. As it well known, a spinor rotated a full turn goes to the negative of itself, and requires two full turns to come back to itself completely. We'll return to this later.</p>
 <p>These rotation matrices are unitary matrices: they preserve the norms of vectors. (And in fact they are special unitary matrices.) If you exponentiate a Hermitian matrix, you get a unitary matrix: if you think about a Hermitian matrix as a (perhaps multidimensional) pole, then the unitaries are like rotations around that pole. Another interpretation, statistically: as rotations preserve the length of a vector, unitary matrices preserve the fact that probabilities sum to 1.</p>
-<p>Indeed, $e^{iHt}$ turns out to be the general form of time evolution in quantum mechanics. $\psi(x, tt) = e^{iHt}\psi(x,0)$, where $H$ is the operator representing the energy, the Hamiltonian, is just another way of writing the Schrodinger equation: $\frac{d\psi(x,t)}{dt} = -iH\psi(x, t)$.</p>
+<p>Indeed, $e^{iHt}$ turns out to be the general form of time evolution in quantum mechanics. $\psi(x, t) = e^{iHt}\psi(x,0)$, where $H$ is the operator representing the energy, the Hamiltonian, is just another way of writing the Schrodinger equation: $\frac{d\psi(x,t)}{dt} = -iH\psi(x, t)$.</p>
 
 </div>
 </div>
@@ -13615,7 +13614,7 @@ X, Y, Z goes from left to right, and the vertical placement of each sphere is gi
 
 <span class="c1">##########################################################################################</span>
 
-<span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">j</span> <span class="o">=</span> <span class="mi">3</span><span class="o">/</span><span class="mi">2</span>
 <span class="n">XYZ</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">jmat</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">),</span>\
        <span class="s2">&quot;Y&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">jmat</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">),</span>\
        <span class="s2">&quot;Z&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">jmat</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">)}</span>

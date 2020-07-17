@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>index</title>
+<title>5.9 Atoms 8</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13077,12 +13077,95 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><style>
-    .container {
-        top: 0px;
-    }
-</style>
-<a href="https://github.com/heyredhat/heyredhat.github.io"><img align="center" src="img/front_logo.png" /></a></p>
+<h1 id="What-is-an-atom?">What is an atom?<a class="anchor-link" href="#What-is-an-atom?">&#182;</a></h1><h2 id="8.-A-tensor?">8. A tensor?<a class="anchor-link" href="#8.-A-tensor?">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If a polynomial is a bunch of complex numbers coexisting together, and a matrix is a bunch of polynomials coexisting together, we should now be looking for a bunch of matrices to coexist together. And so, we come to the idea of a tensor, or a <em>multi-linear</em> transformation.</p>
+<p>Matrices gave us perspectives on vectors. In the quantum case, each matrix was associated to a certain experimental situation, which provided a basis of outcomes in terms of which we could expand the state vector. We used complex vectors and unitary matrices specifically so that the components of our vectors could be interpreted in terms of probability (amplitudes) for the different outcomes. Each matrix provided a kind of "metric," a different way of assigning weights to outcomes, leading to a statistical expectation value for the "observable," and the relationships between experimental situations were encoded in the algebra of the chosen matrices, which implement the relevant symmetry groups. Despite this probabalistic set up, we found in the spin case a definite geometrical picture associated to the quantum system, the stars on the sphere, even as the very same math could also equally be interpreted in terms of statistics and outcomes.</p>
+<p>We really only considered the case of a single quantum system, allowed to evolve unitarily under the Schrodinger equation in between our measurements on it. In the spin case, we seemed to explain away the mystery of superposition when we realized that a perfectly definite "constellation" can be written as an arbitrary sum of orthogonal basis constellations. Considering the spin-$\frac{1}{2}$ case: while saying "the spin is in a superposition of being $\uparrow$ and $\downarrow$ in the Z direction" sounds mysterious, it's really no different than saying "the spin is pointing in the X direction." <em>Any</em> point on the sphere can be written as a complex linear combination of two antipodal points on the sphere, which fix an axis (corresponding to the external magnetic field in the Stern-Gerlach experiement). The perhaps surprising thing is that the geometry of the situation can be interpreted entirely in terms of probability amplitudes over outcomes to experiments, even as measurements generally disturb the system so that its state can't be passively observed, but has to be reconstructed through repeated measurements on identically prepared systems.</p>
+<p>Moreover, in terms of unitary evolution, we found on the one hand, in the spin case, it could be equally well described by classical particles feeling mutually generated forces confined to whiz around the sphere, even as the form of quantum evolution: $e^{iHt}\mid \psi \rangle$ could be interpreted as guaranteeing the truth of certain propositions, that certain measurable quantities would be conserved: for example, expectation values of observables that commute with the Hamiltonian would be conserved, just as the expectation value of the Hamiltonian itself is conserved: since for an isolated system, the energy can neither increase nor decrease.</p>
+<p>We interpreted measurement itself analogously to a filter, a situation that slices up the situation in a certain way, giving weight to different parts of it. Like: because of the particular orientation of the spin relative to the magnetic field "only the $\uparrow$ part" got through, and this happens with a certain probability related to how much $\uparrow$ was in the original state. The surprising thing about the experiment is that it hadn't seemed like "a particle zipping through a magnetic field" <em>was a filtering operation at all</em>. Like what's the filter? There isn't like some grate blocking paths, that only lets particles in certain positions or with certain properties through. But maybe that's what it's like for a spin-$\frac{1}{2}$ guy to go through an inhomogenous magnetic field. Certain aspects of the spin are distinguished ($\uparrow$ and $\downarrow$ relative to the field) and their relative weights determine the probabilities that the $\uparrow$ part or the $\downarrow$ part get through. Like they're trying to get out of a cave and they have to crawl through a tunnel, and so can only come out head first or feet first. Or just as light can't help but split into many-colored beams when it goes through a prism; when a spin goes through an inhomogenous magnetic field it splits into many-spinned beams.</p>
+<p>But this can't be the full story, as we'll see. And to get there, we have to talk about entanglement.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It's worth considering what really goes on in a Stern-Gerlach experiment. The fact is we don't measure the spin directly: we deduce whether the spin was $\uparrow$ or $\downarrow$ by actually measuring its position: if it ends up here, then this implies it's $\uparrow$ and if it ends up there, then this implies it's $\downarrow$. Indeed, the set-up entangles the particle's position and its spin. This is <em>why</em> it is a filtering operation.</p>
+<p>Entanglement sets up a correspondence between basis states of one system and basis states of another system. The "Stern-Gerlach apparatus" couples the particle's spin and position in such a way that it ends up in something like this state: $\mid UP \rangle \mid \uparrow \rangle + \mid DOWN \rangle \mid \downarrow \rangle$, where $\mid UP \rangle$ is the upper position state and $\mid DOWN \rangle$ is the lower position state. This is a state in the <em>tensor product</em> of the vector space of the particle's position and the vector space of the particle's spin. We can use it to condition on the results of measurement. We can implement "measuring the position to be UP" as projecting the position into the UP state; because of the entanglement, this means only a part of the spin survives, and so the spin is "steered" to a certain state: in this case, $\uparrow$. And conversely for DOWN and $\downarrow$.</p>
+<p>We then have an interesting choice. We could say, Yeah, when the particle goes through the magnetic field, it filters the spin, and so only an $\uparrow$ or a $\downarrow$ part get through with a certain probability. And the field couples the spin to its position, and so when I measure the position to be UP, I can be sure that the spin is $\uparrow$ (and confirm this by sending the particle through multiple Stern-Gerlachs, etc).</p>
+<p>But just the same we could say, No, actually the whole spin gets through, and in fact, it ends up "greater" than when it went in: the relevant fact is that the spin gets entangled with position. In the tensor product basis, in this case, there are four basis states: $\mid UP \uparrow \rangle, \mid UP \downarrow \rangle, \mid DOWN \uparrow \rangle, \mid DOWN \downarrow \rangle$, and the space of states is any complex linear combination thereof. If the spin started in the X state $\frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ 1 \end{pmatrix}$, it will evolve by the Stern-Gerlach dynamics into: $\frac{1}{\sqrt{2}} \big{(} 1 \mid UP \rangle \mid \uparrow \rangle + 1 \mid DOWN \rangle \mid \downarrow \rangle\big{)}$, where the only terms are those in which the spin and the position are correlated, and the amplitudes are just the amplitudes of the original spin. So in this case, we could perhaps say that the spin still has its full, definite constellation, which as we know happens to be able to be described as a superposition of $\uparrow$ and $\downarrow$. In other words, the spin itself makes it through the field unscathed.</p>
+<p>But at the cost of keeping our mental picture of the spin and its constellation intact, we lose something: we now have to regard the particle as being <em>in two places at once</em>, leaving the apparatus along the upper path <em>and</em> the lower path, leading to a superposition of being in multiple positions at once.</p>
+<p>It's then only a bit later, when we filter by position that we get a hit here <em>or</em> there, and the projection of the position slices off the part of the spin that doesn't agree, and we're left with: UP and $\uparrow$.</p>
+<p>Well, we could test it! Why not join the UP path to the DOWN path? Imagine the particle comes out both along the UP path and the DOWN path--well, arrange the obstacle course so that the two "beams" are recombined into one, and send it on its way into another Stern-Gerlach. It turns out you'll get the same results as the original particle 100% of the time.</p>
+<p>Indeed: you can seemingly "undo" a Stern-Gerlach measurement by forgoing the position measurement, and simply creating a way for the UP path and the DOWN path to recombine.</p>
+<p>So at the cost of imagining that the whole spin gets through, we have to imagine that the spin manifests in two different locations. There was a particle with a certain spin axis; then it simultaneously took two different paths through space, only to rejoin with itself: we can associate the upper and lower paths with the two basis states of the spin and say the spin split into two pieces; or we could imagine, in its own terms, the whole time the spin maintained that same definite constellation, but appeared in two places at once.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In other words, we could imagine measuring a spin directly: you filter out $\uparrow$ or $\downarrow$ with a certain probability. Or we could imagine coupling the spin to position in a particular way. The spin maintains its superposition, at the cost of being in a superposition of positions--and then we measure the position directly, and the spin is filtered too.</p>
+<p>But why not go on? What if instead we couple the position to some other quantum system, and then another quantum system, and then another quantum system, and then measure the position of that one? Each time, "both states get through", but at the cost of both states taking two different paths simultaneously, until at last: there's a filter, and because of the chain of correspondences $\mid\upharpoonleft\Uparrow\upharpoonright \dots UP \uparrow\rangle + \mid \downharpoonleft\Downarrow\downharpoonright \dots DOWN \downarrow\rangle$ if we obtain at the end $\upharpoonright$ this still implies $\uparrow$, and $\downharpoonright$ implies $\downarrow$.</p>
+<p>Moreover there is a symmetry: given this particular history, we could imagine the projection as taking place at any point along the chain, and we'd still get the same probability at the end. We could imagine that the magnetic field did the filtering, and then the spin took one path through the whole chain; or maybe it was when it passed by a certain position that the filter took place, or maybe later. No matter where it takes place you get the same state in the end. If any one of the systems down the line is measured to be $\uparrow$, then this implies that all of them are up, and vice versa for down.</p>
+<p>This doesn't conflict with what we said before! Before we seemed to prove that the spin must come out both exits of the Stern-Gerlach apparatus, since we could recombine the beams and recover the original superposition. But here is the all-important point: <em>that's a different experiment</em>. In terms of the experiment we <em>actually did</em> we are perfectly within our rights to regard the spin as having been filtered way back by the magnetic field, collapsing into $\uparrow$ or $\downarrow$ with a certain probability, and regard either the one or the other as making its way along the "all up path" or the "all down path": no superposition over positions at all.  It actually doesn't matter where we regard the collapse as taking place: the probabilities at the end are just the same: precisely the probabilties for the spin to be $\uparrow$ or $\downarrow$ originally.</p>
+<p>We could recombine the Stern-Gerlach beams. We could do who knows what else? And if we had done those things, we've have to admit that the particle was definitely in a superposition over positions and had to be regarded as taking both paths along its journey. But as I say, that's a different experiment.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's consider a more elaborate set up, involving "decoherence."</p>
+<p>And actually, let's consider a related experiment.</p>
+<p>A single particle is shot at a double slit. If you measure where it comes out right at the slits, you find it comes out either one of the slits at random. But if you let the particle continue along, the wave function coming out of the two slits interferes with itself, and so if you later measure the position, there is an interference pattern in the probabilities at each location. In other words, the position state entangled with "TAKING THE UP PATH" and the position state entangled with "TAKING THE DOWN PATH" aren't orthogonal. Whereas "TAKING THE UP PATH" vs "TAKING THE DOWN PATH" is a binary choice between two orthogonal states, so that we can project the particle in the "UP" state and see where the position state is steered to, and similarly with the "DOWN" state: the state is a sum of these two vectors, but the two position states need not be themselves orthogonal. And indeed, in this case, they aren't. And so, there is intereference between them when they are added. If, however, you measure the position right at the slits, and then let it propagate for a bit, and then measure the position: there are no interference fringes.</p>
+<p>Imagine, however, that there were a gas of blue (B) particles and a gas of red (R) particles hanging by the UP and DOWN slits respectively. The particle interacts with the blue particles if it comes out the top slit, entangling with them, and it interacts with the red particles if it comes out the bottom slit, entangling with them.</p>
+<p>Before, the position states tied to “went up” and “went down” weren’t orthogonal: hence there was interference in their sum. But almost all vectors in high dimensional space are orthogonal, so that the two position states (plus everything else) (associated to "went up" and "went down") are almost certainly orthogonal. And so, what you find is that there is no interference pattern and it’s just as if: the particle went through either slit A or B, but not both.</p>
+<p>Indeed, with the gas, the resulting steered states are almoth certainly orthogonal, and thus can be added freely without disturbing each other in the tensor product, and so you never obtain a result that would imply that the particle took both paths, which you'd have to show via an interference experiment. Another way of saying this is that the off-diagonal terms of the density matrix go to 0. And so we have to say: the particle either went through gas A or gas B, and continued along one path the whole time.</p>
+<p>This is why for large objects the double slit effect isn't noticable: whereas a quantum particle is tiny, zipping along at high speeds, and more or less isolated from interaction, in contrast all sorts of interactions are taking place between a large thing and the outside world, all the air molecules, the hubbub of the world whereby everything is always checking in on everything else, and so the world appears transparently, passively viewable before us:  there's no isolated arena where something can follow out two paths at once undisturbed.</p>
+<p>But: in theory, suppose you did your R and B gas experiment in isolated circumstances, and also suppose you somehow deferred measuring your particle, and gathered up all the R and B gas after the experiment, and unitarily evolved it with the particle to undo the interaction, and let the particle continue forward as before: it would go back to interfering with itself.</p>
+<p>But in general circumstances, it's impossible to control all the interactions with the outside world, and carefully reconstruct the broken egg, and so once an interference pattern is gone, it stays gone, and we have to say: the particle passed through the blue gas, and then was correspondingly measured in the up position. But that's precisely: the limitation of my perspective, being unable to gather up all the broken pieces. (Although one wonders in the end if one can assign limits to what biological beings, evolved over millenia from the tiniest organisms to our present size, are capable of in terms of coherent interactions with the world.)</p>
+<p>And so, even if there is "decoherence," we can't definitely regard the filter as having taken place until we actually do the final measurement, since after all until the actual final registration is made since, there is still the possibility that someone could gather up the gas, and restore the interference, even if decoherence makes that well nigh impossible. Even if things zip off at the speed of light, how do we know that right now someone is finishing building a huge sphere enclosing the solar system, so that everything remains inside, and so is potentially reversible?</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The analogous situation for our spin:</p>
+<p>We send a spin through the magnetic field, and it splits into two beams, each of which pass respectively through the red gas and the blue gas, entangling with them, and then the two beams are recombined, and the resulting beam is aimed at another Stern-Gerlach.</p>
+<p>Suppose we started with our X+ state. As a density matrix, we could represent this as $\frac{1}{2}\begin{pmatrix}1 \\ 1\end{pmatrix} \begin{pmatrix} 1 &amp; 1\end{pmatrix} = \begin{pmatrix} \frac{1}{2} &amp; \frac{1}{2}\\ \frac{1}{2} &amp; \frac{1}{2} \end{pmatrix}$. For now, what you need to know is that the diagonal entries are the probabilities for $\uparrow$ and $\downarrow$. This is a "pure" state, and there is quantum coherence: these are encoded in the off-diagonal terms. After decoherence, our density matrix will be: $\begin{pmatrix} \frac{1}{2} &amp; 0 \\ 0 &amp; \frac{1}{2} \end{pmatrix}$. The probabilities are still $\frac{1}{2}$ for $\uparrow$ and $\frac{1}{2}$ for $\downarrow$, but this is a "mixed state" and the coherence is gone. It can be interpreted as a classical statistical mixture, as if: it were <em>either</em> $\uparrow$ or $\downarrow$ each with a certain probability, but you just don't know (or as some say, a "self-locating probability" about which branch of the wavefunction you've ended up on)--whereas the original pure state could be interpreted as a particular point on the sphere, which happened to give those probabilties.</p>
+<p>This has experimental significance: if you send the particle through another Stern-Gerlach, if there's been decoherence, then half the time it gives the results you'd expect from an $\uparrow$ and half the time it gives the results you'd expect from a $\downarrow$. But if there hadn't been a gas, and coherence had been maintained, then the recombined beam would give the identical results to the original particle, pointing in its particular direction, a superpositon of $\uparrow$ and $\downarrow$.</p>
+<p>Arguably, we call things "measuring devices," those large apparatuses we use to measure tiny particles, precisely when they decohere things so that the resulting mixed state gives the same probabilities as the original pure state, only without the coherence.</p>
+<p>But to emphasize again, until the particle is actually measured, that "mixed state" remains provisional. No matter how strong the decoherence, one can't rule out in principle some clever phenomenon that precisely implements the reverse unitary evolution necessary to recohere. It's only by actually measuring it ourselves that we can definitely say: a definite outcome occured--the buck stops here. Although strangely, after we do, it is perfectly consistent for us to imagine that the definite outcome occured anywhere along the chain of causation. (In other words, to be consistent quantum mechanics requires you to specify both the beginning <em>and</em> the end of an experiment. We aren't used to thinking in this somewhat "teleological" way.)</p>
+<p>But all the same, someone else could bring me together with the particle and the measuring apparatuses and unitarily evolve us, making me forget I ever knew what the spin was, even restoring the spin's coherence. Does this change the fact that I "really did" observe a definite outcome? Whether I did or not has no experimental consequences. But if I "know" something and remain isolated, I don't forget it: it's a fact stabilized by me.</p>
+<p>In other words, the quantum experiments suggest that definite outcomes, "facts" about the world, are only more or less stable; stable facts are those for which decoherence has come into play and so it would be unimaginably difficulty to restore the settings--other facts might be more or less stable, and at the scale of a spin, the facts on the ground can change dramatically. Moreover, a fact can only defined relative to some observer, some system: in terms of its capabilities to restore coherence, in terms of which measurements it actually does, which systems it is entangled with--and even which other systems have the capacity to make the system forget what it observed, which systems can regard it and the spin it measures as a closed, tunable system.</p>
+<p>One of the beauties of quantum mechanics is that even as it proposes a world where "definite outcomes" are mutable and relative, it nevertheless simultaneously explains the emergence of a world of stable facts we can agree on.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It is interesting that when one actually makes a measurement, because of the linearity of the quantum evolution, one can regard the "collapse" as having taken place arbitrarily along the chain of causation leading from the system to you. This line of reasoning was the basis of Von Neumann's claim that quantum mechanics implements the principle of "psychophysical paralellism" by virtue of the "movable cut" between subject and object, observer and observed.</p>
+<p>He writes:</p>
+<blockquote><p>...It is inherently correct that measurement or the related process of subjective perception is a new entity relative to the physical environment, and is not reducible to the latter. Indeed, subjective perception leads us into the intellectual inner life of the individual, which is extra-observational by its very nature, since it must be taken for granted by any conceivable observation or experiment. ... Nevertheless, it is a fundamental requirement of the scientific viewpoint—the so-called principle of psycho-physical parallelism—that it must be possible so to describe the extra-physical process of subjective perception as if it were in the reality of the physical world; i.e., to assign to its parts equivalent physical processes in the objective environment, in ordinary space.</p>
+<p>(Of course, in this correlating procedure there arises the frequent necessity of localizing some of these processes at points which lie within the portion of space occupied by our own bodies. But this does not alter the fact of their belonging to “the world about us,” the objective environment referred to above.) In a simple example, these concepts might be applied as follows: We wish to measure the temperature. If we want, we can proceed numerically by looking to the mercury column in a thermometer, and then say: “This is the temperature as measured by the thermometer.” But we can carry the process further, and from the properties of mercury (which can be explained in kinetic and molecular terms) we can calculate its heating, expansion, and the resultant length of the mercury column, and then say: “This length is seen by the observer.” Going still further, and taking the light source into consideration, we could find out the reflection of the light quanta on the opaque mercury column, and the path taken by the reflected light quanta into the eye of the observer, their refraction in the eye lens, and the formation of an image on the retina, and then we would say: “This image is registered by the retina of the observer.” And were our physiological knowledge greater than it is today, we could go still further, tracing the chemical reactions which produce the impression of this image on the retina, and in the optic nerve and in the brain, and then in the end say: “These chemical changes of his brain cells are perceived by the observer.” But in any case, no matter how far we proceed—from the thermometer scale, to the mercury, to the retina, or into the brain—at some point we must say: “And this is perceived by the observer.”</p>
+<p>That is, we are obliged always to divide the world into two parts, the one being the observed system, the other the observer. In the former we can follow all physical processes (in principle at least) arbitrarily precisely. In the latter, this is meaningless. The boundary between the two is arbitrary to a very large extent. In particular, we saw in the four different possibilities considered in the preceding example that the “observer”—in this sense—need not be identified with the body of the actual observer: in one instance we included even the thermometer in it, while in another instance even the eyes and optic nerve were not included. <em>That this boundary can be pushed arbitrarily far into the interior of the body of the actual observer is the content of the principle of psycho-physical parallelism</em>. But this does not change the fact that in every account the boundary must be put somewhere if the principle is not to be rendered vacuous; i.e., if a comparison with experience is to be possible. Indeed, experience only makes statements of this type: “An observer has made a certain (subjective) observation,” and never any like this: “A physical quantity has a certain value.”</p>
+<p>Now quantum mechanics describes events which occur in observed portions of the world, so long as they do not interact with the observing portion, and does so by means of process 2 (V.1) [unitary evolution]. But as soon such an interaction does occur— i.e., a measurement is made—the theory requires application of process 1 [projection]. This duality is therefore fundamental to the theory. Danger, however, lies in the fact that the principle of psycho-physical parallelism is violated so long as it is not shown that the boundary between the observed system and the observer can be displaced arbitrarily, in the sense given above.</p>
+<p>In order to discuss this, let us divide the world into three parts: I, II, III. Let I be the system actually observed, II the measuring instrument, and III the actual observer. It is to be shown that the boundary can just as well be drawn between I and II+III as between I+II and III. In comparison of the first and second cases of our introductory example, viewed in this light: I was the system to be observed, II the thermometer, and III the light plus the observer. In comparison of the second and third cases, I was the system to be observed plus the thermometer, II was the light plus the eye of the observer, III was the observer, from the retina on. In comparison of the third and fourth cases, I was everything up to the retina of the observer, II was his retina, optic nerve and brain, III was his abstract “ego.” That is, in one case 2 is to be applied to I and 1 to the interaction between I and II+III; in the other case 2 is to be applied to I+II and 1 to the interaction between I+II and III. In both cases, III itself remains outside of the calculation.</p>
+</blockquote>
 
 </div>
 </div>
@@ -13090,56 +13173,815 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Essays-on-Quantum-Physics"><div align="center">Essays on Quantum Physics</div><a class="anchor-link" href="#Essays-on-Quantum-Physics">&#182;</a></h1>
+<p>We unitarily evolve the system. And then represent the measurement as a projection on the system (I), with the measuring device and the abstract ego (II + III) treated as "observer": as "extra-physical." Alternatively, we could unitarily entangle the system and the measuring device (I + II), with the abstract ego (III) treated as "observer," so that the measuring device is projected (and the spin along with it). In both cases the abstract ego is left outside the calculations, and moreover: the probabilities for that observer are the same in both cases because of the entanglement. You can imagine this chain of causation arbitrarily long, and you can always leave the observer out in the end. But although this cut between observer and observer, subject and object, is movable, it must be placed somewhere: where the buck ultimately stopped for you. Without a cut, the spin is happy to be in two places at once, and the quantum state describing your world remains in a superposition of possible histories, nothing decided yet.</p>
+<hr>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ol>
-<li><a href="1%20Introduction.html">Introduction</a> (<a href="1%20Introduction.ipynb">notebook</a>)</li>
-<li><a href="2.1%20Yanking.html"><em>How to Make a Wormhole</em>: Yanking</a> (<a href="2.1%20Yanking.ipynb">notebook</a>)</li>
-<li><a href="2.2%20Teleportation.html"><em>How to Make a Wormhole</em>: Teleportation</a> (<a href="2.2%20Teleportation.ipynb">notebook</a>)</li>
-<li><a href="2.3%20Time%20Evolution.html"><em>How to Make a Wormhole</em>: Time Evolution</a> (<a href="2.3%20Time%20Evolution.ipynb">notebook</a>)</li>
-<li><a href="2.4%20The%20TFD.html"><em>How to Make a Wormhole</em>: The TFD</a> (<a href="2.4%20The%20TFD.ipynb">notebook</a>)</li>
-<li><a href="2.5%20Scrambling%20and%20Winding.html"><em>How to Make a Wormhole</em>: Scrambling and Winding</a> (<a href="2.5%20Scrambling%20and%20Winding.ipynb">notebook</a>)</li>
-<li><a href="2.6%20Wormhole%20Experiments.html"><em>How to Make a Wormhole</em>: Wormhole Experiments</a> (<a href="2.6%20Wormhole%20Experiments.ipynb">notebook</a>)</li>
-<li><a href="2.7%20Geometrical%20Sketch.html"><em>How to Make a Wormhole</em>: Geometrical Sketch</a> (<a href="2.7%20Geometrical%20Sketch.ipynb">notebook</a>)</li>
-<li><a href="3.1%20Philosophical%20Interlude.html"><em>How to Continue Making a Wormhole</em>: Philosophical Interlude</a> (<a href="3.1%20Philosophical%20Interlude.ipynb">notebook</a>)</li>
-<li><a href="3.2%20Majorana%20Fermions%20and%20SYK.html"><em>How to Continue Making a Wormhole</em>: Majorana Fermions and SYK</a> (<a href="3.2%20Majorana%20Fermions%20and%20SYK.ipynb">notebook</a>)</li>
-<li><a href="3.3%20A%20Really%20Existing%20Quantum%20Computer.html"><em>How to Continue Making a Wormhole</em>: A Really Existing Quantum Computer</a> (<a href="3.3%20A%20Really%20Existing%20Quantum%20Computer.ipynb">notebook</a>)</li>
-<li><a href="4.1%20Spheres.html"><em>How to Think about Entanglement</em>: Spheres</a> (<a href="4.1%20Spheres.ipynb">notebook</a>)</li>
-<li><a href="4.2%20Quantum%20Clocks.html"><em>How to Think about Entanglement</em>: Quantum Clocks</a> (<a href="4.2%20Quantum%20Clocks.ipynb">notebook</a>) </li>
-<li><a href="4.3%20Representations.html"><em>How to Think about Entanglement</em>: Representations</a> (<a href="4.3%20Representations.ipynb">notebook</a>) [in progress]</li>
-<li><a href="5.1%20Atoms%200.html"><em>How to Think about Atoms</em>: 0</a> (<a href="5.1%20Atoms%200.ipynb">notebook</a>)</li>
-<li><a href="5.2%20Atoms%201.html"><em>How to Think about Atoms</em>: I</a> (<a href="5.2%20Atoms%201.ipynb">notebook</a>)</li>
-<li><a href="5.3%20Atoms%202.html"><em>How to Think about Atoms</em>: II</a> (<a href="5.3%20Atoms%202.ipynb">notebook</a>)</li>
-<li><a href="5.4%20Atoms%203.html"><em>How to Think about Atoms</em>: III</a> (<a href="5.4%20Atoms%203.ipynb">notebook</a>)</li>
-<li><a href="5.5%20Atoms%204.html"><em>How to Think about Atoms</em>: IV</a> (<a href="5.5%20Atoms%204.ipynb">notebook</a>)</li>
-<li><a href="5.6%20Atoms%205.html"><em>How to Think about Atoms</em>: V</a> (<a href="5.6%20Atoms%205.ipynb">notebook</a>)</li>
-<li><a href="5.7%20Atoms%206.html"><em>How to Think about Atoms</em>: VI</a> (<a href="5.7%20Atoms%206.ipynb">notebook</a>)</li>
-<li><a href="5.8%20Atoms%207.html"><em>How to Think about Atoms</em>: VII</a> (<a href="5.8%20Atoms%207.ipynb">notebook</a>)</li>
-<li><a href="5.9%20Atoms%208.html"><em>How to Think about Atoms</em>: VIII</a> (<a href="5.9%20Atoms%208.ipynb">notebook</a>)</li>
-<li>...</li>
-</ol>
+<p>Keep following the chain of causation to the light coming into the eye, some neuron firing in the brain, until what: well, the thing itself to be explained: the conscious registration of a difference. But the "consciousness registration of a difference" has no place in the physical world per se. For example, if we explained why we registered the fact in a certain way, we would localize that explanation somewhere in the brain, for example: we saw it that way, because that neural system did this as opposed to that. Maybe we seek an even deeper explanation: the answer pushes the chain of causation back a bit further to yet some other physical condition which serves as the explanation for a difference-- and we could imagine it as yet another quantum system maximally entangled with the spin. We could try to add our "conscious registration of a difference" to the picture as <em>yet another</em> quantum system maximally entangled with the spin: but if we add it into the picture, then we have to regard our consciousness as being in an entangled superposition, when manifestly the very thing we were trying to explain was the appearence of one definite outcome over another consciously. So if we add "the substrate of our consciousness registration" to the picture, we, as it were, immedietly have to collapse it, and the rest of the world into a definite state, or else admit that our conscious registration can't be reduced to its substrate and so is "extra-physical". Alternatively, we could say the uncollapsed entangled state is certainly a valid state, but it would have to be <em>from someone else's perspective</em>, not yours. So that what is collapsed for me, I am conscious of; but those same things might yet be superposition from someone else's perspective. In other words, it's what we regard as having collapsed that <em>picks out our particular perspective</em> allowing us to calculate the probabilities of future events, as if the random outcomes of quantum experiments furnished us with absolutely unique coordinates for ourselves.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here's a variant on the "Wigner's Friend" thought experiment, where we imagine we can treat people like quantum systems.</p>
+<p>Bob measures a spin, and gets UP or DOWN at random.
+Alice would describe this as: Bob and the spin getting unitarily entangled.
+Then, Alice measures Bob and the spin separately, and they always agree. So far so good.</p>
+<p>The paradox is that:
+    From Alice’s perspective, before she makes her measurement, Bob is in a superposition of “recording UP” and “recording DOWN.” Whereas from Bob’s perspective, Bob recorded UP or DOWN.</p>
+<p>So in theory, it’s possible that: from Bob’s perspective, Bob records UP; but from Alice’s perspective, Bob records DOWN (and the spin agrees either way).</p>
+<p>We could say:</p>
+<p>a) Many Worlds. Sure, Bob records UP from his perspective, and Alice records Bob being DOWN from her perspective. They’ve just ended up in different branches of the multiverse. If Bob had recorded UP from his perspective, and Alice had recorded Bob being UP from her perspective, then they’d be in the same branch of the multiverse. But of course, Alice and Bob would never know if they ended up in the same branch or not, since the spin agrees either way. Moreover, we have to imagine that the filter doesn't "happen" for Alice until she measures Bob, whereas for Bob it happened already when he measured the spin.</p>
+<p>b) If Bob had recorded UP, Alice will always get UP when she asks him, even though nominally Bob is in an entangled superposition from her perspective. The only reason she has to describe things this way is to keep track of the entanglement: some auxiliary thing could interact with Bob before Alice’s measurement, so that now there would be a three way entanglement between the auxiliary system, Bob, and the spin, whose correlations Alice could observe. If Bob were already in a separable state before Alice’s measurement (from her perspective), then she’d only observe correlations between the auxiliary system and Bob, and not the auxiliary system, Bob, and the spin. Moreover, there’s no conflict if the entangling operation between Bob and the spin is reversed; this is just Bob later “forgetting.” (I'd be happy if someone could find a contradiction in this view.)</p>
+<p>Further reflection reveals that this situation (Alice having to describe Bob as in a superposition before her measurement) is not really that strange at all; since after all, she has no access to Bob’s inner experience, even if he does (and is definitely recording UP). So that for her, it really is a coin flip.</p>
+<p>A paradox is only apparent when one tries to describe the physics from an observerless perspective. Whereas it is apparent, that all our experience is relative to an observer, namely us. Interestingly, nothing in physics can predict that we would be us. But once we’ve put in our past observations, the physics can predict our future observations.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There is a desire among some people to have an observerless physics. But the genius of quantum mechanics, at least according to Von Neumann, is that: even as the theory only describes predictions relative to some observer, its physics is invariant under the shifting of the boundary line between the observer and the observed. The temperature of water causes mercury to rise in a thermometer, off which photons scatter, entering your eye, causing neurons to fire, causing other neurons to fire, causing other neurons to fire, until: you can’t trace it back anymore, except to say: I observed. Quantum mechanically, the water, the thermometer, the photons, the neurons, all get entangled. And so, we could imagine the “measurement” (the projection) to have taken place on any of those systems, all the way up to my abstract ego. It doesn’t matter which I choose, since due to the entanglement, they will always agree. But if no perspective is chosen, then nothing definite happens: there is just the superposition of outcomes.</p>
+<p>So some perspective must be chosen, but the physics doesn’t depend on the perspective you pick. It’s no different from: to get coordinates, some basis must be chosen, but any basis is as good as any other (all things being equal). If we integrate a function, we have to add a constant term, even though it will disappear again when we take its derivative. A gauge must be chosen for your railroad tracks, and any width its as good as any other, all things being equal; but once you’ve made a choice, you better stick with it so that a given train can rove around the land without issue. We can write down a general solution to some differential equations as a potentially infinite superposition of basis solutions, but we can’t get any predictions until we specify some initial conditions, which determines the constants. We could speak in French, English, German, Japanese and tell the same story; the choice of language is arbitrary, but we have to speak in some language. The choice of the observer in physics is arbitrary, but some choice must be made. And naturally, we try to pick ourselves.</p>
+<p>All the same the exact relationship between our conscious experience and the mathematics of quantum physics remains unknown and a matter for speculation. Whether our quantum state describes what we are actually know, or whether our quantum state describes "what it is possible for us to know in our situation," is unclear. We'll put off some of the deeper questions about perception until later. For now, we'll stick with a line from Mallarme: "Toute Pensée émet un Coup de Dés": "Every Thought issues a Throw of the Dice."</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We already saw how in the case of spin, the very geometry of the situation could be interpreted statistically. But now that we're considering multiple systems, the statistical nature of quantum experiments now takes on a new light.</p>
+<p>Suppose we have two spin-$\frac{1}{2}$'s A and B in the antisymmetric state: $\mid \uparrow \downarrow \rangle - \mid \downarrow \uparrow \rangle$. Suppose Alice measures A along the Z axis and gets $\uparrow$. It follows that if Bob measures A along the Z axis, then he'll definitely get $\downarrow$. Naively, Alice and Bob might think that the two particles just agreed before hand that one would be $\uparrow$ and the other would be $\downarrow$. But if Alice had measured along the X axis instead and gotten $\rightarrow$, then if Bob does a Z measurement, he'll get $\uparrow$ or $\downarrow$ half the time. So that A and B couldn't have agreed upon what their spins were beforehand, since what happens depends on Alice's choice of what to measure.</p>
+<p>So there is a non-local correlation between A and B. But this doesn't imply that there is causation, and that information can be non-locally transferred from A to B. After all, even if Alice measures A along the Z axis, the answer is randomly $\uparrow$ or $\downarrow$--and correspondingly, B will be anticorrelated if Bob measures B along the Z-axis as well. But Alice can't just send an arbitrary bit string to Bob via entanglement. If you want to use the metaphor of "sending", she just sends a bunch of random bits to Bob, since she just gets $\uparrow$ or $\downarrow$ at random for each of her measurements. In other words, the indeterminism of quantum mechanics protects the principle of local causation.</p>
+<p>Moreover, look at it from Bob's perspective: Bob measured $\downarrow$. Is that because Alice got $\uparrow$? It could also be because Alice measured along the X-axis and got $\rightarrow$, and actually Bob could have gotten $\downarrow$ or $\uparrow$, and just happend to get $\downarrow$. In order to distinguish between these two cases, Bob would have to repeat the experiment. But he only has one particle from Alice. And so, even the random bits can only be agreed upon if <em>Alice and Bob</em> have a prior agreement about what to measure: not the particles!</p>
+<p>In other words, even though there are nonlocal correlations between A and B, Alice can't use this to send a message to Bob because of the intrinsic randomness of the outcome. And even though the result that Bob gets depends on Alice's choice of measurement, again, because of the randomness, it will remain ambiguous for him exactly what Alice chose.</p>
+<p>One could imagine explaining the same results in terms of a determinisic theory, but such a theory would have to be <em>causally</em> non-local. In other words, we give up determinism to save local causation.</p>
+<p>One might wonder here about the relationship between so-called "free will" and the indeterminism of quantum events. One must treat carefully here, but Conway has provided an interesting theorem, the Free Will Theorem, that assumes some basic physics (entanglement, finite speed of light, etc) and shows: exactly to the extent that we are free to choose what to measure about a quantum system, the quantum system is free to choose what outcome to deliver.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's go briefly into the basic math of tensors.</p>
+<p>Just as there is the inner product:</p>
+<p>$\begin{pmatrix} a^{*} &amp; b^{*} \end{pmatrix} \begin{pmatrix} a \\ b \end{pmatrix} = aa^{*} + bb^{*}$</p>
+<p>There is the outer product:</p>
+<p>$\begin{pmatrix} a \\ b \end{pmatrix} \begin{pmatrix} a^{*} &amp; b^{*} \end{pmatrix} = \begin{pmatrix} aa^{*} &amp; ab^{*} \\ ba^{*} &amp; bb^{*} \end{pmatrix}$.</p>
+<p>If $\mid \psi \rangle = \begin{pmatrix} a \\ b \end{pmatrix}$ were the state of a qubit, then $\mid \psi \rangle\langle \psi \mid$ would be the corresponding density matrix. It is Hermitian. And it's a "pure" state density matrix precisely because it is rank-1: it can be written as an outer product. Higher rank density matrices have to be written as a sum of outer products: they are known as "mixed" states, where there is not only quantum uncertainty, but also classical uncertainty about the quantum system described. If we take the expectation values with Pauli X, Y, Z, we'll get a point <em>in the interior of the sphere</em>.</p>
+<p>You can also think of $\mid \psi \rangle\langle \psi \mid$ as a projector, which satisfies $P^{2} = P$, and which projects the state it acts upon onto $\psi$. The expectation value of a projector: $\langle \phi \mid P \mid \phi \rangle$ gives the probability.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can tensor two qubits together with the tensor product:</p>
+<p>$\mid \psi \rangle \mid \phi \rangle = \begin{pmatrix} a \\ b \end{pmatrix} \otimes \begin{pmatrix} c \\ d \end{pmatrix} = \begin{pmatrix} ac &amp; ad &amp; bc &amp; bd \end{pmatrix}$</p>
+<p>We can see that the representation is "holographic": for each component of the first system, there is an entire copy of the second system. Whereas the state above is separable back into two separate systems, this in general is not the case. The tensor product space is the space of all complex linear combinations of in this case: $\mid \uparrow \uparrow \rangle,  \mid \uparrow \downarrow \rangle, \mid \downarrow \uparrow \rangle, \mid \downarrow \downarrow \rangle$, and when the tensor product state can't be separated out into two pure states, we call it "entangled."</p>
+<p>This is the origin of all the real magic of quantum mechanics. The "jointness" of two systems is in fact larger than merely the two taken together. Nevertheless, through repeated measurements on identical systems, the overal entangled state can be recovered through measurements on its parts.</p>
+<p>We can upgrade operators to act on an individual system in the tensor product.</p>
+<p>$O_{L} = O \otimes I, O_{R} = I \otimes O$, where $I$ is the appropriate identity.</p>
+<p>Moreover, one can take the partial trace with respect to one or other of the systems in order to calculate the "partial state" of a subsystem, which is in general a "mixed state," and which encodes all the probabilities for the results of <em>local</em> measurements on that subsystem.</p>
+<p>Given an entangled state, we form the pure state density matrix $\rho$ with the outer product, so that $\rho_{AB} = \sum_{ijkl}\mid a_{i} \rangle \langle a_{j} \mid \otimes \mid b_{k} \rangle \langle b_{l} \mid$. Then the partial trace over B, which gives $\rho_{A}$, is:</p>
+<p>$\rho_{A} = \sum_{ijkl} c_{ijkl}\mid a_{i} \rangle \langle a_{j} \mid \langle b_{l}\mid b_{k} \rangle$</p>
+<p>In the case of two qubits:</p>
+<p>$tr_{B}(\rho_{AB})  = tr_{B} \begin{pmatrix} a &amp; b &amp; c &amp; d \\ e &amp; f &amp; g &amp; h \\ i &amp; j &amp; k &amp; l \\ m &amp; n &amp; o &amp; p \end{pmatrix} = \begin{pmatrix} tr \begin{pmatrix} a &amp; b \\ e &amp; f \end{pmatrix} &amp; tr \begin{pmatrix} c &amp; d \\ g &amp; h  \end{pmatrix} \\ tr \begin{pmatrix} i &amp; j \\ m &amp; n \end{pmatrix} &amp; tr \begin{pmatrix} k &amp; l \\ o &amp; p \end{pmatrix} \end{pmatrix}$</p>
+<p>$\rho_{A} = \begin{pmatrix} a + f &amp; c + h \\ i + n &amp; k + p \end{pmatrix}$</p>
+<p>$tr_{A}(\rho_{AB})  = tr_{A} \begin{pmatrix} a &amp; b &amp; c &amp; d \\ e &amp; f &amp; g &amp; h \\ i &amp; j &amp; k &amp; l \\ m &amp; n &amp; o &amp; p \end{pmatrix} = \begin{pmatrix} tr \begin{pmatrix} a &amp; c \\ i &amp; k \end{pmatrix} &amp; tr \begin{pmatrix} b &amp; d \\ j &amp; l  \end{pmatrix} \\ tr \begin{pmatrix} e &amp; g \\ m &amp; o \end{pmatrix} &amp; tr \begin{pmatrix} f &amp; h \\ n &amp; p \end{pmatrix} \end{pmatrix}$</p>
+<p>$\rho_{B} = \begin{pmatrix} a + k &amp; b + l \\ e + o &amp; f + p \end{pmatrix}$</p>
+<p>Let's take the antisymmetric state $\begin{pmatrix} 0 \\ \frac{1}{\sqrt{2}} \\ -\frac{1}{\sqrt{2}} \\ 0 \end{pmatrix}$ as an example:</p>
+<p>$\rho_{AB} = \begin{pmatrix} 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; \frac{1}{2}  &amp; - \frac{1}{2}  &amp; 0 \\ 0 &amp; - \frac{1}{2} &amp; \frac{1}{2}  &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0\end{pmatrix}$</p>
+<p>$\rho_{A} = \begin{pmatrix} \frac{1}{2} &amp; 0 \\ 0 &amp; \frac{1}{2} \end{pmatrix}$</p>
+<p>$\rho_{B} = \begin{pmatrix} \frac{1}{2} &amp; 0 \\ 0 &amp; \frac{1}{2} \end{pmatrix}$</p>
+<p>In either case, we get the maximally mixed state. The expectation values X, Y, Z are all 0: we're in the very center of the sphere, and we have equal probability to collapse into <em>any</em> state on the surface. There is maximal uncertainty about the orientation of either spin. And yet we know: due to the entanglement, they must always be pointing in opposite directions. In this sense, there is more contained in the "whole" than in either of the parts.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Another way to look at a tensor product is as a set of linear maps between subsystems. In this sense, we can think of a tensor, a multi-linear map, as being a "coexistence" of matrices. In other words, given two systems $A$ and $B$, we can view their tensor product as a linear map from states of $A$ to states of $B$. We can imagine projecting $A$ into all its states in turn, and $B$ will be steered accordingly; or as a linear map from density matrices in $A$ to density matrices in $B$. Think of it like: the tensor product defines an intrinsic reference frame for $A$ and $B$, for $A$ and $B$ relative to each other. If they are in the antisymmetric state, then they have no defined orientation relative to you: their partial states are each maximally mixed states, and each one locally contains no information about its relative orientation to you. But relative to each other: they are always pointing in opposite directions. When you measure $A$, you fix a basis relative to it; and then, if you measure $B$ in the same basis, you always find it in the corresponding opposite direction.</p>
+<p>If you have more than two systems, then you get a series of linear maps. For three systems, $A, B$, and $C$, you'll get a map from states of $A$ to states of $B \otimes C$, from states of $B$ to $A \otimes C$, and from states of $C$ to $B \otimes C$. And in the other direction, from states of $B \otimes C$ to $A$. In other words, $A$'s state can only determined once you've determined $B$ and $C$: the entanglement encodes the mutual dependency between the different systems, which may get quite involved!</p>
+<p>In classical physics, reference frames are defined relative to absolute space, in the Newtonian conception, or the gravitational field in the Einsteinian conception. In quantum physics, we can see that individual quantum systems can keep track of their relationships all on their own, with reference only to each other, via the tensor product.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In Ancient Greek, the word <em>symbol</em> originally referred to a broken pot shard. If you wanted to make a contract, one would break a pot in two, and each party to the contract would take half. When time came to redeem the goods, the two halves would be brought together to see if they would fit: and if so, everything was kosher. The word later came to mean something within a text which seems to refer to something outside it, by virtue of a jagged edge implying another piece elsewhere, perhaps to be provided by the reader. Memorably, Plato referred to a human as a kind of symbol: in the sense that we're always looking for our other half. In fact, he tells a myth of how at one time male and female were joined together as one, back to back, only to be split in two by the gods.</p>
+<p>When it comes to clay pot shards, there can be no perfect symbol: with sufficient effort, any jagged edge can be forged. Plato at great length meditates on the difficulties involving "originals" and "copies."</p>
+<p>Quantum mechanics, however, allows for perfect symbols through the magic of entanglement. Whereas in classical physics, the shape or form of anything can be copied or duplicated, in quantum physics states cannot simply duplicated, can't be cloned. You can't make a copy of one half of an entangled pair; the entanglement between the two halves is <em>unique</em>, a relationship between only them. It can be transferred around, but it can't be forged.</p>
+<p>For the same reason, all classical cryptography is inherently insecure; given enough time, any scheme can be cracked-- the challenge is to find ways of encrypting data that are merely too expensive for anyone to waste time trying to break. But quantum crytography, in principle, is absolutely secure. For example, if we share entangled spins, and a prior agreement to measure in the Z-basis, we can come to share a sequence of random bits <em>that are only available to us</em>, and no one else in the universe-- it's our little secret. We can then use these bits as a cryptographic key.</p>
+<p>If we have to transfer quantum particles between us, we can always tell if someone has tampered with them, measuring them on their way over. For example, one party (Alice) can share a list of what basis they measured each qubit in, choosing X, Y, Z at random each time; the other party (Bob) sends a list of what outcomes he obtained. Alice and Bob can do this publically without revealing anything important. Bob can then look at only those entries in the list where he and Alice measured in the same basis, and he can double check that they are always correlated. If not, he can signal to Alice that someone's intercepted the qubits and broken their entanglement, and so they have to start over.</p>
+<p>In other words, in classical physics there are no secrets, per se. Everything is open to view, and anything, given enough meticulousness, can be forged. In quantum physics, the tensor product keeps track of <em>the relationships</em> between things, and <em>relationships</em> cannot be faked. As such, a quantum system's entanglement picks it out <em>uniquely</em> among the things in the world.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here's a fact with great significance, one imagines, for the theory of evolution.</p>
+<p>One of the most famous games studied by game theory, and which lies at the heart of economic theory, is the Prisoner's Dilemma. Two prisoners are kept in separate jail cells, and the jailor is trying to get them to rat on each other. Each prisoner has to choose separately whether to "cooperate" (stay silent, protect their fellow) or "defect" (rat them out).</p>
+<p>If both prisoners cooperate, and stay silent, then they will each serve just a year in jail.
+If A defects, and rats out B, but B stays silent, then A will go free, and B will serve five years.
+Similarly, if B defects, and A stays silent, then B will go free, and A will serve five years.
+If both prisoners betray each other, then each serves three years.</p>
+<p>Classically, a rational actor will always betray their partner. Although the best situation is if both stay silent, they necessarily can't trust each other; and if they are betrayed, then it is worse for them if they cooperate than if they also betray. So a rational actor will always cut their losses and betray, opting for the two years, rather than the three.</p>
+<p>The twist is that one can imagine a Quantum Prisoner's Dilemma, where, although the prisoners are in separate cells, they nevertheless share entanglement. Here's a formalization of the set up.</p>
+<p>Here's one possible set of payoffs (the important thing is the relative numbers):</p>
+<p>$\begin{array}{c|c} &amp; Bob (C) &amp; Bob(D)\\
+Alice (C) &amp; (3,3) &amp; (0,5) \\ Alice (D) &amp; (5,0) &amp; (1,1) \end{array}$</p>
+<p>We say:</p>
+<p>$\mid C \rangle = \begin{pmatrix} 1 \\ 0 \end{pmatrix}$
+$\mid D \rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix}$</p>
+<p>We begin with the state $\mid C, C \rangle$.</p>
+<p>We then entangle the two qubits with:</p>
+<p>$\hat{E} = e^{\frac{i}{2} \gamma X \otimes X}$</p>
+<p>So that: $\mid \psi_{initial} \rangle = \hat{E}\mid C, C \rangle = cos(\frac{\gamma}{2}) \mid C, C \rangle + isin(\frac{\gamma}{2})\mid D, D \rangle$.</p>
+<p>The $\gamma$ controls the entanglement. For example, if $\gamma=\frac{\pi}{2}$, then we get: $\mid \psi \rangle = \begin{pmatrix} \frac{1}{\sqrt{2}} \\ 0 \\ 0 \\ i\frac{1}{\sqrt{2}} \end{pmatrix}$, which is a maximally entangled state.</p>
+<p>Each qubit is given to Alice and Bob separately, and they are allowed to perform some arbitrary unitary operation on them. They then return their qubits, and $\hat{E}^{\dagger}$ is applied to get the final state. $\mid \psi_{final} \rangle = \hat{E}^{\dagger}U_{A}U_{B}\hat{E}\mid \psi_{initial} \rangle$.</p>
+<p>Then, the two qubits are measured in the Z basis, and $\uparrow$ signifies cooperate, and $\downarrow$ signifies defect.</p>
+<p>(One could imagine other set-ups, without doing and undoing $\hat{E}$, but doing so makes things quite transparent.)</p>
+<p>Given the payoff matrix, the payoff functions for Alice and Bob can be calculated as expected values:</p>
+<p>$Payoff_{Alice} = 3p_{CC} + 5p_{DC} + 0p_{CD} + 1p_{DD} $</p>
+<p>$Payoff_{Bob} = 3p_{CC} + 0p_{DC} + 5p_{CD} + 1p_{DD}$</p>
+<p>Here, $p_{CC}$ is the probability $|\langle CC \mid \psi_{final} \rangle|^2$, $p_{DD} = |\langle DD \mid \psi_{final} \rangle|^2$, etc.</p>
+<p>So Alice and Bob are trying to maximize their payoff by choosing some 2x2 unitary operator.</p>
+<p>The identity matrix $\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}$ corresponds to classically cooperating (since we start out in the $\mid C, C \rangle$ state), and Pauli Y $\begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix}$ corresponds to classically defecting.</p>
+<p>But if both players instead apply Pauli Z $\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}$, then $\mid\psi_{final}\rangle$ always equals $\mid C, C \rangle$: they both always cooperate. Call this Q, the magic quantum strategy. Why magic?</p>
+<p>If Alice applies Q, and Bob cooperates, then it's just as if both defected, which is not so bad.</p>
+<p>But best of all, if Alice applies Q, and Bob defects, then it's just as if: Bob had cooperated and Alice had defected, and so Alice gains the upper hand!</p>
+<p>Therefore, the rational strategy is Q, and so prisoners in the Quantum Prisoner's Dilemma, can always cooperate, even though they are spatially separate and out of contact. They can't communicate, but they can be correlated: and that's enough.</p>
 
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">qpd</span><span class="p">(</span><span class="n">UA</span><span class="p">,</span> <span class="n">UB</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">CC</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span><span class="n">j</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">gamma</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">(),</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">()))</span><span class="o">.</span><span class="n">expm</span><span class="p">()</span>
+    <span class="n">final</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">UA</span><span class="p">,</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">UB</span><span class="p">)</span><span class="o">*</span><span class="n">E</span><span class="o">*</span><span class="n">CC</span>
+    <span class="n">pr</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">*</span><span class="n">f</span><span class="o">.</span><span class="n">conjugate</span><span class="p">()</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">final</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="n">alice</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">bob</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">alice_payoff</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">alice</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">p</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pr</span><span class="p">)])</span>
+    <span class="n">bob_payoff</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">bob</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">p</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pr</span><span class="p">)])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Alice $: </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">alice_payoff</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bob $: </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">bob_payoff</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">final</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Alice: C, Bob: C&quot;</span><span class="p">)</span>
+<span class="n">final_CC</span> <span class="o">=</span> <span class="n">qpd</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Alice: D, Bob: C&quot;</span><span class="p">)</span>
+<span class="n">final_DC</span> <span class="o">=</span> <span class="n">qpd</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmay</span><span class="p">(),</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Alice: C, Bob: D&quot;</span><span class="p">)</span>
+<span class="n">final_CD</span> <span class="o">=</span> <span class="n">qpd</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmay</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Alice: D, Bob: D&quot;</span><span class="p">)</span>
+<span class="n">final_DD</span> <span class="o">=</span> <span class="n">qpd</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmay</span><span class="p">(),</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmay</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Alice: Q, Bob: Q&quot;</span><span class="p">)</span>
+<span class="n">final_QQ</span> <span class="o">=</span> <span class="n">qpd</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">(),</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Alice: Q, Bob: C&quot;</span><span class="p">)</span>
+<span class="n">final_QC</span> <span class="o">=</span> <span class="n">qpd</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">(),</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Alice: Q, Bob: D&quot;</span><span class="p">)</span>
+<span class="n">final_QD</span> <span class="o">=</span> <span class="n">qpd</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">(),</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmay</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div align="center"><a href="https://mybinder.org/v2/gh/heyredhat/heyredhat.github.io/master"><img src="https://mybinder.org/badge_logo.svg" /></a>
-<div align="center">&copy; 2020 heyredhat @ gmail.com</div>
+<p><hr>
+Okay, now we're going to shift gears a little bit. It turns out that there is another related and very useful representation of a spin-$j$ particle.</p>
+<p>Specifically, there's a 1-to-1 map between spin-$j$ states and the symmeterized tensor product of $2j$ spin-$\frac{1}{2}$ states. And you'll never guess: the spin-$\frac{1}{2}$ states we symmeterize are the spinors corresponding to the roots from before.</p>
+<p>Consider we have two spin-$\frac{1}{2}$ states $\begin{pmatrix} a \\ b \end{pmatrix}$ and $\begin{pmatrix} c \\ d \end{pmatrix}$. Their homogeneous polynomials are: $f(w, z) = az - bw$ and $g(w, z) = cz - dw$. Let's multiply them together: $h(w, z) = (az - bw)(cz - dw) = acz^{2} - adzw - bcwz + bdw^{2} = acz^{2} - (ad + bc)zw + bdw^{2}$.</p>
+<p>Converting things into a $\mid j, m \rangle$ state, we get: $\begin{pmatrix} \frac{ac}{ (-1)^{0}\sqrt{\begin{pmatrix} 2 \\ 0 \end{pmatrix}}} \\ \frac{-(ad + bc)}{(-1)^{1}\sqrt{\begin{pmatrix} 2 \\ 1 \end{pmatrix}}} \\ \frac{bd}{(-1)^{2}\sqrt{\begin{pmatrix} 2 \\ 2 \end{pmatrix}}} \end{pmatrix}$ or $\begin{pmatrix} ac \\ \frac{1}{\sqrt{2}}(ad + bc) \\ bd \end{pmatrix}$. This is a spin-$1$ state.</p>
+<p>On the other hand, let's consider the permutation symmetric tensor product of our two states:</p>
+<p>$ \frac{1}{2} \Big{(} \begin{pmatrix} a \\ b \end{pmatrix} \otimes \begin{pmatrix} c \\ d \end{pmatrix} + \begin{pmatrix} c \\ d \end{pmatrix} \otimes \begin{pmatrix} a \\ b \end{pmatrix} \Big{)} = \frac{1}{2} \Big{(} \begin{pmatrix} ac \\ ad \\ bc \\ bd \end{pmatrix} + \begin{pmatrix} ca \\ cb \\ da \\ db \end{pmatrix} \Big{)} = \begin{pmatrix} ac \\ \frac{1}{2}(ad + bc) \\ \frac{1}{2}(ad + bc) \\ bd \end{pmatrix}$.</p>
+<p>Just looking at the components we can see that the spin-$1$ state and the permutation symmetric product of the two spin-$\frac{1}{2}$ states are really encoding the same information.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Consider that the following states form a basis for the permutation symmetric states of two spin-$\frac{1}{2}$'s:</p>
+<p>$\begin{matrix} 
+\mid \uparrow \uparrow \rangle \\ 
+\mid \uparrow \downarrow \rangle \ + \mid \downarrow \uparrow \rangle \\ 
+\mid \downarrow \downarrow \rangle
+\end{matrix}$</p>
+<p>The permutation symmetric subspace is 3 dimensional, just like a spin-$1$ state! (We could normalize the middle term with a $\frac{1}{\sqrt{2}}$, etc.)</p>
+<p>For three spin-$\frac{1}{2}$'s:</p>
+<p>$\begin{matrix} 
+\mid \uparrow \uparrow \uparrow \rangle \\ 
+\mid \uparrow \uparrow \downarrow \rangle \ + \mid \uparrow \downarrow \uparrow \rangle \ + \mid \downarrow \uparrow \uparrow \rangle \\ 
+\mid \downarrow \downarrow \uparrow \rangle \ + \mid \downarrow \uparrow \downarrow \rangle \ + \mid \uparrow \downarrow \downarrow \rangle \\ 
+\mid \downarrow \downarrow \downarrow \rangle
+\end{matrix}$</p>
+<p>It's four dimensional, just like a spin-$\frac{3}{2}$ state!</p>
+<p>For four:</p>
+<p>$\begin{matrix} 
+\mid \uparrow \uparrow \uparrow \uparrow \rangle \\ 
+\mid \uparrow \uparrow \uparrow \downarrow \rangle \ + \mid \uparrow \uparrow \downarrow \uparrow \rangle \ + \mid \uparrow \downarrow \uparrow \uparrow \rangle \ + \mid \downarrow \uparrow \uparrow \uparrow \rangle \\ 
+\mid \uparrow \uparrow \downarrow \downarrow \rangle \ + \mid \uparrow \downarrow \downarrow \uparrow \rangle \ + \mid \uparrow \downarrow \uparrow \downarrow \rangle \ + \mid \downarrow \uparrow \downarrow \uparrow \rangle \ + \mid \downarrow \uparrow \uparrow \downarrow \rangle \ + \mid \downarrow \downarrow \uparrow \uparrow \rangle \\
+\mid \downarrow \downarrow \downarrow \uparrow \rangle \ + \mid \downarrow \downarrow \uparrow \downarrow \rangle \ + \mid \downarrow \uparrow \downarrow \downarrow \rangle \ + \mid \uparrow \downarrow \downarrow \downarrow \rangle \\ 
+\mid \downarrow \downarrow \downarrow \downarrow \rangle
+\end{matrix}$</p>
+<p>It's five dimensional, just like a spin-$2$ state!</p>
+<p>We can see that the symmeterized basis states are just sums over the states with: all $\uparrow$, all but one $\uparrow$, all but two $\uparrow$, etc.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">magic</span> <span class="k">import</span> <span class="n">spin_XYZ</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">permutations</span><span class="p">,</span> <span class="n">product</span>
+
+<span class="k">def</span> <span class="nf">spin_sym_trans</span><span class="p">(</span><span class="n">j</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">product</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="ow">in</span> <span class="n">N</span><span class="p">:</span>
+            <span class="n">N</span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span> <span class="o">+=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">p</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">N</span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">p</span><span class="p">])</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">N</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]))</span>
+    <span class="n">Q</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span>
+    <span class="k">return</span> <span class="n">Q</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">spin_sym</span><span class="p">(</span><span class="n">spin</span><span class="p">):</span>
+    <span class="n">spinors</span> <span class="o">=</span> <span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">c_spinor</span><span class="p">(</span><span class="n">r</span><span class="p">))</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">spin_roots</span><span class="p">(</span><span class="n">spin</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">spinors</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">p</span><span class="p">])</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">spinors</span><span class="p">)))])</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">get_phase</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">v</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">normalize_phase</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">v</span><span class="o">/</span><span class="n">get_phase</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+<span class="n">j</span> <span class="o">=</span> <span class="mi">3</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">spin</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">spin_sym_trans</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+
+<span class="n">sym</span> <span class="o">=</span> <span class="n">S</span><span class="o">*</span><span class="n">spin</span>
+<span class="n">spin2</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">sym</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">spin</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sym</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">spin</span> <span class="o">==</span> <span class="n">spin2</span><span class="p">)</span>
+
+<span class="n">sym2</span> <span class="o">=</span> <span class="n">spin_sym</span><span class="p">(</span><span class="n">spin</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">normalize_phase</span><span class="p">(</span><span class="n">sym</span><span class="p">)</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">normalize_phase</span><span class="p">(</span><span class="n">sym2</span><span class="p">)</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Above we calculate our symmeterized state in two ways. First, we calculate the symmeterized basis states and make a change-of-basis matrix that transforms our $\mid j, m \rangle$ state into a symmeterized state of $2j$ spin-$\frac{1}{2}$'s. The symmeterized basis states (in the order given above) are paired with the $\mid j, m \rangle$ states in their usual order, from largest $m$ to smallest $m$. We also show we can undo the transformation without any harm.</p>
+<p>Second, we find the roots of the associated polynomial of the $\mid j, m\rangle$ state, upgrade the roots to spinors, and then tensor them in all possible orders, and add up all the permutations, normalizing the state in the end. We find that we get exactly the same symmeterized state! Up to complex phase, however. So we normalize the phases (basically, impose that the first (non-0) component is real), and behold: it's precisely the same symmeterized state.</p>
+<p>One nice thing that immediate follows from this is that we can actually explicitly calculate the X, Y, Z matrices for any spin-$j$. If we wanted the X matrix for spin-$\frac{3}{2}$, for example, we'd just take:</p>
+<p>$X_{sym} = (X_{\frac{1}{2}} \otimes I \otimes I) + (I \otimes X_{\frac{1}{2}} \otimes I) + (I \otimes I \otimes X_{\frac{1}{2}})$</p>
+<p>This applies the Pauli X matrix to each of the symmeterized spin-$\frac{1}{2}$ guys each separately. Then we downgrade this to act on our $\mid j, m \rangle$ vector with $X_{\frac{3}{2}} = S^{\dagger} X_{sym} S$, where $S$ is our change-of-basis matrix.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">magic</span> <span class="k">import</span> <span class="n">spin_XYZ</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">permutations</span><span class="p">,</span> <span class="n">product</span>
+
+<span class="k">def</span> <span class="nf">spin_sym_trans</span><span class="p">(</span><span class="n">j</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">product</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="ow">in</span> <span class="n">N</span><span class="p">:</span>
+            <span class="n">N</span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span> <span class="o">+=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">p</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">N</span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">p</span><span class="p">])</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">N</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]))</span>
+    <span class="n">Q</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span>
+    <span class="k">return</span> <span class="n">Q</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
+
+<span class="n">j</span> <span class="o">=</span> <span class="mi">3</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">spin</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">spin_sym_trans</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="nb">sum</span><span class="p">([</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">jmat</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span> <span class="k">else</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>\
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)])</span><span class="o">*</span><span class="n">S</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="nb">sum</span><span class="p">([</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">jmat</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span> <span class="k">else</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>\
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)])</span><span class="o">*</span><span class="n">S</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="nb">sum</span><span class="p">([</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">jmat</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span> <span class="k">else</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>\
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)])</span><span class="o">*</span><span class="n">S</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span> <span class="o">==</span> <span class="n">qt</span><span class="o">.</span><span class="n">jmat</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Y</span> <span class="o">==</span> <span class="n">qt</span><span class="o">.</span><span class="n">jmat</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Z</span> <span class="o">==</span> <span class="n">qt</span><span class="o">.</span><span class="n">jmat</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So anyway this is interesting. We can represent our spin-$j$ state as: a set of roots/$(x, y, z)$ points, a single variable polynomial, a homogeneous two variable polynomial, a $\mid j, m \rangle$ state, and also a state of $2j$ symmeterized spin-$\frac{1}{2}$'s. In the latter case, we can swap any of the symmeterized qubits and this doesn't change the constellation. Indeed, the constellation is "holistically" encoded in the entanglement between the parts and not in the parts (qubits) individually. What does this mean operationally?</p>
+<p>Well, suppose we just rotate a single one of the symmeterized qubits around the X axis a bit. This won't lead to a rigid rotation of the whole sphere. In fact, we're no longer in a permutation symmetry state! But a local rotation can't change the entanglement between the parts in any way. Indeed, if we then rotate the rest of the qubits in exactly the same, we can recover our original constellation (just rotated around the X-axis)! In other words, the constellation isn't ultimately affected by local rotations of the qubits: we can rotate all the qubits separately locally, but the constellation is still in there somewhere--there will always be a way to undo all those changes and recover the constellation by acting locally separately on the qubits. In this sense, the constellation is encoded in the entanglement of the whole and not in the parts.</p>
+<p>Indeed, we could separate the $2j$ spin-$\frac{1}{2}$ particles and distribute them to $2j$ parties. The constellation is still encoded in them, even though the individual parts might be scattered around the universe!</p>
+<hr >
+
+<p>There's an idea that goes by the name SLOCC: Stochastic Local Operations and Classical Communication. The idea is: we want to describe what's invariant about a multipartite quantum state, in other words, characterize its entanglement structure, supposing we can: act separately with unitaries on the parts, classically communicate to each each other (like if we each had one of the parts), and also: entangle our part with some auxilliary system (which will change the entanglement structure), but then measure the auxilliary system (which will restore the entanglement structure). (In this context, if we do the same auxilliary operation to all the qubits, we can <em>boost</em> the constellation: we can implement not just SU(2), but also SL(2,C)). By coordinating our local operations, we can always recover the original constellation by local ops: we can always turn local rotations/boosts into global rotations/boosts by making sure each qubit is rotated in the same way.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We could use the symmeterized spinor representation to encode a spin-$j$ state in a quantum computer whose basic elements are qubits. We could upgrade the Hamiltonian acting on the spin-$j$ state to a corresponding Hamiltonian acting on the $2j$ symmeterized qubits. And one could draw out the following implication:</p>
+<p>While it seems possible to view a single, isolated spin, evolving unmeasured, as essential a classical system, consisting of $2j$ particles confined to the sphere, each feeling weighted n-body forces depending on the locations of the other stars, we should be hesitant to say that the system <em>really is</em> just that classical system. Not just because of what happens when we go to measure the spin, but also because we've shown that we can represent the same system in terms of $2j$ entangled qubits, where the constellation is encoded in the <em>entanglement</em> between the qubits. (And incidentally, this doesn't exclude the fact that the whole collection of qubits might be entangled with other things; indeed, one can take an entangled spin-$j$ particle and load it into a quantum computer in symmeterized qubit form, and that overall entanglement with the outside world will be preserved, so that one can say: it really is "the same" system, and not a copy.) In any case, for the symmeterized qubits, it doesn't make much sense to say that the quantum system <em>really is</em> just that classical system, since the quantum system isn't even localized in one place! Nevertheless from the corresponding classical system the entire time evolution of the quantum system can be derived, so that at the very least, they are encoding the same information. That a classical system can encoded the same information as a quantum system is perhaps not surprising: after all, our classical computers simulating quantum mechanics do it all the time.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Another great thing about the symmeterized qubit representation of spin is that it makes calculating spin couplings aka "the addition of angular momentum" very elegant! Normally, we need to calculate a basis transformation in terms of the so-called Clebsch-Gordan coefficients, or find the eigenvalues/eigenvectors of the total spin operator, but we can get the same answer in a very cool way with our symmeterized states.</p>
+<p>So what are we talking about it? It's a kind of generalization of the Fourier transform to SU(2). Suppose we have two spin-$\frac{1}{2}$ particles tensored together. We normally describe this in terms of the standard tensor basis: $\{\mid \uparrow \uparrow \rangle, \mid \uparrow \downarrow \rangle, \mid \downarrow \uparrow \rangle, \mid \downarrow \downarrow \rangle \}$. But we could also expand it in another basis, for example, in terms of eigenstates of the total spin operator: $J^{2} = \textbf{XX} + \textbf{YY} + \textbf{ZZ}$, where $\textbf{X}$ is the sum of the X operators on each of the spins, $\textbf{Y}$ is the sum of the Y operators on each of the spins, etc, each tensored with identities appropriately.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">symmeterize</span><span class="p">(</span><span class="n">qubits</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="n">perm</span><span class="p">)</span>\
+        <span class="k">for</span> <span class="n">perm</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">qubits</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">)))</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>
+
+<span class="n">j1</span><span class="p">,</span> <span class="n">j2</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">n1</span><span class="p">,</span> <span class="n">n2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j1</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="n">n1</span><span class="o">*</span><span class="n">n2</span><span class="p">)</span>
+<span class="n">state</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">jmat</span><span class="p">(</span><span class="n">j1</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">n2</span><span class="p">))</span> <span class="o">+</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">n1</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">jmat</span><span class="p">(</span><span class="n">j2</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">))</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">jmat</span><span class="p">(</span><span class="n">j1</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">n2</span><span class="p">))</span> <span class="o">+</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">n1</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">jmat</span><span class="p">(</span><span class="n">j2</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">))</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">jmat</span><span class="p">(</span><span class="n">j1</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">n2</span><span class="p">))</span> <span class="o">+</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">n1</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">jmat</span><span class="p">(</span><span class="n">j2</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">))</span>
+
+<span class="n">J</span> <span class="o">=</span> <span class="n">X</span><span class="o">*</span><span class="n">X</span> <span class="o">+</span> <span class="n">Y</span><span class="o">*</span><span class="n">Y</span> <span class="o">+</span> <span class="n">Z</span><span class="o">*</span><span class="n">Z</span>
+<span class="n">JL</span><span class="p">,</span> <span class="n">JV</span> <span class="o">=</span> <span class="n">J</span><span class="o">.</span><span class="n">eigenstates</span><span class="p">()</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">v</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">JV</span><span class="p">]))</span>
+<span class="n">M</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">],</span> <span class="p">[</span><span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">]]</span>
+<span class="n">state2</span> <span class="o">=</span> <span class="n">M</span><span class="o">*</span><span class="n">state</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">state2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Looking at the rows of $M$, which are the eigenvectors of $J^{2}$, we find that the following provide an alternative basis for the states of two qubits:</p>
+<p>$\begin{matrix}
+\mid \uparrow \downarrow \rangle \ - \mid \downarrow \uparrow \rangle \\
+\mid \uparrow \uparrow \rangle \\
+\mid \uparrow \downarrow \rangle \ + \mid \downarrow \uparrow \rangle \\
+\mid \downarrow \downarrow \rangle
+\end{matrix}
+$</p>
+<p>Well, we recognize the latter three basis states as just the 3 permutation symmetric states from before! So the last three components in this basis correspond to a spin-$1$ state. The first basis state, in contrast, is the antisymmetric state: there's only one of them, and this corresponds to a spin-$0$ state, a singlet. (This 1+3 decomposition is deeply related to the 1+3 structure of a Minkowski vector.)</p>
+<p>So we can decompose the tensor product of two spin-$\frac{1}{2}$ states into a "direct sum" or concatenation of a spin-$0$ state and a spin-$1$ state.</p>
+<p>$ H_{\frac{1}{2}} \otimes H_{\frac{1}{2}} \rightarrow H_{0} \oplus H_{1}$</p>
+<p>I like to think of this like: we can turn a spin-$\frac{1}{2}$ AND a spin-$\frac{1}{2}$ into a spin-$0$ OR a spin-$1$. It's like finding the "spectrum": but instead of a direct sum of "frequencies", we get a direct sum of spin sectors. If the "product/tensor" basis makes manifest the fact that there are two "separate" particles (which might be entangled), the "Clebsch-Gordan basis" makes manifest their togetherness. Moreover, it's worth pointing out that a concatenation of Hilbert spaces is also a Hilbert space. The spin-${0}$ sector and the spin-${1}$ sector are each weighted by an amplitude, like: $\begin{pmatrix} a_{j=0} \\ b_{j=1} \end{pmatrix}$, with $aa^{*} + bb^{*} = 1$. So we can interpret $a$ and $b$ as the probability amplitudes that if two spin-$\frac{1}{2}$'s come in, depending on their state, they'll combine into either a spin-$0$ or a spin-$1$.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We have for example:</p>
+<p>$ H_{\frac{1}{2}} \otimes H_{1} \rightarrow H_{\frac{1}{2}} \oplus H_{\frac{3}{2}}$</p>
+<p>$ H_{\frac{1}{2}} \otimes H_{\frac{3}{2}} \rightarrow H_{1} \oplus H_{2}$</p>
+<p>In other words, if we combine a spin-$\frac{1}{2}$ and a spin-$j$, we get either a spin-($j+\frac{1}{2}$) or spin-($j-\frac{1}{2}$).</p>
+<p>$ H_{1} \otimes H_{1} \rightarrow H_{0} \oplus H_{1} \oplus H_{2}$</p>
+<p>Indeed, $3 \times 3 = 1 + 3 + 5 = 9$. So the dimensionality checks out.</p>
+<p>$ H_{1} \otimes H_{2} \rightarrow H_{1} \oplus H_{2} \oplus H_{3}$</p>
+<p>As: $3 \times 5 = 3 + 5 + 7 = 15$.</p>
+<p>$ H_{1} \otimes H_{\frac{3}{2}} \rightarrow H_{\frac{1}{2}} \oplus H_{\frac{3}{2}} \oplus H_{\frac{5}{2}}$</p>
+<p>As: $3 \times 4 = 2 + 4 + 6 = 12$.</p>
+<p>$ H_{\frac{3}{2}} \otimes H_{\frac{3}{2}} \rightarrow H_{0} \oplus H_{1} \oplus H_{2} \oplus H_{3}$</p>
+<p>As: $4 \times 4 = 1 + 3 + 5 + 7 = 16$.</p>
+<p>And if we have more than two spins, we can iterate this construction (you may have to take into account the different orders one could combine the spins in).</p>
+<p>E.g., $H_{\frac{1}{2}} \otimes H_{\frac{1}{2}} \otimes H_{\frac{1}{2}} \otimes H_{\frac{1}{2}} = (H_{0} \oplus H_{1}) \otimes (H_{0} \oplus H_{1}) = H_{0} \oplus H_{1} \oplus H_{1} \oplus H_{0} \oplus H_{1} \oplus H_{2} = (H_{0} \oplus H_{0}) \oplus (H_{1} \oplus H_{1} \oplus H_{1}) \oplus (H_{2})$.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Alright, so we can calculate this decomposition by just diagonalizing the total spin operator (and making sure the basis states are in the right order!). But here's another way:</p>
+<p>First we define $\epsilon = \begin{pmatrix} 0 \\ 1 \\ -1 \\ 0 \end{pmatrix}$: it's just the (unnormalized) antisymmetric state of two spin-$\frac{1}{2}$'s. Now suppose we have two spins with $j_{1}$ and $j_{2}$, each represented as the symmetrized tensor product of $2j$ spinors. We tensor them together. If we then symmeterize over <em>all</em> the spinors, we obtain a spin-($j_{1} + j_{2}$) state. If we started with two separable spins, the resulting constellation is just given by: the constellation of the first spin overlaid with the constellation of the second spin. If we had two spin-$\frac{1}{2}$'s, this would be the spin-$1$ state. To get the rest of the states, before we symmeterize, we contract $k$ spinors of the first group with $k$ spinors of the second group using the $\epsilon$. In other words, we contract a spinor from the first group with the first spinor in $\epsilon$ and a spinor from the second group with the second spinor in $\epsilon$. Once we've contracted k spinors, we symmeterize the $2(j_{1} + j_{2} - k)$ spinors which are left. By going over all the possible k's, we obtain the Clebsch-Gordan decomposition.</p>
+<p>Now the normalization of the states is a little tricky so let's ignore that! It's the principle that matters: to get each lower state, we remove a star's worth of angular momentum from each of the two groups: and the use of the $\epsilon$ imposes angular momentum conservation. (Note because of the permutation symmetry, it doesn't matter which spinors we choose to contract within a group!)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">permutations</span><span class="p">,</span> <span class="n">product</span>
+<span class="kn">from</span> <span class="nn">magic</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="c1">######################################################</span>
+
+<span class="k">def</span> <span class="nf">spin_sym_trans</span><span class="p">(</span><span class="n">j</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">product</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="ow">in</span> <span class="n">N</span><span class="p">:</span>
+            <span class="n">N</span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span> <span class="o">+=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">p</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">N</span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">p</span><span class="p">])</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">N</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]))</span>
+    <span class="n">Q</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span>
+    <span class="k">return</span> <span class="n">Q</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
+
+<span class="c1">######################################################</span>
+
+<span class="k">def</span> <span class="nf">symmeterize_indices</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span> <span class="n">dims</span><span class="p">):</span>
+    <span class="n">tensor</span> <span class="o">=</span> <span class="n">tensor</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">old_dims</span> <span class="o">=</span> <span class="n">tensor</span><span class="o">.</span><span class="n">dims</span>
+    <span class="n">tensor</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[</span><span class="n">dims</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">dims</span><span class="p">)]</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">tensor</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span>
+    <span class="n">pieces</span> <span class="o">=</span> <span class="p">[</span><span class="n">tensor</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tensor</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">]))))]</span>
+    <span class="k">for</span> <span class="n">piece</span> <span class="ow">in</span> <span class="n">pieces</span><span class="p">:</span>
+        <span class="n">piece</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="n">piece</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">pieces</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">pieces</span><span class="p">)</span>
+    <span class="n">v</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="n">old_dims</span>
+    <span class="k">return</span> <span class="n">v</span>
+
+<span class="c1">######################################################</span>
+
+<span class="k">def</span> <span class="nf">clebsch_split</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">sectors</span><span class="p">):</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">dims</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">sector</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">sector</span> <span class="ow">in</span> <span class="n">sectors</span><span class="p">]</span>
+    <span class="n">running</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">clebsch_states</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dims</span><span class="p">:</span>
+        <span class="n">clebsch_states</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">running</span><span class="p">:</span><span class="n">running</span><span class="o">+</span><span class="n">d</span><span class="p">]))</span>
+        <span class="n">running</span> <span class="o">+=</span> <span class="n">d</span>
+    <span class="k">return</span> <span class="n">clebsch_states</span>
+
+<span class="k">def</span> <span class="nf">possible_j3s</span><span class="p">(</span><span class="n">j1</span><span class="p">,</span> <span class="n">j2</span><span class="p">):</span>
+    <span class="n">J3</span> <span class="o">=</span> <span class="p">[</span><span class="n">j1</span><span class="o">-</span><span class="n">m2</span> <span class="k">for</span> <span class="n">m2</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">j2</span><span class="p">,</span> <span class="n">j2</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>\
+            <span class="k">if</span> <span class="n">j1</span> <span class="o">&gt;</span> <span class="n">j2</span> <span class="k">else</span>\
+                <span class="p">[</span><span class="n">j2</span><span class="o">-</span><span class="n">m1</span> <span class="k">for</span> <span class="n">m1</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">j1</span><span class="p">,</span> <span class="n">j1</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">J3</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">tensor_clebsch</span><span class="p">(</span><span class="n">j1</span><span class="p">,</span> <span class="n">j2</span><span class="p">):</span>
+    <span class="n">J3</span> <span class="o">=</span> <span class="n">possible_j3s</span><span class="p">(</span><span class="n">j1</span><span class="p">,</span> <span class="n">j2</span><span class="p">)</span>
+    <span class="n">states</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">j3</span> <span class="ow">in</span> <span class="n">J3</span><span class="p">:</span>
+        <span class="n">substates</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">sublabels</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">m3</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">j3</span><span class="p">,</span> <span class="n">j3</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">terms</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">m1</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">j1</span><span class="p">,</span> <span class="n">j1</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">m2</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">j2</span><span class="p">,</span> <span class="n">j2</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>\
+                        <span class="n">qt</span><span class="o">.</span><span class="n">clebsch</span><span class="p">(</span><span class="n">j1</span><span class="p">,</span> <span class="n">j2</span><span class="p">,</span> <span class="n">j3</span><span class="p">,</span> <span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="n">m3</span><span class="p">)</span><span class="o">*</span>\
+                        <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">spin_state</span><span class="p">(</span><span class="n">j1</span><span class="p">,</span> <span class="n">m1</span><span class="p">),</span>\
+                                    <span class="n">qt</span><span class="o">.</span><span class="n">spin_state</span><span class="p">(</span><span class="n">j2</span><span class="p">,</span> <span class="n">m2</span><span class="p">)))</span>
+            <span class="n">substates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">terms</span><span class="p">))</span>
+            <span class="n">sublabels</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">j3</span><span class="p">,</span> <span class="n">m3</span><span class="p">))</span>
+        <span class="n">states</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">substates</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sublabels</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">state</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">states</span><span class="p">])),</span> <span class="n">labels</span>
+
+<span class="c1">######################################################</span>
+
+<span class="n">j1</span><span class="p">,</span> <span class="n">j2</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="c1"># make sure the smaller spin is first</span>
+<span class="n">n1</span><span class="p">,</span> <span class="n">n2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j1</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="n">n1</span><span class="o">*</span><span class="n">n2</span><span class="p">)</span>
+<span class="n">state</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+
+<span class="c1">######################################################</span>
+
+<span class="n">CG</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">tensor_clebsch</span><span class="p">(</span><span class="n">j1</span><span class="p">,</span> <span class="n">j2</span><span class="p">)</span>
+<span class="n">CG</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[</span><span class="n">state</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">state</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">cg_state</span> <span class="o">=</span> <span class="n">CG</span><span class="o">*</span><span class="n">state</span>
+<span class="n">cgr</span> <span class="o">=</span> <span class="n">clebsch_split</span><span class="p">(</span><span class="n">cg_state</span><span class="p">,</span> <span class="n">possible_j3s</span><span class="p">(</span><span class="n">j1</span><span class="p">,</span> <span class="n">j2</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cgr</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">cgr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">normalize_phase</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">unit</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">cgr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cgr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>
+
+<span class="c1">######################################################</span>
+
+<span class="k">def</span> <span class="nf">repair</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
+    <span class="n">q</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">q</span>
+
+<span class="n">S1</span><span class="p">,</span> <span class="n">S2</span> <span class="o">=</span> <span class="n">spin_sym_trans</span><span class="p">(</span><span class="n">j1</span><span class="p">),</span> <span class="n">spin_sym_trans</span><span class="p">(</span><span class="n">j2</span><span class="p">)</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">S1</span><span class="p">,</span> <span class="n">S2</span><span class="p">)</span>
+<span class="n">together</span> <span class="o">=</span> <span class="n">S</span><span class="o">*</span><span class="n">state</span>
+
+<span class="n">a_indices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">n1</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">b_indices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">n2</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">repair</span><span class="p">(</span><span class="n">symmeterize_indices</span><span class="p">(</span><span class="n">together</span><span class="p">,</span> <span class="n">together</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">]))]</span>
+<span class="n">contracted</span> <span class="o">=</span> <span class="p">[</span><span class="n">together</span><span class="o">.</span><span class="n">copy</span><span class="p">()]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j1</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="n">contracted</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]:</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">singlet_state</span><span class="p">()</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">contracted</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">intermediate</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">singlet_state</span><span class="p">(),</span> <span class="n">contracted</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">intermediate</span> <span class="o">=</span> <span class="n">repair</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor_contract</span><span class="p">(</span><span class="n">intermediate</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+        <span class="n">a_indices</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">intermediate</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]:</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">singlet_state</span><span class="p">()</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">intermediate</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">intermediate</span> <span class="o">=</span> <span class="n">repair</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor_contract</span><span class="p">(</span><span class="n">intermediate</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">intermediate</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
+            <span class="n">b_indices</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="n">contracted</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">intermediate</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">intermediate</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">repair</span><span class="p">(</span><span class="n">symmeterize_indices</span><span class="p">(</span><span class="n">intermediate</span><span class="p">,</span> <span class="n">intermediate</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">intermediate</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+
+<span class="n">cgr2</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">cgr2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">unit</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">SR</span> <span class="o">=</span> <span class="n">spin_sym_trans</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">repair</span><span class="p">(</span><span class="n">normalize_phase</span><span class="p">(</span><span class="n">SR</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">result</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">temp</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>
+        <span class="n">cgr2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+<span class="n">cgr2</span> <span class="o">=</span> <span class="n">cgr2</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">cgr</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cgr2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To see whether the above algorithm worked, we use qutip's built-in Clebsch-Gordan calculator. We construct the basis transformation given $j_{1}$ and $j_{2}$ by iterating over the possible $j$'s that can result. For each possible output $j$, we iterate over its possible $m$ values. For each one, we iterate over the possible $m_{1}$ and $m_{2}$ values for $j_{1}$ and $j_{2}$: for each $(j_{1}, j_{2}, j, m_{1}, m_{2}, m)$, we get the Clebsch-Gordan coefficient, which weights the state $\mid j_{1}, m_{1} \rangle \mid j_{2}, m_{2}\rangle$. We then sum all those states (for the $m$ value of $j$). We repeat the procedure for each $m$ value of $j$. We stick all those states into a matrix, and that gives us our basis transformation.</p>
+<p>Anyway, let's see it in action!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">magic</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">vpython</span> <span class="k">as</span> <span class="nn">vp</span>
+
+<span class="c1">######################################################</span>
+
+<span class="k">def</span> <span class="nf">clebsch_split</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">sectors</span><span class="p">):</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">dims</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">sector</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">sector</span> <span class="ow">in</span> <span class="n">sectors</span><span class="p">]</span>
+    <span class="n">running</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">clebsch_states</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dims</span><span class="p">:</span>
+        <span class="n">clebsch_states</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">running</span><span class="p">:</span><span class="n">running</span><span class="o">+</span><span class="n">d</span><span class="p">]))</span>
+        <span class="n">running</span> <span class="o">+=</span> <span class="n">d</span>
+    <span class="k">return</span> <span class="n">clebsch_states</span>
+
+<span class="k">def</span> <span class="nf">possible_j3s</span><span class="p">(</span><span class="n">j1</span><span class="p">,</span> <span class="n">j2</span><span class="p">):</span>
+    <span class="n">J3</span> <span class="o">=</span> <span class="p">[</span><span class="n">j1</span><span class="o">-</span><span class="n">m2</span> <span class="k">for</span> <span class="n">m2</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">j2</span><span class="p">,</span> <span class="n">j2</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>\
+            <span class="k">if</span> <span class="n">j1</span> <span class="o">&gt;</span> <span class="n">j2</span> <span class="k">else</span>\
+                <span class="p">[</span><span class="n">j2</span><span class="o">-</span><span class="n">m1</span> <span class="k">for</span> <span class="n">m1</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">j1</span><span class="p">,</span> <span class="n">j1</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">J3</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">tensor_clebsch</span><span class="p">(</span><span class="n">j1</span><span class="p">,</span> <span class="n">j2</span><span class="p">):</span>
+    <span class="n">J3</span> <span class="o">=</span> <span class="n">possible_j3s</span><span class="p">(</span><span class="n">j1</span><span class="p">,</span> <span class="n">j2</span><span class="p">)</span>
+    <span class="n">states</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">j3</span> <span class="ow">in</span> <span class="n">J3</span><span class="p">:</span>
+        <span class="n">substates</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">sublabels</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">m3</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">j3</span><span class="p">,</span> <span class="n">j3</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">terms</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">m1</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">j1</span><span class="p">,</span> <span class="n">j1</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">m2</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">j2</span><span class="p">,</span> <span class="n">j2</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>\
+                        <span class="n">qt</span><span class="o">.</span><span class="n">clebsch</span><span class="p">(</span><span class="n">j1</span><span class="p">,</span> <span class="n">j2</span><span class="p">,</span> <span class="n">j3</span><span class="p">,</span> <span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="n">m3</span><span class="p">)</span><span class="o">*</span>\
+                        <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">spin_state</span><span class="p">(</span><span class="n">j1</span><span class="p">,</span> <span class="n">m1</span><span class="p">),</span>\
+                                    <span class="n">qt</span><span class="o">.</span><span class="n">spin_state</span><span class="p">(</span><span class="n">j2</span><span class="p">,</span> <span class="n">m2</span><span class="p">)))</span>
+            <span class="n">substates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">terms</span><span class="p">))</span>
+            <span class="n">sublabels</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">j3</span><span class="p">,</span> <span class="n">m3</span><span class="p">))</span>
+        <span class="n">states</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">substates</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sublabels</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">state</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">states</span><span class="p">])),</span> <span class="n">labels</span>
+
+<span class="c1">######################################################</span>
+
+<span class="n">j1</span><span class="p">,</span> <span class="n">j2</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="c1"># make sure the smaller spin is first</span>
+<span class="n">n1</span><span class="p">,</span> <span class="n">n2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j1</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="n">n1</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="n">n2</span><span class="p">))</span><span class="c1">#qt.rand_ket(n1*n2)</span>
+<span class="n">state</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+
+<span class="c1">######################################################</span>
+
+<span class="n">CG</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">tensor_clebsch</span><span class="p">(</span><span class="n">j1</span><span class="p">,</span> <span class="n">j2</span><span class="p">)</span>
+<span class="n">CG</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[</span><span class="n">state</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">state</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">cg_state</span> <span class="o">=</span> <span class="n">CG</span><span class="o">*</span><span class="n">state</span>
+<span class="n">poss_js</span> <span class="o">=</span> <span class="n">possible_j3s</span><span class="p">(</span><span class="n">j1</span><span class="p">,</span> <span class="n">j2</span><span class="p">)</span>
+<span class="n">cgr</span> <span class="o">=</span> <span class="n">clebsch_split</span><span class="p">(</span><span class="n">cg_state</span><span class="p">,</span> <span class="n">poss_js</span><span class="p">)</span>
+
+<span class="c1">######################################################</span>
+
+<span class="n">Astate</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">ptrace</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">AL</span><span class="p">,</span> <span class="n">AV</span> <span class="o">=</span> <span class="n">Astate</span><span class="o">.</span><span class="n">eigenstates</span><span class="p">()</span>
+<span class="n">Bstate</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">ptrace</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">BL</span><span class="p">,</span> <span class="n">BV</span> <span class="o">=</span> <span class="n">Bstate</span><span class="o">.</span><span class="n">eigenstates</span><span class="p">()</span>
+<span class="n">vsphereA</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="n">j1</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">blue</span><span class="p">)</span>
+<span class="n">vstarsA</span> <span class="o">=</span> <span class="p">[[</span><span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vsphereA</span><span class="o">.</span><span class="n">pos</span> <span class="o">+</span> <span class="n">vsphereA</span><span class="o">.</span><span class="n">radius</span><span class="o">*</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">*</span><span class="n">xyz</span><span class="p">),</span>\
+                      <span class="n">radius</span><span class="o">=</span><span class="mf">0.2</span><span class="o">*</span><span class="n">vsphereA</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span>\
+                      <span class="n">opacity</span><span class="o">=</span><span class="n">AL</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>\
+                 <span class="k">for</span> <span class="n">xyz</span> <span class="ow">in</span> <span class="n">spin_XYZ</span><span class="p">(</span><span class="n">v</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">AV</span><span class="p">)]</span>
+<span class="n">vsphereB</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="n">j2</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">blue</span><span class="p">)</span>
+<span class="n">vstarsB</span> <span class="o">=</span> <span class="p">[[</span><span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vsphereB</span><span class="o">.</span><span class="n">pos</span> <span class="o">+</span> <span class="n">vsphereB</span><span class="o">.</span><span class="n">radius</span><span class="o">*</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">*</span><span class="n">xyz</span><span class="p">),</span>\
+                      <span class="n">radius</span><span class="o">=</span><span class="mf">0.2</span><span class="o">*</span><span class="n">vsphereB</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span>\
+                      <span class="n">opacity</span><span class="o">=</span><span class="n">BL</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>\
+                 <span class="k">for</span> <span class="n">xyz</span> <span class="ow">in</span> <span class="n">spin_XYZ</span><span class="p">(</span><span class="n">v</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">BV</span><span class="p">)]</span>
+
+<span class="n">vcgspheres</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">vcgstars</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">red</span><span class="p">,</span> <span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">orange</span><span class="p">,</span> <span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">yellow</span><span class="p">,</span> <span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">green</span><span class="p">,</span> <span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">blue</span><span class="p">,</span> <span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">magenta</span><span class="p">,</span> <span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">cyan</span><span class="p">]</span>
+<span class="n">lengths</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cgr</span><span class="p">]</span>
+<span class="n">L</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">lengths</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">running</span> <span class="o">=</span> <span class="o">-</span><span class="n">L</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cgr</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>
+        <span class="n">vsph</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">opacity</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">norm</span><span class="p">(),</span> <span class="n">pos</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="n">running</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>\
+                        <span class="n">axis</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="n">vcgspheres</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vsph</span><span class="p">)</span>
+        <span class="n">vcgstars</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+        <span class="n">running</span> <span class="o">+=</span> <span class="mi">4</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">vsph</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>\
+                         <span class="n">pos</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="n">running</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>\
+                         <span class="n">opacity</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">norm</span><span class="p">(),</span>\
+                         <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">vsts</span> <span class="o">=</span> <span class="p">[</span><span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="mf">0.2</span><span class="o">*</span><span class="n">vsph</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> \
+                          <span class="n">pos</span><span class="o">=</span><span class="n">vsph</span><span class="o">.</span><span class="n">pos</span> <span class="o">+</span> <span class="n">vsph</span><span class="o">.</span><span class="n">radius</span><span class="o">*</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">*</span><span class="n">xyz</span><span class="p">))</span>\
+                            <span class="k">for</span> <span class="n">xyz</span> <span class="ow">in</span> <span class="n">spin_XYZ</span><span class="p">(</span><span class="n">c</span><span class="p">)]</span>
+        <span class="n">vcgspheres</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vsph</span><span class="p">)</span>
+        <span class="n">vcgstars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vsts</span><span class="p">)</span>
+        <span class="n">running</span> <span class="o">+=</span> <span class="mf">1.5</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1">######################################################</span>
+
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_herm</span><span class="p">(</span><span class="n">n1</span><span class="o">*</span><span class="n">n2</span><span class="p">)</span>
+<span class="n">H</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">],</span> <span class="p">[</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">]]</span>
+<span class="n">U</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">H</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span><span class="o">.</span><span class="n">expm</span><span class="p">()</span>
+
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">U</span><span class="o">*</span><span class="n">state</span>
+
+    <span class="n">Astate</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">ptrace</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">AL</span><span class="p">,</span> <span class="n">AV</span> <span class="o">=</span> <span class="n">Astate</span><span class="o">.</span><span class="n">eigenstates</span><span class="p">()</span>
+    <span class="n">Bstate</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">ptrace</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">BL</span><span class="p">,</span> <span class="n">BV</span> <span class="o">=</span> <span class="n">Bstate</span><span class="o">.</span><span class="n">eigenstates</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">AV</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">xyz</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">spin_XYZ</span><span class="p">(</span><span class="n">v</span><span class="p">)):</span>
+            <span class="n">vstarsA</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">vsphereA</span><span class="o">.</span><span class="n">pos</span> <span class="o">+</span> <span class="n">vsphereA</span><span class="o">.</span><span class="n">radius</span><span class="o">*</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">*</span><span class="n">xyz</span><span class="p">)</span>
+            <span class="n">vstarsA</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">opacity</span> <span class="o">=</span> <span class="n">AL</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">BV</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">xyz</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">spin_XYZ</span><span class="p">(</span><span class="n">v</span><span class="p">)):</span>
+            <span class="n">vstarsB</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">vsphereB</span><span class="o">.</span><span class="n">pos</span> <span class="o">+</span> <span class="n">vsphereB</span><span class="o">.</span><span class="n">radius</span><span class="o">*</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">*</span><span class="n">xyz</span><span class="p">)</span>
+            <span class="n">vstarsB</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">opacity</span> <span class="o">=</span> <span class="n">BL</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="n">cg_state</span> <span class="o">=</span> <span class="n">CG</span><span class="o">*</span><span class="n">state</span>
+    <span class="n">cgr</span> <span class="o">=</span> <span class="n">clebsch_split</span><span class="p">(</span><span class="n">cg_state</span><span class="p">,</span> <span class="n">poss_js</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cgr</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>
+            <span class="n">vcgspheres</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">opacity</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span>
+            <span class="n">vcgspheres</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">vcgspheres</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">opacity</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">xyz</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">spin_XYZ</span><span class="p">(</span><span class="n">c</span><span class="p">)):</span>
+                <span class="n">vcgstars</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">vcgspheres</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">pos</span> <span class="o">+</span> <span class="n">vcgspheres</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">radius</span><span class="o">*</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">*</span><span class="n">xyz</span><span class="p">)</span>
+
+    <span class="n">vp</span><span class="o">.</span><span class="n">rate</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><hr>
+Now there's so much one could talk about here. One could talk about spin networks, originally developed by Penrose in the 60's. It gets at our issue about reference frames.</p>
+<p>You imagine a network of spin interactions, with edges labeled by $j$ values consistent with the addition of angular momenta. It turns out you can extract probabilities from a closed network without ever specifying the states per se, just the j values at the interactions--and these probabilities happen to be rational numbers. Penrose's motivation to look for an example of how space can emerge out of interaction. His reasoning was that we can only assign a state to a spin relative to some X, Y, Z axes, which presuppose that a shared 3D space exists. So instead of specifying the $\mid j, m \rangle$ state, he just wants to specify the $j$ values. He then wonders what happens when you consider the limit of large networks and high spin $j$'s, and he proves the Spin Geometry Theorem. The idea is this, suppose you have a large network, and in that context, a large $j$ spin. You could imagine it interacts with an additional single spin-$\frac{1}{2}$ particle. Now either the interaction will result in a $j+\frac{1}{2}$ or a $j-\frac{1}{2}$ state, depending on the angle between the spins. But we know how to calculate probabilities using the spin network itself! (The rules are interesting and relate to our string diagram language from before, where the role of cup and cap is played by the $\epsilon$. But we won't go into details here.) So imagine the network where the interaction results in a $j+\frac{1}{2}$, and get the probability; and then the network where the interaction results in a $j-\frac{1}{2}$, and get the probability. These two probabilities should relate to the angle between the spin's rotation axes, which we havn't determined at all, and so we work backwards from the probabilities to the angles. Actually one imagines doing this twice to separate out classical uncertainty from quantum uncertainty (see his original paper for details!). Anyway, if you do this "experiment" for many spins in your network, it's not clear that the angles so obtained will be consistent with each other. One might find that A and B have this angle between them, and B and C have that angle between them, which in normal 3D space would imply something about A and C's angle; but here this isn't necessarily the case. Penrose, however, shows that in the limit of big networks and high spin-$j$, that the angles between the spins become consistent with each other as if there were all embedded consistently in an emergent 3D geometry.</p>
+<p>Such ideas have been explored in other forms in loop quantum gravity. Again, we'll save the details for another time, but for example, one can consider the tensor product of a bunch of spins, and demand that they live in the angular momentum 0 subspace. For example, we've seen that the spin-$0$ subspace of 4 spin-$\frac{1}{2}$ particles is 2D (it's just a qubit in disguise!). If you do this, then the spins act like an "intertwiner," an angular momentum preserving interaction vertex, and moreover the spins can be interpreted as the faces of a <em>quantum polyhedron</em> living at that vertex, where the $j$ values now refer to the areas of the face. Indeed, it turns out the best way to quantize polyhedra is in terms of Minkowski's theorem, which says that a polyhedron is uniquely specified by the normal vectors to each of its faces, multiplied by their areas, all of which sum to 0 if the polyhedron is closed. But we digress... Another time!</p>
+<p>(Okay one more thing: I recently learned there's an intimate relationship between quantum spin and Bezier curves, the components of the $\mid j, m \rangle$ vector being like the control points of a complexified Bezier curve! What!)</p>
+
 </div>
 </div>
 </div>
     </div>
   </div>
 </body>
-
- 
-
-
-</html>
+        <div id="logo">
+            <a href="index.html"><img src="img/logo.png"/></a>
+        </div>
+        

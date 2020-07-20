@@ -25,6 +25,7 @@ jupyter nbconvert --to html '5.7 Atoms 6.ipynb' --template=config/web.tpl
 jupyter nbconvert --to html '5.8 Atoms 7.ipynb' --template=config/web.tpl
 jupyter nbconvert --to html '5.9 Atoms 8.ipynb' --template=config/web.tpl
 
+jupyter nbconvert --to html 'Bibliography.ipynb' --template=config/web.tpl
 echo "uploading..."
 
 git add *

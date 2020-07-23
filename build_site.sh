@@ -1,6 +1,6 @@
 echo "converting notebooks..."
-jupyter nbconvert --to html 'index.ipynb' --template='full.tpl'
 jupyter nbconvert --to html '*.ipynb' --template=config/web.tpl
+jupyter nbconvert --to html 'index.ipynb' --template='full.tpl'
 
 echo "uploading..."
 git add *

@@ -6,3 +6,4 @@ dependencies:
   - vpython
   - matplotlib
   - qutip
+  - pyaudio

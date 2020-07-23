@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>index</title>
+<title>2.4_Scrambling_and_Winding</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13077,60 +13077,150 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><style>
-    .container {
-        top: 0px;
-    }
-</style></p>
-<div style="display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 70%;"><a href="http://heyredhat.github.io/">
-                            <img  width=800 src="img/front_logo.png" />
-                         </a>
-</div>
+<h1 id="How-to-Make-a-Wormhole">How to Make a Wormhole<a class="anchor-link" href="#How-to-Make-a-Wormhole">&#182;</a></h1><h2 id="Part-5:-Scrambling-and-Winding">Part 5: Scrambling and Winding<a class="anchor-link" href="#Part-5:-Scrambling-and-Winding">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Essays-on-Quantum-Physics"><div align="center">Essays on Quantum Physics</div><a class="anchor-link" href="#Essays-on-Quantum-Physics">&#182;</a></h1>
+<p>Consider a bunch of qubits evolving under some random unitary operator. If we wanted to run this on a quantum computer, for example, we'd want to compile down that unitary into a series of, say, one and two qubit operators that we apply in a sequence since these are simpler to implement. Consider a single qubit in our group, which starts off separable from the rest. As time goes on, maybe it interacts with another qubit: then, generically, the two qubits will get entangled. Each of those qubits then goes off and gets entangled with more qubits, and now it's possible all four are entangled. And so on. In other words, entanglement spreads between quantum systems like an epidemic.</p>
+<p>Here's an easy way to get a handle on this. Below is a python implementation of above: a bunch of qubits start of separable, and we evolve them under some randomly selected time evolution. We want to track how one qubit gets entangled with the rest. One easy way to do this is to instead start off with a maximally entangled pair of qubits. One stays outside the group, the other one evolves with the rest of the group. We can then calculate the entanglement between the one who stays outside and all the ones in the group in turn, and track it over time. Think of it like we have two qubits connected by Ariadne's thread; we toss one in and it gets scrambled into the rest, but we can keep track of it by following the thread home.</p>
+<p>What's a good measure of entanglement though? A classical measure is the quantum mutual information:</p>
+$$ QMI(A, B) = S(A) + S(B) - S(A, B)$$$$ S = - tr( \rho \ ln \rho ) = - \sum_{\lambda} \lambda  \ ln \lambda $$<p>$S$ is called the Von Neumann entropy. In the latter part the sum is over eigenvalues $ \lambda $ of $ \rho $.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> notebook
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">t_max</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="n">ref</span><span class="p">,</span> <span class="n">rest</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">bell_state</span><span class="p">(</span><span class="s2">&quot;00&quot;</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">rest</span><span class="p">)</span>
+<span class="n">state</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">)]</span>
+
+<span class="n">E</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_herm</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">U</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">dt</span><span class="o">*</span><span class="n">E</span><span class="p">)</span><span class="o">.</span><span class="n">expm</span><span class="p">())</span>
+<span class="n">U</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">),</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">)]</span>
+
+<span class="n">entropies</span> <span class="o">=</span> <span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">entropy_mutual</span><span class="p">((</span><span class="n">state</span><span class="o">*</span><span class="n">state</span><span class="o">.</span><span class="n">dag</span><span class="p">())</span><span class="o">.</span><span class="n">ptrace</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">)]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;qubit&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;entanglement&#39;</span><span class="p">)</span>
+
+<span class="n">bar</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">)),</span> <span class="n">entropies</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">t_max</span><span class="p">):</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">U</span><span class="o">*</span><span class="n">state</span>
+    <span class="n">entropies</span> <span class="o">=</span> <span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">entropy_mutual</span><span class="p">((</span><span class="n">state</span><span class="o">*</span><span class="n">state</span><span class="o">.</span><span class="n">dag</span><span class="p">())</span><span class="o">.</span><span class="n">ptrace</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">b</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">entropies</span><span class="p">):</span>
+        <span class="n">b</span><span class="o">.</span><span class="n">set_height</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">pause</span><span class="p">(</span><span class="mf">0.0001</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Just like we can track a qubit as it gets scrambled among the rest, we could also keep track of an operator, watch how it starts off localized and then gets spread out over the whole Hilbert space.</p>
+<p>So we're interested in tracking in some sense the size/complexity of the operator $ O(t) = e^{iEt} O e^{-iEt} $ as it evolves in time.</p>
+<p>Now just as quantum states form a vector space, operators also form a vector space. For example, I can write any 2x2 Hermitian matrix in the following 4-vector form:</p>
+$$ H = tI + xX + yY + zZ $$<p>So given an operator H I can expand it in terms of a real (t, x, y, z) vector. One way to do this is to use the generalization of the inner product for matrices: $ (tr(H), tr(X^{\dagger}H), tr(Y^{\dagger}H), tr(Z^{\dagger}H)) $. But we know another way: We could multiply I, X, Y, Z and H all by the cup state and then take the normal inner product: $ ( \langle I\cup \mid H \cup \rangle , \langle X \cup \mid H \cup \rangle , \langle Y \cup \mid H \cup \rangle , \langle Z \cup \mid H \cup \rangle ) $.</p>
+<p>I could decompose a 2x2 unitary in the same way: the components would then be generally complex. Cool, but does the same work for the nxn case? Yes, there's always some basis for Hermitian matrices. But we want to consider spaces of qubits and it turns out that the following 16 operators forms a basis for two qubit operators:</p>
+$$ \begin{matrix}II &amp; IX &amp; IY &amp; IZ \\
+                 XI &amp; XX &amp; XY &amp; XZ \\
+                 YI &amp; YX &amp; YY &amp; YZ \\
+                 ZI &amp; ZX &amp; ZY &amp; ZZ\end{matrix} $$<p>And then same goes for the n-qubit case: we take all arrangements of the Pauli operators, and we can expand any operator in the so-called Pauli basis. The point is that in the Pauli basis we can define the notion of the size of an operator. For the 1 qubit case, $I$ has size 0, while $X, Y, Z$ each have size 1. In the 2 qubit case, we have 1 operator of size 0, 6 operators of size 1, and 9 operators of size 2. We'll write $ |P| $ for the size of a Pauli operator P.</p>
+<p>So we have the idea that generically operators grow in size over time. Let's watch it happen.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> notebook
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">product</span>
+
+<span class="k">def</span> <span class="nf">pauli_basis</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">IXYZ</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;I&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">(),</span> <span class="s2">&quot;Y&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmay</span><span class="p">(),</span> <span class="s2">&quot;Z&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">()}</span>
+    <span class="n">names</span><span class="p">,</span> <span class="n">ops</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">P</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="n">IXYZ</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">P</span><span class="p">))</span>
+        <span class="n">ops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">IXYZ</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">P</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">names</span><span class="p">,</span> <span class="n">ops</span>
+
+<span class="k">def</span> <span class="nf">to_pauli</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">Pops</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">o</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">op</span><span class="p">)</span><span class="o">.</span><span class="n">tr</span><span class="p">()</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">Pops</span><span class="p">])</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Pops</span><span class="p">))</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">Pnames</span><span class="p">,</span> <span class="n">Pops</span> <span class="o">=</span> <span class="n">pauli_basis</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="n">H</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_herm</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">n</span><span class="p">)</span>
+<span class="n">H</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">]</span>
+<span class="n">U</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">dt</span><span class="o">*</span><span class="n">H</span><span class="p">)</span><span class="o">.</span><span class="n">expm</span><span class="p">()</span>
+<span class="n">O</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">()</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+
+<span class="n">probabilities</span> <span class="o">=</span> <span class="p">[(</span><span class="n">a</span><span class="o">*</span><span class="n">a</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span><span class="o">.</span><span class="n">real</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">to_pauli</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">Pops</span><span class="p">)]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;paulis&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;probabilities&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Pnames</span><span class="p">)),</span> <span class="n">Pnames</span><span class="p">)</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Pnames</span><span class="p">))),</span> <span class="n">probabilities</span><span class="p">)</span>
+
+<span class="n">t_max</span> <span class="o">=</span> <span class="mi">5000</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">t_max</span><span class="p">):</span>
+    <span class="n">O</span> <span class="o">=</span> <span class="n">U</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">O</span><span class="o">*</span><span class="n">U</span>
+    <span class="n">probabilities</span> <span class="o">=</span> <span class="p">[(</span><span class="n">a</span><span class="o">*</span><span class="n">a</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span><span class="o">.</span><span class="n">real</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">to_pauli</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">Pops</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">b</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">):</span>
+        <span class="n">b</span><span class="o">.</span><span class="n">set_height</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">pause</span><span class="p">(</span><span class="mf">0.0001</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In fact, we could think about the operator as a quantum particle undergoing its own Schrodinger evolution but defined on a graph where nodes are Pauli matrices and node are connected by edges when they are one operator different from another.</p>
+<hr>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ol>
-<li><a href="1_Introduction.html">Introduction</a> (<a href="1_Introduction.ipynb">notebook</a>)</li>
-<li><a href="2_Yanking.html"><em>How to Make a Wormhole</em>: Yanking</a> (<a href="2_Yanking.ipynb">notebook</a>)</li>
-<li><a href="2.1_Teleportation.html"><em>How to Make a Wormhole</em>: Teleportation</a> (<a href="2.1_Teleportation.ipynb">notebook</a>)</li>
-<li><a href="2.2_Time_Evolution.html"><em>How to Make a Wormhole</em>: Time Evolution</a> (<a href="2.2_Time_Evolution.ipynb">notebook</a>)</li>
-<li><a href="2.3_The_TFD.html"><em>How to Make a Wormhole</em>: The TFD</a> (<a href="2.3_The_TFD.ipynb">notebook</a>)</li>
-<li><a href="2.4_Scrambling_and_Winding.html"><em>How to Make a Wormhole</em>: Scrambling and Winding</a> (<a href="2.4_Scrambling_and_Winding.ipynb">notebook</a>)</li>
-<li><a href="2.5_Wormhole_Experiments.html"><em>How to Make a Wormhole</em>: Wormhole Experiments</a> (<a href="2.5_Wormhole_Experiments.ipynb">notebook</a>)</li>
-<li><a href="2.6_Geometrical_Sketch.html"><em>How to Make a Wormhole</em>: Geometrical Sketch</a> (<a href="2.6_Geometrical_Sketch.ipynb">notebook</a>)</li>
-<li><a href="3_Diagrams_Etc.html"><em>How to Continue Making a Wormhole</em>: Diagrams Etc.</a> (<a href="3_Diagrams_Etc.ipynb">notebook</a>)</li>
-<li><a href="3.1_Majorana_Fermions_and_SYK.html"><em>How to Continue Making a Wormhole</em>: Majorana Fermions and SYK</a> (<a href="3.1_Majorana_Fermions_and_SYK.ipynb">notebook</a>)</li>
-<li><a href="3.2_A_Really_Existing_Quantum_Computer.html"><em>How to Continue Making a Wormhole</em>: A Really Existing Quantum Computer</a> (<a href="3.2_A_Really_Existing_Quantum_Computer.ipynb">notebook</a>)</li>
-<li><a href="4_Spheres_and_Ellipsoids.html"><em>How to Think about Entanglement</em>: Spheres and Ellipsoids</a> (<a href="4_Spheres_and_Ellipsoids.ipynb">notebook</a>)</li>
-<li><a href="4.1_Quantum_Clocks.html"><em>How to Think about Entanglement</em>: Quantum Clocks</a> (<a href="4.1_Quantum_Clocks.ipynb">notebook</a>) </li>
-<li><a href="4.2_On_Representations.html"><em>How to Think about Entanglement</em>: On Representations</a> (<a href="4.2_On_Representations.ipynb">notebook</a>) [in progress]</li>
-<li><a href="5_What_is_an_Atom?.html"><em>How to Think about Atoms</em>: 0: What is an Atom?</a> (<a href="5_What_is_an_Atom?.ipynb">notebook</a>)</li>
-<li><a href="5.1_A_Pebble?.html"><em>How to Think about Atoms</em>: I: A pebble? </a> (<a href="5.1_A_Pebble?.ipynb">notebook</a>)</li>
-<li><a href="5.2_A_Counting_Number?.html"><em>How to Think about Atoms</em>: II: A counting number?</a> (<a href="5.2_A_Counting_Number?.ipynb">notebook</a>)</li>
-<li><a href="5.3_An_Integer?.html"><em>How to Think about Atoms</em>: III: An integer?</a> (<a href="5.3_An_Integer?.ipynb">notebook</a>)</li>
-<li><a href="5.4_A_Rational?.html"><em>How to Think about Atoms</em>: IV: A rational?</a> (<a href="5.4_A_Rational?.ipynb">notebook</a>)</li>
-<li><a href="5.5_A_Star.html"><em>How to Think about Atoms</em>: V: $\mathbb{C} + \infty$?</a> (<a href="5.5_A_Star.ipynb">notebook</a>)</li>
-<li><a href="5.6_A_Polynomial?.html"><em>How to Think about Atoms</em>: VI: A polynomial?</a> (<a href="5.6_A_Polynomial?.ipynb">notebook</a>)</li>
-<li><a href="5.7_A_Matrix?.html"><em>How to Think about Atoms</em>: VII: A matrix?</a> (<a href="5.7_A_Matrix?.ipynb">notebook</a>)</li>
-<li><a href="5.8_A_Tensor?.html"><em>How to Think about Atoms</em>: VIII: A tensor?</a> (<a href="5.8_A_Tensor?.ipynb">notebook</a>)</li>
-<li><a href="5.8.1_Polyhedral_Interlude.html"><em>How to Think about Atoms</em>: Polyhedral Interlude</a> (<a href="5.8.1_Polyhedral_Interlude.ipynb">notebook</a>) [in progress]</li>
-<li><a href="5.8_A_Quantum?.html"><em>How to Think about Atoms</em>: IX: A quantum?</a> (<a href="5.8_A_Quantum?.ipynb">notebook</a>) [in progress]</li>
-<li>...</li>
-</ol>
-<p>Also: <a href="0_Bibliography.html">Bibliography</a> (<a href="0_Bibliography.ipynb">notebook</a>)</p>
+<p>So now we can put some interesting facts together. We know that:</p>
+$$ O_{L} (-t) \mid TFD \rangle \to \rho_{\beta, R}^{\frac{1}{2}} O_{R}^{T} (t) \mid \cup \rangle $$$$ O_{R}^{T} (t) \mid TFD \rangle \to O_{R}^{T} (t) \rho_{\beta, R}^{\frac{1}{2}} \mid \cup \rangle $$<p>And our general setup is:</p>
+<p><img src="img/freed_operator_and_state.png"></p>
 
 </div>
 </div>
@@ -13138,8 +13228,31 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div align="center"><a href="https://mybinder.org/v2/gh/heyredhat/heyredhat.github.io/master"><img src="https://mybinder.org/badge_logo.svg" /></a>
-<div align="center">&copy; 2020 heyredhat @ gmail.com</div>
+<p>The question is what properties does our \(E)\ have to have for this to work? In the state transfer picture, we throw a qubit in on the left in the past, which then should get completely scrambled over the whole left side. To the extend that the qubit is scrambled over the whole thing, we could say that the qubit is "deeper inside" the black hole. Then our coupling should somehow transfer our deep qubit from the left to the right, and then the forward time evolution on the right side should unscramble it and Bob's your uncle.</p>
+<p>Following <a href="https://arxiv.org/abs/1911.06314">arXiv:1911.06314</a>, it turns out that energy operators that have the right scrambling properties exhibit something called "perfect size winding." And even if the size winding isn't perfect, you can still often get stuff through.</p>
+<p>The authors of the aforementioned paper provide the following ansatz:</p>
+$$ \big( \rho_{\beta, R}^{\frac{1}{2}} O_{R}^{T} (t) \big)(t) = \sum_{Paulis} e^{i \alpha \frac{|P|}{n}}r_{p}P $$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here the sum is over all the n-qubit Paulis where n is the number of qubits on the right side! Since we can see that this is an operator that only acts on the right. $r_{p}$ is some real coefficient, $P$ is the given Pauli, and $ \alpha $ is some overall phase. (Incidentally, in the limit of large size for a random P, $ \alpha = \frac{4}{3}g$--we'll come back to the $g$.) We can see that in the Pauli basis, each Pauli basis vector has a phase proportional to its size. In other words, for perfect sizing winding Hamiltonians, in the Pauli basis, the phases wind around at a speed proportional to its size.</p>
+<p>Considering that $  \big( \rho_{\beta, R}^{\frac{1}{2}} O_{R}^{T} (t) \big)^{\dagger} =  O_{R}^{T} (t) \rho_{\beta, R}^{\frac{1}{2}}  $, we can say:</p>
+$$ O_{L} (-t) \mid TFD \rangle = \sum_{Paulis} e^{i \alpha \frac{|P|}{n}}r_{p}\mid P \rangle$$$$ O_{R}^{T} (t) \mid TFD \rangle = \sum_{Paulis} e^{-i \alpha \frac{|P|}{n}}r_{p}\mid P \rangle$$<p>Which is of course:</p>
+$$ O_{L} (-t) \mid TFD \rangle = \sum_{Paulis} e^{i \alpha \frac{|P|}{n}}r_{p}P_{L}\mid \cup \rangle$$$$ O_{R}^{T} (t) \mid TFD \rangle = \sum_{Paulis} e^{-i \alpha \frac{|P|}{n}}r_{p}P_{L}\mid \cup \rangle$$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The only difference between $ O_{L} (-t)  $ and $ O_{R}^{T} (t) $ is the direction of the winding, whether clockwise or counterclockwise.</p>
+<p>Recall our choice of V operator from before.</p>
+$$ V = \frac{1}{b-a} \sum_{i}^{b} Z_{i, L} Z_{b-i, R} $$<p>Its role is simply to unwind the phases. It turns out that the ZZ coupling is sensitive enough to size to do the job.</p>
+<p>Finally, when $ \beta = 0 $, in other words, at infinite temperature when the TFD reduces down to the $\cup $, $ \rho_{\beta, R}^{\frac{1}{2}} O_{R}^{T} $ is Hermitian and has real expansion coefficients in the Pauli basis. And so no unwinding is necessary!</p>
+
 </div>
 </div>
 </div>

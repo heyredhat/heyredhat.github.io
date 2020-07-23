@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>index</title>
+<title>5.9_A_Quantum</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13077,60 +13077,110 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><style>
-    .container {
-        top: 0px;
-    }
-</style></p>
-<div style="display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 70%;"><a href="http://heyredhat.github.io/">
-                            <img  width=800 src="img/front_logo.png" />
-                         </a>
-</div>
+<h1 id="What-is-an-atom?">What is an atom?<a class="anchor-link" href="#What-is-an-atom?">&#182;</a></h1><h2 id="8.-A-Quantum?">8. A Quantum?<a class="anchor-link" href="#8.-A-Quantum?">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Essays-on-Quantum-Physics"><div align="center">Essays on Quantum Physics</div><a class="anchor-link" href="#Essays-on-Quantum-Physics">&#182;</a></h1>
+<p>For our final destination in this tour of spin angular momentum theory (which itself is just one chapter in our larger story about "atoms"), we have to discuss the "Jordan-Schwinger" representation of a spin, as a fixed energy subspace of two quantum harmonic oscillators.</p>
+<p>A brief review of the quantum harmonic oscillator.</p>
+<p>It's hamiltonian is basically: $H = \frac{1}{2}(P^{2} + Q^{2})$, where $P$ is the momentum operator and $Q$ is the position operator. One great thing to do is define the creation and annihilation operators:</p>
+<p>$a = \frac{1}{\sqrt 2} (Q + iP)$</p>
+<p>$a^{\dagger} = \frac{1}{\sqrt 2} (Q - iP)$</p>
+<p>So that: $Q = \frac{1}{\sqrt 2} (a^{\dagger} + a)$ and $P =  \frac{1}{\sqrt 2} (a^{\dagger} - a)$. Note that $PQ - QP = i$.</p>
+<p>What's nice about them is that you can interpret them as adding or subtracting a "quantum" from the oscillator, kicking it up to a higher or lower energy state. So if you can get the 0 quantum state, the ground state of the oscillator, then you can get all the other states by repeated action of the creation operator.</p>
+<p>The number operator, which counts the number of quanta, is $N = a^{\dagger}a$, and the hamiltonian can be rewritten $H = N + \frac{1}{2}$.</p>
+<p>Notice:</p>
+<p>$ N = \frac{1}{\sqrt 2}(Q - iP)\frac{1}{\sqrt 2}(Q + iP) = \frac{1}{2}(Q^{2} + iQP - iPQ + P^{2}) = \frac{1}{2}(Q^{2} + i(QP - PQ) + P^{2})$, but $QP - PQ = i$, so we get $ N = \frac{1}{2}(P^{2} + Q^{2}) + -\frac{1}{2} = H - \frac{1}{2}$. So $H = N + \frac{1}{2}$.</p>
+<hr >
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ol>
-<li><a href="1_Introduction.html">Introduction</a> (<a href="1_Introduction.ipynb">notebook</a>)</li>
-<li><a href="2_Yanking.html"><em>How to Make a Wormhole</em>: Yanking</a> (<a href="2_Yanking.ipynb">notebook</a>)</li>
-<li><a href="2.1_Teleportation.html"><em>How to Make a Wormhole</em>: Teleportation</a> (<a href="2.1_Teleportation.ipynb">notebook</a>)</li>
-<li><a href="2.2_Time_Evolution.html"><em>How to Make a Wormhole</em>: Time Evolution</a> (<a href="2.2_Time_Evolution.ipynb">notebook</a>)</li>
-<li><a href="2.3_The_TFD.html"><em>How to Make a Wormhole</em>: The TFD</a> (<a href="2.3_The_TFD.ipynb">notebook</a>)</li>
-<li><a href="2.4_Scrambling_and_Winding.html"><em>How to Make a Wormhole</em>: Scrambling and Winding</a> (<a href="2.4_Scrambling_and_Winding.ipynb">notebook</a>)</li>
-<li><a href="2.5_Wormhole_Experiments.html"><em>How to Make a Wormhole</em>: Wormhole Experiments</a> (<a href="2.5_Wormhole_Experiments.ipynb">notebook</a>)</li>
-<li><a href="2.6_Geometrical_Sketch.html"><em>How to Make a Wormhole</em>: Geometrical Sketch</a> (<a href="2.6_Geometrical_Sketch.ipynb">notebook</a>)</li>
-<li><a href="3_Diagrams_Etc.html"><em>How to Continue Making a Wormhole</em>: Diagrams Etc.</a> (<a href="3_Diagrams_Etc.ipynb">notebook</a>)</li>
-<li><a href="3.1_Majorana_Fermions_and_SYK.html"><em>How to Continue Making a Wormhole</em>: Majorana Fermions and SYK</a> (<a href="3.1_Majorana_Fermions_and_SYK.ipynb">notebook</a>)</li>
-<li><a href="3.2_A_Really_Existing_Quantum_Computer.html"><em>How to Continue Making a Wormhole</em>: A Really Existing Quantum Computer</a> (<a href="3.2_A_Really_Existing_Quantum_Computer.ipynb">notebook</a>)</li>
-<li><a href="4_Spheres_and_Ellipsoids.html"><em>How to Think about Entanglement</em>: Spheres and Ellipsoids</a> (<a href="4_Spheres_and_Ellipsoids.ipynb">notebook</a>)</li>
-<li><a href="4.1_Quantum_Clocks.html"><em>How to Think about Entanglement</em>: Quantum Clocks</a> (<a href="4.1_Quantum_Clocks.ipynb">notebook</a>) </li>
-<li><a href="4.2_On_Representations.html"><em>How to Think about Entanglement</em>: On Representations</a> (<a href="4.2_On_Representations.ipynb">notebook</a>) [in progress]</li>
-<li><a href="5_What_is_an_Atom.html"><em>How to Think about Atoms</em>: 0: What is an Atom?</a> (<a href="5_What_is_an_Atom.ipynb">notebook</a>)</li>
-<li><a href="5.1_A_Pebble.html"><em>How to Think about Atoms</em>: I: A pebble? </a> (<a href="5.1_A_Pebble.ipynb">notebook</a>)</li>
-<li><a href="5.2_A_Counting_Number.html"><em>How to Think about Atoms</em>: II: A counting number?</a> (<a href="5.2_A_Counting_Number.ipynb">notebook</a>)</li>
-<li><a href="5.3_An_Integer.html"><em>How to Think about Atoms</em>: III: An integer?</a> (<a href="5.3_An_Integer.ipynb">notebook</a>)</li>
-<li><a href="5.4_A_Rational.html"><em>How to Think about Atoms</em>: IV: A rational?</a> (<a href="5.4_A_Rational.ipynb">notebook</a>)</li>
-<li><a href="5.5_A_Star.html"><em>How to Think about Atoms</em>: V: $\mathbb{C} + \infty$?</a> (<a href="5.5_A_Star.ipynb">notebook</a>)</li>
-<li><a href="5.6_A_Polynomial.html"><em>How to Think about Atoms</em>: VI: A polynomial?</a> (<a href="5.6_A_Polynomial.ipynb">notebook</a>)</li>
-<li><a href="5.7_A_Matrix.html"><em>How to Think about Atoms</em>: VII: A matrix?</a> (<a href="5.7_A_Matrix.ipynb">notebook</a>)</li>
-<li><a href="5.8_A_Tensor.html"><em>How to Think about Atoms</em>: VIII: A tensor?</a> (<a href="5.8_A_Tensor.ipynb">notebook</a>)</li>
-<li><a href="5.8.1_Polyhedral_Interlude.html"><em>How to Think about Atoms</em>: Polyhedral Interlude</a> (<a href="5.8.1_Polyhedral_Interlude.ipynb">notebook</a>) [in progress]</li>
-<li><a href="5.8_A_Quantum.html"><em>How to Think about Atoms</em>: IX: A quantum?</a> (<a href="5.8_A_Quantum.ipynb">notebook</a>) [in progress]</li>
-<li>...</li>
-</ol>
-<p>Also: <a href="0_Bibliography.html">Bibliography</a> (<a href="0_Bibliography.ipynb">notebook</a>)</p>
+<p>Now this is often developed using the formalism of position and momentum wave functions. You have a wave function $\psi(x)$, a function from the real numbers to the complex numbers, which is square integrable, and so can be interpreted as an "infinite dimensional vector." You can think of $\psi(x)$ as $\langle x \mid \psi \rangle$, where x is a "Dirac delta" that spikes at position x. But the deltas have infinite norm. They don't form a basis per se; to actually calculate probabilities you need to integrate over some interval.</p>
+<p>$Q\mid x \rangle = x\mid x \rangle$</p>
+<p>$\langle x \mid x' \rangle = \delta(x - x')$</p>
+<p>$\int \mid x \rangle \langle x \mid dx = \mathbb{1}$</p>
+<p>You can take the Fourier transform of $\psi(x)$ to get $\psi(p)$. You can use Dirac deltas that spike at momentum p, etc.</p>
+<p>$P \mid p \rangle = p\mid p \rangle$</p>
+<p>$\langle p \mid p' \rangle = \delta(p - p')$</p>
+<p>$\int \mid p \rangle \langle p \mid dp = \mathbb{1}$</p>
+<p>By the nature of the Fourier duality, a spike in position means an “oscillation” across momentum space. A spike in momentum means a “oscillation” across position space. For example, $\psi_{p}(x) = Ce^{ipx}$ where C is a constant I’ve suppressed.</p>
+<p>$\langle x \mid p \rangle = e^{ipx} $</p>
+<p>$\langle p \mid x \rangle = e^{-ipx} $</p>
+<p>$ \psi(x) = \int e^{ipx}\psi(p) dp = \int \langle x \mid p \rangle \langle p \mid \psi \rangle dp$</p>
+<p>$ \psi(p) = \int e^{-ipx}\psi(x) dx = \int \langle p \mid x \rangle \langle x \mid \psi \rangle dx$</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We recall that $Q\psi(x) = x\psi(x)$, that the position operator acts like multiplication by x, and $P\psi(x) = -i\frac{d}{dx}\psi(x)$, that the momentum operator acts like differentiation. This was one of the initial insights of quantum mechanics: promoting the classical variables $q$ and $p$ to linear operators $Q$ and $P$.</p>
+<p>We'd also like to remind you what was implied above: the inner product $\langle \phi \mid \psi \rangle$ is now $\int_{-\infty}^{+\infty} \phi(x)^{*}\psi(x) dx$, where the $*$ means take the complex conjugate. Square summable means that $|\psi(x)|^{2} = \int_{-\infty}^{+\infty} \psi(x)^{*}\psi(x) dx$ converges to a real number (and so can be normalized to 1), and thus we can think of our wave function as being an "infinite dimensional vector."</p>
+<p>With this set of correspondences, we consider the time dependent Schrodinger equation for the harmonic oscillator: $H\psi(x, t) = i\frac{d\psi(x, t)}{dt}$, which in this case is:</p>
+<p>$\frac{1}{2}(P^{2} + Q^{2})\psi(x, t) = i\frac{d\psi(x, t)}{dt}$, or $\frac{1}{2}(-\frac{d^{2}}{dx^{2}} + x^{2})\psi(x, t) = i\frac{d\psi(x, t)}{dt}$. Or: $ -\frac{1}{2}\frac{d^{2}\psi(x, t)}{dx^{2}} + \frac{1}{2}x^{2}\psi(x, t) = i\frac{d\psi(x, t)}{dt}$.</p>
+<p>In terms of the time independent Schrodinger equation:  $ -\frac{1}{2}\frac{d^{2}\psi(x)}{dx^{2}} + \frac{1}{2}x^{2}\psi(x) - e\psi(x) = 0$, where $e$ is the eigenvalue corresponding to a given energy level. There is a whole beautiful theory of differential equations and how to solve them, and in the harmonic oscillator case, one relates the Hermite polynomials to the eigenstates of the oscillator. But actually there are some tricks we can use without actually solving the equation directly--just like in the spin case!</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For example, I'll just tell you that the ground state of the oscillator is:</p>
+<p>$ \psi_{0}(x) = e^{-\frac{x^{2}}{2}}$</p>
+<p>This function $\psi_{0} = e^{-\frac{x^{2}}{2}}$ is interesting. It's a Gaussian: it's invariant under the Fourier transform; and it represents the best compromise you can get between knowing both position and momentum given the Heisenberg uncertainty relations.</p>
+<p>$\frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} e^{ipx}e^{-\frac{x^{2}}{2}}dx = e^{-\frac{p^{2}}{2}}$.</p>
+<p>We can confirm that this is the ground state by seeing if acting with the annihilator gives the 0 vector.</p>
+<p>$ a\psi_{0}(x) = \frac{1}{\sqrt 2} (Q + iP) e^{-\frac{x^{2}}{2}} = \frac{1}{\sqrt 2} (xe^{-\frac{x^{2}}{2}} + (i)(-i)\frac{d}{dx}e^{-\frac{x^{2}}{2}}) = \frac{1}{\sqrt 2}(xe^{-\frac{x^{2}}{2}} -xe^{-\frac{x^{2}}{2}}) = 0$</p>
+<p>But is it really an eigenstate of $H$? Consider:</p>
+<p>$H \psi_{0}(x) = (a^{\dagger}a + \frac{1}{2})\psi_{0}(x) = a^{\dagger}a\psi_{0}(x) + \frac{1}{2}\psi_{0}(x)$.</p>
+<p>But we know that $a\psi_{0}(x)= 0$, so $H \psi_{0}(x) = \frac{1}{2}\psi_{0}(x)$. And so $\psi_{0}(x)$ is an eigenvector of the harmonic oscillator hamiltonian as desired: $H$ acts on $\psi_{0}(x)$ by multiplication by a scalar eigenvalue, in this case $\frac{1}{2}$. And since the annihilator annihilates it, we know it is the lowest eigenvector, and we can get all the rest by using the creation operator, just like climbing a ladder: indeed, they're known as ladder operators.</p>
+<p>$\psi_{n}(x) = \frac{(a^{\dagger})^{n}}{\sqrt{n!}}\psi_{0}(x)$</p>
+<p>This set of set of states $\psi_{n}(x)$, the energy eigenstates, form a countable basis for our harmonic oscillator wave function. They provide a complete set of sets. In other words, we can express some state $f(x)$ as an infinite series in the energy eigenstates:</p>
+<p>$f(x) = \sum_{n=0}^{\infty} c_{n}\psi_{n}(x)$, where:</p>
+<p>$c_{n} = \frac{\psi_{n} \cdot f}{\psi_{n} \cdot \psi_{n}} = \frac{\int \psi_{n}^{*}(x)f(x)dx}{\int \psi_{n}^{*}(x)\psi_{n}(x)dx}$, in other words, the projection of the function $f(x)$ onto the energy state $n$, which, just like in the finite dimensional case, gives the coordinate in that "direction."</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can compare this to the example from before of breaking a sound wave down into its component frequencies. If we have a real, continuous, periodic function $f(x)$ defined over the interval $r$ to $s$, we can write it as a Fourier series:</p>
+<p>$ f(x) = a_{0}C_{0}(x) + \sum_{n=1}^{\infty} \Big{(} a_{n}C_{n}(x) + b_{n}S_{n}(x) \Big{)} $.</p>
+<p>Here: $C_{0}(x) = 1$, $C_{n}(x) = cos(\frac{2\pi n x}{T})$, and $S_{n}(x) = sin(\frac{2\pi n x}{T})$, where $T$ is the period.</p>
+<p>$a_{0} = \frac{C_{0} \cdot f}{C_{0} \cdot C_{0}} = \frac{\int_{r}^{s} C_{0}(x)f(x) dx }{\int_{r}^{s} C_{0}(x)C_{0}(x) dx }$</p>
+<p>$a_{n} = \frac{C_{n} \cdot f}{C_{n} \cdot C_{n}} = \frac{\int_{r}^{s} C_{n}(x)f(x) dx }{\int_{r}^{s} C_{n}(x)C_{n}(x) dx }$</p>
+<p>$b_{n} = \frac{S_{n} \cdot f}{S_{n} \cdot S_{n}} = \frac{\int_{r}^{s} S_{0}(x)f(x) dx }{\int_{r}^{s} S_{n}(x)S_{n}(x) dx }$</p>
+<p>It all works because sines (and cosines) of different integer $n$ values are orthogonal!</p>
+<p>Note that there are many ways of representing a function as an infinite series, often with different inner products, with different measures.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Back to the oscillator:</p>
+<p>We can prove that the number operator $N = a^{\dagger}a$ actually does count the quanta.</p>
+<p>First, we consider the eigenvalue equation for $N$:</p>
+<p>$N\psi_{n} = n\psi_{n}$</p>
+<p>In other words, on a state of definite number, the number operator acts by multiplication by $n$, the number.</p>
+<p>Let's consider acting with $N$ after we've raised the number by one: $Na^{\dagger}\psi_{n}$.</p>
+<p>Now it happens that $[N, a^{\dagger}] = a^{\dagger}$ and $[N, a] = -a$.</p>
+<p>This means: $Na^{\dagger} - a^{\dagger}N = a^{\dagger}$, which means $Na^{\dagger} = a^{\dagger}N + a^{\dagger}$.</p>
+<p>So we can rewrite the above as: $Na^{\dagger}\psi_{n} = (a^{\dagger}N + a^\dagger)\psi_{n} = a^{\dagger}N\psi_{n} + a^\dagger\psi_{n}$.</p>
+<p>But by the eigenvalue equation, this is: $na^{\dagger}\psi_{n} + a^\dagger\psi_{n} = (n+1)a^{\dagger}\psi_{n}$.</p>
+<p>In short, $Na^{\dagger}\psi_{n} = (n+1)a^{\dagger}\psi_{n}$. $N$ knows we've raised the number by 1!</p>
+<p>So if $\psi_{n} = (a^{\dagger})^{n}\psi_{0}$, then $N\psi_{n} = n\psi_{n}$.</p>
+<p>Similarly: $Na\psi_{n} = aN\psi_{n} - a\psi_{n} = na\psi_{n} - a\psi_{n} = (n-1)a\psi_{n}$.</p>
 
 </div>
 </div>
@@ -13138,8 +13188,216 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div align="center"><a href="https://mybinder.org/v2/gh/heyredhat/heyredhat.github.io/master"><img src="https://mybinder.org/badge_logo.svg" /></a>
-<div align="center">&copy; 2020 heyredhat @ gmail.com</div>
+<hr>
+
+<p>Now notice that while $a^{\dagger}\psi_{n} = \psi_{n+1}$, we actually have $a\psi_{n} = n\psi_{n-1}$. Here's a little proof:</p>
+<p>We have $a\psi_{0} = 0$, for which this is the case ($n=0$). We assume: $a\psi_{n} = n\psi_{n-1}$.</p>
+<p>Consider $a\psi_{n+1}$, which is really just $aa^{\dagger}\psi_{n}$. Now it happens that $[a, a^\dagger] = 1$, or $aa^{\dagger} - a^{\dagger}a = 1$, or $aa^{\dagger} = a^{\dagger}a + 1$. So we can rewrite $aa^{\dagger}\psi_{n}$ as $(a^{\dagger}a + 1)\psi_{n} = a^{\dagger}a\psi_{n} + \psi_{n}$. We assumed that $a\psi_{n} = n\psi_{n-1}$, so we have: $a^{\dagger}n\psi_{n-1} + \psi_{n}$, which is just $n\psi_{n} + \psi_{n}$, or $(n+1)\psi_{n}$.</p>
+<p>In other words, if $a\psi_{n} = n\psi_{n-1}$, then $a\psi_{n+1} = (n+1)\psi_{n}$, and so if it was true for $n=0$, which it is since $a\psi_{0} = 0$, it's true for all $n+1$. Love it!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<p>But take a look at that a second time $a\psi_{n} = n\psi_{n-1}$. It looks kind of like: $\frac{d}{dz} z^{n} = nz^{n-1}$, the rule for taking the derivative!</p>
+<p>And so another way of thinking about all this is that we represent the state of a quantum harmonic oscillator as a <em>polynomial</em>, where the powers of $z$ represent the number of quanta. This analogy can be made rigorous and goes by the name the Segal-Bargmann representation. There, $a \rightarrow \frac{d}{dz}$ and $ a^{\dagger} \rightarrow z$, the latter being multiplication by $z$. There are some technicalities involved in this construction, but the long and short of it is that we can represent our wave function as a function $f(z)$ from $\mathbb{C} \rightarrow \mathbb{C}$, instead of a wavefunction $\psi(x)$ from $\mathbb{R} \rightarrow \mathbb{C}$. We'll return to this idea momentarily.</p>
+<p>For now the upshot is we can conveniently work in the energy basis: aka the Fock basis, or "occupation number basis." $\mid 0 \rangle$, $\mid 1 \rangle$, $\mid 2 \rangle$, are the states with 0, 1, 2, and three quanta respectively. In terms of a matrix representation, we have the vacuum state is just $\begin{pmatrix} 1 \\ 0 \\ 0 \\ \vdots \end{pmatrix}$.</p>
+<p>And:</p>
+<p>$a^\dagger =\begin{pmatrix}           
+0 &amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp;\dots \\
+\sqrt{1} &amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; \dots\\
+0 &amp; \sqrt{2} &amp; 0 &amp; \dots &amp; 0 &amp; \dots\\
+0 &amp; 0 &amp; \sqrt{3} &amp; \dots &amp; 0 &amp; \dots\\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots  &amp; \vdots  &amp; \dots\\
+0 &amp; 0 &amp; 0 &amp; \dots &amp; \sqrt{n} &amp;\dots &amp;  \\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots  &amp;\ddots \end{pmatrix}$</p>
+<p>$a =\begin{pmatrix}
+0 &amp; \sqrt{1} &amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; \dots \\
+0 &amp; 0 &amp; \sqrt{2} &amp; 0 &amp; \dots &amp; 0 &amp; \dots \\
+0 &amp; 0 &amp; 0 &amp; \sqrt{3} &amp; \dots &amp; 0 &amp; \dots \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; \ddots &amp; \vdots &amp; \dots \\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \sqrt{n} &amp; \dots \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; \ddots \\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \ddots \end{pmatrix}$</p>
+<p>One thing that's nice is that we can truncate the number of possible quanta in our oscillator and obtain a finite dimensional oscillator representation, although the commutation relations between $P$ and $Q$ won't be exactly satisfied. It'll be more like a particle in a box!</p>
+<p>But we should emphasize that whereas in the spin case we were dealing with a finite dimensional Hilbert space, when we consider 1D harmonic oscillator on an infinite line, we are dealing with an infinite dimensional Hilbert space: we have to upgrade our sums into integrals, and there are all sorts of interesting technicalities.</p>
+<p>And in this nice case of the harmonic oscillator, there's a natural representation on polynomials, indeed, with an unbounded number of terms--unlike the case before, where we dealt with polynomials of fixed degree (and employed our Majorana rule for infinities).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<p>Now: it happens that we have the notion of a coherent state for the quantum harmonic oscillator, just like we had the coherent states on the sphere.</p>
+<p>$\mid z \rangle = e^{-\frac{|z|^{2}}{2}} \sum_{n=0}^{\infty} \frac{z^{n}}{\sqrt{n!}}\mid n \rangle$, where $\mid n \rangle$ are all the number states.</p>
+<p>We have here a polynomial with an infinite number of terms, and notice it's just like the infinite series of $e^{x}$ from way back when, except for the square root. Indeed, it's an eigenstate of the annihilation operator: you can subtract a quanta and it doesn't make a difference!</p>
+<p>Check this out:</p>
+<p>$ \mid z \rangle = \sum_{n=0}^{\infty} c_{n}\mid n \rangle$</p>
+<p>$ \mid z \rangle = \sum_{n=0}^{\infty} \mid n \rangle \langle n \mid z \rangle$</p>
+<p>But if $\mid n \rangle = \frac{(a^{\dagger})^{n}}{\sqrt{n!}}\mid 0 \rangle$, then: $\langle n \mid  = \langle 0 \mid  \frac{(a)^{n}}{\sqrt{n!}}$.</p>
+<p>So we can make the following move:</p>
+<p>$ \mid z \rangle = \sum_{n=0}^{\infty} \mid n \rangle \langle 0 \mid \frac{(a)^{n}}{\sqrt{n!}} \mid z \rangle$</p>
+<p>And since the coherent state is an eigenvector of the annihilation operator, $a\mid z \rangle = z \mid z \rangle$. So:</p>
+<p>$ \mid z \rangle = \sum_{n=0}^{\infty} \mid n \rangle \langle 0 \mid \frac{(z)^{n}}{\sqrt{n!}} \mid z \rangle = \ \langle 0 \mid z \rangle \sum_{n=0}^{\infty} \frac{(z)^{n}}{\sqrt{n!}} \mid n \rangle$</p>
+<p>The length of this as a vector has to be 1, so:</p>
+<p>$1 = \ \mid \langle 0 \mid z \rangle \mid^{2} \sum_{n=0}^{\infty} \frac{(\mid z \mid^{2})^{n}}{n!}$.</p>
+<p>And by the infinite series definition of $e^{x}$, we get $1 = \  \mid \langle 0 \mid z \rangle \mid^{2} e^{\mid z \mid^{2}}$.</p>
+<p>Thus is seems like $ \langle 0 \mid z \rangle = e^{-\frac{\mid z \mid^{2}}{2}}$, since then $\mid \langle 0 \mid z \rangle \mid^{2} = e^{-\mid z \mid^{2}}$, which cancels out the $e^{\mid z \mid^{2}}$ to get 1.</p>
+<p>So we've derived out expression from before:</p>
+<p>$\mid z \rangle = e^{-\frac{|z|^{2}}{2}} \sum_{n=0}^{\infty} \frac{z^{n}}{\sqrt{n!}}\mid n \rangle$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<p>Using further trickiness, including the Baker-Campell-Hausdorff formula, we can derive this expression for a coherent state:</p>
+<p>$\mid z \rangle = e^{-\frac{|z|^{2}}{2}}e^{za^{\dagger}}e^{-z^{*}a}\mid 0 \rangle$, where $\mid 0 \rangle$ is the vacuum state which we are "squeezing."</p>
+<p>The average number of quanta in a coherent state is just $|z|^{2}$. Its expected position is just (up to some factor) $z + z^{*}$, and its expected momentum is just $ z - z^{*}$, in other words, its position is proportional to its real part, and its momentum is proportional to its imaginary part. So that we can interpret the real axis as the "positon axis" and the imaginary axis as the "momentum axis"!</p>
+<p>If you look at their behavior, they act as little coherent wavepackets closely resembling classical particles (or classical electromagnetic waves), maintaining their shape as they zip along. This is just like how the spin coherent states closely resemble the classical states of a spinning particle, all the stars along one axis.</p>
+<p>And similarly, any state of the oscillator can be written in terms of all the $\mid z \rangle$'s:</p>
+<p>$\frac{1}{\pi} \int \mid z \rangle \langle z \mid d^{2}z = \mathbb{1}$, where $d^{2}z = d\mathbb{R}(z)d\mathbb{I}(z)$.</p>
+<p>In other words, each coherent state corresponds to a <em>complex number</em>, a point in the plane (just as before each spin coherent state corresponded to a point on the sphere). And just as we could use the spin coherent states over the sphere as a basis, we can use the oscillator coherent states over the plane as a basis. When you look at the time evolution of a coherent state itself, it makes a perfect circle in this position/momentum plane.</p>
+<p>Furthermore just as in the case of the sphere, it is interesting that we are able to break down the quantum system in a basis consisting of <em>the most classical states</em>. (Ps. there's an interesting relationship to "wavelets!")</p>
+<p>In other words, by using coherent states, we can turn our wavefunction $\psi(x) = \langle x \mid \psi \rangle$, which is a function of a real number, into a function of a complex number $\psi(z) = \langle z \mid \psi \rangle$, which is actually how we get our polynomial (from $\mathbb{C} \rightarrow \mathbb{C}$) representation of the oscillator--again, cf. the Segal-Bargmann transformation for the subleties.</p>
+<p>In the spin case, it's interesting that when we consider the coherent state wave function on the sphere, it's completely characterized by the points opposite to the Majorana stars, in other words, by the places of 0% probability (for all the stars to be found in that location, indeed, for the spin to be in a "classical state" pointing in that direction). Similarly, in the harmonic oscillator case, we can use the coherent state representation to work with a polynomial, and can characterize the state by its 0% probability points, 0% probability, that is, to be in certain "most-classical" coherent states (with a given position and momentum). (One difference between the two cases (spin and oscillator) is that on the sphere there is a notion of  antipodal points, so that the Majorana stars are on opposite sides of the sphere from the 0% points.)</p>
+<p>In other words, we seem to be able to define a quantum state in terms of <em>which classical states it definitely isn't</em>, by a kind of negative definition.</p>
+<p>What's funny is that: while I may have an intuitive difficulty understanding how something can be in a superposition of being in "multiple places at once," I have no problem understanding how something <em>can't</em> be in multiple places at once. So that it actually seems more sensible to define thing in terms of where they aren't rather than where they are.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<p>Anyway, check out a (truncated) 1D oscilllator in <a href="examples/oscillator.py">oscillator.py</a>. You can set the maximum energy value, and view the amplitudes at each location along the line as it evolves under the oscillator hamiltonian, as well as the probabilities (in red). Use "0", "1", "2", "3", etc, to explore the different number states. Use "i" to generate a random state. And finally, use "c" to generate a random coherent state! The yellow dot shows the expected value of the position operator on the current state.</p>
+<p>For the energy states, you'll see something like:</p>
+<p><img src="img/oscillator_eigenstates.jpg"></p>
+<p>Note that ignoring the endpoints, the $0$ state has 1 hump, the $1$ state has $2$ humps, the $2$ state has $3$ humps. Recall the harmonics of a vibrating string.</p>
+<p>Also check out <a href="examples/osc_coherent.py">osc_coherent.py</a> to see an oscillator coherent state evolve. <a href="examples/osc_coherent_picker.py">osc_coherent_picker.py</a> where you can drag a point around the plane and see the corresponding coherent state. And <a href="examples/osc_coherent_basis.py">osc_coherent_basis.py</a> is just like [oscillator.py] except it shows you the amplitudes for each coherent state in the plane, given the current state.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Okay, so we have a 1D quantum harmonic oscillator. We can view it as a little guy that "counts" quanta: we can add quanta to it, subtract quanta from it, measure the number of quanta. The more quanta, the higher the energy. And a general state of the oscillator is a superposition of different numbers of quanta. What is a quantum? Here, it's like a nugget of energy. It doesn't have an identity of its own: it's like the idea of a pebble.</p>
+<p>Now here's a very important connection.</p>
+<p>One of the simplest ways of understanding quantum field theory, at least at first, is via something called "second quantization." Basically, if you start with a quantum system living in some Hilbert space of dimension $d$, then you can construct a theory of a <em>variable number of indistinguishable "copies" of that system</em> by introducing a quantum harmonic oscillator for each basis state of the original quantum system. Hence, second quantization. (We won't get into the eventual difficulties with this view as regards QFT as a whole.)</p>
+<p>The oscillators count the number of particles in the state it represents. And because we use quantum harmonic oscillators to count them, the particles as a whole will always be indistinguishable, like quanta in a harmonic oscillator. For a bosonic field, there can be any number of particles in the same state, and the particles will always be in the permutation symmetric state. For a fermionic field, there can be at most one particle in a given state, and the particles will always be in the permutation antisymmetric state.</p>
+<p>It happens that our current theories of physics regard all "particles" as quanta of some quantum field, as indistinguishable nuggets, which can be counted.</p>
+<p>In "field theory" proper, one starts with a first quantized quantum wave function, with an amplitude at each position (or momentum). And then one second quantizes, imagining a quantum harmonic oscillator at each location, counting the number of particles at that location (or in that momentum mode), and indeed: this is like a quantized model of a field, with little oscillating springs at each point. And then one can add other things to the first quantized state besides "position," like spin, and even make it relativistic. (The difficulty comes in dealing with interactions.)</p>
+<p>But actually, the simplest "quantum field theory" involves second quantizing a little spin-$\frac{1}{2}$ particle. It has two states, and so we introduce two quantum harmonic oscillators. It's like the first oscillator keeps track of the number of $\uparrow$ quanta, and the second oscillator keeps track of the number of $\downarrow$ quanta. And we'll get a theory of a variable number of permutation symmetric spin-$\frac{1}{2}$'s. But we know what a permutation symmetric state of spin-$\frac{1}{2}$'s is! It's a spin-$j$ particle! And so, we can look at our double oscillator construction as a model of spin with <em>variable $j$</em>, where the $j$ value can change, and indeed, we can have a superposition of different $j$ values.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We could write this out in "Fock" notation, but let's use polynomials instead. Given two oscillators states (coeffcients suppressed):</p>
+<p>$f(z) = z^{0} + z^{1} + z^{2} + z^{3} + \dots$</p>
+<p>$g(w) = w^{0} + w^{1} + w^{2} + w^{3} + \dots $</p>
+<p>We can tensor them:</p>
+<p>$F(z, w) = z^{0}w^{0} + z^{0}w^{1} + z^{0}w^{2} + z^{0}w^{3} + \dots + z^{1}w^{0} + z^{1}w^{1} + z^{1}w^{2} + z^{1}w^{3} + \dots + z^{2}w^{0} + z^{2}w^{1} + z^{2}w^{2} + z^{2}w^{3} + \dots + z^{3}w^{0} + z^{3}w^{1} + z^{3}w^{2} + z^{3}w^{3} + \dots$</p>
+<p>But this can be rearranged:</p>
+<p>$F(z, w) = \Big{\{} z^{0}w^{0} \Big{\}} + \Big{\{} z^{1}w^{0} + z^{0}w^{1} \Big{\}} + \Big{\{} z^{2}w^{0} + z^{1}w^{1} + z^{0}w^{2} \Big{\}} + \Big{\{} z^{3}w^{0} + z^{2}w^{1} + z^{1}w^{2} + z^{0}w^{3} \Big{\}} + \dots$</p>
+<p>So that we see that the two variable polynomial is a sum of <em>homogenous</em> polynomials, of degree 0, 1, 2, 3, 4... So that each sector of the Hilbert space corresponding to a given a fixed $n$ can be interpreted as a spin-$\frac{n}{2}$ state. In other words, $n$ is just $2j$, the number of stars.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Furthermore, we can upgrade any 2x2 operator on spin-$\frac{1}{2}$'s to act globally on the whole space via simple map:</p>
+<p>$ \textbf{O} = \sum_{i, j} a_{i}^{\dagger} O_{i, j} a_{j} $</p>
+<p>Or: $\textbf{O} = \begin{pmatrix} a_{0}^{\dagger} &amp; a_{1}^{\dagger} \end{pmatrix} \begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix} \begin{pmatrix} a_{0} \\ a_{1}\end{pmatrix}$, where the $a_{i}$'s and $a_{i}^{\dagger}$'s and recall are matrices.</p>
+<p>If we upgrade the X operator, it will act as an X operator on each of the spin-$j$ subspaces. If we use it to rotate, it'll rotate them all at once, although at a speed proportional to the $j$ value.</p>
+<p>We can also form a creation operator that creates a star at a given location. Given some spinor $\begin{pmatrix} \alpha \\ \beta \end{pmatrix}$, the star creation operator is $a_{star}^{\dagger} = \alpha a_{0}^{\dagger} + \beta a_{1}^{\dagger}$. Thus we can decompose a spin-$j$ state into $2j$ spinors, and so lift a constellation into the double harmonic ocillator Hilbert space. Or we can form a homogenous polynomial in the creation operators:</p>
+<p>$ a_{constellation}^{\dagger} = \sum_{i=0}^{2j} \frac{c_{i}}{\sqrt{i!(2j-i)!}} (a_{0}^{\dagger})^{2j-i}(a_{1}^{\dagger})^{i} $</p>
+<p>where the $c_{i}$'s are the components of the $\mid j, m \rangle$ state: $\begin{pmatrix} c_{0} \\ c_{1} \\ c_{2} \\ \vdots \end{pmatrix}$. Majorana returns! In fact, Schwinger learned about Majorana's representation at some point in the 30's and 40's, and it bugged him so much he invented a lot of this.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Once we're working with an oscillator representation, it's interesting to consider the meaning of the position operators associated to each oscillator. If we imagine the axes of the oscillators to be at right angles, so that we treat them as a 2D harmonic oscillator, and if one examines the eigenstates of the X, Y, Z operators, one finds that they correspond to diagonal/antidiagonal oriented state, circular states, and vertical/horizontal oriented states in the plane. This immedietly makes one think of the polarization of light.</p>
+<p>Indeed, imagine a light wave is rushing toward you. It has to move forward at the speed of light, as always, but it can oscillate in the plane orthogonal to its motion. This gives light a corkscrew character, and this is called its polarization. You can send light through a polarizing filter to filter out horizontally polarized light, circularly polarized light, etc. And out of nowhere, we have a model of the polarization of light, oscillating in the 2D plane orthogonal to its motion, which somehow involves the sphere. (Precusors include: the "Poincare sphere.")</p>
+<p>If we imagine the simplest model of polarization, and consider how the light can oscillate, it'll form an ellipse in the plane. There is an intimate connection between the sphere and the ellipse. Since what is an ellipse, but a circle seen askew in 3D?</p>
+<p><img src="img/polarization_ellipse.jpeg"></p>
+<p>Indeed, if you have a qubit quantized along the Y axis (in other words, the left/right circularly polarized axis), if you rotate its overall phase, while taking the real parts of the two components to be $(x, y)$ points on the plane, it makes the appropriate ellipse. There is a relationship here to the old theory of epicycles. Consider that you can draw an ellipse by oscillatory movement horizontally and vertically, at some phase relative to each other. A point is traces out along the horizontal axis, and a point is traced out along the vertical axis: and you sum them to get the point in the plane. Or you could use oscillator movement at $45^{\circ}$ from that, by diagonal and antidiagonal phase oscillations; or by two points making a left handed circle and a right handed circle, phased from each other, and the two locations added. This one way of interpreting the geometry of a spinor, and the meaning of the Z, X, and Y bases respectively.</p>
+<p>So we have a model for the polarization state of a photon, ignoring its momentum, in fact, of severeal photons, all with the same momentum. Each photon has a qubit representing its polarization state, and photons are a bosonic field, so the qubits must be permutation symmetric. (A photon is technically a spin-$1$ particle, but because it's massless, it has only two possible states, hence its polarization is described by a qubit.) And so everything makes sense. And we appreciate once more the deep connection between the plane and the sphere.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Anyway, check out <a href="examples/spin_oscillators.py">spin_oscillators.py</a>! One can choose a max number of quanta in each of the two oscillators, as well as a random spin state to be loaded into the double oscillator Hilbert space, and a Hamiltonian to evolve with. One sees above a red sphere representing the original spin state (just to make sure it's loaded in correctly!), and below a series of blue spheres representing the spin-$0$, spin-$\frac{1}{2}$, spin-$1$, $\dots$ states that the Hilbert space decomposes into. Their opacity is just the norm of that sector. In the middle, one sees the plane, with little arrows at each point representing the amplitude at that location. Using the keyboard, one can measure the X, Y, Z, N (number), and Q (position) operators with "x", "y", "z", "n", and "q". And with "i" one can reset to a random state. Play around with it!</p>
+<p>Before we go, we should mention: Spin is all about representations of the group SU(2), which is the double cover of 3D rotations. Instead of using SU(2), we could use SU(3), which acts on 3D complex states, and then we'd have 3 harmonic oscillators, but actually we'd need 6, since SU(3) is rank 2. And so on, and so forth. Generally speaking, we can construct theories of a variable number of indistinguishable "particles" with different symmeteries. The oscillator space, just like in the spin case, can be interpreted as a superposition of possible higher order states, each of which can be represented by an unordered collection of states <em>to be symmeterized</em>, corresponding to the "roots": thus the atomic pattern continues.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's recap.</p>
+<p>We began (1) by investigating our most basic idea of a "pebble." We could place a pebble somewhere, and we could take it away. To communicate with a pebble, we had to agree on whether presence or absence would be significant.</p>
+<p>We then engaged in a mathematical dialectic. We imagined that anything we could do once, we could do again. So we could place another pebble, and another, and another. And make a little pile of indistinguishable pebbles which we could also take away from. And so we invented the counting numbers (2). The rule was we could repeat an action, but we always had to be able to go backwards too. To communicate with a counting number, we have to agree on what number we start counting from. We can conceive of this as a contextualization of our original pebble: <em>this</em> pebble is actually the 4th pebble, if you've been keeping count, and to keep count is: to build up a little pile. So the pile is a contextualization of the pebble.</p>
+<p>Then (3), we could imagine repeating "counting" itself, counting "all at once," and so we invented addition, or combining piles. We had to have an inverse, and so we invented the negative numbers, when it became clear that we could subtract past 0. And thus, we found the "integers." To communicate with an integer, we have to agree on what is 0, and also which direction we're in, positive or negative.</p>
+<p>Then (4), we imagined iterating addition to get multiplication, whose inverse is division. We thus found the rational numbers, or piles of "prime pebbles." We can now yet further contextualize: we can specify a rational number which translates between your units and my units, between our different ideas of "1". We also noticed that allowing division by 0 wraps the number line into a circle.</p>
+<p>Then (5), we imagined iterating multiplication to get exponentiation, whose inverse is root-taking. We thus discovered the irrational numbers like the $\sqrt 2$, but also the complex numbers $a + b\sqrt{-1}$. We could thus rotate between two coordinate axes, turning irrationals into rationals, and back. We investigated the meaning of a "limit" and how at this stage the numbers turn reflexive, leading us to reflect on the general theory of computation and its limitations. We observed that no single set of logical atoms which are powerful enough to axiomatize arithmetic is complete in the sense that it can prove all true theorems about itself, and indeed, one such undecidable statement is the consistency of that formal system itself, in other words, if it leads to a contradiction. In other to prove the consistency of such a logical system, one as to move to a larger, more powerful system, adding axioms, which leads to yet other undecidable truths, which can be decided with yet more axioms. The point being is that: one can't start from a single set of axioms and rules for inference and imagine a machine trying out every possible rearrangement of symbols and thus proving all possible theorems. And so we proved that conceptually, there can't be a single set of "master concepts" from which all concepts can be mechanically derived. Hence, one requires a <em>dialectical</em> unfolding of mathematical ideas alongside the purely deductive. And indeed, that's exactly what we've been doing.</p>
+<p>For example, you could spend all day thinking about the nature of probability in terms of probability theory and you'd never be able to derive the surprising way that probabilities enter into our theory of physics, and how when they appear they are often intimately connected in surprising ways with, for example, geometry.</p>
+<p>Then (6), we began by considering an unordered set of complex numbers, which we associated to points on the plane/sphere, and realized we could interpret them as the roots of a polynomial, giving us a yet higher order version of the idea of a "pile of pebbles": an <em>equation</em>. We developed an interpretation of polynomials as "quantum states," indeed, as the states of spin-$j$ particles. Polynomials brought with them the idea of vector spaces, and we realized that polynomials were only defined up to a set of basis vectors, and that Hermitian matrices, not necessariy commuting, which are observables in quantum mechanics, provide such basis sets via their eigenvectors. And so, to give context to our polynomials, to correctly communicate a quantum state, we had to specify a set of basis polynomials (which themselves provide context for their roots). Linear algebra provides the theory of generalized "perspective switches," and we realized we could generalize our idea of perspective to that of an "experimental situation," by which a state is filtered probablistically into outcome states, which provide a complete basis for the state: re the Stern-Gerlach apparatus. And we realized the importance, therefore, of unitary representations.</p>
+<p>Vector spaces, as well, bring with them the idea of the tensor product, and we realized that the symmetric tensor product of $2j$ spin-$\frac{1}{2}$ states gives us a representation of a spin-$j$ state. And this was interesting because it involved entanglement between potentially spatially separate systems. In one of the great twists of all time, entanglement proves that any simple reductionism can't work in science. What particles get entangled, there is more information in the whole than in the parts. For example, in the antisymmetric state, two spin-$\frac{1}{2}$ particles are maximally uncertain with regard to their individual rotation axis, but their entanglement means that they must always point in the opposite direction. So that if one is measured to be $\uparrow$, the other one must be $\downarrow$ in any direction. Of course, through repeated experiementation on the two particles, one could precisely determine the quantum state of the whole: that it's in the antisymmetric state. But for each instance of the experiment, there is more information contained in the two particles together, in their "jointness," than can be separated into two spatially separate parts. To wit, we found that our constellation was encoded not individually in any of the symmetric spin-$\frac{1}{2}$ particles, but in the entanglement between them.</p>
+<p>This was foreshadowed in the holistic relationship between the roots of a polynomial and its coefficients. And indeed, precisely because of that: even though we might have a situation like $2j$ disparate permutation symmetric particles, where the entangled whole is greater than its parts, from another point of view the same situation can be described as a simple juxtaposition: a product of roots, constellated on the sphere.</p>
+<p>We digressed to discuss the theory of Clebsch-Gordan coefficients, and the idea that the tensor product of a bunch of spins could be split into separate sectors, turning the AND of the tensor product into the OR of a choice. And so we arrived at the theory of angular momentum conserving interactions with allusions to spin networks, which by the way, can be generalized to other types of interactions that conserve other quantities besides angular momentum.</p>
+<p>We then discussed the idea of second quantization. We realized that polynomials (without the Majorana interpretation, in other words, generally infinite dimensional) also provide a representation of a quantum harmonic oscillator, full of indistinguishable, countable energy quanta. And we imagined introducing a quantum harmonic oscillator to each degree of freedom of a first quantized quantum system. In our case, we introduced two harmonic oscillators, one each for the $\uparrow$ state and the $\downarrow$ state of a spin-$\frac{1}{2}$. And the fixed number subspaces of this Hilbert space turned out to correspond to spin-$0$, spin-$\frac{1}{2}$, spin-$1$, $\dots$ Hilbert spaces, each of them indeed being a permutation symmetric tensor product of spin-$\frac{1}{2}$'s.</p>
+<p>And so we developed a representation capable of expressing a superposition of spins with different $j$ values, which was also a representation of the polarization of light, and in either case was a theory of indistinguishable particles. All known actual particles are of this type, quanta of some quantum field, albeit more complex.</p>
+<p>From this point of view, we can rephrase our theory of spin in terms of the repeated measurements of "the number of quanta in the $\uparrow$ oscillator" and "the number of quanta in the $\downarrow$ oscillator," and that due to second quantization, we can think about any measurement, in some sense, as being reducible to the measurement of <em>some</em> number operator. And so, we've come full circle: we can now contextualize our pebbles as counting the number of quanta of some mode of a quantum field. Indeed, we could say that the world is conceptually made of "pebbles" insofar as we can use pebbles, appropriately contextualized, to represent it. And any actual clay pebble has emerged in some limit of this quantum theory.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>One thing that is also clear is that there can be many perspectives conceptually on the same quantum system. We have a constellation. Is it a spin-$j$ particle? Is it $2j$ spin-$\frac{1}{2}$'s, is it two quantum harmonic oscillators, is it the polarization of a beam of photons? The interpretation is physically fixed by how the system interacts with the rest of the world; and conceptually each new  interpretation brings with it a whole unheralded set of ideas and connections to the rest of the world.</p>
+<p>I should emphasize, however, that there is a powerful notion of identity that persists through different physical representations. If my spin is entangled with other spins, then if I split it into symmeterized spin-$\frac{1}{2}$'s, then these guys as whole will still be entangled with the rest of the world in the same way. So that even if something is transformed into a different physical system, it still retains its unique connection to the rest of the universe. To wit, I can load a given quantum state into a quantum computer made of spins, of light, of whatever, and this won't in principle affect its entanglement in anyway. And as we've seen we can simulate light-based operations on spins, and spin-based operations on light! So when you download something from the quantum internet, it really is <em>that unique non-clonable</em> quantum state, and not merely a <em>representation</em>, a <em>copy</em> of it, as would be the case if you loaded some classical data into your computer.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>But the story isn't over yet.</p>
+<p>When one works in relativistic quantum field theory, a basic demand is that the vacuum state (with no particles) is Lorentz invariant. In other words, translated, rotated, boosted observers all agree on the vacuum state, indeed, on the idea of "what is a particle." This theory leads to Wigner's classification scheme. The idea is that what we mean by a "particle" anyway is whatever is invariant, or the same, whether we rotate it, whether we translate it, whether we translate by it, whether we see it while moving at top speed, etc. In other words, we define a particle in terms of what we can do that leaves it the same, that thing which is invariant underneath the different perspectives we might have on it, in this case, spatio-temporal perspectives. Hence the importance of group theory. (Sidebar: today in the field of neural networks, people are starting to build networks which explictly respect the underlying group structure of some domain, the classic example being learning representations of images that are translation invariant, and so forth. The idea, of course, being that a neural network should be able to recognize the identity of something even if it's seen askew--and you can really help it along if you make sure its representation is invariant under some group.)</p>
+<p>But when one moves to field theory in a curved space, one must employ (not necessarily unitary) symplectic transformations between perspectives. Famously, in the Unruh effect, while a stationary observer in the vacuum measures 0 particles, an accelerated observer experiences a different vacuum state, indeed, one with a non-0 number of particles! A symplectic transformation is one that maps creation and annihilation operators to different creation and annihilation operators while preserving the fact that they are, indeed, creation and annihilation operators. So that the $a/a^{\dagger}$'s in the accelerated reference frame are built out of the $a/a^{\dagger}$'s in the rest frame, in a particular way relating to the acceleration.</p>
+<p>For example, there is a class of symplectic transformations known as Bogoliubov transformations, which can turn any Hamiltonian quadratic in its creation and annihilation operators into a simple oscillator Hamiltonian: $\sum_{i} a^{\dagger}a$, etc. This can be used in condensed matter as well to describe how in certain systems electrons pair up to rove around as meta-particles. So that: <em>what is one set of particles from one point of view may be another set of particles from another point of view</em>.</p>
+<p>There is even a general theorem that the oscillator picture of fields falls apart: Haag's Theorem, which says that an interacting theory is not necessarily unitarily equivalent to a free theory: imagine photons and electrons so tightly interacting that they can't be treated as separate entities.</p>
+<p>This reaches its culmination in holographic theory, where one has, for example, a conformal field theory on the boundary of some space (like on the surface of the sphere) being from another point of view a gravitational theory in the interior of that space (like in the interior of the sphere), usually an anti-DeSitter space, one with negative curvature, so that signals going off to infinity, return in finite time--just like the inside of a black hole. Indeed, that was the motivation: one wants to regard the seemingly inaccessible quantum state of the interior of the black hole (including the things that fall into it) as being, from another perspective, the quantum state that lives on a surface, the event horizon (and also the Hawking radiation). In these models, there is an interesting connection between phenomena that extend across large scales of the boundary and phenomena occur deep in the interior of bulk of the "emergent spacetime."</p>
+<p>And so we realize that even a quantum field has to contextualized with reference to some observer: one inside the black hole vs one outside, in terms of their different notions of space, time, and particle.</p>
+<p>Indeed, step by step, as it has unfolded, our story has been as much about translating between the perspective of observers (so that communication can be successful) as it has been about the pebbles which are passed between them. And so we have to ask: What is an observer, anyway? We have a theory that allows observers to come to agreement about the way the world is independent of their perspectives, using mathematics to represent the relationship between their points of view, so that they don't get out of sync. But the observers themselves, as it were, stand outside the theory as such, as <em>users</em> of the theory, which provides a reliable means of guaranteeing communication and agreement. What more can we say about them?</p>
+
 </div>
 </div>
 </div>

@@ -1,0 +1,17 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (0) at (-3, 2) {};
+		\node [style=none] (1) at (-1, 2) {};
+		\node [style=none] (2) at (1, 1.25) {};
+		\node [style=none] (3) at (3, 1.25) {};
+		\node [style=none] (4) at (-2, 0.5) {$\mid \uparrow \downarrow \rangle - \mid \downarrow\uparrow\rangle$};
+		\node [style=none] (5) at (2, 0.5) {$\langle \uparrow \downarrow \mid - \langle \downarrow\uparrow\mid$};
+		\node [style=none] (6) at (0, 4) {};
+		\node [style=none] (7) at (0, -1.5) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [bend right=90, looseness=1.50] (0.center) to (1.center);
+		\draw [bend left=90, looseness=1.75] (2.center) to (3.center);
+		\draw (6.center) to (7.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

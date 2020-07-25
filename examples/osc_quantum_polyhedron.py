@@ -169,11 +169,55 @@ class OscQuantumPolyhedron:
 		else:
 			return OP[choice]
 
+	#### Fancier stuff:
+	def construct_operators(self):
+		a = self.a
+		self.E = [[a[i][0].dag()*a[j][0] + a[i][1].dag()*a[j][1]
+						for j in range(self.nfaces)] \
+						for i in range(self.nfaces)]
+		self.F = [[a[i][0]*a[j][1] - a[i][1]*a[j][0]
+						for j in range(self.nfaces)] \
+						for i in range(self.nfaces)]
+
+	def apply(self, O):
+		if O.shape[0] == self.d:
+			self.spin = O*self.spin
+		else:
+			self.spin = self.tiny(O*self.big())
+		self.update_viz()
+
+	# H is nfaces x nfaces
+	def upgrade_operator(self, H): 
+		H = H.full()
+		terms = []
+		for i in range(self.nfaces):
+			for j in range(self.nfaces):
+				terms.append(H[i][j]*self.E[i][j])
+		return sum(terms)
+
+	def quantize(self, classical_poly, J=1):
+		spinors = classical_poly.spinors
+		terms = []
+		for i in range(self.nfaces):
+			for j in range(self.nfaces):
+				terms.append(\
+				dual_bra(spinors[i])*spinors[j]*\
+				(self.a[i][0].dag()*self.a[j][1].dag() -\
+				 self.a[i][1].dag()*self.a[j][0].dag()))
+		O = (1/np.sqrt(np.math.factorial(J)*np.math.factorial(J+1)))*\
+			((0.5*sum(terms))**J)
+		n = self.a[0][0].shape[0]
+		vac = qt.basis(n, 0)
+		vac.dims[0] = self.a[0][0].dims[0]
+		state = O*repair(vac)
+		self.spin = self.tiny(state)
+		self.update_viz()
+
 ############################################################################
 
 if __name__ == "__main__":
 	scene = vp.canvas(background=vp.color.white, width=1000, height=500)
-	p = OscQuantumPolyhedron(nfaces=4, cutoff=2, show_poly=False, show_spin=False)
+	p = OscQuantumPolyhedron(nfaces=4, cutoff=2, show_poly=True, show_spin=False)
 
 	def evolve(H=None, dt=0.01, T=100):
 		global state, A, B, pA, pB

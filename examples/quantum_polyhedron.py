@@ -6,6 +6,97 @@ import vpython as vp
 from magic import *
 from vhelper import *
 
+#####################################################################
+
+def dual_ket(spinor):
+	a, b = spinor.conj().full().T[0]
+	return qt.Qobj(np.array([-b, a]))
+
+def dual_bra(spinor):
+	a, b = spinor.full().T[0]
+	q = qt.Qobj(np.array([-b, a])).dag().conj()
+	return q
+
+def close_spinors(spinors):
+	X = sum([spinor*spinor.dag() for spinor in spinors])
+	g, d, gi = np.linalg.svd(X.full())
+	d = np.diag(d)
+	rho = np.linalg.det(d)
+	L = np.dot(g, np.sqrt(d)*rho**(-1./4.))
+	Li = qt.Qobj(np.linalg.inv(L))
+	return [Li*spinor for spinor in spinors]
+
+def unitary_spinors(U):
+    col0, col1 = U[:,0], U[:, 1]
+    return [qt.Qobj(np.array([col0[i], col1[i]])) for i in range(n)]
+
+def spinor_xyz(spinor):
+    return np.array([qt.expect(qt.sigmax(), spinor), qt.expect(qt.sigmay(), spinor), qt.expect(qt.sigmaz(), spinor)])
+
+def recover_vectors(inner_products):
+    U, D, V = np.linalg.svd(inner_products)
+    M = np.dot(V[:3].T, np.sqrt(np.diag(D[:3])))
+    return [m for m in M]
+
+def inner_products(vectors):
+	return np.array([[np.dot(vectors[i], vectors[j])\
+				for j in range(len(vectors))]\
+					for i in range(len(vectors))])
+
+class ClassicalPolyhedron:
+	def __init__(self, nfaces, show_poly=True, pos=[0,0,0], spinors=None):
+		self.nfaces = nfaces
+		self.show_poly = show_poly
+		self.pos = pos
+		self.spinors = spinors if type(spinors) != type(None) else close_spinors([qt.rand_ket(2) for i in range(self.nfaces)])
+		self.poly = polyhedrec.reconstruct(self.normals(), self.areas())
+		if self.show_poly:
+			self.vpoly = VisualPolyhedron(self.poly, self.pos)
+
+	def evolve(self, H=None, dt=0.01, T=100):
+		if type(H) == type(None):
+			H = qt.rand_herm(self.nfaces)
+		U = (-1j*H*dt).expm().full()
+		for t in range(T):
+			self.spinors = [sum([U[i][j]*self.spinors[j]\
+								for j in range(self.nfaces)])\
+									for i in range(self.nfaces)]
+			self.poly = polyhedrec.reconstruct(self.normals(), self.areas())
+			self.vpoly.update(self.poly) if self.show_poly else None
+
+	def vectors(self):
+		return [spinor_xyz(s) for s in self.spinors]
+
+	def areas(self):
+		return [(spinor.dag()*spinor).full()[0][0].real for spinor in self.spinors]
+
+	def normals(self):
+		areas = self.areas()
+		vectors = self.vectors()
+		return [v/areas[i] for i, v in enumerate(vectors)]
+
+	def inner_products(self):
+		vectors = self.vectors()
+		return np.array([[np.dot(vectors[i], vectors[j])\
+					for j in range(self.nfaces)]\
+						for i in range(self.nfaces)])
+
+	def closure(self):
+		return np.isclose(sum(self.vectors()), np.array([0,0,0])).all()
+
+	def cross_spinors(self):
+		cross_spinors = []
+		for i in range(self.nfaces):
+			row = []
+			zi = self.spinors[i].full().T[0]
+			for j in range(self.nfaces):
+				zj = self.spinors[j].full().T[0]
+				row.append((zj[0]*zi[1] - zi[0]*zj[1]))
+			cross_spinors.append(row)
+		return np.array(cross_spinors)
+
+##################################################################
+
 def repair(q):
 	q.dims[1] = [1]*len(q.dims[0])
 	return q

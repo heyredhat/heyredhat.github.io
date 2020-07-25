@@ -170,14 +170,22 @@ class OscQuantumPolyhedron:
 			return OP[choice]
 
 	#### Fancier stuff:
-	def construct_operators(self):
+	def construct_operators(self, tiny=False):
 		a = self.a
-		self.E = [[a[i][0].dag()*a[j][0] + a[i][1].dag()*a[j][1]
-						for j in range(self.nfaces)] \
-						for i in range(self.nfaces)]
-		self.F = [[a[i][0]*a[j][1] - a[i][1]*a[j][0]
-						for j in range(self.nfaces)] \
-						for i in range(self.nfaces)]
+		if not tiny:
+			self.E = [[a[i][0].dag()*a[j][0] + a[i][1].dag()*a[j][1]
+							for j in range(self.nfaces)] \
+							for i in range(self.nfaces)]
+			self.F = [[a[i][0]*a[j][1] - a[i][1]*a[j][0]
+							for j in range(self.nfaces)] \
+							for i in range(self.nfaces)]
+		else:
+			self.E = [[self.tiny(a[i][0].dag()*a[j][0] + a[i][1].dag()*a[j][1])
+							for j in range(self.nfaces)] \
+							for i in range(self.nfaces)]
+			self.F = [[self.tiny(a[i][0]*a[j][1] - a[i][1]*a[j][0])
+							for j in range(self.nfaces)] \
+							for i in range(self.nfaces)]
 
 	def apply(self, O):
 		if O.shape[0] == self.d:

@@ -13105,7 +13105,7 @@ div#notebook {
 <p>First off, suppose we had $\mid \uparrow \rangle_{A}^{A} (\mid \uparrow \rangle + \mid \downarrow \rangle)_{B}^{A}$.</p>
 <p>If $A$ is regarded as $\uparrow$, then $B$ is in an even superposition of $\uparrow$ and $\downarrow$: in other words, there's a 50/50 chance that $A$ and $B$ agree. But geometrically, this just means: $B$ is $\rightarrow$.</p>
 <p>Conversely, if $B$ is regarded as $\uparrow$, then: $(\mid \uparrow \rangle - \mid \downarrow \rangle)_{A}^{B} \mid \uparrow \rangle_{B}^{B}$.</p>
-<p>There's still a 50/50 chance they agree, but $B$ would claim it was $A$ who was in a superposition. Why the negative sign? Because geometrically, if when $A$ is $\uparrow$, $B$ is $\rightarrow$, then when $B$ is $\uparrow$, then $A$ would be $\leftarrow$.</p>
+<p>There's still a 50/50 chance they agree, but $B$ would claim it was $A$ who was in a superposition. Why the negative sign? Because geometrically, if when $A$ is $\uparrow$, $B$ is $\rightarrow$, then when $B$ is $\uparrow$, then $A$ would be $\leftarrow$. Of course, $(\mid \uparrow \rangle + \mid \downarrow \rangle)_{A}^{B} \mid \uparrow \rangle_{B}^{B}$ would have worked too, in the sense that the relative relationships are the same: the one is just the mirror image of the first.</p>
 <p>So the first thing to say is that: superposition is in the eye of the beholder.</p>
 <hr>
 </div>
@@ -13119,7 +13119,6 @@ div#notebook {
 <p>We want to transform into $B$'s perspective. We know this much: from $B$'s perspective, $B$ is $\uparrow$. Since $B$ and $C$ are in the entangled state $\mid \uparrow \uparrow \rangle + \mid \downarrow \downarrow \rangle$, then if $B$ is $\uparrow$, then $C$ must also be $\uparrow$. So far so good. But what about $A$ from $B$'s perspective? From $A$'s perspective, there's a 50/50 chance that $A$ agrees with $B$ (and $C$). So to maintain this, we'd have to say that $B$ would regard $A$ to be 50/50 $\uparrow$ or $\downarrow$. In fact, we should say: $\mid \uparrow \rangle + \mid \downarrow \rangle$.</p>
 <p>In other words:</p>
 <p>$\mid \uparrow \rangle_{A}^{A} (\mid \uparrow \uparrow \rangle + \mid \downarrow \downarrow \rangle)_{BC}^{A} \Rightarrow (\mid \uparrow \rangle + \mid \downarrow \rangle)_{A}^{B} \mid \uparrow \rangle_{B}^{B} \mid \uparrow \rangle_{C}^{B}$.</p>
-<p>Why not $\mid \uparrow \rangle - \mid \downarrow \rangle$? We shall see.</p>
 <hr>
 </div>
 </div>
@@ -13127,8 +13126,8 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Following Hamette and Galley (2020), we define the following:</p>
-<p>$ U_{g}$ is a unitary matrix which prepares $\mid g \rangle$ from the "vacuum" state $\begin{pmatrix} 1 \\ 0 \\ 0 \\ \vdots \end{pmatrix}$, in other words: $U_{g}\mid 0 \rangle = \mid g \rangle$. It can be easily calculated by forming a matrix $M$ of all zeros, except for the first column being $\mid g \rangle$. One can use the QR factorization to break down the matrix $M$ into $QR$, with $Q$ unitary and $R$ an upper triangle matrix. $Q$ is our $U_{g}$.</p>
+<p>Following <a href="https://arxiv.org/abs/2004.14292">Hamette and Galley</a> (2020), we define the following:</p>
+<p>$ U_{g}$ is a unitary matrix which prepares $\mid g \rangle$ from the "vacuum" state $\begin{pmatrix} 1 \\ 0 \\ 0 \\ \vdots \end{pmatrix}$, in other words: $U_{g}\mid 0 \rangle = \mid g \rangle$. It can be easily calculated by forming a matrix $M$ of all zeros, except for the first column being $\mid g \rangle$. One can use the QR factorization to break down the matrix $M$ into $QR$, with $Q$ unitary and $R$ an upper triangle matrix. $Q$ is our $U_{g}$, up to sign.</p>
 <p>In this way, for each state $\mid g \rangle$, we can associate a "group element" $U_{g}$. Naturally, there will be an inverse group element $U_{g}^{\dagger}$, and we'll write the state corresponding $U_{g}^{\dagger}$ as $\mid g^{-1} \rangle$. In other words, $\mid g^{-1} \rangle = U_{g}^{\dagger}\mid 0 \rangle$.</p>
 <p>We can then write down a unitary transformation $P$ which implements our perspective switch. Suppose we are working with $n$ systems, each of which lives in a $d$ dimensional complex vector space ($2$, for a qubit) and we want to switch perspectives from the $0^{th}$ subsystem to the $k^{th}$ subsystem. Then:</p>
 <p>$P_{0 \rightarrow k}  = SWAP_{0 \leftrightarrow k} \sum_{i=0}^{d} I^{0} \otimes (\mid g_{i}^{-1} \rangle \langle g_{i} \mid)^{k} \otimes U_{g_{i}}^{\otimes^{n-2}}$</p>
@@ -13140,7 +13139,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>For example, if we have $\mid \uparrow \rangle_{A}^{A} (\mid \uparrow \rangle + \mid \downarrow \rangle)_{B}^{A}$, and we want to switch to $B$'s perspective, first we note:</p>
+<p>For example, if we have $\mid \uparrow \rangle_{A}^{A} (\mid \uparrow \rangle + \mid \downarrow \rangle)_{B}^{A}$, and we want to switch to $B$'s perspective, first we note that by the above method, we can take:</p>
 <p>$\mid g_{0} \rangle = \begin{pmatrix} 1 \\ 0 \end{pmatrix}$ and $\mid g_{1} \rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix}$.</p>
 <p>$U_{g_{0}} = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}$ and $U_{g_{1}} = \begin{pmatrix} 0 &amp; -1 \\ -1 &amp; 0 \end{pmatrix}$.</p>
 <p>$\mid g_{0}^{-1} \rangle = U_{g_{0}}^{\dagger} \mid 0 \rangle = \begin{pmatrix} 1 \\ 0 \end{pmatrix} $</p>
@@ -13152,12 +13151,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
-<span class="kn">from</span> <span class="nn">qutip.qip.gates</span> <span class="k">import</span> <span class="n">swap</span>
-
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">examples.magic</span> <span class="k">import</span> <span class="o">*</span>
 
@@ -13207,37 +13204,6 @@ div#notebook {
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>0: e: 0.000 | [0. 0. 1.]
-[[1.+0.j 0.+0.j]
- [0.+0.j 0.+0.j]]
-1: e: 0.000 | [1. 0. 0.]
-[[0.5+0.j 0.5+0.j]
- [0.5+0.j 0.5+0.j]]
-
-0: e: 0.000 | [-1.  0.  0.]
-[[ 0.5+0.j -0.5+0.j]
- [-0.5+0.j  0.5+0.j]]
-1: e: 0.000 | [0. 0. 1.]
-[[1.+0.j 0.+0.j]
- [0.+0.j 0.+0.j]]
-
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -13262,7 +13228,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
@@ -13317,43 +13283,6 @@ div#notebook {
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>0: e: 0.000 | [0. 0. 1.]
-[[1.+0.j 0.+0.j]
- [0.+0.j 0.+0.j]]
-1: e: 0.693 | [0. 0. 0.]
-[[0.5+0.j 0. +0.j]
- [0. +0.j 0.5+0.j]]
-2: e: 0.693 | [0. 0. 0.]
-[[0.5+0.j 0. +0.j]
- [0. +0.j 0.5+0.j]]
-
-0: e: 0.000 | [1. 0. 0.]
-[[0.5+0.j 0.5+0.j]
- [0.5+0.j 0.5+0.j]]
-1: e: 0.000 | [0. 0. 1.]
-[[1.+0.j 0.+0.j]
- [0.+0.j 0.+0.j]]
-2: e: 0.000 | [0. 0. 1.]
-[[1.+0.j 0.+0.j]
- [0.+0.j 0.+0.j]]
-
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -13368,7 +13297,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[77]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
@@ -13420,79 +13349,6 @@ div#notebook {
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>0&#39;s POV:
-0: e: -0.000 | [0. 0. 1.]
-[[1.+2.49e-17j 0.+0.00e+00j]
- [0.+0.00e+00j 0.+0.00e+00j]]
-1: e: 0.693 | [0. 0. 0.]
-[[0.5+1.25e-17j 0. +0.00e+00j]
- [0. +0.00e+00j 0.5+1.25e-17j]]
-2: e: 0.693 | [0. 0. 0.]
-[[0.5+1.25e-17j 0. +0.00e+00j]
- [0. +0.00e+00j 0.5+1.25e-17j]]
-3: e: 0.000 | [ 0.32  0.6  -0.73]
-[[0.13+0.j  0.16-0.3j]
- [0.16+0.3j 0.87+0.j ]]
-
-1&#39;s POV:
-0: e: 0.640 | [0.32 0.   0.  ]
-[[0.5 +1.25e-17j 0.16+0.00e+00j]
- [0.16+0.00e+00j 0.5 +1.25e-17j]]
-1: e: -0.000 | [0. 0. 1.]
-[[1.+2.49e-17j 0.+0.00e+00j]
- [0.+0.00e+00j 0.+0.00e+00j]]
-2: e: -0.000 | [ 0.  0. -1.]
-[[0.+0.00e+00j 0.+0.00e+00j]
- [0.+0.00e+00j 1.+2.49e-17j]]
-3: e: 0.640 | [ 3.23e-01 -6.94e-18  0.00e+00]
-[[0.5 +0.00e+00j 0.16+3.47e-18j]
- [0.16-3.47e-18j 0.5 +0.00e+00j]]
-
-2&#39;s POV:
-0: e: 0.640 | [0.32 0.   0.  ]
-[[0.5 +1.25e-17j 0.16+0.00e+00j]
- [0.16+0.00e+00j 0.5 +1.25e-17j]]
-1: e: -0.000 | [ 0.  0. -1.]
-[[0.+0.00e+00j 0.+0.00e+00j]
- [0.+0.00e+00j 1.+2.49e-17j]]
-2: e: -0.000 | [0. 0. 1.]
-[[1.+2.49e-17j 0.+0.00e+00j]
- [0.+0.00e+00j 0.+0.00e+00j]]
-3: e: 0.640 | [ 3.23e-01 -6.94e-18  0.00e+00]
-[[0.5 +0.00e+00j 0.16+3.47e-18j]
- [0.16-3.47e-18j 0.5 +0.00e+00j]]
-
-3&#39;s POV:
-0: e: 0.000 | [ 0.32  0.6  -0.73]
-[[0.13+3.31e-18j 0.16-2.99e-01j]
- [0.16+2.99e-01j 0.87+2.16e-17j]]
-1: e: 0.693 | [0. 0. 0.]
-[[0.5+1.25e-17j 0. +0.00e+00j]
- [0. +0.00e+00j 0.5+1.25e-17j]]
-2: e: 0.693 | [0. 0. 0.]
-[[0.5+1.25e-17j 0. +0.00e+00j]
- [0. +0.00e+00j 0.5+1.25e-17j]]
-3: e: -0.000 | [0. 0. 1.]
-[[1.+0.j 0.+0.j]
- [0.+0.j 0.+0.j]]
-
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -13550,7 +13406,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
@@ -13607,108 +13463,6 @@ div#notebook {
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>0&#39;s POV:
-0: e: 0.000 | [0. 0. 1.]
-[[1.+0.j 0.+0.j]
- [0.+0.j 0.+0.j]]
-1: e: 0.000 | [ 0.  0. -1.]
-[[0.+0.j 0.+0.j]
- [0.+0.j 1.+0.j]]
-2: e: 0.000 | [ 0.  0. -1.]
-[[0.+0.j 0.+0.j]
- [0.+0.j 1.+0.j]]
-3: e: 0.693 | [0. 0. 0.]
-[[0.5+0.j 0. +0.j]
- [0. +0.j 0.5+0.j]]
-4: e: 0.693 | [0. 0. 0.]
-[[0.5+0.j 0. +0.j]
- [0. +0.j 0.5+0.j]]
-
-1&#39;s POV:
-0: e: 0.000 | [ 0.  0. -1.]
-[[0.+0.j 0.+0.j]
- [0.+0.j 1.+0.j]]
-1: e: 0.000 | [0. 0. 1.]
-[[1.+0.j 0.+0.j]
- [0.+0.j 0.+0.j]]
-2: e: 0.000 | [0. 0. 1.]
-[[1.+0.j 0.+0.j]
- [0.+0.j 0.+0.j]]
-3: e: 0.693 | [0. 0. 0.]
-[[0.5+0.j 0. +0.j]
- [0. +0.j 0.5+0.j]]
-4: e: 0.693 | [0. 0. 0.]
-[[0.5+0.j 0. +0.j]
- [0. +0.j 0.5+0.j]]
-
-2&#39;s POV:
-0: e: 0.000 | [ 0.  0. -1.]
-[[0.+0.j 0.+0.j]
- [0.+0.j 1.+0.j]]
-1: e: 0.000 | [0. 0. 1.]
-[[1.+0.j 0.+0.j]
- [0.+0.j 0.+0.j]]
-2: e: 0.000 | [0. 0. 1.]
-[[1.+0.j 0.+0.j]
- [0.+0.j 0.+0.j]]
-3: e: 0.693 | [0. 0. 0.]
-[[0.5+0.j 0. +0.j]
- [0. +0.j 0.5+0.j]]
-4: e: 0.693 | [0. 0. 0.]
-[[0.5+0.j 0. +0.j]
- [0. +0.j 0.5+0.j]]
-
-3&#39;s POV:
-0: e: 0.693 | [0. 0. 0.]
-[[0.5+0.j 0. +0.j]
- [0. +0.j 0.5+0.j]]
-1: e: 0.693 | [0. 0. 0.]
-[[0.5+0.j 0. +0.j]
- [0. +0.j 0.5+0.j]]
-2: e: 0.693 | [0. 0. 0.]
-[[0.5+0.j 0. +0.j]
- [0. +0.j 0.5+0.j]]
-3: e: 0.000 | [0. 0. 1.]
-[[1.+0.j 0.+0.j]
- [0.+0.j 0.+0.j]]
-4: e: 0.000 | [ 0.  0. -1.]
-[[0.+0.j 0.+0.j]
- [0.+0.j 1.+0.j]]
-
-4&#39;s POV:
-0: e: 0.693 | [0. 0. 0.]
-[[0.5+0.j 0. +0.j]
- [0. +0.j 0.5+0.j]]
-1: e: 0.693 | [0. 0. 0.]
-[[0.5+0.j 0. +0.j]
- [0. +0.j 0.5+0.j]]
-2: e: 0.693 | [0. 0. 0.]
-[[0.5+0.j 0. +0.j]
- [0. +0.j 0.5+0.j]]
-3: e: 0.000 | [ 0.  0. -1.]
-[[0.+0.j 0.+0.j]
- [0.+0.j 1.+0.j]]
-4: e: 0.000 | [0. 0. 1.]
-[[1.+0.j 0.+0.j]
- [0.+0.j 0.+0.j]]
-
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 

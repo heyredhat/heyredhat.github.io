@@ -9,6 +9,10 @@ from functools import *
 from itertools import *
 import scipy.linalg
 
+def repair(q):
+    q.dims[1] = [1]*len(q.dims[0])
+    return q
+    
 ####################################################################
 
 def d_j(d):

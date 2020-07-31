@@ -328,6 +328,13 @@ class QuantumPolyhedron:
 		else:
 			return OP[choice]
 
+	def apply(self, O):
+		if O.shape[0] == qp.d:
+			self.spin = O*self.spin
+		else:
+			self.spin = self.tiny(O*self.big())
+		self.update_viz()
+
 ############################################################################
 
 if __name__ == "__main__":

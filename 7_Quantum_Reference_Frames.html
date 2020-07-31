@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>2.4_Scrambling_and_Winding</title>
+<title>7_Quantum_Reference_Frames</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13077,140 +13077,22 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="How-to-Make-a-Wormhole">How to Make a Wormhole<a class="anchor-link" href="#How-to-Make-a-Wormhole">&#182;</a></h1><h2 id="Part-5:-Scrambling-and-Winding">Part 5: Scrambling and Winding<a class="anchor-link" href="#Part-5:-Scrambling-and-Winding">&#182;</a></h2>
+<h1 id="What-is-a-Quantum-Reference-Frame?">What is a Quantum Reference Frame?<a class="anchor-link" href="#What-is-a-Quantum-Reference-Frame?">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Consider a bunch of qubits evolving under some random unitary operator. If we wanted to run this on a quantum computer, for example, we'd want to compile down that unitary into a series of, say, one and two qubit operators that we apply in a sequence since these are simpler to implement. Consider a single qubit in our group, which starts off separable from the rest. As time goes on, maybe it interacts with another qubit: then, generically, the two qubits will get entangled. Each of those qubits then goes off and gets entangled with more qubits, and now it's possible all four are entangled. And so on. In other words, entanglement spreads between quantum systems like an epidemic.</p>
-<p>Here's an easy way to get a handle on this. Below is a python implementation of above: a bunch of qubits start of separable, and we evolve them under some randomly selected time evolution. We want to track how one qubit gets entangled with the rest. One easy way to do this is to instead start off with a maximally entangled pair of qubits. One stays outside the group, the other one evolves with the rest of the group. We can then calculate the entanglement between the one who stays outside and all the ones in the group in turn, and track it over time. Think of it like we have two qubits connected by Ariadne's thread; we toss one in and it gets scrambled into the rest, but we can keep track of it by following the thread home.</p>
-<p>What's a good measure of entanglement though? A classical measure is the quantum mutual information:</p>
-$$ QMI(A, B) = S(A) + S(B) - S(A, B)$$$$ S = - tr( \rho \ ln \rho ) = - \sum_{\lambda} \lambda  \ ln \lambda $$<p>$S$ is called the Von Neumann entropy. In the latter part the sum is over eigenvalues $ \lambda $ of $ \rho $.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> notebook
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
-
-<span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.01</span>
-<span class="n">t_max</span> <span class="o">=</span> <span class="mi">1000</span>
-
-<span class="n">ref</span><span class="p">,</span> <span class="n">rest</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">bell_state</span><span class="p">(</span><span class="s2">&quot;00&quot;</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
-<span class="n">state</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">rest</span><span class="p">)</span>
-<span class="n">state</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">)]</span>
-
-<span class="n">E</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_herm</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
-<span class="n">U</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">dt</span><span class="o">*</span><span class="n">E</span><span class="p">)</span><span class="o">.</span><span class="n">expm</span><span class="p">())</span>
-<span class="n">U</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">),</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">)]</span>
-
-<span class="n">entropies</span> <span class="o">=</span> <span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">entropy_mutual</span><span class="p">((</span><span class="n">state</span><span class="o">*</span><span class="n">state</span><span class="o">.</span><span class="n">dag</span><span class="p">())</span><span class="o">.</span><span class="n">ptrace</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">)]</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;qubit&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;entanglement&#39;</span><span class="p">)</span>
-
-<span class="n">bar</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">)),</span> <span class="n">entropies</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">t_max</span><span class="p">):</span>
-    <span class="n">state</span> <span class="o">=</span> <span class="n">U</span><span class="o">*</span><span class="n">state</span>
-    <span class="n">entropies</span> <span class="o">=</span> <span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">entropy_mutual</span><span class="p">((</span><span class="n">state</span><span class="o">*</span><span class="n">state</span><span class="o">.</span><span class="n">dag</span><span class="p">())</span><span class="o">.</span><span class="n">ptrace</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">)]</span>
-    <span class="k">for</span> <span class="n">b</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">entropies</span><span class="p">):</span>
-        <span class="n">b</span><span class="o">.</span><span class="n">set_height</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">pause</span><span class="p">(</span><span class="mf">0.0001</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Just like we can track a qubit as it gets scrambled among the rest, we could also keep track of an operator, watch how it starts off localized and then gets spread out over the whole Hilbert space.</p>
-<p>So we're interested in tracking in some sense the size/complexity of the operator $ O(t) = e^{iEt} O e^{-iEt} $ as it evolves in time.</p>
-<p>Now just as quantum states form a vector space, operators also form a vector space. For example, I can write any 2x2 Hermitian matrix in the following 4-vector form:</p>
-$$ H = tI + xX + yY + zZ $$<p>So given an operator H I can expand it in terms of a real (t, x, y, z) vector. One way to do this is to use the generalization of the inner product for matrices: $ (tr(H), tr(X^{\dagger}H), tr(Y^{\dagger}H), tr(Z^{\dagger}H)) $. But we know another way: We could multiply I, X, Y, Z and H all by the cup state and then take the normal inner product: $ ( \langle I\cup \mid H \cup \rangle , \langle X \cup \mid H \cup \rangle , \langle Y \cup \mid H \cup \rangle , \langle Z \cup \mid H \cup \rangle ) $.</p>
-<p>I could decompose a 2x2 unitary in the same way: the components would then be generally complex. Cool, but does the same work for the nxn case? Yes, there's always some basis for Hermitian matrices. But we want to consider spaces of qubits and it turns out that the following 16 operators forms a basis for two qubit operators:</p>
-$$ \begin{matrix}II &amp; IX &amp; IY &amp; IZ \\
-                 XI &amp; XX &amp; XY &amp; XZ \\
-                 YI &amp; YX &amp; YY &amp; YZ \\
-                 ZI &amp; ZX &amp; ZY &amp; ZZ\end{matrix} $$<p>And then same goes for the n-qubit case: we take all arrangements of the Pauli operators, and we can expand any operator in the so-called Pauli basis. The point is that in the Pauli basis we can define the notion of the size of an operator. For the 1 qubit case, $I$ has size 0, while $X, Y, Z$ each have size 1. In the 2 qubit case, we have 1 operator of size 0, 6 operators of size 1, and 9 operators of size 2. We'll write $ |P| $ for the size of a Pauli operator P.</p>
-<p>So we have the idea that generically operators grow in size over time. Let's watch it happen.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> notebook
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">product</span>
-
-<span class="k">def</span> <span class="nf">pauli_basis</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">IXYZ</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;I&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">(),</span> <span class="s2">&quot;Y&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmay</span><span class="p">(),</span> <span class="s2">&quot;Z&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">()}</span>
-    <span class="n">names</span><span class="p">,</span> <span class="n">ops</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">P</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="n">IXYZ</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="n">n</span><span class="p">):</span>
-        <span class="n">names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">P</span><span class="p">))</span>
-        <span class="n">ops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">IXYZ</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">P</span><span class="p">]))</span>
-    <span class="k">return</span> <span class="n">names</span><span class="p">,</span> <span class="n">ops</span>
-
-<span class="k">def</span> <span class="nf">to_pauli</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">Pops</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">o</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">op</span><span class="p">)</span><span class="o">.</span><span class="n">tr</span><span class="p">()</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">Pops</span><span class="p">])</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Pops</span><span class="p">))</span>
-
-<span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.01</span>
-<span class="n">Pnames</span><span class="p">,</span> <span class="n">Pops</span> <span class="o">=</span> <span class="n">pauli_basis</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-
-<span class="n">H</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_herm</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">n</span><span class="p">)</span>
-<span class="n">H</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">]</span>
-<span class="n">U</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">dt</span><span class="o">*</span><span class="n">H</span><span class="p">)</span><span class="o">.</span><span class="n">expm</span><span class="p">()</span>
-<span class="n">O</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">()</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
-
-<span class="n">probabilities</span> <span class="o">=</span> <span class="p">[(</span><span class="n">a</span><span class="o">*</span><span class="n">a</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span><span class="o">.</span><span class="n">real</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">to_pauli</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">Pops</span><span class="p">)]</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;paulis&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;probabilities&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Pnames</span><span class="p">)),</span> <span class="n">Pnames</span><span class="p">)</span>
-<span class="n">bar</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Pnames</span><span class="p">))),</span> <span class="n">probabilities</span><span class="p">)</span>
-
-<span class="n">t_max</span> <span class="o">=</span> <span class="mi">5000</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">t_max</span><span class="p">):</span>
-    <span class="n">O</span> <span class="o">=</span> <span class="n">U</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">O</span><span class="o">*</span><span class="n">U</span>
-    <span class="n">probabilities</span> <span class="o">=</span> <span class="p">[(</span><span class="n">a</span><span class="o">*</span><span class="n">a</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span><span class="o">.</span><span class="n">real</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">to_pauli</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">Pops</span><span class="p">)]</span>
-    <span class="k">for</span> <span class="n">b</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">):</span>
-        <span class="n">b</span><span class="o">.</span><span class="n">set_height</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">pause</span><span class="p">(</span><span class="mf">0.0001</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>In fact, we could think about the operator as a quantum particle undergoing its own Schrodinger evolution but defined on a graph where nodes are Pauli matrices and node are connected by edges when they are one operator different from another.</p>
+<p>One school of thought is that quantum states are <em>relative</em> states. In other words, things don't "have" quantum states, except with reference to some observer, or some subsystem considered to be "observer."</p>
+<p>Let's consider how this might work in terms of a Wigner's Friend type set-up. Let's consider three spin-$\frac{1}{2}$ states $A$, $B$, and $C$. $A$ is "Wigner," $B$ is his "friend," and $C$ is the spin to be measured, in this case in the state $\mid \uparrow \rangle + \mid \downarrow \rangle$.</p>
+<p>Let's write down the initial state "from $A$'s perspective":</p>
+<p>$\mid \uparrow \rangle_{A}^{A} \mid \uparrow \rangle_{B}^{A} (\mid \uparrow \rangle + \mid \downarrow \rangle)_{C}^{A}$.</p>
+<p>The notation here is that $()_{B}^{A}$ means the state of $B$ relative to $A$, or $A$'s perspective on $B$. So at the beginning of the experiment, from $A$'s perspective, $B$ is $\uparrow$ and $C$ is in a superposition of $\uparrow$ and $\downarrow$.</p>
+<p>Then, $B$ measures the spin $C$, which from $A$'s point of view is a unitary entangling operation: e.g., a $CNOT$.</p>
+<p>Now the state from $A$'s perspective is:</p>
+<p>$\mid \uparrow \rangle_{A}^{A} (\mid \uparrow \uparrow \rangle + \mid \downarrow \downarrow \rangle)_{BC}^{A}$.</p>
+<p>Okay, but what about the state from $B$'s perspective?</p>
 <hr>
 </div>
 </div>
@@ -13218,40 +13100,631 @@ $$ \begin{matrix}II &amp; IX &amp; IY &amp; IZ \\
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>So now we can put some interesting facts together. We know that:</p>
-$$ O_{L} (-t) \mid TFD \rangle \to \rho_{\beta, R}^{\frac{1}{2}} O_{R}^{T} (t) \mid \cup \rangle $$$$ O_{R}^{T} (t) \mid TFD \rangle \to O_{R}^{T} (t) \rho_{\beta, R}^{\frac{1}{2}} \mid \cup \rangle $$<p>And our general setup is:</p>
-<p><img src="img/freed_operator_and_state.png"></p>
+<p>The whole crux of the matter is this: from its <em>own</em> perspective, a spin-$\frac{1}{2}$ is always $\uparrow$. In other words, "orientation" is relative: from your own perspective, you're always "up," and everyone else is tilted. So that if you had $\mid \uparrow \rangle_{A}^{A} \mid \downarrow \rangle_{B}^{A}$, then $\mid \uparrow \rangle_{B}^{B} \mid \downarrow \rangle_{A}^{B}$. $A$ and $B$ would each consider themselves to be $\uparrow$ in their own terms, the other one being down.</p>
+<p>This is quite natural and intuitive classically. In the quantum case, however, there is a bit of a surprise with regard to how superposition and entanglement come into play.</p>
+<p>First off, suppose we had $\mid \uparrow \rangle_{A}^{A} (\mid \uparrow \rangle + \mid \downarrow \rangle)_{B}^{A}$.</p>
+<p>If $A$ is regarded as $\uparrow$, then $B$ is in an even superposition of $\uparrow$ and $\downarrow$: in other words, there's a 50/50 chance that $A$ and $B$ agree. But geometrically, this just means: $B$ is $\rightarrow$.</p>
+<p>Conversely, if $B$ is regarded as $\uparrow$, then: $(\mid \uparrow \rangle - \mid \downarrow \rangle)_{A}^{B} \mid \uparrow \rangle_{B}^{B}$.</p>
+<p>There's still a 50/50 chance they agree, but $B$ would claim it was $A$ who was in a superposition. Why the negative sign? Because geometrically, if when $A$ is $\uparrow$, $B$ is $\rightarrow$, then when $B$ is $\uparrow$, then $A$ would be $\leftarrow$.</p>
+<p>So the first thing to say is that: superposition is in the eye of the beholder.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So we had this state from $A$'s perspective:</p>
+<p>$\mid \uparrow \rangle_{A}^{A} (\mid \uparrow \uparrow \rangle + \mid \downarrow \downarrow \rangle)_{BC}^{A}$.</p>
+<p>We want to transform into $B$'s perspective. We know this much: from $B$'s perspective, $B$ is $\uparrow$. Since $B$ and $C$ are in the entangled state $\mid \uparrow \uparrow \rangle + \mid \downarrow \downarrow \rangle$, then if $B$ is $\uparrow$, then $C$ must also be $\uparrow$. So far so good. But what about $A$ from $B$'s perspective? From $A$'s perspective, there's a 50/50 chance that $A$ agrees with $B$ (and $C$). So to maintain this, we'd have to say that $B$ would regard $A$ to be 50/50 $\uparrow$ or $\downarrow$. In fact, we should say: $\mid \uparrow \rangle + \mid \downarrow \rangle$.</p>
+<p>In other words:</p>
+<p>$\mid \uparrow \rangle_{A}^{A} (\mid \uparrow \uparrow \rangle + \mid \downarrow \downarrow \rangle)_{BC}^{A} \Rightarrow (\mid \uparrow \rangle + \mid \downarrow \rangle)_{A}^{B} \mid \uparrow \rangle_{B}^{B} \mid \uparrow \rangle_{C}^{B}$.</p>
+<p>Why not $\mid \uparrow \rangle - \mid \downarrow \rangle$? We shall see.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Following Hamette and Galley (2020), we define the following:</p>
+<p>$ U_{g}$ is a unitary matrix which prepares $\mid g \rangle$ from the "vacuum" state $\begin{pmatrix} 1 \\ 0 \\ 0 \\ \vdots \end{pmatrix}$, in other words: $U_{g}\mid 0 \rangle = \mid g \rangle$. It can be easily calculated by forming a matrix $M$ of all zeros, except for the first column being $\mid g \rangle$. One can use the QR factorization to break down the matrix $M$ into $QR$, with $Q$ unitary and $R$ an upper triangle matrix. $Q$ is our $U_{g}$.</p>
+<p>In this way, for each state $\mid g \rangle$, we can associate a "group element" $U_{g}$. Naturally, there will be an inverse group element $U_{g}^{\dagger}$, and we'll write the state corresponding $U_{g}^{\dagger}$ as $\mid g^{-1} \rangle$. In other words, $\mid g^{-1} \rangle = U_{g}^{\dagger}\mid 0 \rangle$.</p>
+<p>We can then write down a unitary transformation $P$ which implements our perspective switch. Suppose we are working with $n$ systems, each of which lives in a $d$ dimensional complex vector space ($2$, for a qubit) and we want to switch perspectives from the $0^{th}$ subsystem to the $k^{th}$ subsystem. Then:</p>
+<p>$P_{0 \rightarrow k}  = SWAP_{0 \leftrightarrow k} \sum_{i=0}^{d} I^{0} \otimes (\mid g_{i}^{-1} \rangle \langle g_{i} \mid)^{k} \otimes U_{g_{i}}^{\otimes^{n-2}}$</p>
+<p>Here $I^{0}$ applies to the $0^{th}$ sybsystem, $(\mid g_{i}^{-1} \rangle \langle g_{i} \mid)^{k}$ applies to the $k^{th}$ subsystem, and $U_{g_{i}}^{\otimes^{n-2}}$ is applied to the rest.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For example, if we have $\mid \uparrow \rangle_{A}^{A} (\mid \uparrow \rangle + \mid \downarrow \rangle)_{B}^{A}$, and we want to switch to $B$'s perspective, first we note:</p>
+<p>$\mid g_{0} \rangle = \begin{pmatrix} 1 \\ 0 \end{pmatrix}$ and $\mid g_{1} \rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix}$.</p>
+<p>$U_{g_{0}} = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}$ and $U_{g_{1}} = \begin{pmatrix} 0 &amp; -1 \\ -1 &amp; 0 \end{pmatrix}$.</p>
+<p>$\mid g_{0}^{-1} \rangle = U_{g_{0}}^{\dagger} \mid 0 \rangle = \begin{pmatrix} 1 \\ 0 \end{pmatrix} $</p>
+<p>$\mid g_{1}^{-1} \rangle = U_{g_{1}}^{\dagger} \mid 0 \rangle = \begin{pmatrix} 0 \\ -1 \end{pmatrix} $</p>
+<p>$ P_{A\rightarrow B} = SWAP_{0 \leftrightarrow 1} \big{(} I \otimes \begin{pmatrix} 1 \\ 0 \end{pmatrix} \begin{pmatrix} 1 &amp; 0 \end{pmatrix} + I \otimes \begin{pmatrix} 0 \\ -1 \end{pmatrix} \begin{pmatrix} 0 &amp; 1 \end{pmatrix} \big{)} $</p>
 
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+<span class="kn">from</span> <span class="nn">qutip.qip.gates</span> <span class="k">import</span> <span class="n">swap</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">examples.magic</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="c1">################################################################################################</span>
+
+<span class="k">def</span> <span class="nf">U_g</span><span class="p">(</span><span class="n">g</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">g</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">g</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+    <span class="n">m</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">m</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">g_inv</span><span class="p">(</span><span class="n">g</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">U_g</span><span class="p">(</span><span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">pov</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">state</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">O</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> \
+                         <span class="n">g_inv</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">i</span><span class="p">))</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span> <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">k</span> <span class="k">else</span> \
+                         <span class="n">U_g</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+                                       <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor_swap</span><span class="p">(</span><span class="n">O</span><span class="o">*</span><span class="n">state</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
+
+<span class="c1">################################################################################################</span>
+
+<span class="k">def</span> <span class="nf">to_xyz</span><span class="p">(</span><span class="n">dm</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">(),</span> <span class="n">dm</span><span class="p">),</span>\
+                     <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmay</span><span class="p">(),</span> <span class="n">dm</span><span class="p">),</span>\
+                     <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">(),</span> <span class="n">dm</span><span class="p">)])</span>
+<span class="k">def</span> <span class="nf">disp_subsystems</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">ptrace</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">: e: </span><span class="si">%.3f</span><span class="s2"> | </span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">qt</span><span class="o">.</span><span class="n">entropy_vn</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">to_xyz</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">p</span><span class="o">.</span><span class="n">full</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+<span class="c1">################################################################################################</span>
+
+<span class="n">state_A</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">+</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">unit</span><span class="p">())</span>
+<span class="n">state_B</span> <span class="o">=</span> <span class="n">pov</span><span class="p">(</span><span class="n">state_A</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">disp_subsystems</span><span class="p">(</span><span class="n">state_A</span><span class="p">)</span>
+<span class="n">disp_subsystems</span><span class="p">(</span><span class="n">state_B</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0: e: 0.000 | [0. 0. 1.]
+[[1.+0.j 0.+0.j]
+ [0.+0.j 0.+0.j]]
+1: e: 0.000 | [1. 0. 0.]
+[[0.5+0.j 0.5+0.j]
+ [0.5+0.j 0.5+0.j]]
+
+0: e: 0.000 | [-1.  0.  0.]
+[[ 0.5+0.j -0.5+0.j]
+ [-0.5+0.j  0.5+0.j]]
+1: e: 0.000 | [0. 0. 1.]
+[[1.+0.j 0.+0.j]
+ [0.+0.j 0.+0.j]]
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The question is what properties does our \(E)\ have to have for this to work? In the state transfer picture, we throw a qubit in on the left in the past, which then should get completely scrambled over the whole left side. To the extend that the qubit is scrambled over the whole thing, we could say that the qubit is "deeper inside" the black hole. Then our coupling should somehow transfer our deep qubit from the left to the right, and then the forward time evolution on the right side should unscramble it and Bob's your uncle.</p>
-<p>Following <a href="https://arxiv.org/abs/1911.06314">arXiv:1911.06314</a>, it turns out that energy operators that have the right scrambling properties exhibit something called "perfect size winding." And even if the size winding isn't perfect, you can still often get stuff through.</p>
-<p>The authors of the aforementioned paper provide the following ansatz:</p>
-$$ \big( \rho_{\beta, R}^{\frac{1}{2}} O_{R}^{T} (t) \big)(t) = \sum_{Paulis} e^{i \alpha \frac{|P|}{n}}r_{p}P $$
+<p><code>disp_subsystems(dm)</code> displays the density matrix for each subsystem, along with its entropy (to see if we're dealing with a pure state or not), and its $X, Y, Z$ expectation values.</p>
+<p>In other words, as desired, we get:</p>
+<p>$(\mid \uparrow \rangle - \mid \downarrow \rangle)_{A}^{B} \mid \uparrow \rangle_{B}^{B}$.</p>
+<hr>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Here the sum is over all the n-qubit Paulis where n is the number of qubits on the right side! Since we can see that this is an operator that only acts on the right. $r_{p}$ is some real coefficient, $P$ is the given Pauli, and $ \alpha $ is some overall phase. (Incidentally, in the limit of large size for a random P, $ \alpha = \frac{4}{3}g$--we'll come back to the $g$.) We can see that in the Pauli basis, each Pauli basis vector has a phase proportional to its size. In other words, for perfect sizing winding Hamiltonians, in the Pauli basis, the phases wind around at a speed proportional to its size.</p>
-<p>Considering that $  \big( \rho_{\beta, R}^{\frac{1}{2}} O_{R}^{T} (t) \big)^{\dagger} =  O_{R}^{T} (t) \rho_{\beta, R}^{\frac{1}{2}}  $, we can say:</p>
-$$ O_{L} (-t) \mid TFD \rangle = \sum_{Paulis} e^{i \alpha \frac{|P|}{n}}r_{p}\mid P \rangle$$$$ O_{R}^{T} (t) \mid TFD \rangle = \sum_{Paulis} e^{-i \alpha \frac{|P|}{n}}r_{p}\mid P \rangle$$<p>Which is of course:</p>
-$$ O_{L} (-t) \mid TFD \rangle = \sum_{Paulis} e^{i \alpha \frac{|P|}{n}}r_{p}P_{L}\mid \cup \rangle$$$$ O_{R}^{T} (t) \mid TFD \rangle = \sum_{Paulis} e^{-i \alpha \frac{|P|}{n}}r_{p}P_{L}\mid \cup \rangle$$
+<p>In the case of $\mid \uparrow \rangle_{A}^{A} (\mid \uparrow \uparrow \rangle + \mid \downarrow \downarrow \rangle)_{BC}^{A} $, we have:</p>
+<p>$ P_{A\rightarrow B} = SWAP_{0 \leftrightarrow 1} \big{(} I \otimes \begin{pmatrix} 1 \\ 0 \end{pmatrix} \begin{pmatrix} 1 &amp; 0 \end{pmatrix} \otimes \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} + I \otimes \begin{pmatrix} 0 \\ -1 \end{pmatrix} \begin{pmatrix} 0 &amp; 1 \end{pmatrix} \otimes \begin{pmatrix} 0 &amp; -1 \\ -1 &amp; 0 \end{pmatrix} \big{)} $</p>
+<p>You can see that the negative signs in $\begin{pmatrix} 0 &amp; -1 \\ -1 &amp; 0 \end{pmatrix}$ cancel out the negative sign in $\begin{pmatrix} 0 \\ -1 \end{pmatrix} \begin{pmatrix} 0 &amp; 1 \end{pmatrix}$, which is why we get:</p>
+<p>$(\mid \uparrow \rangle + \mid \downarrow \rangle)_{A}^{B} \mid \uparrow \rangle_{B}^{B} \mid \uparrow \rangle_{C}^{B}$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+<span class="kn">from</span> <span class="nn">qutip.qip.gates</span> <span class="k">import</span> <span class="n">swap</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">examples.magic</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="c1">################################################################################################</span>
+
+<span class="k">def</span> <span class="nf">U_g</span><span class="p">(</span><span class="n">g</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">g</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">g</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+    <span class="n">m</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">m</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">g_inv</span><span class="p">(</span><span class="n">g</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">U_g</span><span class="p">(</span><span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">pov</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">state</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">O</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> \
+                         <span class="n">g_inv</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">i</span><span class="p">))</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span> <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">k</span> <span class="k">else</span> \
+                         <span class="n">U_g</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+                                       <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor_swap</span><span class="p">(</span><span class="n">O</span><span class="o">*</span><span class="n">state</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
+
+<span class="c1">################################################################################################</span>
+
+<span class="k">def</span> <span class="nf">to_xyz</span><span class="p">(</span><span class="n">dm</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">(),</span> <span class="n">dm</span><span class="p">),</span>\
+                     <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmay</span><span class="p">(),</span> <span class="n">dm</span><span class="p">),</span>\
+                     <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">(),</span> <span class="n">dm</span><span class="p">)])</span>
+<span class="k">def</span> <span class="nf">disp_subsystems</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">ptrace</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">: e: </span><span class="si">%.3f</span><span class="s2"> | </span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">qt</span><span class="o">.</span><span class="n">entropy_vn</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">to_xyz</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">p</span><span class="o">.</span><span class="n">full</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+<span class="c1">################################################################################################</span>
+
+<span class="n">state_A</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">bell_state</span><span class="p">(</span><span class="s2">&quot;00&quot;</span><span class="p">))</span>
+<span class="n">state_B</span> <span class="o">=</span> <span class="n">pov</span><span class="p">(</span><span class="n">state_A</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">disp_subsystems</span><span class="p">(</span><span class="n">state_A</span><span class="p">)</span>
+<span class="n">disp_subsystems</span><span class="p">(</span><span class="n">state_B</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0: e: 0.000 | [0. 0. 1.]
+[[1.+0.j 0.+0.j]
+ [0.+0.j 0.+0.j]]
+1: e: 0.693 | [0. 0. 0.]
+[[0.5+0.j 0. +0.j]
+ [0. +0.j 0.5+0.j]]
+2: e: 0.693 | [0. 0. 0.]
+[[0.5+0.j 0. +0.j]
+ [0. +0.j 0.5+0.j]]
+
+0: e: 0.000 | [1. 0. 0.]
+[[0.5+0.j 0.5+0.j]
+ [0.5+0.j 0.5+0.j]]
+1: e: 0.000 | [0. 0. 1.]
+[[1.+0.j 0.+0.j]
+ [0.+0.j 0.+0.j]]
+2: e: 0.000 | [0. 0. 1.]
+[[1.+0.j 0.+0.j]
+ [0.+0.j 0.+0.j]]
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<p>And so we can see that even entanglement is in the eye of the beholder. If $B$ and $C$ are entangled from $A$'s perspective, then from $B$ or $C$'s perspective, $B$ and $C$ just agree (if they're in the $\mid \uparrow \uparrow \rangle + \mid \downarrow \downarrow \rangle$ state: if they were in the antisymmetric state, they'd disagree!), whereas $A$ is regarded as being in a superposition.</p>
+<p>One can consider more baroque cases:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[77]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">examples.magic</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="c1">################################################################################################</span>
+
+<span class="k">def</span> <span class="nf">U_g</span><span class="p">(</span><span class="n">g</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">g</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">g</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+    <span class="n">m</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">m</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">g_inv</span><span class="p">(</span><span class="n">g</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">U_g</span><span class="p">(</span><span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">pov</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">state</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">O</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> \
+                         <span class="n">g_inv</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">i</span><span class="p">))</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span> <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">k</span> <span class="k">else</span> \
+                         <span class="n">U_g</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+                                       <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor_swap</span><span class="p">(</span><span class="n">O</span><span class="o">*</span><span class="n">state</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
+
+<span class="c1">################################################################################################</span>
+
+<span class="k">def</span> <span class="nf">to_xyz</span><span class="p">(</span><span class="n">dm</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">(),</span> <span class="n">dm</span><span class="p">),</span>\
+                     <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmay</span><span class="p">(),</span> <span class="n">dm</span><span class="p">),</span>\
+                     <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">(),</span> <span class="n">dm</span><span class="p">)])</span>
+<span class="k">def</span> <span class="nf">disp_subsystems</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">ptrace</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">: e: </span><span class="si">%.3f</span><span class="s2"> | </span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">qt</span><span class="o">.</span><span class="n">entropy_vn</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">to_xyz</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">p</span><span class="o">.</span><span class="n">full</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+<span class="c1">################################################################################################</span>
+
+<span class="n">state</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">bell_state</span><span class="p">(</span><span class="s2">&quot;11&quot;</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">states</span> <span class="o">=</span> <span class="p">[</span><span class="n">pov</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">]))]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">states</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&#39;s POV:&quot;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
+    <span class="n">disp_subsystems</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0&#39;s POV:
+0: e: -0.000 | [0. 0. 1.]
+[[1.+2.49e-17j 0.+0.00e+00j]
+ [0.+0.00e+00j 0.+0.00e+00j]]
+1: e: 0.693 | [0. 0. 0.]
+[[0.5+1.25e-17j 0. +0.00e+00j]
+ [0. +0.00e+00j 0.5+1.25e-17j]]
+2: e: 0.693 | [0. 0. 0.]
+[[0.5+1.25e-17j 0. +0.00e+00j]
+ [0. +0.00e+00j 0.5+1.25e-17j]]
+3: e: 0.000 | [ 0.32  0.6  -0.73]
+[[0.13+0.j  0.16-0.3j]
+ [0.16+0.3j 0.87+0.j ]]
+
+1&#39;s POV:
+0: e: 0.640 | [0.32 0.   0.  ]
+[[0.5 +1.25e-17j 0.16+0.00e+00j]
+ [0.16+0.00e+00j 0.5 +1.25e-17j]]
+1: e: -0.000 | [0. 0. 1.]
+[[1.+2.49e-17j 0.+0.00e+00j]
+ [0.+0.00e+00j 0.+0.00e+00j]]
+2: e: -0.000 | [ 0.  0. -1.]
+[[0.+0.00e+00j 0.+0.00e+00j]
+ [0.+0.00e+00j 1.+2.49e-17j]]
+3: e: 0.640 | [ 3.23e-01 -6.94e-18  0.00e+00]
+[[0.5 +0.00e+00j 0.16+3.47e-18j]
+ [0.16-3.47e-18j 0.5 +0.00e+00j]]
+
+2&#39;s POV:
+0: e: 0.640 | [0.32 0.   0.  ]
+[[0.5 +1.25e-17j 0.16+0.00e+00j]
+ [0.16+0.00e+00j 0.5 +1.25e-17j]]
+1: e: -0.000 | [ 0.  0. -1.]
+[[0.+0.00e+00j 0.+0.00e+00j]
+ [0.+0.00e+00j 1.+2.49e-17j]]
+2: e: -0.000 | [0. 0. 1.]
+[[1.+2.49e-17j 0.+0.00e+00j]
+ [0.+0.00e+00j 0.+0.00e+00j]]
+3: e: 0.640 | [ 3.23e-01 -6.94e-18  0.00e+00]
+[[0.5 +0.00e+00j 0.16+3.47e-18j]
+ [0.16-3.47e-18j 0.5 +0.00e+00j]]
+
+3&#39;s POV:
+0: e: 0.000 | [ 0.32  0.6  -0.73]
+[[0.13+3.31e-18j 0.16-2.99e-01j]
+ [0.16+2.99e-01j 0.87+2.16e-17j]]
+1: e: 0.693 | [0. 0. 0.]
+[[0.5+1.25e-17j 0. +0.00e+00j]
+ [0. +0.00e+00j 0.5+1.25e-17j]]
+2: e: 0.693 | [0. 0. 0.]
+[[0.5+1.25e-17j 0. +0.00e+00j]
+ [0. +0.00e+00j 0.5+1.25e-17j]]
+3: e: -0.000 | [0. 0. 1.]
+[[1.+0.j 0.+0.j]
+ [0.+0.j 0.+0.j]]
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here, from $0$'s perspective, $1$ and $2$ are in the antisymmetric state, and $3$ is in some superposition. From $1$'s perspective, $2$ is $\downarrow$, and $0$ and $3$ are entangled. Similarly, from $2$'s perspective, with the role of $\uparrow$ and $\downarrow$ swapped. And so on.</p>
+<hr>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The only difference between $ O_{L} (-t)  $ and $ O_{R}^{T} (t) $ is the direction of the winding, whether clockwise or counterclockwise.</p>
-<p>Recall our choice of V operator from before.</p>
-$$ V = \frac{1}{b-a} \sum_{i}^{b} Z_{i, L} Z_{b-i, R} $$<p>Its role is simply to unwind the phases. It turns out that the ZZ coupling is sensitive enough to size to do the job.</p>
-<p>Finally, when $ \beta = 0 $, in other words, at infinite temperature when the TFD reduces down to the $\cup $, $ \rho_{\beta, R}^{\frac{1}{2}} O_{R}^{T} $ is Hermitian and has real expansion coefficients in the Pauli basis. And so no unwinding is necessary!</p>
+<p>Returning to the Wigner's friend set-up, let's analyze it each step of the way.</p>
+<p>Initially, we have:</p>
+<p>$\mid \uparrow \rangle_{A}^{A} \mid \uparrow \rangle_{B}^{A} (\alpha \mid \uparrow \rangle + \beta \mid \downarrow \rangle)_{C}^{A}$</p>
+<p>$\mid \uparrow \rangle_{A}^{B} \mid \uparrow \rangle_{B}^{B} (\alpha \mid \uparrow \rangle + \beta \mid \downarrow \rangle)_{C}^{B}$</p>
+<p>$(\alpha \mid \uparrow \uparrow \rangle + \beta \mid \downarrow \downarrow \rangle)_{A}^{C} \mid \uparrow \rangle_{C}^{C}$</p>
+<p>From the perspectives of both $A$ (Wigner) and $B$ (his friend), the spin is in a superposition $\alpha \mid \uparrow \rangle + \beta \mid \downarrow \rangle$. Conversely, from the spin's perspective, it's Wigner and his friend that are in an entangled superposition with the same amplitudes.</p>
+<p>Then, the friend measures the spin. From Wigner's perspective, this is a unitary $CNOT$ applied to the friend and the spin. Recall that $CNOT \big{(} \mid \uparrow \rangle \otimes (\alpha \mid \uparrow \rangle + \beta \mid \downarrow \rangle)\big{)} = \alpha \mid \uparrow \uparrow \rangle + \beta \mid \downarrow \downarrow \rangle $, where the second qubit is the control and the first qubit is the target. After which we have:</p>
+<p>$\mid \uparrow \rangle_{A}^{A} (\alpha \mid \uparrow \uparrow \rangle + \beta \mid \downarrow \downarrow \rangle)_{BC}^{A}$</p>
+<p>$(\alpha \mid \uparrow \rangle + \beta \mid \downarrow \rangle)_{A}^{B} \mid \uparrow \rangle_{B}^{B}  \mid \uparrow \rangle_{C}^{B} $</p>
+<p>$(\alpha \mid \uparrow \rangle + \beta \mid \downarrow \rangle)_{A}^{C} \mid \uparrow \rangle_{B}^{C}  \mid \uparrow \rangle_{C}^{C} $</p>
+<p>We can see, however, from the perspective of the friend and the spin: the two of them simply agree, but instead regard Wigner as being in the same superposition as the original spin.</p>
+<p>Now, departing somewhat from Hamette and Galley, we could say: well, now suppose Wigner wants to ask his friend what he got. From a third person point of view, this means: another $CNOT$ with the friend as control and Wigner as a target. But it doesn't make much sense to apply it to the state from Wigner's perspective, since he regards himself always as $\uparrow$. In other words, if we imagine choosing a subsystem whose perspective we're going take as implementing Von Neumann's cut, I'm only allowing unitaries to apply to the observed portion of the world.</p>
+<p>But if we imagine the $CNOT$ to be applied to Wigner and his friend from the spin's perspective, nothing happens: since the friend is always in the $\uparrow$ state, applying the $CNOT$ has no effect since $CNOT$ only flips the target qubit if the control qubit is $\downarrow$, otherwise leaving the target the same. Moreover, even if the friend had been in a different state, Wigner is not in the $\mid \uparrow \rangle$ state which he (or his memory) is supposed to be in, if the $CNOT$ is to do its job correctly.</p>
+<p>So in order to model Wigner's asking his friend what he got, we'd have to include a fourth system, who after Wiger is $CNOT$'d with his friend, would describe the world this way:</p>
+<p>$(\alpha \mid \uparrow \uparrow \uparrow \rangle + \beta \mid \downarrow \downarrow \downarrow \rangle)_{ABC}^{D} \mid \uparrow \rangle_{D}^{D} $</p>
+<p>So that from Wigner's perspective, we get the correct agreement between the spin, his friend, and himself.</p>
+<p>$ \mid \uparrow \rangle_{A}^{A} \mid \uparrow \rangle_{B}^{A} \mid \uparrow \rangle_{C}^{A} (\alpha \mid \uparrow \rangle + \beta \mid \downarrow \rangle)_{D}^{A} $</p>
+<p>Notice, however, that even as by switching perspectives, we've seemed to avoid ever having to project a state into an eigenstate of a measurement operator, it's clear we've only shunted the original amplitudes elsewhere. If $A$, $B$, and $C$ are to agree, then they have to regard $D$ as precisely being in the very same superposition as the original spin!</p>
+<p>In other words, we've modeled how Wigner's memory, his friend's memory, and the spin state all come to be in the same state without any collapse, at the cost of: introducing an uncertainty about the orientation <em>of the rest of world</em> relative to them. If we're just interested in the dynamics of agreement, we can avoid collapse, if we're willing to shunt the uncertainty to the "world outside."</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So far we've only worked with qubits, but check out <a href="examples/ref_frame.py">ref_frame.py</a>! You can set some initial state, which should be the tensor product of several spin states, all with the same dimensionality, in other words, all spin-$\frac{1}{2}$'s or all spin-$1$'s or all spin-$\frac{3}{2}$'s, etc. Visually, you'll see a grid of spheres, each sphere representing a density matrix: the first row represents the subsystems from the POV of the first subsystem; the second row represents the subsystems from the POV of the second subsystem; and so on. So that along the diagonal, the states are all in the relevant $\uparrow$ state: all the stars at Z+. One can then evolve the state (implemented as some random unitary acting on all the states beyond the cut from the POV of the first system), and watch the perspectives all evolve in time.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>One question this brings up is: does this work if we have a collection of subsystems that live in <em>different</em> Hilbert spaces? In general, no. The whole idea depends on the relevant symmetry group being represented on each subspace: to wit, in the above, there has to be a way of rotating each of the subspaces. If we included position states, for example, we'd have to demand that they rotate in the correct way as well. And then we'd also have to take into account translations of position: each subsystem would regard itself at "position 0," and so forth.</p>
+<p>What about a bunch of spins with different $j$ values? Well, it makes sense to take the POV of a spin-$\frac{1}{2}$ on a higher spin, since $SU(2)$ rotations can act on any spin-$j$; but not the reverse. On the other hand, one can work in the symmeterized tensor representation of spin, and take the perspective of a single symmeterized spin-$\frac{1}{2}$ which is part of a larger spin state. One interesting thing is that from such a POV, the rest of the spins may rearrange themselves into spin states with different $j$ values than you started with!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">examples.magic</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="c1">################################################################################################</span>
+
+<span class="k">def</span> <span class="nf">U_g</span><span class="p">(</span><span class="n">g</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">g</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">g</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+    <span class="n">m</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">m</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">g_inv</span><span class="p">(</span><span class="n">g</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">U_g</span><span class="p">(</span><span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">pov</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">state</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">O</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> \
+                         <span class="n">g_inv</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">i</span><span class="p">))</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span> <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">k</span> <span class="k">else</span> \
+                         <span class="n">U_g</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+                                       <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor_swap</span><span class="p">(</span><span class="n">O</span><span class="o">*</span><span class="n">state</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
+
+<span class="c1">################################################################################################</span>
+
+<span class="k">def</span> <span class="nf">to_xyz</span><span class="p">(</span><span class="n">dm</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">(),</span> <span class="n">dm</span><span class="p">),</span>\
+                     <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmay</span><span class="p">(),</span> <span class="n">dm</span><span class="p">),</span>\
+                     <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">(),</span> <span class="n">dm</span><span class="p">)])</span>
+<span class="k">def</span> <span class="nf">disp_subsystems</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">ptrace</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">: e: </span><span class="si">%.3f</span><span class="s2"> | </span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">qt</span><span class="o">.</span><span class="n">entropy_vn</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">to_xyz</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">p</span><span class="o">.</span><span class="n">full</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+<span class="c1">################################################################################################</span>
+
+<span class="n">state</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">js</span> <span class="o">=</span> <span class="p">[(</span><span class="n">d</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">state</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">sym_spin</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="p">))</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">js</span><span class="p">])</span>
+<span class="n">sym_state</span> <span class="o">=</span> <span class="n">repair</span><span class="p">(</span><span class="n">S</span><span class="o">*</span><span class="n">state</span><span class="p">)</span>
+
+<span class="n">states</span> <span class="o">=</span> <span class="p">[</span><span class="n">pov</span><span class="p">(</span><span class="n">sym_state</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sym_state</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">]))]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">states</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&#39;s POV:&quot;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
+    <span class="n">disp_subsystems</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0&#39;s POV:
+0: e: 0.000 | [0. 0. 1.]
+[[1.+0.j 0.+0.j]
+ [0.+0.j 0.+0.j]]
+1: e: 0.000 | [ 0.  0. -1.]
+[[0.+0.j 0.+0.j]
+ [0.+0.j 1.+0.j]]
+2: e: 0.000 | [ 0.  0. -1.]
+[[0.+0.j 0.+0.j]
+ [0.+0.j 1.+0.j]]
+3: e: 0.693 | [0. 0. 0.]
+[[0.5+0.j 0. +0.j]
+ [0. +0.j 0.5+0.j]]
+4: e: 0.693 | [0. 0. 0.]
+[[0.5+0.j 0. +0.j]
+ [0. +0.j 0.5+0.j]]
+
+1&#39;s POV:
+0: e: 0.000 | [ 0.  0. -1.]
+[[0.+0.j 0.+0.j]
+ [0.+0.j 1.+0.j]]
+1: e: 0.000 | [0. 0. 1.]
+[[1.+0.j 0.+0.j]
+ [0.+0.j 0.+0.j]]
+2: e: 0.000 | [0. 0. 1.]
+[[1.+0.j 0.+0.j]
+ [0.+0.j 0.+0.j]]
+3: e: 0.693 | [0. 0. 0.]
+[[0.5+0.j 0. +0.j]
+ [0. +0.j 0.5+0.j]]
+4: e: 0.693 | [0. 0. 0.]
+[[0.5+0.j 0. +0.j]
+ [0. +0.j 0.5+0.j]]
+
+2&#39;s POV:
+0: e: 0.000 | [ 0.  0. -1.]
+[[0.+0.j 0.+0.j]
+ [0.+0.j 1.+0.j]]
+1: e: 0.000 | [0. 0. 1.]
+[[1.+0.j 0.+0.j]
+ [0.+0.j 0.+0.j]]
+2: e: 0.000 | [0. 0. 1.]
+[[1.+0.j 0.+0.j]
+ [0.+0.j 0.+0.j]]
+3: e: 0.693 | [0. 0. 0.]
+[[0.5+0.j 0. +0.j]
+ [0. +0.j 0.5+0.j]]
+4: e: 0.693 | [0. 0. 0.]
+[[0.5+0.j 0. +0.j]
+ [0. +0.j 0.5+0.j]]
+
+3&#39;s POV:
+0: e: 0.693 | [0. 0. 0.]
+[[0.5+0.j 0. +0.j]
+ [0. +0.j 0.5+0.j]]
+1: e: 0.693 | [0. 0. 0.]
+[[0.5+0.j 0. +0.j]
+ [0. +0.j 0.5+0.j]]
+2: e: 0.693 | [0. 0. 0.]
+[[0.5+0.j 0. +0.j]
+ [0. +0.j 0.5+0.j]]
+3: e: 0.000 | [0. 0. 1.]
+[[1.+0.j 0.+0.j]
+ [0.+0.j 0.+0.j]]
+4: e: 0.000 | [ 0.  0. -1.]
+[[0.+0.j 0.+0.j]
+ [0.+0.j 1.+0.j]]
+
+4&#39;s POV:
+0: e: 0.693 | [0. 0. 0.]
+[[0.5+0.j 0. +0.j]
+ [0. +0.j 0.5+0.j]]
+1: e: 0.693 | [0. 0. 0.]
+[[0.5+0.j 0. +0.j]
+ [0. +0.j 0.5+0.j]]
+2: e: 0.693 | [0. 0. 0.]
+[[0.5+0.j 0. +0.j]
+ [0. +0.j 0.5+0.j]]
+3: e: 0.000 | [ 0.  0. -1.]
+[[0.+0.j 0.+0.j]
+ [0.+0.j 1.+0.j]]
+4: e: 0.000 | [0. 0. 1.]
+[[1.+0.j 0.+0.j]
+ [0.+0.j 0.+0.j]]
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Finally, it's worth mentioning that the idea of a "quantum reference frame" is often used in a related, but different sense. For example, suppose one wants to measure a spin-$\frac{1}{2}$ but lacks a reference frame for it, a set of $X, Y, Z$ directions. One could use, for example, a large spin-$j$ particle, in a coherent state with all the stars at the same location, as a reference. Since one lacks a frame of reference, all one can measure about the two particles is their total angular momentum, not any of the components of the angular momentum. By the Clebsch-Gordan decomposition, one will get a spin-$(j+\frac{1}{2})$ state or a spin-$(j-\frac{1}{2})$ state, each with a certain probability depending on the relative orientation of the spin-$\frac{1}{2}$ and the reference spin. And so one can try to deduce the relative orientation from these probabilities, perhaps of many different spins relative to the reference. But crucially, the more one employs the same big spin-$j$ as a reference, the more it degrades as a reference, until the probabilities don't tell you anything meaningful about the relative orientation. So that one models reference frames as a resource that can be exhausted.</p>
+<p>And finally, naturally, there is a relationship to "covariant" physics, since in principle all reference frames are systems <em>inside the universe</em>.</p>
 
 </div>
 </div>

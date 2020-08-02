@@ -1,6 +1,10 @@
 import qutip as qt
 import numpy as np
-from quantum_polyhedron import *
+from . import quantum_polyhedron
+from . import magic
+from examples.quantum_polyhedron import *
+from examples.magic import *
+
 scene = vp.canvas(background=vp.color.white, width=1000, height=500)
 
 a = QuantumPolyhedron([1/2,1/2,1/2,1/2])

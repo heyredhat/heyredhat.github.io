@@ -1,8 +1,11 @@
 import qutip as qt
 import numpy as np
-from magic import *
-from vhelper import *
-from quantum_polyhedron import *
+from . import magic
+from . import vhelper
+from . import quantum_polyhedron
+from examples.quantum_polyhedron import *
+from examples.vhelper import *
+from examples.magic import *
 
 scene = vp.canvas(background=vp.color.white, width=1000, height=500)
 

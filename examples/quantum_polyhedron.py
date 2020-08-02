@@ -1,11 +1,14 @@
 import numpy as np
 import qutip as qt
-import polyhedrec
 import itertools
 import vpython as vp
-from magic import *
-from vhelper import *
 
+from . import magic
+from . import vhelper
+from . import polyhedrec
+from examples.polyhedrec import *
+from examples.vhelper import *
+from examples.magic import *
 #####################################################################
 
 def dual_ket(spinor):

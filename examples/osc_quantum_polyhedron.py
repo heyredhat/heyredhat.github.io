@@ -1,11 +1,16 @@
 import numpy as np
 import qutip as qt
-import polyhedrec
 import itertools
 import vpython as vp
-from magic import *
-from vhelper import *
-from quantum_polyhedron import *
+
+from . import magic
+from . import vhelper
+from . import quantum_polyhedron
+from . import polyhedrec
+from examples.vhelper import *
+from examples.magic import *
+from examples.quantum_polyhedron import *
+from examples.polyhedrec import *
 
 class OscQuantumPolyhedron:
 	def __init__(self, nfaces=4, cutoff=4, pos=[0,0,0], show_poly=False, show_spin=False, initial=None):

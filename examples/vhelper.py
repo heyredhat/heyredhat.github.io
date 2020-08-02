@@ -1,9 +1,9 @@
 import numpy as np
 import qutip as qt
-import polyhedrec
 import itertools
 import vpython as vp
-from magic import *
+from . import magic
+from examples.magic import *
 
 ############################################################################
 

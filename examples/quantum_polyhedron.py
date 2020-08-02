@@ -339,7 +339,7 @@ class QuantumPolyhedron:
 
 if __name__ == "__main__":
 	scene = vp.canvas(background=vp.color.white, width=1000, height=500)
-	p = QuantumPolyhedron([1/2, 1/2, 1/2, 1/2], show_poly=True, show_spin=True)
+	p = QuantumPolyhedron([1/2, 1/2, 1/2, 1/2], show_poly=True, show_spin=False)
 	#p = QuantumPolyhedron([1/2, 1/2, 1/2, 1/2, 1/2, 1/2], show_poly=True, show_spin=True)
 	#p = QuantumPolyhedron([1, 1, 1/2, 1/2], show_poly=True, show_spin=True)
 	#print("total area: %s" % sum(p.areas()))

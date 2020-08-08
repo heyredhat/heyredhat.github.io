@@ -13338,7 +13338,7 @@ Then, Alice measures Bob and the spin separately, and they always agree. So far 
 <p>We can upgrade operators to act on an individual system in the tensor product.</p>
 <p>$O_{L} = O \otimes I, O_{R} = I \otimes O$, where $I$ is the appropriate identity.</p>
 <p>Moreover, one can take the partial trace with respect to one or other of the systems in order to calculate the "partial state" of a subsystem, which is in general a "mixed state," and which encodes all the probabilities for the results of <em>local</em> measurements on that subsystem.</p>
-<p>Given an entangled state, we form the pure state density matrix $\rho$ with the outer product, so that $\rho_{AB} = \sum_{ijkl}\mid a_{i} \rangle \langle a_{j} \mid \otimes \mid b_{k} \rangle \langle b_{l} \mid$. Then the partial trace over B, which gives $\rho_{A}$, is:</p>
+<p>Given an entangled state, we form the pure state density matrix $\rho$ with the outer product, so that $\rho_{AB} = \sum_{ijkl} c_{ijkl} \mid a_{i} \rangle \langle a_{j} \mid \otimes \mid b_{k} \rangle \langle b_{l} \mid$. Then the partial trace over B, which gives $\rho_{A}$, is:</p>
 <p>$\rho_{A} = \sum_{ijkl} c_{ijkl}\mid a_{i} \rangle \langle a_{j} \mid \langle b_{l}\mid b_{k} \rangle$</p>
 <p>In the case of two qubits:</p>
 <p>$tr_{B}(\rho_{AB})  = tr_{B} \begin{pmatrix} a &amp; b &amp; c &amp; d \\ e &amp; f &amp; g &amp; h \\ i &amp; j &amp; k &amp; l \\ m &amp; n &amp; o &amp; p \end{pmatrix} = \begin{pmatrix} tr \begin{pmatrix} a &amp; b \\ e &amp; f \end{pmatrix} &amp; tr \begin{pmatrix} c &amp; d \\ g &amp; h  \end{pmatrix} \\ tr \begin{pmatrix} i &amp; j \\ m &amp; n \end{pmatrix} &amp; tr \begin{pmatrix} k &amp; l \\ o &amp; p \end{pmatrix} \end{pmatrix}$</p>

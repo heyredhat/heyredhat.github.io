@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>8.1_Impossibility_of_Stealth_Communication</title>
+<title>Dump</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13077,94 +13077,23 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="On-the-impossibility-of-&quot;stealth-communication&quot;">On the impossibility of "stealth communication"<a class="anchor-link" href="#On-the-impossibility-of-&quot;stealth-communication&quot;">&#182;</a></h1>
+<p><hr>
+You hope to use the appearence of interference in a double slit experiment after a Stern-Gerlach apparatus to determine whether Bob has made a measurement or not on $B$. This cannot be done.</p>
+<p>If Bob has made a measurement, then $A$ is either $\uparrow$ or $\downarrow$, comes out the top port or the bottom port, goes through the top slit or the bottom slit, each half the time, and thus there is no interference. If Bob has not made a measurement, then <em>precisely the same thing happens</em>. You seemed to suggest that if Bob doesn't make a measurement, $A$ would be in the state $\frac{1}{\sqrt{2}} (\mid \uparrow \rangle + \mid \downarrow \rangle)$, whose corresponding density matrix would be: $\begin{pmatrix} \frac{1}{2} &amp; \frac{1}{2} \\ \frac{1}{2} &amp; \frac{1}{2} \end{pmatrix}$-- but this is clearly <em>not</em> the case. That would be a <em>superposition</em> of $A$ being $\mid \uparrow \rangle$ and $A$ being $\mid \downarrow \rangle$, in other words $A$ being $\mid \rightarrow \rangle$. This would imply that if Alice decided to measure along the $X$ direction instead, Alice would get $\uparrow$ (in the X direction) 100% of the time, which is manifestly not true!</p>
+<p>The actual state of $A$ if Bob doesn't make a measurement is $\begin{pmatrix} \frac{1}{2} &amp; 0 \\ 0 &amp; \frac{1}{2} \end{pmatrix}$, which is an improper mixture deriving from $\frac{1}{\sqrt{2}} (\mid \uparrow \downarrow \rangle - \mid \downarrow \uparrow \rangle)$. Clearly, the off-diagonal terms are 0, and so there is no quantum coherence, and so no interference pattern.</p>
+<p>Indeed, the point is that $A$ is <em>not</em> in a superposition in itself, by itself, but rather that the <em>joint state</em> of $A$ and $B$ is in an entangled superposition. (One can see that it's only in the pure state density matrix of the two particles together that there are any off-diagonal terms: $\begin{pmatrix} 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; \frac{1}{2} &amp; -\frac{1}{2} &amp; 0 \\ 0 &amp; -\frac{1}{2} &amp; \frac{1}{2} &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 \end{pmatrix}$). And it's worth remarking that it's this <em>jointness</em> that was at issue in the Einstein/Bohr debates, which is to say, the impossibility of describing $A$'s state as merely, for example, $\frac{1}{\sqrt{2}} (\mid \uparrow \rangle + \mid \downarrow \rangle)$, <em>without reference to $B$'s state</em>.</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Suppose we have a spin-$\frac{1}{2}$ state pointed in the $X+$ direction, and we've quantized along the $Z$ axis.</p>
-<p>We can represent this state as a ket: e.g., $\mid \phi \rangle = \frac{1}{\sqrt{2}} (\mid \uparrow \rangle + \mid \downarrow \rangle)$, and expand it out as a two dimensional complex vector: $\begin{pmatrix} \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} \end{pmatrix}$.</p>
-<p>We could also represent the state as a density matrix, given by an outer product:</p>
-<p>$\mid \phi \rangle \langle \phi \mid = \begin{pmatrix} \frac{1}{2} &amp; \frac{1}{2} \\ \frac{1}{2} &amp; \frac{1}{2} \end{pmatrix}$.</p>
-<p>One thing that's nice about a density matrix is that the probabilities for the results of a $Z$ measurement are just given by the diagonal elements. If we send this state through a Stern-Gerlach oriented along the $Z$ axis, it'll give $\mid \uparrow \rangle$ half the time, and $\mid \downarrow \rangle$ half the time.</p>
-<p>Nevertheless, this density matrix still represents a <em>pure state</em>. Mathematically, this means that the matrix, in fact, is a rank-1 matrix, which means that it can be written as a simple outer product, as we've done. This particular pure state is a superposition of $\mid \uparrow \rangle$ and $\mid \downarrow \rangle$, so that if we measure along the $Z$ direction, there is intrinsic quantum uncertainty about which answer we will obtain. On the other hand, if we measure along the $X$ direction, we'll get $\mid \uparrow \rangle$ 100% of the time.</p>
 <hr>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Suppose, however, we didn't know exactly which state we were working with, not because of quantum uncertainty, but because of just normal, classical, epistemic ignorance. For example, perhaps we had reason to believe that the state in question was equally likely to be $\mid \phi \rangle = \frac{1}{\sqrt{2}} (\mid \uparrow \rangle + \mid \downarrow \rangle)$ or $\mid \psi \rangle = \frac{1}{\sqrt{2}} (\mid \uparrow \rangle - \mid \downarrow \rangle)$, but we simply didn't know which one.</p>
-<p>We can represent this situation as a <em>proper mixed state</em>, a sum of pure state density matrices weighted by probabilities.</p>
-<p>Since $\mid \phi \rangle \langle \phi \mid = \begin{pmatrix} \frac{1}{2} &amp; \frac{1}{2} \\ \frac{1}{2} &amp; \frac{1}{2} \end{pmatrix}$ and $\mid \psi \rangle \langle \psi \mid = \begin{pmatrix} \frac{1}{2} &amp; -\frac{1}{2} \\ -\frac{1}{2} &amp; \frac{1}{2} \end{pmatrix}$, we'd obtain:</p>
-<p>$ \frac{1}{2} \mid \phi \rangle \langle \phi \mid + \frac{1}{2} \mid \psi \rangle \langle \psi \mid = \frac{1}{2} \begin{pmatrix} \frac{1}{2} &amp; \frac{1}{2} \\ \frac{1}{2} &amp; \frac{1}{2} \end{pmatrix} + \frac{1}{2} \begin{pmatrix} \frac{1}{2} &amp; -\frac{1}{2} \\ -\frac{1}{2} &amp; \frac{1}{2} \end{pmatrix} = \begin{pmatrix} \frac{1}{2} &amp; 0 \\ 0 &amp; \frac{1}{2} \end{pmatrix}$.</p>
-<p>This density matrix is a mixed state, in fact, a maximally mixed state. Mathematically, it is a rank-2 matrix: it can't be written as an outer product, but only as a weighted sum of outer products.</p>
-<p>In other words, we don't know whether we're dealing with a $\mid \rightarrow \rangle$ state or a $\mid \leftarrow \rangle$ state; but what we can say is that if we send whatever it is through a Stern-Gerlach oriented in the $Z$ direction, we'll get $\mid \uparrow \rangle$ or $\mid \downarrow \rangle$ with equal probability. And in this case, we get the same if instead we measure the $X$ direction (or the $Y$ direction, for that matter).</p>
-<p>Although a mixed state must be written as a sum of outer products, it can be written as a sum of outer products in many different ways. For example, if we had $\frac{1}{2} \mid \uparrow \rangle \langle \uparrow \mid + \frac{1}{2}\mid \downarrow \rangle \langle \downarrow \mid$, we'd obtain the same density matrix: $\begin{pmatrix} \frac{1}{2} &amp; 0 \\ 0 &amp; \frac{1}{2} \end{pmatrix}$.</p>
-<p>In other words, using a Stern-Gerlach, we can't distinguish between the case where we had $\mid \leftarrow \rangle$ or $\mid \rightarrow \rangle$ from the case where we had $\mid \uparrow \rangle$ or $\mid \downarrow \rangle$. Mathematically, this is encoded in the fact that the same mixed state describes both cases.</p>
-<p>In other words, if we run many identically prepared such mixtures through Stern-Gerlachs, we'll be able to deduce that the probabilites are $\frac{1}{2}$ and $\frac{1}{2}$ for $\mid \uparrow \rangle$ and $\mid \downarrow \rangle$ (or $\mid \leftarrow \rangle$ or $\mid \rightarrow \rangle$), but in this case, we'll remain maximally ignorant about which direction the spin was originally pointed in. This situation of maximal ignorance is mathematically represented in the fact that the off-diagonal terms of the density matrix are all 0.</p>
-<hr>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>This, however, is not the only way that mixed states can arise.</p>
-<p>Suppose we have two spin-$\frac{1}{2}$ particles $A$ and $B$ in the antisymmetric state: $\frac{1}{\sqrt{2}} (\mid \uparrow \downarrow \rangle - \mid \downarrow \uparrow \rangle)$, also known as the singlet state.</p>
-<p>This is a state in the tensor product $H_{A} \otimes H_{B}$, where $H_{A}$ and $H_{B}$ are the Hilbert spaces for the individual spin-$\frac{1}{2}$'s. The standard basis set for the tensor product is given by: $\mid \uparrow \uparrow \rangle,  \mid \uparrow \downarrow \rangle, \mid \downarrow \uparrow \rangle, \mid \downarrow \downarrow \rangle$.</p>
-<p>Expanding in this basis, we can represent the state as a 4 dimensional complex vector: $\begin{pmatrix} 0 \\ \frac{1}{\sqrt{2}} \\ -\frac{1}{\sqrt{2}} \\ 0 \end{pmatrix}$.</p>
-<p>This is, in fact, an <em>entangled</em> state. In other words, it can't be written as a single tensor product of an $A$ state and a $B$ state, but only as a sum of such states. Because of this, we can't associate pure states to $A$ and $B$ individually, but only a pure state to them <em>together</em> (even if they happen to be spatially separate).</p>
-<p>For this particular state, $A$ and $B$ each have a 50% chance of being $\uparrow$ or $\downarrow$ in whatever direction we choose to measure in, but also: if they are measured in the same directions, they will always be found to be pointing opposite to each other.</p>
-<p>Just as before, we can associate a pure density matrix to this state: $\begin{pmatrix} 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; \frac{1}{2} &amp; -\frac{1}{2} &amp; 0 \\ 0 &amp; -\frac{1}{2} &amp; \frac{1}{2} &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 \end{pmatrix}$.</p>
-<p>Now here's the thing: even though we can't assign pure states to $A$ and $B$ individually, we can nevertheless encode the information available locally at $A$ and the information available locally at $B$ in the form of two <em>improper mixed states</em>. These states are obtained by taking a "partial trace" of the pure state density matrix of the two together.</p>
-<hr>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>If we have a pure state density matrix $\rho_{AB} = \sum_{ijkl} c_{ijkl} \mid a_{i} \rangle \langle a_{j} \mid \otimes \mid b_{k} \rangle \langle b_{l} \mid$, then the partial trace over $B$, which gives $\rho_{A}$ is:</p>
-<p>$\rho_{A} = \sum_{ijkl} c_{ijkl}\mid a_{i} \rangle \langle a_{j} \mid \langle b_{l}\mid b_{k} \rangle$</p>
-<p>Similarly:</p>
-<p>$\rho_{B} = \sum_{ijkl} c_{ijkl} \langle a_{i} \mid  a_{j} \rangle \mid b_{l}\rangle \langle b_{k} \mid$</p>
-<p>In the case of two spin-$\frac{1}{2}$ states, taking the partial trace is quite easy.</p>
-<p>$\rho_{A} = tr_{B}(\rho_{AB})  = tr_{B} \begin{pmatrix} a &amp; b &amp; c &amp; d \\ e &amp; f &amp; g &amp; h \\ i &amp; j &amp; k &amp; l \\ m &amp; n &amp; o &amp; p \end{pmatrix} = \begin{pmatrix} tr \begin{pmatrix} a &amp; b \\ e &amp; f \end{pmatrix} &amp; tr \begin{pmatrix} c &amp; d \\ g &amp; h  \end{pmatrix} \\ tr \begin{pmatrix} i &amp; j \\ m &amp; n \end{pmatrix} &amp; tr \begin{pmatrix} k &amp; l \\ o &amp; p \end{pmatrix} \end{pmatrix} = \begin{pmatrix} a + f &amp; c + h \\ i + n &amp; k + p \end{pmatrix}$</p>
-<p>$\rho_{B} = tr_{A}(\rho_{AB})  = tr_{A} \begin{pmatrix} a &amp; b &amp; c &amp; d \\ e &amp; f &amp; g &amp; h \\ i &amp; j &amp; k &amp; l \\ m &amp; n &amp; o &amp; p \end{pmatrix} = \begin{pmatrix} tr \begin{pmatrix} a &amp; c \\ i &amp; k \end{pmatrix} &amp; tr \begin{pmatrix} b &amp; d \\ j &amp; l  \end{pmatrix} \\ tr \begin{pmatrix} e &amp; g \\ m &amp; o \end{pmatrix} &amp; tr \begin{pmatrix} f &amp; h \\ n &amp; p \end{pmatrix} \end{pmatrix} = \begin{pmatrix} a + k &amp; b + l \\ e + o &amp; f + p \end{pmatrix}$</p>
-<p>Another nice way of thinking about the partial trace is in terms of string diagrams. If we define $\mid \cup \rangle = \mid \uparrow \uparrow \rangle + \mid \downarrow \downarrow \rangle$, and $\langle \cap \mid = \langle \uparrow \uparrow \mid + \langle \downarrow \downarrow \mid$, we can represent the partial state of $A$ as:</p>
-<p><img src="img/Apartial.png"></p>
-<p>In other words, $ \rho_{A} = \big( I \otimes \cap \big) \big(\rho_{AB} \otimes I \big) \big( I \otimes \cup \big) $.</p>
-<p><img src="img/Bpartial.png"></p>
-<p>Aka: $ \rho_{B} = \big( \cap \otimes I \big) \big( I \otimes \rho_{AB} \big) \big( \cup \otimes I \big) $.</p>
-<p>In our case, $\rho_{AB} = \begin{pmatrix} 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; \frac{1}{2} &amp; -\frac{1}{2} &amp; 0 \\ 0 &amp; -\frac{1}{2} &amp; \frac{1}{2} &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 \end{pmatrix}$.</p>
-<p>And so, we find that the partial state of $A$ is $\begin{pmatrix} \frac{1}{2} &amp; 0 \\ 0 &amp; \frac{1}{2} \end{pmatrix}$, and the partial state of $B$ is $\begin{pmatrix} \frac{1}{2} &amp; 0 \\ 0 &amp; \frac{1}{2} \end{pmatrix}$.</p>
-<p>In other words, the partial states of $A$ and $B$ are both maximally mixed states. These mixed states are both "improper mixtures" in that they are reduced states of an overall entangled pure state of the two spins.</p>
-<p>Interestingly, whereas there are non-zero off-diagonal terms in the pure state density matrix of $A$ and $B$ together, representing the fact that the joint state is a superposition,  the off-diagonal terms of the partial states are all 0. In other words, these partial states cannot be described as quantum superpositions individually, but instead must be described as mixtures, lacking any "quantum coherence."</p>
-<hr>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>For simplicity, let's assume that Alice (who has $A$) and Bob (who has $B$) both agree to measure their particle in the $Z$ direction.</p>
-<p>Suppose Bob goes first and measures his spin. Half the time Bob will get $\mid \uparrow \rangle$ and half the time Bob will get $\mid \downarrow \rangle$.</p>
-<p>Mathematically, we can represent this as a projection: we act with either $I \otimes \mid \uparrow \rangle \langle \uparrow \mid$ or $I \otimes \mid \downarrow \rangle \langle \downarrow \mid$ on the singlet (and then normalize).</p>
-<p>In the first case, the joint state will end up as: $\mid \downarrow \rangle \mid \uparrow \rangle$ or $\begin{pmatrix} 0 \\ 0 \\ 1 \\ 0 \end{pmatrix}$.</p>
-<p>In the second case, the joint state will end up as $\mid \uparrow \rangle \mid \downarrow \rangle$ or $\begin{pmatrix} 0 \\ 1 \\ 0 \\ 0 \end{pmatrix}$.</p>
-<p>In both cases, we end up with $A$ and $B$ in separable states.</p>
-<p>If we consider the state of $A$ after Bob's measurement of $B$, we have a situation of <em>classical</em>, <em>epistemic</em> uncertainty with regard to whether $A$ is now $\mid \uparrow \rangle$ or $\mid \downarrow \rangle$. In other words, $A$'s state is a <em>proper</em> mixture: $\frac{1}{2}\mid \uparrow \rangle \langle \uparrow \mid + \frac{1}{2}\mid \downarrow \rangle \langle \downarrow \mid$, i.e.: $\begin{pmatrix} \frac{1}{2} &amp; 0 \\ 0 &amp; \frac{1}{2} \end{pmatrix}$.</p>
-<p>But notice, that's just the same density matrix for $A$ as before Bob's measurement of $B$!</p>
-<p>Indeed, we can see that whether or not Bob makes a measurement of $B$, the density matrix for $A$ is precisely the same: the maximally mixed state. In the first case, the maximally mixed state is an "improper mixture," being the reduced state of one half of a pure entangled state. In the second case, the maximally mixed state is a "proper mixture," representing the classical uncertainty with regard to whether $A$ has ended up $\mid \uparrow \rangle$ or $\mid \downarrow \rangle$. But either way, it's the same density matrix.</p>
-<p>The consequence is that there is absolutely <em>no</em> effect local to $A$ that can reveal whether or not Bob has made a measurement on $B$.</p>
-<p>Indeed, consider the following. If Bob does make a measurement, then Alice ends up with a proper mixed state. As we've said, this state doesn't so much represent the "actual" state of the particle as Alice's ignorance about whether her spin has collapsed to $\mid \uparrow \rangle$ or $\mid \downarrow \rangle$ due to Bob's measurement. The point is that even if the spin has collapsed to being the one or the other, there is no way for Alice to know what it has collapsed to unless she herself does a measurement (or Bob phones her up and tells her).</p>
-<p>But here's the subtlety. Suppose Alice herself makes a measurement. It's possible that some relativistic observer will say she did her measurement before Bob, but another observer might say that Bob did his measurement before Alice. In other words, depending on one's time ordering of events, one would classify Alice's maximally mixed state as an improper mixture (if she measures first) or a proper mixture (if Bob measures first). But it doesn't matter because the density matrix is the same either way!</p>
-<p>Indeed, it makes no difference whether Alice or Bob measures first; the relationship is completely symmetrical. Their answers ($\uparrow$ or $\downarrow$) are always random, and the answers always (dis)agree. The correlations can only be noticed by doing measurements on both particles, and bringing the results together and <em>comparing</em> them, and doing this many, many times. There is no way to tell whether there is any entanglement between the particles by subjecting them individually to local measurements, and there's no way to tell locally whether Bob (or Alice) has already measured his (or her) particle first.</p>
-<p>Indeed, whether or not Bob/Alice has made a measurement, Alice/Bob's description of the particle before her/his own measurement is necessarily the same: the maximally mixed state.</p>
+
+<p>In my original example, which I talked about in my meeting, I was only considering the spin, not the position at all, and I said that if you recombined the two beams coming out of an SG, then the coherence of the original <em>spin state</em> would be restored. That I am confident of. On the other hand, if you think about the two beams coming out of the SG, the upper beam will be a tensor product of |spin UP&gt;|pos up&gt;, and the bottom beam will be a tensor product of |spin DOWN&gt;|pos down&gt;. If you add these up, there shouldn't be any interference between |up pos&gt; and |down pos&gt; since |spin UP&gt; and |spin DOWN&gt; are orthogonal states.</p>
+<p>Okay I understand why you want the DS— I also stand by what I said in my second email last night, that you won’t get interference in the position states because after the SG you end up with |spin up&gt;|up pos&gt; + |spin down&gt;|down pos&gt; and since spin up and down are orthogonal, the two tensor products are also orthogonal, hence they can be added with no interference in the position— in fact, the situation is exactly analogous to the case of a simple double slit where we have detectors checking on the path at each slit: you end up with |top slit detection&gt;|up path&gt; + |bottom slit detection&gt;|down path&gt;, and the same argument applies.</p>
+<p>I disagree! In the latter case, sure the particle will take both paths but in two different branches of the wave function and so there won’t be any interference in position. It’s the same problem from before, you’re imagining there’s |top position state&gt; and there’s |bottom position state&gt; and you can just add them and get interference, but in fact you have to take into account the tensor product with the spin: what you should add is |spin up&gt;|top position state&gt; and |spin down&gt;|bottom position state&gt;. These two states will always be at right angles since |spin up&gt; and |spin down&gt; are at right angles, regardless of the positions. Therefore when you add them, there won’t be any interference effect in the positions. Indeed, to me the great danger of using Bohmian guidance waves as a source of intuition is that one is often led to incorrectly picture these waves unfolding together in 3D space, and to misapply our intuitions about how that works. The proper home of quantum mechanics is (at least in this nonrelativistic setting) a tensor product of Hilbert spaces. The two waves might each be propagating in 3D, but in two different “universes” as it were (to use some “many worlds” intuition), each kept separate since one is associated with the spin being up and the other is associated with the spin being down.</p>
 
 </div>
 </div>

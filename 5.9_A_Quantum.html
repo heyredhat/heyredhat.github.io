@@ -13283,20 +13283,6 @@ $= \frac{1}{2}(Q^{2} + i(QP - PQ) + P^{2})$.</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 
-<p>Here's an interesting fact:</p>
-<p>While $a^{\dagger}\psi_{n} = \psi_{n+1}$, we actually have $a\psi_{n} = n\psi_{n-1}$. Here's a little proof:</p>
-<p>We have $a\psi_{0} = 0$, which satisfies $a\psi_{n} = n\psi_{n-1}$, since multiplying by $0$ gives the $0$ vector, when $n=0$. We assume: $a\psi_{n} = n\psi_{n-1}$.</p>
-<p>Consider $a\psi_{n+1}$, which is really just $aa^{\dagger}\psi_{n}$. Since $[a, a^\dagger] = 1$, or $aa^{\dagger} - a^{\dagger}a = 1$, or $aa^{\dagger} = a^{\dagger}a + 1$, we can rewrite $aa^{\dagger}\psi_{n}$ as $(a^{\dagger}a + 1)\psi_{n} = a^{\dagger}a\psi_{n} + \psi_{n}$. We assumed that $a\psi_{n} = n\psi_{n-1}$, so we have: $a^{\dagger}n\psi_{n-1} + \psi_{n}$, which is just $n\psi_{n} + \psi_{n}$, or $(n+1)\psi_{n}$.</p>
-<p>In other words, if $a\psi_{n} = n\psi_{n-1}$, then $a\psi_{n+1} = (n+1)\psi_{n}$, and so if it was true for $n=0$, which it is since $a\psi_{0} = 0$, it's true for all $n+1$. Love it!</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
 <p>One upshot of all this is we can conveniently work in the number basis: aka the Fock basis, or "occupation number basis." $\mid 0 \rangle$, $\mid 1 \rangle$, $\mid 2 \rangle$, are the states with 0, 1, 2, and three quanta respectively. In terms of a matrix representation, we have the vacuum state is just $\begin{pmatrix} 1 \\ 0 \\ 0 \\ \vdots \end{pmatrix}$.</p>
 <p>And:</p>
 <p>$a^\dagger =\begin{pmatrix}           
@@ -13316,13 +13302,29 @@ $= \frac{1}{2}(Q^{2} + i(QP - PQ) + P^{2})$.</p>
 0 &amp; 0 &amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; \ddots \\
 \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \ddots \end{pmatrix}$</p>
 <p>One thing that's nice is that we can truncate the number of possible quanta in our oscillator and obtain a finite dimensional oscillator representation, although the commutation relations between $P$ and $Q$ won't be exactly satisfied.</p>
-<hr>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<p>Here's an interesting fact:</p>
+<p>While $a^{\dagger}\psi_{n} = \psi_{n+1}$, we actually have $a\psi_{n} = n\psi_{n-1}$. Here's a little proof:</p>
+<p>We have $a\psi_{0} = 0$, which satisfies $a\psi_{n} = n\psi_{n-1}$, since multiplying by $0$ gives the $0$ vector, when $n=0$. We assume: $a\psi_{n} = n\psi_{n-1}$.</p>
+<p>Consider $a\psi_{n+1}$, which is really just $aa^{\dagger}\psi_{n}$. Since $[a, a^\dagger] = 1$, or $aa^{\dagger} - a^{\dagger}a = 1$, or $aa^{\dagger} = a^{\dagger}a + 1$, we can rewrite $aa^{\dagger}\psi_{n}$ as $(a^{\dagger}a + 1)\psi_{n} = a^{\dagger}a\psi_{n} + \psi_{n}$. We assumed that $a\psi_{n} = n\psi_{n-1}$, so we have: $a^{\dagger}n\psi_{n-1} + \psi_{n}$, which is just $n\psi_{n} + \psi_{n}$, or $(n+1)\psi_{n}$.</p>
+<p>In other words, if $a\psi_{n} = n\psi_{n-1}$, then $a\psi_{n+1} = (n+1)\psi_{n}$, and so if it was true for $n=0$, which it is since $a\psi_{0} = 0$, it's true for all $n+1$. Love it!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
 <p>Take a look this expresion again: $a\psi_{n} = n\psi_{n-1}$.</p>
 <p>It looks kind of like: $\frac{d}{dz} z^{n} = nz^{n-1}$, the rule for taking the derivative!</p>
 <p>And so, another way of thinking about all this is that we represent the state of a quantum harmonic oscillator as a <em>polynomial</em>, where the powers of $z$ represent the number of quanta. This analogy can be made rigorous and goes by the name the Segal-Bargmann representation. There, $a \rightarrow \frac{d}{dz}$ and $ a^{\dagger} \rightarrow z$, the latter being multiplication by $z$. There are some technicalities involved in this construction, but the long and short of it is that we can represent our wave function as a function $f(z)$ from $\mathbb{C} \rightarrow \mathbb{C}$, instead of a wavefunction $\psi(x)$ from $\mathbb{R} \rightarrow \mathbb{C}$.</p>
@@ -13353,7 +13355,7 @@ $= \frac{1}{2}(Q^{2} + i(QP - PQ) + P^{2})$.</p>
 <p>We then declare:</p>
 <p>$\psi(z) = \langle \overline{z} \mid \psi \rangle  = e^{-\frac{|z|^{2}}{2}} \sum_{n=0}^{\infty} \frac{z^{n}}{\sqrt{n!}}\langle n \mid \psi \rangle $.</p>
 <p>This is a complex polynomial in $z$, where the coefficient of the $n^{th}$ power of $z$ is the amplitude for $\psi$ being in the $n^{th}$ number state.</p>
-<p>In other words, instead of writing $\alpha\mid 0 \rangle + \beta \mid 1 \rangle + \gamma \mid 2 \rangle$, we could write: $f(z) = \frac{1}{\sqrt{2}}\gamma z^{2} + \beta z + \alpha$.</p>
+<p>In other words, instead of writing $\alpha\mid 0 \rangle + \beta \mid 1 \rangle + \gamma \mid 2 \rangle$, we could write: $f(z) = \frac{1}{\sqrt{2}}\gamma z^{2} + \beta z + \alpha$, and find some zeros!</p>
 <p>We can define the inner product as an integral over the complex plane:</p>
 <p>$ \int_{\mathbb{C}} f(z)^{*}g(z)e^{-|z|^2} dz$</p>
 
@@ -13369,9 +13371,8 @@ $= \frac{1}{2}(Q^{2} + i(QP - PQ) + P^{2})$.</p>
 <p>$\int \mid z \rangle \langle z \mid dz = I$.</p>
 <p>In other words, each coherent state corresponds to a <em>complex number</em>, a point in the plane.</p>
 <p>This is just like before. We had each spin coherent state corresponding to a point on the sphere. And just as we could use the spin coherent states over the sphere as a basis, we can use the oscillator coherent states over the plane as a basis.</p>
-<p>Furthermore just as in the case of the sphere, it is interesting that we are able to break down the quantum system in a basis consisting of <em>the most classical states</em>. (Ps. there's an interesting relationship to "wavelets!")</p>
-<p>In the spin case, it's interesting that when we consider the coherent state wave function on the sphere, it's completely characterized by the points opposite to the Majorana stars, in other words, by the places of 0% probability (for all the stars to be found in that location, for the spin to be in a "classical state" pointing in that direction). Similarly, in the harmonic oscillator case, we can use the coherent state representation to work with a polynomial, and can characterize the state by its 0% probability points, 0% probability, that is, to be in certain "most-classical" coherent states (with a given position and momentum).</p>
-<p>(One difference between the two cases (spin and oscillator) is that on the sphere there is a notion of  antipodal points, so that the Majorana stars are on opposite sides of the sphere from the 0% points.)</p>
+<p>Furthermore just as in the case of the sphere, it is interesting that we are able to break down the quantum system in a basis consisting of <em>the most classical states</em>.</p>
+<p>Moreover, in the spin case, when we consider the coherent state wave function on the sphere, it's completely characterized by the points opposite to the Majorana stars, in other words, by the places of 0% probability (for all the stars to be found in that location, for the spin to be in a "classical state" pointing in that direction). Similarly, in the harmonic oscillator case, we can use the coherent state representation to work with a polynomial, and can characterize the state by its 0% probability points, 0% probability, that is, to be in certain "most-classical" coherent states (with a given position and momentum).</p>
 <p>In other words, we seem to be able to define a quantum state in terms of <em>which classical states it definitely isn't</em>, by a kind of negative definition.</p>
 <p>What's funny is that: while I may have an intuitive difficulty understanding how something can be in a superposition of being in "multiple places at once," I have no problem understanding how something <em>can't</em> be in multiple places at once. So that it actually seems more sensible to define thing in terms of where they aren't rather than where they are.</p>
 
@@ -13401,7 +13402,7 @@ $= \frac{1}{2}(Q^{2} + i(QP - PQ) + P^{2})$.</p>
 <p>For the energy states, you'll see something like:</p>
 <p><img src="img/oscillator_eigenstates.jpg"></p>
 <p>Note that ignoring the endpoints, the $0$ state has 1 hump, the $1$ state has $2$ humps, the $2$ state has $3$ humps. Recall the harmonics of a vibrating string.</p>
-<p>Also check out <a href="examples/osc_coherent_picker.py">osc_coherent_picker.py</a> where you can drag a point around the plane and see the corresponding coherent state. And <a href="examples/osc_coherent_basis.py">osc_coherent_basis.py</a> is just like <code>oscillator.py</code> except it shows you the amplitudes for each coherent state in the plane, given the current state, as well as the roots of the corresponding polynomial in purple. Use <code>i</code> to choose a random state, <code>c</code> to choose a random coherent state, <code>h</code> to choose a random hamiltonian, <code>e</code> to use the oscillator hamiltonian, <code>n</code> to nudge the hamiltonian just a little. Use <code>0,1,2,3,...</code> to check out the energy eigenstates.</p>
+<p>Also check out <a href="examples/osc_coherent_picker.py">osc_coherent_picker.py</a> where you can drag a point around the plane and see the corresponding coherent state. And <a href="examples/osc_coherent_basis.py">osc_coherent_basis.py</a> is just like <code>oscillator.py</code> except it shows you the amplitudes for each coherent state in the plane, given the current state, as well as the roots of the corresponding polynomial in purple. Use <code>i</code> to choose a random state, <code>c</code> to choose a random coherent state, <code>h</code> to choose a random hamiltonian, <code>e</code> to use the oscillator hamiltonian, <code>n</code> to nudge the hamiltonian just a little. Use <code>0,1,2,3,...</code> to check out the energy eigenstates. We can see that under the oscillator hamiltonian, the roots of the polynomial simply rotate around rigidly as a constellation in the complex position/momentum plane.</p>
 <hr>
 </div>
 </div>

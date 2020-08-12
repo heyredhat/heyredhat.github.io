@@ -26,7 +26,6 @@ def coherent(s):
 def oscillator_roots(q):
 	n = q.shape[0]
 	poly = [(c/np.sqrt(np.math.factorial(n-i))) for i, c in enumerate(q.full().T[0][::-1])]
-	#print(poly)
 	return [c.conjugate() for c in np.roots(poly)]
 
 state = qt.basis(n,0)

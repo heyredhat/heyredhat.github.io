@@ -38,7 +38,7 @@ vprobs = [vp.sphere(radius=0.1, color=vp.color.red,\
 vexp = vp.sphere(color=vp.color.yellow, radius=0.3,\
 					pos=vp.vector(qt.expect(Q, state), 0, 0))
 
-grid_pts = 20
+grid_pts = 25
 grid = np.linspace(-10, 10, grid_pts)
 CS = [[coherent(x+1j*y) for y in grid] for x in grid]
 cs = [[state.overlap(CS[i][j]) for j in range(grid_pts)] for i in range(grid_pts)]

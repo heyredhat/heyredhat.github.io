@@ -13077,7 +13077,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="What-is-an-atom?">What is an atom?<a class="anchor-link" href="#What-is-an-atom?">&#182;</a></h1><h2 id="8.-A-Quantum?">8. A Quantum?<a class="anchor-link" href="#8.-A-Quantum?">&#182;</a></h2>
+<h1 id="What-is-an-atom?">What is an atom?<a class="anchor-link" href="#What-is-an-atom?">&#182;</a></h1><h2 id="9.-A-Quantum?">9. A Quantum?<a class="anchor-link" href="#9.-A-Quantum?">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -13367,7 +13367,7 @@ $= \frac{1}{2}(Q^{2} + i(QP - PQ) + P^{2})$.</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 
-<p>Any state of the oscillator can be written in terms of all the $\mid z \rangle$'s. In other words, the $\mid z \rangle$'s form a linearly independent (but overcomplete) basis for states of the oscillator. Up to normalization:</p>
+<p>Any state of the oscillator can be written in terms of all the $\mid z \rangle$'s. In other words, the $\mid z \rangle$'s form an overcomplete basis for states of the oscillator. Up to normalization:</p>
 <p>$\int \mid z \rangle \langle z \mid dz = I$.</p>
 <p>In other words, each coherent state corresponds to a <em>complex number</em>, a point in the plane.</p>
 <p>This is just like before. We had each spin coherent state corresponding to a point on the sphere. And just as we could use the spin coherent states over the sphere as a basis, we can use the oscillator coherent states over the plane as a basis.</p>
@@ -13385,8 +13385,33 @@ $= \frac{1}{2}(Q^{2} + i(QP - PQ) + P^{2})$.</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 
-<p>Using further trickiness, including the Baker-Campell-Hausdorff formula, we can derive this expression for a coherent state:</p>
-<p>$\mid z \rangle = e^{-\frac{|z|^{2}}{2}}e^{za^{\dagger}}e^{-z^{*}a}\mid 0 \rangle$, where $\mid 0 \rangle$ is the vacuum state which we are "squeezing."</p>
+<p>Using further trickiness, including the Baker-Campell-Hausdorff formula, we can derive this useful expression for a coherent state:</p>
+<p>$\mid z \rangle = e^{za^{\dagger} - \overline{z}a}\mid 0 \rangle$, where $\mid 0 \rangle$ is the vacuum state which we are "squeezing."</p>
+<p>To see this, we note that if $[A, B]$ commutes with both $A$ and $B$, then:</p>
+<p>$e^{A+B} = e^{\frac{1}{2}[A, B]}e^{A}e^{B}$</p>
+<p>In our case, $[za^{\dagger}, \overline{z}a] = -|z|$, since $[a^{\dagger}, a] = -1$.</p>
+<p>So we have $e^{za^{\dagger} - \overline{z}a} = e^{-\frac{|z|}{2}}e^{za^\dagger}e^{-\overline{z}a}$</p>
+<p>Now consider that $e^{-\overline{z}a}\mid 0 \rangle = \sum_{n=0}^{\infty} \frac{(-1)^{n}}{n!} \overline{z}^{n}a^{n} \mid 0 \rangle$</p>
+<p>This gives the $0$ vector for $n&gt;0$, and so reduces down to $a^{0}\mid 0 \rangle = \mid 0 \rangle$. Thus: $e^{-\overline{z}a}\mid 0 \rangle = \mid 0 \rangle$.</p>
+<p>Therefore:</p>
+<p>$e^{-\frac{|z|}{2}}e^{za^\dagger}e^{-\overline{z}a}\mid 0 \rangle = e^{-\frac{|z|}{2}}e^{za^{\dagger}}\mid 0 \rangle$.</p>
+<p>But $e^{za^{\dagger}}\mid 0 \rangle$ by the infinite series for the exponential is just:</p>
+<p>$\sum_{n=0}^{\infty} \frac{z^{n}(a^{\dagger})^{n}}{n!}  \mid 0 \rangle = \sum_{n=0}^{\infty} \frac{z^{n}}{\sqrt{n!}} \mid n \rangle$</p>
+<p>Thus we have it that:</p>
+<p>$\mid z \rangle = e^{za^{\dagger} - \overline{z}a}\mid 0 \rangle = e^{-\frac{|z|}{2}}\sum_{n=0}^{\infty} \frac{z^{n}}{\sqrt{n!}} \mid n \rangle$, connecting up with what we derived before.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<p>Some nice facts:</p>
+<p>We can derive the amplitude between two coherent states to be:</p>
+<p>$\langle w \mid z \rangle = e^{-\frac{1}{2}(|z|^{2} + |w|^{2}) + z\overline{w}}$.</p>
+<p>The probability: $\mid \langle w \mid z \rangle \mid^{2} = e^{-|z - w|^{2}}$.</p>
 <p>The average number of quanta in a coherent state is just $|z|^{2}$. Its expected position is just (up to some factor) $z + z^{*}$, and its expected momentum is just $ z - z^{*}$, in other words, its position is proportional to its real part, and its momentum is proportional to its imaginary part. So that we can interpret the real axis as the "positon axis" and the imaginary axis as the "momentum axis"!</p>
 <p>If you look at their behavior, these states act as little coherent wavepackets closely resembling classical particles (or classical electromagnetic waves), maintaining their shape as they zip along. This is just like how the spin coherent states closely resemble the classical states of a spinning particle, all the stars along one axis.</p>
 <p>When you look at the time evolution of a coherent state itself, it makes a perfect circle in this position/momentum plane.</p>
@@ -13404,13 +13429,27 @@ $= \frac{1}{2}(Q^{2} + i(QP - PQ) + P^{2})$.</p>
 <p><img src="img/oscillator_eigenstates.jpg"></p>
 <p>Note that ignoring the endpoints, the $0$ state has 1 hump, the $1$ state has $2$ humps, the $2$ state has $3$ humps. Recall the harmonics of a vibrating string.</p>
 <p>Also check out <a href="examples/osc_coherent_picker.py">osc_coherent_picker.py</a> where you can drag a point around the plane and see the corresponding coherent state. And <a href="examples/osc_coherent_basis.py">osc_coherent_basis.py</a> is just like <code>oscillator.py</code> except it shows you the amplitudes for each coherent state in the plane, given the current state, as well as the roots of the corresponding polynomial in purple. Use <code>i</code> to choose a random state, <code>c</code> to choose a random coherent state, <code>h</code> to choose a random hamiltonian, <code>e</code> to use the oscillator hamiltonian, <code>n</code> to nudge the hamiltonian just a little. Use <code>0,1,2,3,...</code> to check out the energy eigenstates. We can see that under the oscillator hamiltonian, the roots of the polynomial simply rotate around rigidly as a constellation in the complex position/momentum plane.</p>
-<hr>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<p>Finally, we want to emphasize again the significance of "coherent state quantization," which we've seen in the case of the quantum harmonic oscillator and the quantum spin. It turns out that we can describe a <em>quantum</em> harmonic oscillator state as a constellation of <em>classical oscillator</em> states, precisely those which are forbidden. In other words, we can interpret the quantum system as some number of copies of the classical system, which represent the classical states <em>the quantum state can't be in</em>, that have 0% probability of occuring. Materially, we can use coherent states to turn the quantum state into a polynomial and find the roots. This works in the case of the oscillator, where classical states refer to Gaussian wavepackets; and in the case of the spin, where classical states refer to states where all the angular momentum is concentrated in one direction. Whereas the "metaphysics" of a superposition of position states seems strange (a particle can be simultaneously in many locations?), we can perhaps find some clarity here: we can interpret a quantum state as specifying <em>which classical states it's not in</em>. While we have some difficulty imagining something <em>here</em> and <em>here</em> and <em>here</em>, it is less difficult to imagine something <em>not here</em> and <em>not here</em> and <em>not here</em>. And moreover, we can describe the Schrodinger dynamics of an isolated system in terms of interactions <em>between the classical states the system can't be in</em>.</p>
+<p>One is reminded of the "negative theology" of late Antiquity and the Middle Ages. For example, Maimonides urges us only to define God in negative terms, never attributing some positive quality to God, since after all, all our ideas of qualities are relative human ideas gained through comparison, which can't apply absolutely to God. So it's best to say, instead, what God isn't. We can't actually get a positive idea of God; we can only try and fail to capture God's image, realize how we failed, and thus ever so slowly characterize God by <em>how God can't be pinned down</em>.</p>
+<p>Divinity aside, it is interesting that one can characterize quantum mechanics as an extension of classical mechanics that allows for systems to be defined <em>negatively</em>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
 <p>Okay, so we have a 1D quantum harmonic oscillator. We can view it as a little guy that "counts" quanta: we can add quanta to it, subtract quanta from it, measure the number of quanta. The more quanta, the higher the energy. And a general state of the oscillator is a superposition of different numbers of quanta. What is a quantum? Here, it's like a nugget of energy. It doesn't have an identity of its own: it's like the idea of a pebble.</p>
 <p>Now here's a very important connection.</p>
 <p>One of the simplest ways of understanding quantum field theory, at least at first, is via something called "second quantization." Basically, if you start with a quantum system living in some Hilbert space of dimension $d$, then you can construct a theory of a <em>variable number of indistinguishable "copies" of that system</em> by introducing a quantum harmonic oscillator for each basis state of the original quantum system. Hence, second quantization. (We won't get into the eventual difficulties with this view as regards QFT as a whole.)</p>
@@ -13476,6 +13515,16 @@ $= \frac{1}{2}(Q^{2} + i(QP - PQ) + P^{2})$.</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>Example of a QFT proper.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
 <p>Let's recap.</p>
 <p>We began (1) by investigating our most basic idea of a "pebble." We could place a pebble somewhere, and we could take it away. To communicate with a pebble, we had to agree on whether presence or absence would be significant.</p>
 <p>We then engaged in a mathematical dialectic. We imagined that anything we could do once, we could do again. So we could place another pebble, and another, and another. And make a little pile of indistinguishable pebbles which we could also take away from. And so we invented the counting numbers (2). The rule was we could repeat an action, but we always had to be able to go backwards too. To communicate with a counting number, we have to agree on what number we start counting from. We can conceive of this as a contextualization of our original pebble: <em>this</em> pebble is actually the 4th pebble, if you've been keeping count, and to keep count is: to build up a little pile. So the pile is a contextualization of the pebble.</p>
@@ -13499,37 +13548,9 @@ $= \frac{1}{2}(Q^{2} + i(QP - PQ) + P^{2})$.</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>One thing that is also clear is that there can be many perspectives conceptually on the same quantum system. We have a constellation. Is it a spin-$j$ particle? Is it $2j$ spin-$\frac{1}{2}$'s, is it two quantum harmonic oscillators, is it the polarization of a beam of photons? The interpretation is physically fixed by how the system interacts with the rest of the world; and conceptually each new  interpretation brings with it a whole unheralded set of ideas and connections to the rest of the world.</p>
 <p>I should emphasize, however, that there is a powerful notion of identity that persists through different physical representations. If my spin is entangled with other spins, then if I split it into symmeterized spin-$\frac{1}{2}$'s, then these guys as whole will still be entangled with the rest of the world in the same way. So that even if something is transformed into a different physical system, it still retains its unique connection to the rest of the universe. To wit, I can load a given quantum state into a quantum computer made of spins, of light, of whatever, and this won't in principle affect its entanglement in anyway. And as we've seen we can simulate light-based operations on spins, and spin-based operations on light! So when you download something from the quantum internet, it really is <em>that unique non-clonable</em> quantum state, and not merely a <em>representation</em>, a <em>copy</em> of it, as would be the case if you loaded some classical data into your computer.</p>
-<hr>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>But the story isn't over yet.</p>
-<p>When one works in relativistic quantum field theory, a basic demand is that the vacuum state (with no particles) is Lorentz invariant. In other words, translated, rotated, boosted observers all agree on the vacuum state, indeed, on the idea of "what is a particle." This theory leads to Wigner's classification scheme. The idea is that what we mean by a "particle" anyway is whatever is invariant, or the same, whether we rotate it, whether we translate it, whether we translate by it, whether we see it while moving at top speed, etc. In other words, we define a particle in terms of what we can do that leaves it the same, that thing which is invariant underneath the different perspectives we might have on it, in this case, spatio-temporal perspectives. Hence the importance of group theory. (Sidebar: today in the field of neural networks, people are starting to build networks which explictly respect the underlying group structure of some domain, the classic example being learning representations of images that are translation invariant, and so forth. The idea, of course, being that a neural network should be able to recognize the identity of something even if it's seen askew--and you can really help it along if you make sure its representation is invariant under some group.)</p>
-<p>But when one moves to field theory in a curved space, one must employ (not necessarily unitary) symplectic transformations between perspectives. Famously, in the Unruh effect, while a stationary observer in the vacuum measures 0 particles, an accelerated observer experiences a different vacuum state, indeed, one with a non-0 number of particles! A symplectic transformation is one that maps creation and annihilation operators to different creation and annihilation operators while preserving the fact that they are, indeed, creation and annihilation operators. So that the $a/a^{\dagger}$'s in the accelerated reference frame are built out of the $a/a^{\dagger}$'s in the rest frame, in a particular way relating to the acceleration.</p>
-<p>For example, there is a class of symplectic transformations known as Bogoliubov transformations, which can turn any Hamiltonian quadratic in its creation and annihilation operators into a simple oscillator Hamiltonian: $\sum_{i} a^{\dagger}a$, etc. This can be used in condensed matter as well to describe how in certain systems electrons pair up to rove around as meta-particles. So that: <em>what is one set of particles from one point of view may be another set of particles from another point of view</em>.</p>
-<p>There is even a general theorem that the oscillator picture of fields falls apart: Haag's Theorem, which says that an interacting theory is not necessarily unitarily equivalent to a free theory: imagine photons and electrons so tightly interacting that they can't be treated as separate entities. You might not even be able to do a tensor decomposition on the Hilbert space!</p>
-<p>This reaches its culmination in holographic theory, where one has, for example, a conformal field theory on the boundary of some space (like on the surface of the sphere) being from another point of view a gravitational theory in the interior of that space (like in the interior of the sphere), usually an anti-DeSitter space, one with negative curvature, so that signals going off to infinity, return in finite time--just like the inside of a black hole. Indeed, that was the motivation: one wants to regard the seemingly inaccessible quantum state of the interior of the black hole (including the things that fall into it) as being, from another perspective, the quantum state that lives on a surface, the event horizon (and also the Hawking radiation). In these models, there is an interesting connection between phenomena that extend across large scales of the boundary and phenomena occur deep in the interior of bulk of the "emergent spacetime."</p>
-<p>And so we realize that even a quantum field has to contextualized with reference to some observer: one inside the black hole vs one outside, in terms of their different notions of space, time, and particle.</p>
-<p>Indeed, step by step, as it has unfolded, our story has been as much about translating between the perspective of observers (so that communication can be successful) as it has been about the pebbles which are passed between them. And so we have to ask: What is an observer, anyway? We have a theory that allows observers to come to agreement about the way the world is independent of their perspectives, using mathematics to represent the relationship between their points of view, so that they don't get out of sync. But the observers themselves, as it were, stand outside the theory as such, as <em>users</em> of the theory, which provides a reliable means of guaranteeing communication and agreement. What more can we say about them?</p>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
 </div>
     </div>
   </div>

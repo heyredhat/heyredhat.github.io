@@ -4,8 +4,10 @@ import vpython as vp
 vp.scene.width = 1000
 vp.scene.height = 800
 
+CALC_ROOTS = True
+
 dt = 0.01
-n = 101
+n = 20
 a = qt.destroy(n)
 Q = qt.position(n)
 QL, QV = Q.eigenstates()
@@ -18,6 +20,12 @@ def coherent(s):
 	global n, a
 	return np.exp(-s*np.conjugate(s)/2)*(s*a.dag()).expm()*(-np.conjugate(s)*a).expm()*qt.basis(n,0)
 
+def oscillator_roots(q):
+	n = q.shape[0]
+	poly = [(c/np.sqrt(np.math.factorial(n-i))) for i, c in enumerate(q.full().T[0][::-1])]
+	#print(poly)
+	return np.roots(poly)
+
 state = qt.basis(n,0)
 amps = [state.overlap(v) for v in QV]
 vamps = [vp.arrow(pos=vp.vector(QL[i], 0, 0),\
@@ -29,25 +37,41 @@ vexp = vp.sphere(color=vp.color.yellow, radius=0.3,\
 					pos=vp.vector(qt.expect(Q, state), 0, 0))
 
 grid_pts = 20
-grid = np.linspace(-10, 10, 20)
+grid = np.linspace(-10, 10, grid_pts)
 CS = [[coherent(x+1j*y) for y in grid] for x in grid]
 cs = [[state.overlap(CS[i][j]) for j in range(grid_pts)] for i in range(grid_pts)]
 vcs = [[vp.arrow(pos=vp.vector(x, y+12, 0), color=vp.color.green,\
 				 axis=vp.vector(cs[i][j].real, cs[i][j].imag,0))
 			for j, y in enumerate(grid)] for i, x in enumerate(grid)]
 
+if CALC_ROOTS:
+	vC = [vp.sphere(color=vp.color.magenta, radius=0.15,\
+				   pos=vp.vector(r.real, r.imag+12, 0))\
+						for r in oscillator_roots(state)]
+
 def keyboard(e):
-	global state, n, NV
+	global state, n, NV, H, U
 	key = e.key
 	if key == "i":
 		state = qt.rand_ket(n)
 	elif key == "c":
 		state = coherent(np.random.randint(1,5)*(np.random.randn() + np.random.randn()*1j))
+	elif key == "h":
+		H = qt.rand_herm(n)
+		U = (-1j*dt*H).expm()
+	elif key == "e":
+		H = N + 1/2
+		U = (-1j*dt*H).expm()		
+	elif key == "n":
+		H = H + qt.rand_herm(n)*0.1
+		U = (-1j*dt*H).expm()		
 	else:
-		state = NV[int(key)]
+		if key.isdigit():
+			state = NV[int(key)]
 
 vp.scene.bind('keydown', keyboard)
-
+print("Loaded.")
+T = 0
 while True:
 	state = U*state
 	amps = [state.overlap(v) for v in QV]
@@ -60,3 +84,19 @@ while True:
 	for i, x in enumerate(grid):
 		for j, y in enumerate(grid):
 			vcs[i][j].axis = vp.vector(cs[i][j].real, cs[i][j].imag,0)
+
+	if CALC_ROOTS:
+		if T % 5 == 0:
+			C = oscillator_roots(state)
+			if len(vC) > len(C):
+				for i in range(len(vC) - len(C)):
+					vC[0].visible = False
+					del vC[0]
+			elif len(C) > len(vC):
+				for i in range(len(C) - len(vC)):
+					vC.append(vp.sphere(color=vp.color.magenta, radius=0.15, visible=True))
+
+			for i,r in enumerate(C):
+				vC[i].pos = vp.vector(r.real, r.imag+12, 0)
+
+	T += 1

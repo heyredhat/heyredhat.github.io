@@ -139,7 +139,7 @@ vpos_exp = vp.sphere(pos=vp.vector(qt.expect(Q[0], state).real, qt.expect(Q[1], 
 ####################################################################################
 
 def keyboard(e):
-    global n, state, XP, XL, YP, YL, ZP, ZL, NP, NL, QP, QL
+    global n, state, XP, XL, YP, YL, ZP, ZL, NP, NL, QP, QL, H, U, X, Y, Z
     k = e.key
     if k == "x":
         probs = np.array([qt.expect(XP[i], state) for i in range(n*n)])
@@ -181,6 +181,18 @@ def keyboard(e):
         i, j = indices[choice]
         state = (Qprojs[i][j]*state).unit()
         print(QL[i], QL[j])
+    elif k == "e":
+        H = N + 1#X#qt.rand_herm(n*n)
+        H.dims = [[n, n], [n, n]]
+        U = (-1j*H*dt).expm()
+    elif k == "h":
+        H = qt.rand_herm(n*n)
+        H.dims = [[n, n], [n, n]]
+        U = (-1j*H*dt).expm()
+    elif k == "s":
+        H = [X, Y, Z][np.random.randint(3)]
+        H.dims = [[n, n], [n, n]]
+        U = (-1j*H*dt).expm()
 
 vp.scene.bind('keydown', keyboard)
 

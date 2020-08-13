@@ -13766,8 +13766,11 @@ $= \frac{1}{2}(Q^{2} + i(QP - PQ) + P^{2})$.</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Example of a QFT proper with position and spin.</p>
-<p>-&gt; Relativistic theory, Hagg's theorem.</p>
+<p>Check out <a href="examples/qft.py">qft.py</a> for an very rudimentary example of a 1D quantum field theory. Choose the number of discrete positions, the max num of excitations per oscillator. Each position also carries a spin. In fact, since we have to introduce two oscillators per position, we can have a variable spin-$j$ at each location.</p>
+<p>The height of the cylinders is the expectation value of the number of particles at each location. Below, you see the expected spin axis at that location, as well as the expected values of the number operators for up and down quanta.</p>
+<p>We begin with an oscillator coherent state with a definite spin, and upgrade the oscillator hamiltonian to an operator that acts on the field. Also try simply creating a "star" at a given location out of the vacuum. The free field hamiltonian is given by the sum of the momentum oscillator hamiltonians.</p>
+<p>By building up operators out of the creation and annihilation operators at a given position, one can guarantee that spacelike separated operators commute: this is useful if for whatever reason there fail to be tensor products in the Hilbert space.</p>
+<p>Obviously, we could add other dimensions of space and other internal symmetries. We could try to make the theory relativistic. In the general case, once you include interactions, there is a theorem (Haag's theorem), which says that the resulting theory will be unitarily inequivalent to one built out of oscillators. We'll return to these ideas in the next section.</p>
 
 </div>
 </div>

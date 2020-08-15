@@ -13226,7 +13226,7 @@ div#notebook {
 <hr>
 
 <p>Since we're dealing with a 2D real Hilbert space, observables will consist of 2x2 real symmetric matrices, whose eigenvectors are orthogonal 2D vectors. When we go to "measure" our quantum angle, it collapses to being "parallel" or "perpendicular" with reference to the two axes corresponding to the eigenvectors, each with a certain probability.</p>
-<p>For example, consider the "angle" operator, which multiplies each state $\mid \theta \rangle$ by $\theta$:</p>
+<p>For example, consider the "angle" operator, which multiplies each state $\mid \theta \rangle$ by $\theta$. In other words, we're quantizing the function $f(\theta) = \theta$.</p>
 <p>$\hat{A} = \frac{1}{\pi} \int_{0}^{2\pi} \theta d\theta \mid \theta \rangle \langle \theta \mid$</p>
 <p>Let's expand it as a 2x2 matrix:</p>
 <p>$\begin{pmatrix} \frac{1}{\pi} \int_{0}^{2\pi} d\theta \theta \langle 0 \mid \theta \rangle \langle \theta \mid 0 \rangle &amp; \frac{1}{\pi} \int_{0}^{2\pi}  d\theta \theta \langle 0 \mid \theta \rangle \langle \theta \mid 1 \rangle \\ \frac{1}{\pi} \int_{0}^{2\pi} d\theta \theta \langle 1 \mid \theta \rangle \langle \theta \mid 0 \rangle &amp; \frac{1}{\pi} \int_{0}^{2\pi} d\theta \theta  \langle 1 \mid \theta \rangle \langle \theta \mid 1 \rangle \end{pmatrix} = \begin{pmatrix} \frac{1}{\pi} \int_{0}^{2\pi} d\theta \theta cos^{2}(\theta) &amp; \frac{1}{\pi} \int_{0}^{2\pi} d\theta \theta cos(\theta)cos(\theta - \frac{\pi}{2}) \\ \frac{1}{\pi} \int_{0}^{2\pi} d\theta \theta cos(\frac{\pi}{2} - \theta)cos(\theta) &amp;  \frac{1}{\pi} \int_{0}^{2\pi} d\theta \theta cos^{2}(\frac{\pi}{2} - \theta) \end{pmatrix} = \begin{pmatrix} \pi &amp; -\frac{1}{2} \\ -\frac{1}{2} &amp; \pi \end{pmatrix}$</p>

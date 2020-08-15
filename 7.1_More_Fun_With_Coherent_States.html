@@ -13085,10 +13085,10 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We've seen coherent states in the context of the quantum harmonic oscillator as well as for quantum spins. It's worth thinking about an even simpler example. I follow the excellent work of J. P. Gazeau in what follows.</p>
-<p>We'll be taking as our Hilbert space the circle, in fact, the circle with opposite points identified. In other words: the space of oriented lines in the plane. This is a two-dimensional <em>real</em> Hilbert space.</p>
+<p>We'll be taking as our Hilbert space the circle, in fact, ultimately, the circle with opposite points identified. In other words: the space of oriented lines in the plane. This is a two-dimensional <em>real</em> Hilbert space.</p>
 <p>For example, we all know we can specify a point on a 2D plane in terms of $x$ and $y$ coordinates. Since we're restricting to the unit circle, we could also parameterize the point solely by its angle: $\theta$.</p>
 <p>We could take as our basis vectors $\mid 0 \rangle = \begin{pmatrix} 1 \\ 0 \end{pmatrix}$ and $\mid \frac{\pi}{2} \rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix}$.</p>
-<p>In other words, $\mid \theta \rangle$ represents a unit vector with angle $\theta$, between $0$ and $2\pi$. Our two basis states clearly resolve the identity:</p>
+<p>The notation $\mid \theta \rangle$ means a unit vector with angle $\theta$, between $0$ and $2\pi$. Our two basis states clearly resolve the identity:</p>
 <p>$I = \mid 0 \rangle \langle 0 \mid + \mid \frac{\pi}{2} \rangle \langle \frac{\pi}{2} \mid$</p>
 <p>$\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{pmatrix} + \begin{pmatrix} 0 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}$.</p>
 <p>We could then write $\mid \theta \rangle = cos \theta \mid 0 \rangle + sin \theta \mid \frac{\pi}{2} \rangle$.</p>
@@ -13107,7 +13107,7 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 
-<p>Now here's an interesting fact. Pick $n$ equidistributed points on the unit circle. It turns out that these points will provide an overcomplete basis, or "frame," for our Hilbert space. We can think of these points like coherent states. (And for those in the know, we're essentially specifying a "POVM.")</p>
+<p>Now here's an interesting fact. Pick $n$ equidistributed points on the unit circle, forming an n-gon. It turns out that these points will provide an overcomplete basis, or "frame," for our Hilbert space. We can think of these points like coherent states. (And for those in the know, we're essentially specifying a "POVM.")</p>
 <p>For example, pick a five-fold or "starfish" frame. We have $5$ states $\mid \frac{2n\pi}{5} \rangle$. It turns out they provide a complete resolution of the identity.</p>
 <p>$\frac{2}{5} \sum_{n=0}^{4} \mid \frac{2n\pi}{5} \rangle \langle \frac{2n\pi}{5} \mid = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = I$.</p>
 <p>We could expand out some state:</p>
@@ -13127,10 +13127,10 @@ div#notebook {
 <p>Cosine and sine are orthogonal as functions and so this keeps $x$ and $y$ separate from each other, just as if they were arranged in a 2D vector.</p>
 <p>If we consider $\langle \theta \mid \phi \rangle = cos \theta cos \phi + sin \theta sin \phi$, we could rewrite via trigonometric identity as: $\langle \theta \mid \phi \rangle = cos(\theta - \phi)$. Clearly, when the angles are the same this gives an inner product of $1$, and when the angles are offset by $\frac{\pi}{2}$, a right angle, this gives $0$.</p>
 <p>This makes quite transparent the resolution of the identity:</p>
-<p>$\frac{1}{\pi} \int_{0}^{2\pi} d\theta \langle \phi \mid \theta \rangle \langle \theta \mid \phi \rangle = \frac{1}{\pi} \int_{0}^{2\pi} d\theta cos(\phi-\theta)cos(\theta-\phi)$</p>
+<p>$\langle \phi \mid \phi \rangle = \langle \phi \mid \frac{1}{\pi} \int_{0}^{2\pi} d\theta \mid \theta \rangle \langle \theta \mid \phi \rangle = \frac{1}{\pi} \int_{0}^{2\pi} d\theta \langle \phi \mid \theta \rangle \langle \theta \mid \phi \rangle = \frac{1}{\pi} \int_{0}^{2\pi} d\theta cos(\phi-\theta)cos(\theta-\phi)$</p>
 <p>Since cosine is an even function:</p>
 <p>$\frac{1}{\pi} \int_{0}^{2\pi} d\theta cos^{2}(\theta-\phi) = 1$</p>
-<p>Finally, we can consider when $\phi(\theta) = 0$, in other words, the classical angles which are excluded from the quantum state, and define the quantum state in terms of these excluded states. In fact, between $0$ and $2\pi$, this function will always have two $0$'s at some $\alpha$ and $\alpha + \pi$, in other words, at two opposite points on the circle. And this makes sense, since we're talking about lines at the origin in the plane, which cut the unit circle at two points.</p>
+<p>Finally, we can consider when $\phi(\theta) = 0$, in other words, the classical angles which are excluded from the quantum state. In fact, between $0$ and $2\pi$, this function will always have two $0$'s at some $\alpha$ and $\alpha + \pi$, in other words, at two opposite points on the circle. And this makes sense, since we're talking about lines at the origin in the plane, which cut the unit circle at two points.</p>
 
 </div>
 </div>
@@ -13242,8 +13242,9 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>If we consider two "quantum lines" tensored together, we'll end up with a 4D real vector. We can take the partial traces, and regard each partial density matrix as living <em>within the unit disk</em>.</p>
+<p>Finally, if we consider two "quantum lines" tensored together, we'll end up with a 4D real vector. We can take the partial traces, and regard each partial density matrix as living <em>within the unit disk</em>.</p>
 <p>Furthermore, considering entangled lines will help us deal with the limitations of working with a real Hilbert space. Indeed, if we tensor our real vector to a normal complex vector, things will go awry. And we can't use the Schrodinger equation since it has the imaginary unit in it! What to do? Well: we could package up our 4D real vector as a 2D complex vector. We could then say that a qubit could be interpreted as two possibly entangled "quantum lines." We could then evolve them with unitaries, etc. There's an interesting relationship to "Majorana" fermions lurking here.</p>
+<p>Okay, that's all for now!</p>
 
 </div>
 </div>

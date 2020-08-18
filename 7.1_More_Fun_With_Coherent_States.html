@@ -13338,6 +13338,33 @@ $\sigma_{+}\mid j, j \rangle = 0$</p>
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<p>You might wonder how we obtain the above representation of spin coherent state. Here's the sketch of a proof, again due to Gazeau.</p>
+<p>We can represent a rotation of $\omega$ around an axis $(x, y, z)$ with: $e^{-i\omega(x\sigma_{X} + y\sigma_{Y} + z\sigma_{Z})}$.</p>
+<p>Now recall that if we have some unit vector pointing to $(\theta, \phi)$ in spherical coordinates, then its expression in cartesian coordinates is: $(sin(\theta)cos(\phi), sin(\theta)sin(\phi), sin(\theta)cos(\theta))$.</p>
+<p>We can consider a rotation that takes the point $(0,0,1)$ to that unit vector:</p>
+<p>$e^{-i\theta(-sin(\phi)\sigma_{X} + cos(\phi)\sigma_{Y})}$.</p>
+<p>Now if we define $\chi = -\frac{\theta}{2}e^{-i\phi}$, this can be rewritten: $e^{(\chi\sigma_{+} - \overline{\chi}\sigma_{-})}$.</p>
+<p>The $\mid j, j \rangle$ state is the state with all the stars at the North Pole. Since a spin coherent state is defined by all the stars located at the same point, each spin coherent state can be obtained from rotating the $\mid j, j \rangle$ state.</p>
+<p>$\mid \theta, \phi \rangle = e^{(\chi\sigma_{+} - \overline{\chi}\sigma_{-})}\mid j, j \rangle$, where $\chi = -\frac{\theta}{2}e^{-i\phi}$.</p>
+<p>Now $e^{(\chi\sigma_{+} - \overline{\chi}\sigma_{-})}$ can be rewritten using the Baker-Campell-Hausdorff formula as:</p>
+<p>$e^{-\overline{z}\sigma_{+}}e^{ln(1+|z|^{2})\sigma_{Z}}e^{z\sigma_{-}} = e^{z\sigma_{-}}e^{-ln(1+|z|^{2})\sigma_{Z}}e^{-\overline{z}\sigma_{+}}$</p>
+<p>Here, $z = - \frac{\overline{\chi}}{|\chi|} \frac{sin(|\chi|)}{cos(|\chi|)} = tan(\frac{\theta}{2})e^{i\phi}$.</p>
+<p>We then have:</p>
+<p>$\mid z \rangle = \mid \theta, \phi \rangle = e^{z\sigma_{-}}e^{-ln(1+|z|^{2})\sigma_{Z}}e^{-\overline{z}\sigma_{+}}\mid j, j \rangle$</p>
+<p>But $e^{-\overline{z}\sigma_{+}}\mid j, j \rangle = \mid j, j \rangle$, since $\sigma_{+}$ gives the zero vector on $\mid j, j\rangle$ so that all but the first term (the identity) are irrelevant in the exponential series.</p>
+<p>Then it turns out that: $e^{-ln(1+|z|^{2})\sigma_{Z}}\mid j, j \rangle = cos^{2j}(\frac{\theta}{2})\mid j, j \rangle$</p>
+<p>This leaves us with $\mid \theta, \phi \rangle =  cos(\frac{\theta}{2})^{2j}e^{z\sigma_{-}}\mid j, j \rangle$.</p>
+<p>Working this out gives:</p>
+<p>$\mid \theta, \phi \rangle = \sum_{m=-j}^{j} \sqrt{\begin{pmatrix} 2j \\ j+m \end{pmatrix}}cos(\frac{\theta}{2})^{j+m}sin(\frac{\theta}{2})^{j-m}e^{i(j-m)\phi}\mid j, m\rangle$</p>
+
+</div>
+</div>
+</div>
     </div>
   </div>
 </body>

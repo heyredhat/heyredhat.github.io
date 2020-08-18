@@ -5,7 +5,7 @@ vp.scene.width = 1000
 vp.scene.height = 800
 
 dt = 0.001
-n = 101
+n = 50
 a = qt.destroy(n)
 Q = qt.position(n)
 QL, QV = Q.eigenstates()

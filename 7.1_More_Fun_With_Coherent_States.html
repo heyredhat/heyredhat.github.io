@@ -13244,7 +13244,96 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Finally, if we consider two "quantum lines" tensored together, we'll end up with a 4D real vector. We can take the partial traces, and regard each partial density matrix as living <em>within the unit disk</em>.</p>
 <p>Furthermore, considering entangled lines will help us deal with the limitations of working with a real Hilbert space. Indeed, if we tensor our real vector to a normal complex vector, things will go awry. And we can't use the Schrodinger equation since it has the imaginary unit in it! What to do? Well: we could package up our 4D real vector as a 2D complex vector. We could then say that a qubit could be interpreted as two possibly entangled "quantum lines." We could then evolve them with unitaries, etc. There's an interesting relationship to "Majorana" fermions lurking here.</p>
-<p>Okay, that's all for now!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="On-the-connection-to-classical-probability-distributions">On the connection to classical probability distributions<a class="anchor-link" href="#On-the-connection-to-classical-probability-distributions">&#182;</a></h2><p>So we have our quantum harmonic oscillator coherent state:</p>
+<p>$\mid z \rangle = e^{-\frac{|z|^{2}}{2}} \sum_{n=0}^{\infty} \frac{z^{n}}{\sqrt{n!}}\mid n \rangle$</p>
+<p>Let's work out $\langle n \mid z \rangle$, the amplitude for the coherent state associated with the complex number $z$ to be in the $n^{th}$ number state.</p>
+<p>$\langle n \mid e^{-\frac{|z|^{2}}{2}} \sum_{m=0}^{\infty} \frac{z^{m}}{\sqrt{m!}}\mid m \rangle = e^{-\frac{|z|^{2}}{2}} \sum_{m=0}^{\infty} \frac{z^{m}}{\sqrt{m!}}\langle n \mid m \rangle = e^{-\frac{|z|^{2}}{2}} \sum_{m=0}^{\infty} \frac{z^{m}}{\sqrt{m!}}\delta_{m}^{n} = e^{-\frac{|z|^{2}}{2}} \frac{z^{n}}{\sqrt{n!}}$</p>
+<p>The corresponding probability: $|\langle n \mid z \rangle|^{2} = e^{-|z|^{2}} \frac{(|z|^{2})^{n}}{n!}$</p>
+<p>Let's also work out the expectation value of the number operator on the coherent state: $\langle z \mid N \mid z \rangle = \langle z \mid a^{\dagger}{a} \mid z \rangle$. But we know that $a\mid z \rangle = z \mid z \rangle$ and adjointly that $\langle z \mid a^{\dagger} = \langle z \mid \overline{z}$.</p>
+<p>So: $\langle z \mid N \mid z \rangle = \langle z \mid \overline{z}z \mid z \rangle = |z|^{2}$.</p>
+<p>So we could also write the probability $|\langle n \mid z \rangle|^{2}$ as $e^{-\langle N \rangle} \frac{\langle N \rangle^{n}}{n!}$, where $\langle N \rangle = \langle z \mid N \mid z \rangle$.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now recall the Poisson distribution, which gives the probability that a given number of events will occur in a fixed interval, given a constant rate of events, and the fact that the events occur independently of each other.</p>
+<p>$Pr(n) = e^{-\lambda}\frac{\lambda^{n}}{n!}$, where $n$ is the number of times the event occurs, and $\lambda$ is the expected value of the random variable, in other words, the average number of events per interval.</p>
+<p>But look! Replace $\lambda$ with $\langle N \rangle$ (which recall is $|z|^{2})$:</p>
+<p>$Pr(n) = e^{-\langle N \rangle}\frac{\langle N \rangle^{n}}{n!} = e^{-|z|^{2}} \frac{(|z|^{2})^{n}}{n!} = |\langle n \mid z \rangle|^{2}$</p>
+<p>In other words, the probability of detecting $n$ quanta in the coherent state $\mid z \rangle$ is given by the Poisson distribution with $\lambda = |z|^{2}$. It's almost like by specifying a harmonic oscillator coherent state, in some sense, we're working with the "square root" of the Poisson distribution!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<p>Turning to the spin coherent states, let's recall some details:</p>
+<p>We have the basic commutation relationships between the spin operators in the $X, Y$ and $Z$ directions:</p>
+<p>$[\sigma_{X}, \sigma_{Y}] = i\sigma_{Z}$, $[\sigma_{Z}, \sigma_{X}] = i\sigma_{Y}$, $[\sigma_{Y}, \sigma_{Z}] = i\sigma_{X}$</p>
+<p>We can define the total spin squared operator.</p>
+<p>$\sigma^{2} = \sigma_{X}^{2} + \sigma_{Y}^{2} + \sigma_{Z}^{2}$</p>
+<p>We can work in the $\mid j, m \rangle$ representation where are states are simultaneous eigenstates of $\sigma^{2}$ and $\sigma_{Z}$.</p>
+<p>$\sigma^{2}\mid j, m \rangle = j(j+1)\mid j, m \rangle$</p>
+<p>$\sigma_{Z}\mid j, m \rangle = m\mid j, m \rangle$</p>
+<p>Defining the spin raising and lowering operators:</p>
+<p>$\sigma_{\pm} = \sigma_{X} \pm i\sigma_{Y}$</p>
+<p>Their action of a $\mid j, m\rangle$ state is given by:</p>
+<p>$\sigma_{+}\mid j, m \rangle = \sqrt{(j-m)(j+m+1)}\mid j, m+1 \rangle$</p>
+<p>$\sigma_{-}\mid j, m \rangle = \sqrt{(j+m)(j-m+1)}\mid j, m-1 \rangle$</p>
+<p>Note that the raising operator kills the top state and the lowering operator kills the bottom state: 
+$\sigma_{+}\mid j, j \rangle = 0$</p>
+<p>$\sigma_{-}\mid j, -j \rangle = 0$</p>
+<p>Finally, we can obtain all the $\mid j, m\rangle$ states by repeated application of the raising/lowering operators on the lowest/highest states:</p>
+<p>$\mid j, m \rangle = \sqrt{\frac{(j-m)!}{(j+m)!2j!}} \sigma_{+}^{j+m} \mid j, -j \rangle = \sqrt{\frac{(j+m)!}{(j-m)!2j!}} \sigma_{-}^{j-m} \mid j, j \rangle$</p>
+<p>It's worth recalling that:</p>
+<p>$ \begin{pmatrix} n \\ k \end{pmatrix} = \frac{n!}{(n-k)!k!}$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<p>We can define the basis states of the oscillator as functions on the sphere, orthonormal with respect to the measure $sin(\theta)d\theta d\phi$. Here, $\theta$ is the polar angle (between $0$ and $\pi$) and $\phi$ is the azimuthal angle (between $0$ and $2\pi$).</p>
+<p><img src="img/spherical_coordinates.png"></p>
+<p>$\phi_{j,m}(\theta, \phi) = \frac{1}{\sqrt{4\pi}}\sqrt{\begin{pmatrix} 2j \\ j+m \end{pmatrix}}cos(\frac{\theta}{2})^{j+m}sin(\frac{\theta}{2})^{j-m}e^{-i(j-m)\phi}$</p>
+<p>In similar terms, we can define the coherent states, which have $2j$ stars at the point $(\theta, \phi)$:</p>
+<p>$\mid \theta, \phi \rangle = \sum_{m=-j}^{j} \sqrt{\begin{pmatrix} 2j \\ j+m \end{pmatrix}}cos(\frac{\theta}{2})^{j+m}sin(\frac{\theta}{2})^{j-m}e^{i(j-m)\phi}\mid j, m\rangle$</p>
+<p>We have: $\langle \theta, \phi \mid \theta, \phi \rangle = 1$ and $\int_{\phi=0}^{\phi=2\pi} \int_{\theta=0}^{\theta=\pi} \frac{sin(\theta)d\theta d\phi}{4\pi} \mid \theta, \phi \rangle \langle \theta, \phi \mid = I$.</p>
+<p>We then consider:</p>
+<p>$\langle j, m \mid \theta, \phi \rangle = \sqrt{\begin{pmatrix} 2j \\ j+m \end{pmatrix}}cos(\frac{\theta}{2})^{j+m}sin(\frac{\theta}{2})^{j-m}e^{i(j-m)\phi}$</p>
+<p>So that:</p>
+<p>$|\langle j, m \mid \theta, \phi \rangle|^{2} =  \begin{pmatrix} 2j \\ j+m \end{pmatrix}cos^{2}(\frac{\theta}{2})^{j+m}sin^{2}(\frac{\theta}{2})^{j-m}$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<p>Now recall the binomial distribution. We have $n$ trials, and there is a probability $p$ of success and a probability $1-p$ of failure in each trial. The question is: what is the probability of getting $k$ successes?</p>
+<p>$Pr(k) = \begin{pmatrix}n \\ k \end{pmatrix}p^{k}(1-p)^{n-k}$</p>
+<p>Suppose we have $n=2j$ trials, and $p_{win} = cos^{2}(\frac{\theta}{2})$ and $p_{loss} = 1 - p_{win} = sin^{2}(\frac{\theta}{2})$. We're interested in the probability of winning $k = j+m$ trials.</p>
+<p>We then have $Pr(k) = \begin{pmatrix}2j \\ j+m \end{pmatrix}cos^{2}(\frac{\theta}{2})^{j+m}sin^{2}(\frac{\theta}{2})^{j-m} = |\langle j, m \mid \theta, \phi \rangle|^{2}$</p>
+<p>In other words, $|\langle j, m \mid \theta, \phi \rangle|^{2}$, the probability of measuring a coherent state at $(\theta, \phi)$ to be in the basis state $\mid j, m\rangle$ is that same as the probability of winning $j+m$ out of $2j$ trials where the probability of winning a single trial is given by $cos^{2}(\frac{\theta}{2})$.</p>
+<p>When $\theta=0$, $p_{win} = cos^{2}(0) = 1$. In other words, if our coherent state is at the north pole, we're certain to win. When $\theta=\pi$, $p_{win} = cos^{2}(\frac{\pi}{2}) = 0$, so that if our coherent state is at the south pole, we're certain to lose. At the equator, we have a 50/50 shot each time: $p_{win} = \frac{1}{2}$. (Recall we've quantized along the $Z$ axis.)</p>
 
 </div>
 </div>

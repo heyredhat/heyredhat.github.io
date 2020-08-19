@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>5.9_A_Quantum</title>
+<title>7.2_Unruh</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13077,670 +13077,21 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="What-is-an-atom?">What is an atom?<a class="anchor-link" href="#What-is-an-atom?">&#182;</a></h1><h2 id="9.-A-Quantum?">9. A Quantum?<a class="anchor-link" href="#9.-A-Quantum?">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Once upon a time, we started with a single pebble, and called it an "atom." We graduated to a "pile of pebbles," each pebble within a pile treated as identical, fungible. Even if the actual pebbles we might use to represent a pile are irregular in some respect, what we meant by "grouping them into a pile" was that insofar as they were in the pile, the pebbles were to be regarded as "indistinguishable" from each other, considered only insofar as they contributed to the "number of pebbles." And so we invented the counting numbers.</p>
-<p>We then ascended the dialectical ladder, from counting numbers to integers to rationals to complex numbers to polynomials and at last to tensors, the latter corresponding the multiple joint perspectives of entangled quantum systems.</p>
-<p>We're now going to consider "piles" of a yet higher-order sort, piles of identical quantum systems, piles which can keep track of a variable number of  quantum systems, as indistinguishable as the "1"'s in a counting number. The mathematical structure we're looking for is essentially that of a "quantum field," although to call it a "field" is to emphasize one application of the structure, as we'll see. The general process of moving from ordinary quantum mechanics to a quantum mechanics of a variable number of indistinguishable "particles" is called "second quantization."</p>
-<p>But to understand that, we first need to become familiar with the quantum harmonic oscillator. Then we can discuss perhaps the simplest example of second quantization, the oscillator representation of spin, also known as the "Jordan-Schwinger" representation. Since we already know so about spin states, we are already half-way there!</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>A review of the 1-dimensional quantum harmonic oscillator:</p>
-<p>It's Hamiltonian is basically: $H = \frac{1}{2}(P^{2} + Q^{2})$, where $P$ is the momentum operator, whose eigenstates are states of definite momentum, and $Q$ is the position operator, whose eigenstates are states of definite position. These two operators are related to each other via the Fourier transform.</p>
-<p>One great thing to do is define the creation and annihilation operators:</p>
-<p>$a = \frac{1}{\sqrt 2} (Q + iP)$</p>
-<p>$a^{\dagger} = \frac{1}{\sqrt 2} (Q - iP)$</p>
-<p>So that: $Q = \frac{1}{\sqrt 2} (a^{\dagger} + a)$ and $P =  \frac{1}{\sqrt 2} (a^{\dagger} - a)$.</p>
-<p>Note that $[Q, P] = QP - PQ = i$. This is the Heisenberg uncertainty principle. And one thing it implies is that not only are $P$ and $Q$ not simultaneous measureable, but also, they can't be represented by any finite dimensional matrices, but only by "infinite" matrices. We'll see what this means.</p>
-<p>Now what's nice about the creation and annihilation operators is that you can interpret them as adding or subtracting a "quantum" from the oscillator, kicking it up to a higher or lower "number" state (each of which has a higher or lower energy). These "number" states form a basis for the states of the oscillator, just as the position (or momentum) eigenstates do. To wit, if you can get the $\mid 0 \rangle$ quantum state, the ground state of the oscillator, then you can get all the other states, $\mid 1 \rangle, \mid 2 \rangle, \mid 3 \rangle, \ldots$ by repeated action of the creation operator.</p>
-<p>The number operator, which counts the number of quanta, is $N = a^{\dagger}a$, and the hamiltonian can be rewritten $H = N + \frac{1}{2}$.</p>
-<p>Notice:</p>
-<p>$ N = \frac{1}{\sqrt 2}(Q - iP)\frac{1}{\sqrt 2}(Q + iP)$</p>
-<p>$= \frac{1}{2}(Q^{2} + iQP - iPQ + P^{2}) $
-$= \frac{1}{2}(Q^{2} + i(QP - PQ) + P^{2})$.</p>
-<p>But $QP - PQ = i$, so we get $ N = \frac{1}{2}(P^{2} + Q^{2}) + -\frac{1}{2} = H - \frac{1}{2}$.</p>
-<p>So $H = N + \frac{1}{2}$.</p>
-<p>Already we can see that at least one way of thinking about a quantum harmonic oscillator is as a little guy that "counts quanta."</p>
-<hr >
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We should give a few words on the formalism of position and momentum wave functions, since hitherto we've only worked with finite dimensional Hilbert spaces.</p>
-<p>A position wave function $\psi(x)$ is a function from the real numbers to the complex numbers, which is square integrable, and so can be interpreted as an "infinite dimensional vector." We have:</p>
-<p>$Q\mid x \rangle = x\mid x \rangle$</p>
-<p>$\langle x \mid x' \rangle = \delta(x - x')$</p>
-<p>$\int \mid x \rangle \langle x \mid dx = I$</p>
-<p>You can think of $\psi(x)$ as $\langle x \mid \psi \rangle$, where $x$ is a "Dirac delta" that spikes at position $x$. (There are some subleties here: because the deltas have infinite norm, they aren't technically vectors in the Hilbert space. One consequence is that to actually calculate legitimate probabilities, you need to integrate over some finite interval.)</p>
-<p>You can take the Fourier transform of $\psi(x)$ to get $\psi(p)$, the momentum wave function. Similarly, you can use Dirac deltas that spike at momentum $p$, etc.</p>
-<p>$P \mid p \rangle = p\mid p \rangle$</p>
-<p>$\langle p \mid p' \rangle = \delta(p - p')$</p>
-<p>$\int \mid p \rangle \langle p \mid dp = I$</p>
-<p>By the nature of Fourier duality, a spike in position means an “oscillation” across momentum space. A spike in momentum means a “oscillation” across position space. For example, $\psi_{p}(x) = Ce^{ipx}$ where $C$ is a constant.</p>
-<p>$\langle x \mid p \rangle = e^{ipx} $</p>
-<p>$\langle p \mid x \rangle = e^{-ipx} $</p>
-<p>$ \psi(x) = \int e^{ipx}\psi(p) dp = \int \langle x \mid p \rangle \langle p \mid \psi \rangle dp$</p>
-<p>$ \psi(p) = \int e^{-ipx}\psi(x) dx = \int \langle p \mid x \rangle \langle x \mid \psi \rangle dx$</p>
-<p>Given that we're working with infinite dimensional vector spaces, we have to treat the inner product as an integral, an infinite sum. In other words:</p>
-<p>$\langle \phi \mid \psi \rangle =  \int_{-\infty}^{+\infty} \phi(x)^{*}\psi(x) dx$, where the $*$ means take the complex conjugate.</p>
-<p>Square summable means that $|\psi(x)|^{2} = \int_{-\infty}^{+\infty} \psi(x)^{*}\psi(x) dx$ converges to a real number (and so can be normalized to 1), and thus really can think of our wave function as being an vector in infinite dimensional space.</p>
-<hr>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We recall that $Q\psi(x) = x\psi(x)$, that the position operator acts on a position wave function like multiplication by x, and $P\psi(x) = -i\frac{d}{dx}\psi(x)$, that the momentum operator acts like (multiplication by $-i$ and) differentiation. This was one of the initial insights of quantum mechanics: the so-called canonical quantization, promoting the classical variables $q$ and $p$ to linear operators $Q$ and $P$.</p>
-<p>With this set of correspondences, we consider the time dependent Schrodinger equation for the harmonic oscillator.</p>
-<p>$H\psi(x, t) = i\frac{d\psi(x, t)}{dt}$</p>
-<p>$\frac{1}{2}(P^{2} + Q^{2})\psi(x, t) = i\frac{d\psi(x, t)}{dt}$</p>
-<p>$\frac{1}{2}(-\frac{d^{2}}{dx^{2}} + x^{2})\psi(x, t) = i\frac{d\psi(x, t)}{dt}$</p>
-<p>$ -\frac{1}{2}\frac{d^{2}\psi(x, t)}{dx^{2}} + \frac{1}{2}x^{2}\psi(x, t) = i\frac{d\psi(x, t)}{dt}$.</p>
-<p>In terms of the time independent Schrodinger equation:</p>
-<p>$ -\frac{1}{2}\frac{d^{2}\psi(x)}{dx^{2}} + \frac{1}{2}x^{2}\psi(x) - e\psi(x) = 0$, where $e$ is the eigenvalue corresponding to a given energy level.</p>
-<p>There is a whole beautiful theory of these differential equations and how to solve them, and one finds that its infinitude of solutions are proportional to the Hermite polynomials. But actually there are some tricks we can use without actually solving the equations directly.</p>
-<hr>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>For example, we know that we want the annihilation operator to annihilate the ground state, which is also the 0 number state.</p>
-<p>$a \psi_{0}(x) = 0$</p>
-<p>$\frac{1}{\sqrt 2} (x + \frac{d}{dx})\psi_{0}(x) = 0 $</p>
-<p>$x\psi_{0}(x) + \frac{d}{dx}\psi_{0}(x) = 0 $</p>
-<p>A solution is given by:</p>
-<p>$ \psi_{0}(x) = e^{-\frac{x^{2}}{2}}$</p>
-<p>Which we can confirm:</p>
-<p>$ \frac{d}{dx}\psi_{0}(x) = -xe^{-\frac{x^{2}}{2}}$</p>
-<p>$ xe^{-\frac{x^{2}}{2}} -xe^{-\frac{x^{2}}{2}} = 0 $</p>
-<p>Since $\int_{-\infty}^{+\infty} \psi(x)^{*}\psi(x) dx = \int_{-\infty}^{+\infty} e^{-x^{2}} dx = \sqrt{\pi}$, we should really use $\psi_{0}(x) = \pi^{\frac{1}{4}}e^{-\frac{x^{2}}{2}}$, but let's not get bogged down.</p>
-<p>This function $\psi_{0}(x) = e^{-\frac{x^{2}}{2}}$ is interesting. It's a Gaussian, and it's invariant under the Fourier transform.</p>
-<p>$\frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} e^{ipx}e^{-\frac{x^{2}}{2}}dx = e^{-\frac{p^{2}}{2}}$.</p>
-<p>In other words, it represents the best compromise you can get between knowing both position and momentum given the Heisenberg uncertainty relations.</p>
-<p>But is $\psi_{0}(x)$ really an eigenstate of $H$? Consider:</p>
-<p>$H \psi_{0}(x) = (a^{\dagger}a + \frac{1}{2})\psi_{0}(x) = a^{\dagger}a\psi_{0}(x) + \frac{1}{2}\psi_{0}(x)$.</p>
-<p>But we know that $a\psi_{0}(x)= 0$, so $H \psi_{0}(x) = \frac{1}{2}\psi_{0}(x)$.</p>
-<p>Thus, $\psi_{0}(x)$ is an eigenvector of the harmonic oscillator hamiltonian: $H$ acts on $\psi_{0}(x)$ by multiplication by a scalar eigenvalue, in this case $\frac{1}{2}$. Since the annihilator annihilates it, we know that $\psi_{0}(x)$ is the lowest eigenvector of $N$ (and $H$), and we can get all the rest of the number states via the creation operator, just like climbing a ladder: indeed, they're known as ladder operators.</p>
-<p>$\psi_{n}(x) = \frac{(a^{\dagger})^{n}}{\sqrt{n!}}\psi_{0}(x)$</p>
-<p>This set of set of states $\psi_{n}(x)$ form a countable basis for our quantum harmonic oscillator.  In other words, we can express any state $\phi(x)$ as an infinite series in the number states:</p>
-<p>$\phi(x) = \sum_{n=0}^{\infty} c_{n}\psi_{n}(x)$, where:</p>
-<p>$c_{n} = \frac{\psi_{n} \cdot \phi}{\psi_{n} \cdot \psi_{n}} = \frac{\int \psi_{n}^{*}(x)\phi(x)dx}{\int \psi_{n}^{*}(x)\psi_{n}(x)dx}$.</p>
-<p>In other words, the projection of the function $\phi(x)$ onto the number state $\psi_{n}$, just like in the finite dimensional case, gives the coordinate in that "direction."</p>
-<hr>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We can compare this to the case of breaking down sound waves into their harmonics.</p>
-<p>If we have a <em>real</em>, continuous, periodic function $f(x)$ defined over the interval $r$ to $s$, we can write it as a Fourier series:</p>
-<p>$ f(x) = a_{0}C_{0}(x) + \sum_{n=1}^{\infty} \Big{(} a_{n}C_{n}(x) + b_{n}S_{n}(x) \Big{)} $.</p>
-<p>Here: $C_{0}(x) = 1$, $C_{n}(x) = cos(\frac{2\pi n x}{T})$, and $S_{n}(x) = sin(\frac{2\pi n x}{T})$, where $T$ is the period, and $n \in 1,2,3,\dots$.</p>
-<p>$a_{0} = \frac{C_{0} \cdot f}{C_{0} \cdot C_{0}} = \frac{\int_{r}^{s} C_{0}(x)f(x) dx }{\int_{r}^{s} C_{0}(x)C_{0}(x) dx }$</p>
-<p>$a_{n} = \frac{C_{n} \cdot f}{C_{n} \cdot C_{n}} = \frac{\int_{r}^{s} C_{n}(x)f(x) dx }{\int_{r}^{s} C_{n}(x)C_{n}(x) dx }$</p>
-<p>$b_{n} = \frac{S_{n} \cdot f}{S_{n} \cdot S_{n}} = \frac{\int_{r}^{s} S_{0}(x)f(x) dx }{\int_{r}^{s} S_{n}(x)S_{n}(x) dx }$</p>
-<p>This works because sines (and cosines) of different integer $n$ values are orthogonal, and so these functions can be treated as separate "directions" in infinite dimensional space.</p>
-<p>Note that there are many ways of representing a function as an infinite series, often with different inner products, given by different measures.</p>
-<hr>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Returing to the oscillator, let's prove that the number operator $N = a^{\dagger}a$ actually does count the number of quanta.</p>
-<p>First, we consider the eigenvalue equation for $N$:</p>
-<p>$N\psi_{n} = n\psi_{n}$</p>
-<p>In other words, on a state of definite number, the number operator acts by multiplication by $n$, the number.</p>
-<p>Let's consider acting with $N$ after we've raised the number by one: $Na^{\dagger}\psi_{n}$.</p>
-<p>To evaluate this, first we note that:</p>
-<p>$[a, a^{\dagger}] = aa^{\dagger} - a^{\dagger}a = \frac{1}{\sqrt 2} (Q + iP)\frac{1}{\sqrt 2} (Q - iP) - \frac{1}{\sqrt 2} (Q - iP)\frac{1}{\sqrt 2} (Q + iP)$</p>
-<p>$ = \frac{1}{2} (Q^{2} -iQP +iPQ + P^2 - Q^{2} - iQP + iPQ - P^{2})$</p>
-<p>$ = \frac{1}{2} (2iPQ - 2iQP)$</p>
-<p>$ = i[P, Q] = -i[Q,P] = 1$</p>
-<p>We then note that:</p>
-<p>$[N, a^{\dagger}] = Na^{\dagger} - a^{\dagger}N = a^{\dagger}aa^{\dagger} - a^{\dagger}a^{\dagger}a = a^{\dagger}(aa^{\dagger} - a^{\dagger}a) = a^{\dagger}[a, a^{\dagger}] = a^{\dagger}$.</p>
-<p>If $Na^{\dagger} - a^{\dagger}N = a^{\dagger}$, then $Na^{\dagger} = a^{\dagger}N + a^{\dagger}$.</p>
-<p>So we can rewrite $Na^{\dagger}\psi_{n}$ as: $(a^{\dagger}N + a^\dagger)\psi_{n} = a^{\dagger}N\psi_{n} + a^\dagger\psi_{n}$.</p>
-<p>But by the eigenvalue equation, this is: $na^{\dagger}\psi_{n} + a^\dagger\psi_{n} = (n+1)a^{\dagger}\psi_{n}$.</p>
-<p>In short, $Na^{\dagger}\psi_{n} = (n+1)a^{\dagger}\psi_{n}$. $N$ knows we've raised the number by 1!</p>
-<p>Similarly, given that $[N, a] = -a$, $Na\psi_{n} = aN\psi_{n} - a\psi_{n} = na\psi_{n} - a\psi_{n} = (n-1)a\psi_{n}$.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>Let's do a sanity check.</p>
-<p>$\psi_{0}(x) = e^{-\frac{x^{2}}{2}}$</p>
-<p>$ \int_{-\infty}^{\infty} \psi_{0}(x)^{*}\psi_{0}(x) dx = e^{-x^{2}}dx = \sqrt{\pi}$</p>
-<p>$\langle \psi_{0} \mid N \mid \psi_{0} \rangle = \frac{1}{\sqrt{\pi}} \int_{-\infty}^{+\infty} \psi_{0}(x)^{*}N\psi_{0}(x) dx = \frac{1}{\sqrt{\pi}} \int_{-\infty}^{+\infty}  e^{-\frac{x^{2}}{2}}\frac{1}{2}(-\frac{d^{2}}{dx^{2}} + x^{2} - 1)e^{-\frac{x^{2}}{2}} dx$</p>
-<p>$\frac{1}{2\sqrt{\pi}} \int_{-\infty}^{+\infty}  e^{-\frac{x^{2}}{2}}(-\frac{d^{2}}{dx^{2}}e^{-\frac{x^{2}}{2}}  + x^{2}e^{-\frac{x^{2}}{2}}  - e^{-\frac{x^{2}}{2}}) dx$</p>
-<p>$\frac{d}{dx} e^{-\frac{x^{2}}{2}} = -xe^{-\frac{x^{2}}{2}}$</p>
-<p>$\frac{d^{2}}{dx^{2}} e^{-\frac{x^{2}}{2}} = x^{2}e^{-\frac{x^{2}}{2}} -e^{-\frac{x^{2}}{2}}$</p>
-<p>$\frac{1}{2\sqrt{\pi}} \int_{-\infty}^{+\infty}  e^{-\frac{x^{2}}{2}}(-x^{2}e^{-\frac{x^{2}}{2}} + e^{-\frac{x^{2}}{2}} + x^{2}e^{-\frac{x^{2}}{2}}  - e^{-\frac{x^{2}}{2}}) dx = 0$.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Going up a level:</p>
-<p>$\psi_{1}(x) = a^{\dagger}e^{-\frac{x^{2}}{2}} = \frac{1}{\sqrt 2} (Q - iP)e^{-\frac{x^{2}}{2}} = \frac{1}{\sqrt 2} (x - i(-i\frac{d}{dx})e^{-\frac{x^{2}}{2}} = \frac{1}{\sqrt 2} (xe^{-\frac{x^{2}}{2}} - \frac{d}{dx}e^{-\frac{x^{2}}{2}}) = \frac{1}{\sqrt 2}(xe^{-\frac{x^{2}}{2}} + xe^{-\frac{x^{2}}{2}}) = \frac{2}{\sqrt 2}xe^{-\frac{x^{2}}{2}}$</p>
-<p>$\langle \psi_{1} \mid N \mid \psi_{1} \rangle = \frac{1}{\sqrt{\pi}} \int_{-\infty}^{+\infty} \psi_{1}(x)^{*}N\psi_{1}(x) dx =  \frac{1}{\sqrt{\pi}} \int_{-\infty}^{+\infty} xe^{-\frac{x^{2}}{2}}(-\frac{d^{2}}{dx^{2}} + x^{2} - 1)xe^{-\frac{x^{2}}{2}} dx$</p>
-<p>$\frac{1}{\sqrt{\pi}}  \int_{-\infty}^{+\infty} xe^{-\frac{x^{2}}{2}}(-\frac{d^{2}}{dx^{2}}xe^{-\frac{x^{2}}{2}} + x^{3}e^{-\frac{x^{2}}{2}} - xe^{-\frac{x^{2}}{2}}) dx$</p>
-<p>$ \frac{d}{dx} xe^{-\frac{x^{2}}{2}} = -x^{2}e^{-\frac{x^{2}}{2}} + e^{-\frac{x^{2}}{2}}$</p>
-<p>$ \frac{d^{2}}{dx^{2}} xe^{-\frac{x^{2}}{2}} = x^{3}e^{-\frac{x^{2}}{2}} - 2xe^{-\frac{x^{2}}{2}} - xe^{-\frac{x^{2}}{2}} = x^{3}e^{-\frac{x^{2}}{2}} - 3xe^{-\frac{x^{2}}{2}}$</p>
-<p>$\frac{1}{\sqrt{\pi}}  \int_{-\infty}^{+\infty} xe^{-\frac{x^{2}}{2}}(-x^{3}e^{-\frac{x^{2}}{2}} + 3xe^{-\frac{x^{2}}{2}} + x^{3}e^{-\frac{x^{2}}{2}} - xe^{-\frac{x^{2}}{2}}) dx$</p>
-<p>$\frac{1}{\sqrt{\pi}}  \int_{-\infty}^{+\infty} xe^{-\frac{x^{2}}{2}}( 2xe^{-\frac{x^{2}}{2}}) dx$</p>
-<p>$\frac{2}{\sqrt{\pi}}  \int_{-\infty}^{+\infty} x^{2}e^{-x^{2}} dx = 1.$</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Continuing doggedly on, and recalling an earlier comment that:</p>
-<p>$\psi_{n}(x) = \frac{(a^{\dagger})^{n}}{\sqrt{n!}}\psi_{0}(x)$</p>
-<p>$\psi_{2}(x) = \frac{1}{\sqrt{2}} \frac{2}{\sqrt{2}} a^{\dagger} xe^{-\frac{x^{2}}{2}} = \frac{1}{\sqrt{2}} (Q - iP)xe^{-\frac{x^{2}}{2}} = \frac{1}{\sqrt{2}}  (x - \frac{d}{dx})xe^{-\frac{x^{2}}{2}} = \frac{1}{\sqrt{2}}   \big{(} x^{2}e^{-\frac{x^{2}}{2}} - \frac{d}{dx}xe^{-\frac{x^{2}}{2}} \big{)}  = \frac{1}{\sqrt{2}}  \big{(} x^{2}e^{-\frac{x^{2}}{2}} + x^{2}e^{-\frac{x^{2}}{2}} - e^{-\frac{x^{2}}{2}} \big{)} = \frac{1}{\sqrt{2}} \big{(} (2x^{2} - 1)e^{-\frac{x^{2}}{2}} \big{)} $</p>
-<p>$\langle \psi_{1} \mid N \mid \psi_{1} \rangle = \frac{1}{\sqrt{\pi}} \int_{-\infty}^{+\infty} \psi_{1}(x)^{*}N\psi_{1}(x) dx$</p>
-<p>$= \frac{1}{4\sqrt{\pi}} \int_{-\infty}^{+\infty} (2x^{2} - 1)e^{-\frac{x^{2}}{2}}(-\frac{d^{2}}{dx^{2}} + x^{2} - 1)(2x^{2} - 1)e^{-\frac{x^{2}}{2}} dx$</p>
-<p>$= \frac{1}{4\sqrt{\pi}} \int_{-\infty}^{+\infty} (2x^{2} - 1)e^{-\frac{x^{2}}{2}}(-\frac{d^{2}}{dx^{2}}(2x^{2} - 1)e^{-\frac{x^{2}}{2}} + x^{2}(2x^{2} - 1)e^{-\frac{x^{2}}{2}} - (2x^{2} - 1)e^{-\frac{x^{2}}{2}}) dx$</p>
-<p>$= \frac{1}{4\sqrt{\pi}} \int_{-\infty}^{+\infty} (2x^{2} - 1)e^{-\frac{x^{2}}{2}}(-e^{-\frac{x^{2}}{2}}(x^{2} - 5)(2x^{2} -1) + x^{2}(2x^{2} - 1)e^{-\frac{x^{2}}{2}} - (2x^{2} - 1)e^{-\frac{x^{2}}{2}}) dx$</p>
-<p>$= \frac{1}{4\sqrt{\pi}} \int_{-\infty}^{+\infty} (2x^{2} - 1)\big{(}-(x^{2} - 5)(2x^{2} -1) + x^{2}(2x^{2} - 1) - (2x^{2} - 1)\big{)}e^{-x^{2}}dx$</p>
-<p>$= \frac{1}{4\sqrt{\pi}} \int_{-\infty}^{+\infty} (2x^{2} - 1)^{2}\big{(}-(x^{2} - 5) + x^{2} - 1\big{)}e^{-x^{2}}dx$</p>
-<p>$= \frac{1}{\sqrt{\pi}} \int_{-\infty}^{+\infty} (2x^{2} - 1)^{2}e^{-x^{2}}dx = 2$</p>
-<p>(Compare the <a href="https://en.wikipedia.org/wiki/Hermite_polynomials">Hermite polynomials</a>, which are orthogonal under the Gaussian measure $e^{-x^{2}}$.)</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>One upshot of all this is we can conveniently work in the number basis: aka the Fock basis, or "occupation number basis." $\mid 0 \rangle$, $\mid 1 \rangle$, $\mid 2 \rangle$, are the states with 0, 1, 2, and three quanta respectively. In terms of a matrix representation, we have the vacuum state is just $\begin{pmatrix} 1 \\ 0 \\ 0 \\ \vdots \end{pmatrix}$.</p>
-<p>And:</p>
-<p>$a^\dagger =\begin{pmatrix}           
-0 &amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp;\dots \\
-\sqrt{1} &amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; \dots\\
-0 &amp; \sqrt{2} &amp; 0 &amp; \dots &amp; 0 &amp; \dots\\
-0 &amp; 0 &amp; \sqrt{3} &amp; \dots &amp; 0 &amp; \dots\\
-\vdots &amp; \vdots &amp; \vdots &amp; \ddots  &amp; \vdots  &amp; \dots\\
-0 &amp; 0 &amp; 0 &amp; \dots &amp; \sqrt{n} &amp;\dots &amp;  \\
-\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots  &amp;\ddots \end{pmatrix}$</p>
-<p>$a =\begin{pmatrix}
-0 &amp; \sqrt{1} &amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; \dots \\
-0 &amp; 0 &amp; \sqrt{2} &amp; 0 &amp; \dots &amp; 0 &amp; \dots \\
-0 &amp; 0 &amp; 0 &amp; \sqrt{3} &amp; \dots &amp; 0 &amp; \dots \\
-0 &amp; 0 &amp; 0 &amp; 0 &amp; \ddots &amp; \vdots &amp; \dots \\
-\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \sqrt{n} &amp; \dots \\
-0 &amp; 0 &amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; \ddots \\
-\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \ddots \end{pmatrix}$</p>
-<p>One thing that's nice is that we can truncate the number of possible quanta in our oscillator and obtain a finite dimensional oscillator representation, although the commutation relations between $P$ and $Q$ won't be exactly satisfied.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>Here's an interesting fact:</p>
-<p>While $a^{\dagger}\psi_{n} = \psi_{n+1}$, we actually have $a\psi_{n} = n\psi_{n-1}$. Here's a little proof:</p>
-<p>We have $a\psi_{0} = 0$, which satisfies $a\psi_{n} = n\psi_{n-1}$, since multiplying by $0$ gives the $0$ vector, when $n=0$. We assume: $a\psi_{n} = n\psi_{n-1}$.</p>
-<p>Consider $a\psi_{n+1}$, which is really just $aa^{\dagger}\psi_{n}$. Since $[a, a^\dagger] = 1$, or $aa^{\dagger} - a^{\dagger}a = 1$, or $aa^{\dagger} = a^{\dagger}a + 1$, we can rewrite $aa^{\dagger}\psi_{n}$ as $(a^{\dagger}a + 1)\psi_{n} = a^{\dagger}a\psi_{n} + \psi_{n}$. We assumed that $a\psi_{n} = n\psi_{n-1}$, so we have: $a^{\dagger}n\psi_{n-1} + \psi_{n}$, which is just $n\psi_{n} + \psi_{n}$, or $(n+1)\psi_{n}$.</p>
-<p>In other words, if $a\psi_{n} = n\psi_{n-1}$, then $a\psi_{n+1} = (n+1)\psi_{n}$, and so if it was true for $n=0$, which it is since $a\psi_{0} = 0$, it's true for all $n+1$. Love it!</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>Take a look this expresion again: $a\psi_{n} = n\psi_{n-1}$.</p>
-<p>It looks kind of like: $\frac{d}{dz} z^{n} = nz^{n-1}$, the rule for taking the derivative!</p>
-<p>And so, another way of thinking about all this is that we represent the state of a quantum harmonic oscillator as a <em>polynomial</em>, where the powers of $z$ represent the number of quanta. This analogy can be made rigorous and goes by the name the Segal-Bargmann representation. There, $a \rightarrow \frac{d}{dz}$ and $ a^{\dagger} \rightarrow z$, the latter being multiplication by $z$. There are some technicalities involved in this construction, but the long and short of it is that we can represent our wave function as a function $f(z)$ from $\mathbb{C} \rightarrow \mathbb{C}$, instead of a wavefunction $\psi(x)$ from $\mathbb{R} \rightarrow \mathbb{C}$.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Which brings us to: just as we had spin coherent states parameterized by a $\mathbb{C} + \infty$, points on the sphere, we have coherent states of the quantum oscillator parameterized by $\mathbb{C}$, points on the plane.</p>
-<p>$\mid z \rangle = e^{-\frac{|z|^{2}}{2}} \sum_{n=0}^{\infty} \frac{z^{n}}{\sqrt{n!}}\mid n \rangle$, where $\mid n \rangle$ are all the number states.</p>
-<p>We have here a polynomial with an infinite number of terms, and notice it's just like the infinite series for $e^{x}$ from way back when. One consequence is that a coherent state $\mid z \rangle$ is an eigenstate of the annihilation operator: you can subtract a quanta and it doesn't make a difference!</p>
-<p>Check this out:</p>
-<p>$ \mid z \rangle = \sum_{n=0}^{\infty} c_{n}\mid n \rangle$</p>
-<p>$ \mid z \rangle = \sum_{n=0}^{\infty} \mid n \rangle \langle n \mid z \rangle$</p>
-<p>But if $\mid n \rangle = \frac{(a^{\dagger})^{n}}{\sqrt{n!}}\mid 0 \rangle$, then: $\langle n \mid  \ =  \langle 0 \mid  \frac{(a)^{n}}{\sqrt{n!}}$.</p>
-<p>So we can make the following move:</p>
-<p>$ \mid z \rangle = \sum_{n=0}^{\infty} \mid n \rangle \langle 0 \mid \frac{(a)^{n}}{\sqrt{n!}} \mid z \rangle$</p>
-<p>And since the coherent state is an eigenvector of the annihilation operator, $a\mid z \rangle = z \mid z \rangle$:</p>
-<p>$ \mid z \rangle = \sum_{n=0}^{\infty} \mid n \rangle \langle 0 \mid \frac{(z)^{n}}{\sqrt{n!}} \mid z \rangle = \ \langle 0 \mid z \rangle \sum_{n=0}^{\infty} \frac{(z)^{n}}{\sqrt{n!}} \mid n \rangle$</p>
-<p>The length of this as a vector has to be 1, so:</p>
-<p>$1 = \ \mid \langle 0 \mid z \rangle \mid^{2} \sum_{n=0}^{\infty} \frac{(\mid z \mid^{n})^{2}}{n!}$.</p>
-<p>And by the infinite series definition of $e^{x}$, we get $1 = \  \mid \langle 0 \mid z \rangle \mid^{2} e^{\mid z \mid^{2}}$.</p>
-<p>Thus we must have $ \langle 0 \mid z \rangle = e^{-\frac{\mid z \mid^{2}}{2}}$, since then $\mid \langle 0 \mid z \rangle \mid^{2} = e^{-\mid z \mid^{2}}$, which cancels out the $e^{\mid z \mid^{2}}$ to get $1$.</p>
-<p>So we've derived our expression from before:</p>
-<p>$\mid z \rangle = e^{-\frac{|z|^{2}}{2}} \sum_{n=0}^{\infty} \frac{z^{n}}{\sqrt{n!}}\mid n \rangle$.</p>
-<p>We then declare:</p>
-<p>$\psi(z) = \langle \overline{z} \mid \psi \rangle  = e^{-\frac{|z|^{2}}{2}} \sum_{n=0}^{\infty} \frac{z^{n}}{\sqrt{n!}}\langle n \mid \psi \rangle $.</p>
-<p>Ignoring the exponential, this is a complex polynomial in $z$, where the coefficient of the $n^{th}$ power of $z$ is the amplitude for $\psi$ being in the $n^{th}$ number state.</p>
-<p>In other words, instead of writing $\alpha\mid 0 \rangle + \beta \mid 1 \rangle + \gamma \mid 2 \rangle$, we could write: $f(z) = \frac{1}{\sqrt{2}}\gamma z^{2} + \beta z + \alpha$, and find some zeros!</p>
-<p>We can define the inner product as an integral over the complex plane:</p>
-<p>$ \int_{\mathbb{C}} f(z)^{*}g(z)e^{-|z|^2} dz$</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>Any state of the oscillator can be written in terms of all the $\mid z \rangle$'s. In other words, the $\mid z \rangle$'s form an overcomplete basis for states of the oscillator.</p>
-<p>In other words, we have the following resolution of the identity: $\frac{1}{\pi} \int_{\mathbb{C}} \mid z \rangle \langle z \mid dz = I$</p>
-<p>We start with $\mid z \rangle = e^{-\frac{|z|^2}{2}} \sum_{n=0}^{\infty} \frac{z^{n}}{\sqrt{n!}} \mid n \rangle$. So:</p>
-<p>$\frac{1}{\pi} \int_{\mathbb{C}} \mid z \rangle \langle z \mid dz = \frac{1}{\pi}  \int_{\mathbb{C}}  e^{-\frac{|z|^2}{2}} \sum_{n=0}^{\infty} \frac{z^{n}}{\sqrt{n!}} \mid n \rangle \langle m \mid  e^{-\frac{|z|^2}{2}} \sum_{m=0}^{\infty} \frac{\overline{z}^{m}}{\sqrt{m!}} dz$</p>
-<p>$ \sum_{n=0}^{\infty} \sum_{m=0}^{\infty} \mid n \rangle \langle m \mid \frac{1}{\pi}\int_{\mathbb{C}} \frac{z^{n}}{\sqrt{n!}}\frac{\overline{z}^{m}}{\sqrt{m!}}e^{-|z|^{2}} dz$</p>
-<p>$\sum_{n=0}^{\infty} \sum_{m=0}^{\infty} \mid n \rangle \langle m \mid\delta_{n,m} = \sum_{n=0}^{\infty} \mid n \rangle \langle n \mid = I$</p>
-<p>We can derive the amplitude between two coherent states to be:</p>
-<p>$\langle w \mid z \rangle = e^{-\frac{1}{2}(|z|^{2} + |w|^{2}) + z\overline{w}}$.</p>
-<p>The probability: $\mid \langle w \mid z \rangle \mid^{2} = e^{-|z - w|^{2}}$.</p>
-<p>The average number of quanta in a coherent state is just $|z|^{2}$. Its expected position is just (up to some factor) $z + z^{*}$, and its expected momentum is just $ z - z^{*}$, in other words, its position is proportional to its real part, and its momentum is proportional to its imaginary part. So that we can interpret the real axis as the "positon axis" and the imaginary axis as the "momentum axis"!</p>
-<p>If you look at their behavior, these states act as little coherent wavepackets closely resembling classical particles (or classical electromagnetic waves), maintaining their shape as they zip along. This is just like how the spin coherent states closely resemble the classical states of a spinning particle, all the stars along one axis.</p>
-<p>When you look at the time evolution of a coherent state itself, it makes a perfect circle in this position/momentum plane.</p>
-<p>Moreover, the expectation value of the position operator obeys the classical equations of motion for a harmonic oscillator: $\frac{d^{2}x}{dx^{2}} + \frac{1}{2}x^{2} = 0$.</p>
-<p>$\langle z \mid Q(t) \mid z \rangle = c|z|cos(t - \phi)$, where $Q(t) = e^{iHt}Qe^{-iHt}$, $z = |z|e^{i\phi}$, and $c$ is some constant we're ignoring.</p>
-<p>This was first noticed by Schrodinger himself!</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>Now, it's clear that each coherent state corresponds to a <em>complex number</em>, a point in the plane interpreted as the position/momentum plane, the phase space of a classical harmonic oscillator.</p>
-<p>This is just like before. We had each spin coherent state corresponding to a point on the sphere, which also happens to be the phase space of a spinning object. And just as we could use the spin coherent states over the sphere as a basis, we can use the oscillator coherent states over the plane as a basis.</p>
-<p>Furthermore just as in the case of the sphere, it is interesting that we are able to break down the quantum system in a basis consisting of <em>the most classical states</em></p>
-<p>Moreover, in the spin case, when we consider the coherent state wave function on the sphere, it's completely characterized by the points opposite to the Majorana stars, in other words, by the places of 0% probability (for all the stars to be found in that location, for the spin to be in a "classical state" pointing in that direction). Similarly, in the harmonic oscillator case, we can use the coherent state representation to work with a polynomial, and can characterize the state by its 0% probability points, 0% probability, that is, for it to be in certain "most-classical" coherent states (with a given position and momentum). (Incidentally, one can show that the oscillator coherent states can be related to the Poisson distribution, and the spin coherent states to the binomial distribution.)</p>
-<p>In other words, we seem to be able to define a quantum state in terms of <em>which classical states it definitely isn't</em>, by a kind of negative definition.</p>
-<p>What's funny is that: while I may have an intuitive difficulty understanding how something can be in a superposition of being in multiple ways at once, I have no problem understanding how something <em>can't</em> be in multiple ways at once. So that it actually seems more sensible to define thing in terms of what they aren't rather than what they are.</p>
-<p>What is perhaps remarkable is that in the spin case, the coherent state sphere is identified with <em>the actual 3D space we live in</em>. On the other hand, if we admit we can't specify a classical harmonic oscillator state without specifying a position <em>and</em> a momentum, we can still make contact with the very real phase space of a classical harmonic oscillator--only now we have to consider a "constellation" of such classical oscillators to get our quantum state.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>Using further trickiness, including the Baker-Campell-Hausdorff formula, we can derive this useful expression for a coherent state:</p>
-<p>$\mid z \rangle = e^{za^{\dagger} - \overline{z}a}\mid 0 \rangle$, where $\mid 0 \rangle$ is the vacuum state which we are "displacing."</p>
-<p>To see this, we note that if $[A, B]$ commutes with both $A$ and $B$, then:</p>
-<p>$e^{A+B} = e^{\frac{1}{2}[A, B]}e^{A}e^{B}$</p>
-<p>In our case, $[za^{\dagger}, \overline{z}a] = -|z|$, since $[a^{\dagger}, a] = -1$.</p>
-<p>So we have $e^{za^{\dagger} - \overline{z}a} = e^{-\frac{|z|}{2}}e^{za^\dagger}e^{-\overline{z}a}$</p>
-<p>Now consider that $e^{-\overline{z}a}\mid 0 \rangle = \sum_{n=0}^{\infty} \frac{(-1)^{n}}{n!} \overline{z}^{n}a^{n} \mid 0 \rangle$</p>
-<p>This gives the $0$ vector for $n&gt;0$, and so reduces down to $a^{0}\mid 0 \rangle = \mid 0 \rangle$. Thus: $e^{-\overline{z}a}\mid 0 \rangle = \mid 0 \rangle$.</p>
-<p>Therefore:</p>
-<p>$e^{-\frac{|z|}{2}}e^{za^\dagger}e^{-\overline{z}a}\mid 0 \rangle = e^{-\frac{|z|}{2}}e^{za^{\dagger}}\mid 0 \rangle$.</p>
-<p>But $e^{za^{\dagger}}\mid 0 \rangle$ by the infinite series for the exponential is just:</p>
-<p>$\sum_{n=0}^{\infty} \frac{z^{n}(a^{\dagger})^{n}}{n!}  \mid 0 \rangle = \sum_{n=0}^{\infty} \frac{z^{n}}{\sqrt{n!}} \mid n \rangle$</p>
-<p>Thus we have it that:</p>
-<p>$\mid z \rangle = e^{za^{\dagger} - \overline{z}a}\mid 0 \rangle = e^{-\frac{|z|}{2}}\sum_{n=0}^{\infty} \frac{z^{n}}{\sqrt{n!}} \mid n \rangle$, connecting up with what we derived before.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>Anyway, check out a (truncated) 1D oscilllator in <a href="examples/oscillator.py">oscillator.py</a>. You can set the maximum energy value, and view the amplitudes at each location along the line as it evolves under the oscillator hamiltonian, as well as view the probabilities (in red). Use "0", "1", "2", "3", etc, to explore the different number states. Use "i" to generate a random state. And finally, use "c" to generate a random coherent state! The yellow dot shows the expected value of the position operator on the current state.</p>
-<p>For the energy states, you'll see something like:</p>
-<p><img src="img/oscillator_eigenstates.jpg"></p>
-<p>Note that ignoring the endpoints, the $0$ state has 1 hump, the $1$ state has $2$ humps, the $2$ state has $3$ humps. Recall the harmonics of a vibrating string.</p>
-<p>Also check out <a href="examples/osc_coherent_picker.py">osc_coherent_picker.py</a> where you can drag a point around the plane and see the corresponding coherent state. And <a href="examples/osc_coherent_basis.py">osc_coherent_basis.py</a> is just like <code>oscillator.py</code> except it shows you the amplitudes for each coherent state in the plane, given the current state, as well as the roots of the corresponding polynomial in purple. Use <code>i</code> to choose a random state, <code>c</code> to choose a random coherent state, <code>h</code> to choose a random hamiltonian, <code>e</code> to use the oscillator hamiltonian, <code>n</code> to nudge the hamiltonian just a little. Use <code>0,1,2,3,...</code> to check out the energy eigenstates. We can see that under the oscillator hamiltonian, the roots of the polynomial simply rotate around rigidly as a constellation in the complex position/momentum plane.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>Finally, we want to emphasize again the significance of "coherent state quantization," which we've seen in the case of the quantum harmonic oscillator and the quantum spin. It turns out that we can describe a <em>quantum</em> harmonic oscillator state as a constellation of <em>classical</em> oscillator states, precisely those which are forbidden. In other words, we can interpret the quantum system as some number of copies of the classical system, which represent the classical states <em>the quantum system can't be in</em>, that have 0% probability of occuring. Materially, we can use coherent states to turn the quantum state into a polynomial and find the roots. This works in the case of the oscillator, where classical states refer to Gaussian wavepackets; and in the case of the spin, where classical states refer to states where all the angular momentum is concentrated in one direction. Whereas the "metaphysics" of a superposition of position states seems strange (a particle can be simultaneously in many locations?), we can perhaps find some clarity here: we can interpret a quantum state as specifying <em>which classical states it's not</em>. Moreover, we can describe the Schrodinger dynamics of an isolated system in terms of interactions <em>between the constellation of classical states the system can't be in</em>.</p>
-<p>One is reminded of the "negative theology" of late Antiquity and the Middle Ages. For example, Maimonides urges us only to define God in negative terms, never attributing some positive quality to God, since after all, all our ideas of qualities are relative human ideas gained through comparison, which can't apply absolutely to God. So it's best to say, instead, what God isn't. We can't actually get a positive idea of God; we can only try and fail to capture God's image, realize how we failed, and thus ever so slowly characterize God by <em>how God can't be pinned down</em>.</p>
-<p>Divinity aside, it is interesting that one can characterize quantum mechanics as an extension of classical mechanics that allows for systems to be defined <em>negatively</em>.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><hr>
-We can also gain a new perspective on entanglement.</p>
-<p>Suppose we have two polynomials $f(w) = (w-1)(w-2)$ and $g(z) = (z-3)(z-4)$. We can form the tensor product through simple multiplication: $(f \otimes g)(w, z) = (w-1)(w-2)(z-3)(z-4)$.</p>
-<p>We could form a plot of the roots of $(f \otimes g)(w, z)$:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">sympy</span> <span class="k">import</span> <span class="o">*</span>
-
-<span class="n">z</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;z w&quot;</span><span class="p">)</span>
-<span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">state_poly</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
-    <span class="k">global</span> <span class="n">z</span><span class="p">,</span> <span class="n">w</span>
-    <span class="n">v</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-    <span class="n">terms</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-            <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">n</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">w</span><span class="o">**</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">**</span><span class="n">j</span><span class="p">))</span>
-    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>    
-
-<span class="k">def</span> <span class="nf">make_lines</span><span class="p">(</span><span class="n">roots</span><span class="p">):</span>
-    <span class="k">global</span> <span class="n">z</span><span class="p">,</span> <span class="n">w</span>
-    <span class="n">n_grid</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">20</span>
-    <span class="k">for</span> <span class="n">root</span> <span class="ow">in</span> <span class="n">roots</span><span class="p">:</span>
-        <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">root</span><span class="p">:</span>
-            <span class="n">r</span> <span class="o">=</span> <span class="n">root</span><span class="p">[</span><span class="n">w</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">is_number</span><span class="p">:</span>
-                <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">N</span><span class="p">(</span><span class="n">r</span><span class="p">)]</span><span class="o">*</span><span class="n">n_grid</span><span class="p">)</span>
-                <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">L</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">n_grid</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">L</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">n_grid</span><span class="p">)</span>
-                <span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">Y</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">root</span><span class="p">:</span>
-            <span class="n">r</span> <span class="o">=</span> <span class="n">root</span><span class="p">[</span><span class="n">z</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">is_number</span><span class="p">:</span>
-                <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">L</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">n_grid</span><span class="p">)</span>
-                <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">N</span><span class="p">(</span><span class="n">r</span><span class="p">)]</span><span class="o">*</span><span class="n">n_grid</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">L</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">n_grid</span><span class="p">)</span>
-                <span class="n">Y</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="p">]</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="n">make_lines</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
-"
->
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The x-axis is the $w$ axis and the y-axis is the $z$ axis. We see two vertical lines at $1$ and $2$ cooresponding to $(w-1)(w-2)$. We get a line because $w$ must be 1 or 2 independently of $z$: the lines represents the fact that for all values of $z$, $w=1$ and $w=2$ are roots. Similarly, we have two horizontal lines at $3$ and $4$ corresponding to $(z-3)(z-4)$. We've chosen to stick with real roots since we can visualize things nicely with lines. Otherwise, we'd have to imagine: for every point in the complex plane, a map to another point on the complex plane.</p>
-<p>What happens, though, if we add a term mixing $w$ and $z$?</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="n">p2</span> <span class="o">=</span> <span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="n">w</span><span class="p">)</span>
-<span class="n">make_lines</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">p2</span><span class="p">))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
-"
->
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="n">p2</span> <span class="o">=</span> <span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="n">w</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">make_lines</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">p2</span><span class="p">))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
-"
->
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>In this last image, we have a relationship: $w = \frac{10}{z}$. This function has two branches, asymptoting to the $x$ and $y$ axes. Note there's a distortion in the middle as matplotlib connects the two branches.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-
-<span class="n">p3</span> <span class="o">=</span> <span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="n">z</span><span class="o">*</span><span class="n">w</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">make_lines</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">p3</span><span class="p">))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
-"
->
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>In other words, when systems are entangled we can't imagine simply: a constellation of excluded classical states of $A$ and a separate constellation of excluded classical states of $B$. Instead, we might have a joint, mutually dependent relationship: for each possible choice of excluded classical state of $A$, we can get an excluded classical state of $B$, and vice versa. In other words, the excluded classical states of $B$ are only defined up to a choice of excluded classical states of $A$. These joint root of $A$ and $B$ exclude a whole swath of the space of their togetherness.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>Okay, so we have a 1D quantum harmonic oscillator. We can view it as a coexistence or constellation of banned classical oscillator states; for our purposes now, however, we will view it primarily as a little guy that "counts" quanta: we can add quanta to it, subtract quanta from it, measure the number of quanta. The more quanta, the higher the energy. A general state of the oscillator is a superposition of different numbers of quanta. What is a quantum? Here, it's like a nugget of energy. It doesn't have an identity of its own: it's like the idea of a pebble: simple, indistinguishable.</p>
-<p>Now here's a very important connection.</p>
-<p>One of the simplest ways of understanding quantum field theory, at least at first, is via something called "second quantization."</p>
-<p>If you start with a quantum system living in some Hilbert space of dimension $d$, then you can construct a theory of a <em>variable number of indistinguishable "copies" of that quantum system</em> by introducing a quantum harmonic oscillator for each basis state of the original quantum system. Hence, second quantization. (Later we'll get into the eventual difficulties with this view as regards QFT as a whole.) Note: now we're talking about not a constellation of classical systems, but a constellation of <em>quantum systems</em>, as it were.</p>
-<p>In second quantized quantum mechanics, each oscillator is associated with a basis state of the original quantum system, and each oscillator count the number of particles in the state it is associated with. And because we use quantum harmonic oscillators to count them, the particles so described will always be as indistinguishable as quanta in a harmonic oscillator.</p>
-<p>For a "bosonic field," there can be any number of particles in the same state, and the particles are always be in the permutation symmetric state. For a "fermionic field," there can be at most one particle in a given state, and the particles are always be in the permutation antisymmetric state. In what follows, we'll mainly be considering the bosonic case.</p>
-<p>The point is that, remarkably, it happens that our current theories of physics regard all so-called "particles" as quanta of some quantum field, as indistinguishable, countable nuggets.</p>
-<p>In "field theory" proper, one can think about a "quantum field" as a "first quantization" of a classical field; or as the "second quantization" of ordinary quantum system, originally with an amplitude at each position (or momentum), where we imagine a quantum harmonic oscillator at each location, counting the number of particles at that location (or in that momentum mode), and indeed: this is like a quantized model of a field, with little oscillating springs at each point. One can add other things to the first quantized state besides "position," like spin, and even make it relativistic. (The difficulty comes in dealing with interactions.)</p>
-<p>But actually, the simplest "quantum field theory" involves second quantizing a little spin-$\frac{1}{2}$ particle. Such a system has two states, and so we introduce two quantum harmonic oscillators. We could say: the first oscillator keeps track of the number of $\uparrow$ quanta, and the second oscillator keeps track of the number of $\downarrow$ quanta. By construction, we'll get a theory of a variable number of permutation symmetric spin-$\frac{1}{2}$ particles. But we know what a permutation symmetric state of spin-$\frac{1}{2}$'s is! It's a spin-$j$ particle! And so, we can look at our double oscillator construction as a model of spin with <em>variable $j$</em>, where the $j$ value can change, and indeed, where we can have a superposition of different $j$ values.</p>
-<hr>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We could write this out in "Fock" notation, but let's use polynomials instead. Given two oscillators states (coeffcients suppressed):</p>
-<p>$f(z) = z^{0} + z^{1} + z^{2} + z^{3} + \dots$</p>
-<p>$g(w) = w^{0} + w^{1} + w^{2} + w^{3} + \dots $</p>
-<p>We can tensor them:</p>
-<p>$F(z, w) = z^{0}w^{0} + z^{0}w^{1} + z^{0}w^{2} + z^{0}w^{3} + \dots + z^{1}w^{0} + z^{1}w^{1} + z^{1}w^{2} + z^{1}w^{3} + \dots + z^{2}w^{0} + z^{2}w^{1} + z^{2}w^{2} + z^{2}w^{3} + \dots + z^{3}w^{0} + z^{3}w^{1} + z^{3}w^{2} + z^{3}w^{3} + \dots$</p>
-<p>But this can be rearranged:</p>
-<p>$F(z, w) = \Big{\{} z^{0}w^{0} \Big{\}} + \Big{\{} z^{1}w^{0} + z^{0}w^{1} \Big{\}} + \Big{\{} z^{2}w^{0} + z^{1}w^{1} + z^{0}w^{2} \Big{\}} + \Big{\{} z^{3}w^{0} + z^{2}w^{1} + z^{1}w^{2} + z^{0}w^{3} \Big{\}} + \dots$</p>
-<p>In other words, we can regard the two variable polynomial as a sum of <em>homogenous</em> polynomials, of degree $0, 1, 2, 3, 4, \ldots$. Each such sector of the Hilbert space, corresponding to a given a fixed $n$, can be interpreted as a spin-$\frac{n}{2}$ state. In other words, $n$ is just $2j$, the number of stars.</p>
-<hr>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Furthermore, we can upgrade any 2x2 operator on spin-$\frac{1}{2}$'s to act globally on the whole space via simple map:</p>
-<p>$ \textbf{O} = \sum_{i, j} a_{i}^{\dagger} O_{i, j} a_{j} $</p>
-<p>Or: $\textbf{O} = \begin{pmatrix} a_{0}^{\dagger} &amp; a_{1}^{\dagger} \end{pmatrix} \begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix} \begin{pmatrix} a_{0} \\ a_{1}\end{pmatrix}$, where the $a_{i}$'s and $a_{i}^{\dagger}$'s and recall are matrices.</p>
-<p>So that:</p>
-<p>$X = \begin{pmatrix} a_{0}^{\dagger} &amp; a_{1}^{\dagger} \end{pmatrix} \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} \begin{pmatrix} a_{0} \\ a_{1}\end{pmatrix} = \begin{pmatrix} a_{0}^{\dagger} &amp; a_{1}^{\dagger} \end{pmatrix} \begin{pmatrix} a_{1} \\ a_{0}\end{pmatrix} = a_{0}^{\dagger}a_{1} + a_{1}^{\dagger}a_{0}$</p>
-<p>$Y = \begin{pmatrix} a_{0}^{\dagger} &amp; a_{1}^{\dagger} \end{pmatrix} \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix} \begin{pmatrix} a_{0} \\ a_{1}\end{pmatrix} = \begin{pmatrix} a_{0}^{\dagger} &amp; a_{1}^{\dagger} \end{pmatrix} \begin{pmatrix} -ia_{1} \\ ia_{0}\end{pmatrix} = -ia_{0}^{\dagger}a_{1} + ia_{1}^{\dagger}a_{0}$</p>
-<p>$Z = \begin{pmatrix} a_{0}^{\dagger} &amp; a_{1}^{\dagger} \end{pmatrix} \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} \begin{pmatrix} a_{0} \\ a_{1}\end{pmatrix} = \begin{pmatrix} a_{0}^{\dagger} &amp; a_{1}^{\dagger} \end{pmatrix} \begin{pmatrix} a_{0} \\ -a_{1}\end{pmatrix} = a_{0}^{\dagger}a_{0} - a_{1}^{\dagger}a_{1}$</p>
-<p>If we upgrade the $X$ operator, for example, it will act as an $X$ operator on each of the spin-$j$ subspaces. If we use it to rotate, it'll rotate them all at once, although at a speed proportional to the $j$ value.</p>
-<p>We can also form a creation operator that creates a star at a given location. Given some spinor $\begin{pmatrix} \alpha \\ \beta \end{pmatrix}$, the star creation operator is $a_{star}^{\dagger} = \alpha a_{0}^{\dagger} + \beta a_{1}^{\dagger}$. Thus we can decompose a spin-$j$ state into $2j$ spinors, and so lift a constellation into the double harmonic ocillator Hilbert space. Or we can form a homogenous polynomial in the creation operators:</p>
-<p>$ a_{constellation}^{\dagger} = \sum_{i=0}^{2j} \frac{c_{i}}{\sqrt{i!(2j-i)!}} (a_{0}^{\dagger})^{2j-i}(a_{1}^{\dagger})^{i} $</p>
-<p>where the $c_{i}$'s are the components of the $\mid j, m \rangle$ state: $\begin{pmatrix} c_{0} \\ c_{1} \\ c_{2} \\ \vdots \end{pmatrix}$. Majorana returns! In fact, Schwinger learned about Majorana's representation at some point in the 30's and 40's, and it bugged him so much he invented a lot of this.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>It's interesting to consider the meaning of the position operators associated to each oscillator. If we consider the oscillators as abstractly counting "quanta," we don't necessarily have to see deeper meaning in the "quadrature" operators for each oscillator. But it turns out to be useful to do so in this case.</p>
-<p>If we imagine the axes of the two oscillators to be at right angles, so that we treat them as a 2D harmonic oscillator, and if one examines the eigenstates of the X, Y, Z operators, one finds that they correspond to diagonal/antidiagonal oriented state, circularly symmetrical states, and vertical/horizontal oriented states in the plane of positions. This immedietly should make you think of the polarization of light.</p>
-<p>Indeed, imagine a light wave is rushing toward you. It has to move forward at the speed of light, as always, but it can oscillate in the plane orthogonal to its motion. This gives light a corkscrew character, and this is called its polarization. You can send light through a polarizing filter to filter out horizontally polarized light, circularly polarized light, etc.</p>
-<p>It turns out that another way of interpreting our construction is as a model of the polarization of light, oscillating in the 2D plane orthogonal to its motion. We can see there is an intimate connection to the sphere: precusors include: the "Poincare sphere," invented in the 19th century to deal with classical polarization.</p>
-<p>To wit, if we imagine the simplest model of polarization, and consider how the light can oscillate, it'll form an ellipse in the plane. There is an intimate connection between the sphere and the ellipse. Since what is an ellipse, but a circle seen askew in 3D?</p>
-<p><img src="img/polarization_ellipse.jpeg"></p>
-<p>Indeed, if you take a qubit state and rotate its overall phase, while taking the real parts of the two components to be $(x, y)$ points on the plane, this will draw out the appropriate ellipse. (There is a relationship here to the old theory of epicycles.)</p>
-<p>Consider three ways of drawing an ellipse: you can draw an ellipse by oscillatory movement horizontally and vertically, at some phase relative to each other. Or you could use oscillatory movement at $45^{\circ}$ from that, by diagonal and antidiagonal phased oscillations. Or by left handed circular and a right handed circular motion, phased from each other, the two points being added. This one way of interpreting the geometry of a spinor, and the meaning of the Z, X, and Y bases respectively.</p>
+<p>We've had occasion to discuss "symplectic" geometry way back when we discussed the meaning of the complex inner product. The name symplectic is kind of a joke: it's a translation into Greek of the Latin word "complex." Symplectic geometry is related to the phase space of classical mechanics. There, things come in pairs: one always as some kind of "position" paired to a "momentum," even if the meanings of these things become somewhat abstract. Hence, a similarity to complex numbers, which have two parts, real and imaginary. And clearly, the relationship between "symplectic" and "complex" runs deep: we've seen how in the case of the oscillator, we can interpret the complex plane as the position/momentum plane of the classical oscillator!</p>
+<p>The point is that "symplectic" or "canonical" transformations transform positions and momenta among themselves so that you end up with another set of positions and momenta.</p>
+<p>We can consider finite linear symplectic transformations, which correspond to even dimensional "symplectic matrices".</p>
+<p>It's easy to generate a random $2n$ x $2n$ symplectic matrix. The dimensions have to be even since we have pairs of $p$'s and $q$'s. First, generate four random real $n$ x $n$ matrices. Then tensor each one respectively with $I, iX, iY, iZ$, where $X, Y, Z$ are the $2$ x $2$ Pauli's and $I$ is the $2$ x $2$ identity. Sum them all up, and then do the $QR$ decomposition into a unitary matrix $Q$ times an upper triangular matrix $R$. $Q$ is the desired symplectic matrix.</p>
+<p>Such a matrix preserves the so-called "symplectic form." We'll take the symplectic form $\Omega$ to be, for example, in the $6$ x $6$ case:</p>
+<p>$\begin{pmatrix} 
+0 &amp; -1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; -1 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \end{pmatrix}$</p>
+<p>In other words, a block diagonal matrix with $\begin{pmatrix} 0 &amp; -1 \\ 1 &amp; 0 \end{pmatrix}$'s along the diagonal.</p>
+<p>A symplectic matrix $M$ will perserve $\Omega$ in the following sense:</p>
+<p>$\Omega = M^{T}\Omega M$</p>
 
 </div>
 </div>
@@ -13752,28 +13103,28 @@ We can also gain a new perspective on entanglement.</p>
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">vpython</span> <span class="k">as</span> <span class="nn">vp</span>
-<span class="n">scene</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">canvas</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">white</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">scipy</span>
 
-<span class="k">def</span> <span class="nf">spinor_xyz</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">(),</span> <span class="n">s</span><span class="p">),</span>\
-                     <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmay</span><span class="p">(),</span> <span class="n">s</span><span class="p">),</span>\
-                     <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">(),</span> <span class="n">s</span><span class="p">)])</span>
+<span class="k">def</span> <span class="nf">random_symplectic</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">O</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">O</span> <span class="ow">in</span> \
+             <span class="nb">enumerate</span><span class="p">([</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">(),</span> \
+                        <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmay</span><span class="p">(),</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">()])])</span>
+    <span class="n">Q</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">full</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
 
-<span class="n">a</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">xyz</span> <span class="o">=</span> <span class="n">spinor_xyz</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="n">vsphere</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">blue</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-<span class="n">varrow</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vsphere</span><span class="o">.</span><span class="n">pos</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">*</span><span class="n">xyz</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">omega</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">O</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+    <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">scipy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">block_diag</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">O</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">))</span>
 
-<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">real</span>
-<span class="n">vpt</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">yellow</span><span class="p">,</span> <span class="n">make_trail</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">W</span><span class="p">):</span>
+    <span class="n">F</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">trans</span><span class="p">()</span><span class="o">*</span><span class="n">W</span><span class="o">*</span><span class="n">M</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">full</span><span class="p">(),</span> <span class="n">W</span><span class="o">.</span><span class="n">full</span><span class="p">())</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 
-<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.001</span>
-<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span><span class="o">*</span><span class="n">a</span>
-    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">real</span>
-    <span class="n">vpt</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">vp</span><span class="o">.</span><span class="n">rate</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">omega</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">random_symplectic</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">test</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">W</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -13784,35 +13135,8 @@ We can also gain a new perspective on entanglement.</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>So we have a model for the polarization state of a photon, ignoring its momentum. When we consider the double oscillator construction, we can view this as the polarization state of potentially several photons, all with the same momentum. Each photon has a qubit representing its polarization state, and photons are a bosonic field, so the qubits are as desired permutation symmetric.</p>
-<p>A word to the wise: a photon is technically a spin-$1$ particle, but because it's massless, it has only two possible states, hence its polarization is described by a qubit.</p>
-<p>Finally, we have a new way of thinking about the duality between the plane and the sphere: the same state can represent the polarization of a massless particle (plane) or the spin of a massive particle (spin).</p>
-<p>One nice consequence of this duality is that we can build quantum computers out of spins and also quantum computers out of light, and easily translate between them. I can represent by spin operators on the photons; and the photonic operators on the spins. And so, the one can simulate the other. Of course, this is more profound than a mere classical simulation. If I load a given quantum state into a quantum computer made of spins, of light, of whatever, this won't in principle affect its entanglement to other systems.  So when you download something from the quantum internet onto a quantum computer even with a different architecture, it really is <em>that unique non-clonable</em> quantum state, and not merely a <em>representation</em>, a <em>copy</em> of it, as would be the case if you loaded some classical data into your computer.</p>
-<p>One thing that is also clear is that there can be many perspectives conceptually on the same quantum system. We have a constellation on the sphere. Is it a spin-$j$ particle? Is it $2j$ spin-$\frac{1}{2}$'s, is it two quantum harmonic oscillators, is it the polarization of a beam of photons? The interpretation is physically fixed by how the system interacts with the rest of the world; and conceptually each new interpretation brings with it a whole unheralded set of ideas and connections to the rest of the world.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>Check out <a href="examples/spin_oscillators.py">spin_oscillators.py</a>! One can choose a max number of quanta in each of the two oscillators, as well as a random spin state to be loaded into the double oscillator Hilbert space, and a Hamiltonian to evolve with. One sees above a red sphere representing the original spin state (just to make sure it's loaded in correctly!), and below a series of blue spheres representing the spin-$0$, spin-$\frac{1}{2}$, spin-$1$, $\dots$ states that the Hilbert space decomposes into. Their opacity is just the norm of that sector. In the middle, one sees the plane, with little arrows at each point representing the amplitude at that location. Using the keyboard, one can measure the X, Y, Z, N (number), and Q (position) operators with "x", "y", "z", "n", and "q". "i" gives you a random state, "h" picks a random hamiltonian, "e" returns you to the oscillator hamiltonian, "s" picks X, Y, Z to be hamiltonian. Play around with it!</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>Spin is all about representations of the group SU(2), which is the double cover of 3D rotations. We can view the spin-$\frac{1}{2}$ representation as a kind of template, and build up the higher spin representations as "constellations" of spin-$\frac{1}{2}$'s. This is done systematically through second quantizing the basic representation.</p>
-<p>Instead of using SU(2), we could use SU(3), which acts on 3D complex states, and then we'd have 3 harmonic oscillators, but actually we'd need 6, since SU(3) is rank 2. Indeed, the same pattern can be applied to SU(N). Generally speaking, we can construct theories of a variable number of indistinguishable "particles" with different symmeteries. The oscillator space can be interpreted as a superposition of higher order representations, each of which can be itself represented as an unordered collection of "stars," or basic states, to be symmeterized. Thus the atomic pattern continues.</p>
-<p>Furthermore, in a second quantized context, we could regard any measurement as, in fact, the measurement of the <em>number</em> of particles in a certain state. We could rephrase a spin measurement along the $Z$ axis in terms of the of "the number of quanta in the $\uparrow$ oscillator" and "the number of quanta in the $\downarrow$ oscillator" (at a certain location). Indeed, we could rotate the creation and annihilation operators themselves to count $\rightarrow$ and $\leftarrow$ quanta instead.</p>
-<p>Due to second quantization, we can think about any measurement, in some sense, as being reducible to the measurement of <em>some</em> number operator.</p>
-<p>In a way, we've come full circle. We can now contextualize our pebbles as counting the number of indistinguishable quanta of some mode of a quantum field. And any actual distinguishable clay pebble has emerged in the limit of this quantum theory.</p>
+<p>In the quantum case, we could use a symplectic matrix to transform position and momenta operators among themselves in such a way that perserves the commutation relations.</p>
+<p>Indeed, given some $R = \begin{pmatrix} Q_{0} \\ P_{0} \\ Q_{1} \\ P_{1} \\ \vdots \end{pmatrix}$, you can think about $\Omega$ as: $\Omega_{i,j} = tr(i[R_{i}, R_{j}])$ Naturally, this won't work unless $Q$ and $P$ are infinite dimensional and satisfying the canonical commutation relation: $[Q, P] = i$.</p>
 <hr>
 </div>
 </div>
@@ -13820,11 +13144,219 @@ We can also gain a new perspective on entanglement.</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Check out <a href="examples/qft.py">qft.py</a> for an very rudimentary example of a 1D quantum field theory. Choose the number of discrete positions, the max num of excitations per oscillator. Each position also carries a spin. In fact, since we have to introduce two oscillators per position, we can have a variable spin-$j$ at each location.</p>
-<p>The height of the cylinders is the expectation value of the number of particles at each location. Below, you see the expected spin axis at that location, as well as the expected values of the number operators for up and down quanta.</p>
-<p>We begin by upgrading an oscillator coherent state with a definite spin, and also upgrading the oscillator hamiltonian to an operator that acts on the field. Also try simply creating a "star" at a given location out of the vacuum. The free field hamiltonian is given by the sum of the momentum oscillator hamiltonians.</p>
-<p>By building up operators out of the creation and annihilation operators at a given position, one can guarantee that spacelike separated operators commute: this is useful if for whatever reason there fail to be tensor products in the Hilbert space.</p>
-<p>Obviously, we could add other dimensions of space and other internal symmetries. We could try to make the theory relativistic. In the general case, once you include interactions, there is a theorem (Haag's theorem), which says that the resulting theory will be unitarily inequivalent to one built out of oscillators. We'll return to these ideas in the next section.</p>
+<p>Now, one could imagine transforming not the $P$'s and $Q$'s but the $a$'s and $a^{\dagger}$'s. In this case, we call the transformations "Bogoliubov transformations." Linear Bogoliubov transformations can diagonalize quadratic Hamiltonians, and were first employed in the study of condensed matter systems, where certain particles can "pair up" and become "quasiparticles," moving around in their own right. In other words, the notion of "what is a particle" can be shifted with such a transformation.</p>
+<p>In quantum optics, one simple such transformation is the following. We have a Bogoliubov matrix paramterized by $r$:</p>
+<p>$\begin{pmatrix} cosh(r) &amp; -sinh(r) \\ -sinh(r) &amp; cosh(r) \end{pmatrix} \begin{pmatrix} a \\ a^{\dagger}\end{pmatrix} = \begin{pmatrix} b \\ b^{\dagger}\end{pmatrix}$</p>
+<p>So that:</p>
+<p>$b = a \ cosh(r) - a^{\dagger} \ sinh(r)$</p>
+<p>$b^{\dagger} = a^{\dagger} \ cosh(r) - a \ sinh(r)$</p>
+<p>This same transformation can be implemented with the "single mode squeezing operator":</p>
+<p>$S = e^{ \frac{r(a^{2} - a^{\dagger2})} {2}}$</p>
+<p>In general, we can have a complex parameter $z$ with:</p>
+<p>$S = e^{ \frac{\overline{z}a^{2} - za^{\dagger2}}{2}}$</p>
+<p>If $z = re^{i\theta}$:</p>
+<p>$\begin{pmatrix} cosh(r) &amp; -e^{i\theta}sinh(r) \\ -e^{-i\theta}sinh(r) &amp; cosh(r) \end{pmatrix} \begin{pmatrix} a \\ a^{\dagger}\end{pmatrix} = \begin{pmatrix} b \\ b^{\dagger}\end{pmatrix}$</p>
+<p>The squeezing operator is useful since we can act on states, for example the vacuum state $\mid 0 \rangle$ to get the "squeezed" vacuum.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">destroy</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span>
+
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">cosh</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sinh</span><span class="p">(</span><span class="n">r</span><span class="p">)],</span>\
+              <span class="p">[</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sinh</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cosh</span><span class="p">(</span><span class="n">r</span><span class="p">)]])</span>
+<span class="n">O</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">dag</span><span class="p">()]</span>
+
+<span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">O</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">O</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">sum</span><span class="p">([</span><span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">O</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>\
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>\
+                     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+
+<span class="n">a2</span><span class="p">,</span> <span class="n">adag2</span> <span class="o">=</span> <span class="n">apply</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">O</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">commutator</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">dag</span><span class="p">())</span> <span class="o">==</span> <span class="n">qt</span><span class="o">.</span><span class="n">commutator</span><span class="p">(</span><span class="n">a2</span><span class="p">,</span> <span class="n">adag2</span><span class="p">))</span>
+
+<span class="n">S</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span><span class="o">*</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">a</span> <span class="o">-</span> <span class="n">a</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">a</span><span class="o">.</span><span class="n">dag</span><span class="p">())</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">expm</span><span class="p">()</span>
+<span class="n">a3</span><span class="p">,</span> <span class="n">adag3</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">S</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">a</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">S</span>
+
+<span class="c1"># NOTE:</span>
+<span class="c1"># a3 is close to a2</span>
+<span class="c1"># adag3 is close to adag2</span>
+<span class="c1"># but not exactly due to finite approximation</span>
+
+<span class="n">vac</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">squeezed_vac</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">vac</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;N on vac: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="n">vac</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;N2 on vac: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">a2</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">a2</span><span class="p">,</span> <span class="n">vac</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;N3 on vac: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">a3</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">a3</span><span class="p">,</span> <span class="n">vac</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;N on squeezed vac: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="n">squeezed_vac</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;N2 on squeezed vac: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">a2</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">a2</span><span class="p">,</span> <span class="n">squeezed_vac</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;N3 on squeezed vac: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">a3</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">a3</span><span class="p">,</span> <span class="n">squeezed_vac</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<p>We can also consider "two-mode squeezing."</p>
+<p>Given some parameter $r$, we have a Bogoliubov transformation:</p>
+<p>$\begin{pmatrix}
+cosh(r) &amp; 0 &amp; 0 &amp; sinh(r) \\
+0 &amp; cosh(r) &amp; sinh(r) &amp; 0 \\
+0 &amp; sinh(r) &amp; cosh(r) &amp; 0 \\
+sinh(r) &amp; 0 &amp; 0 &amp; cosh(r)
+\end{pmatrix} \begin{pmatrix} a_{0} \\ a_{1} \\ a_{0}^{\dagger} \\ a_{1}^{\dagger} \end{pmatrix}$</p>
+<p>The two mode squeezing operator is:</p>
+<p>$S = e^{r(a_{0}a_{1} - a_{0}^{\dagger}a_{1}^{\dagger})}$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">destroy</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">n</span><span class="p">)),</span>\
+     <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">destroy</span><span class="p">(</span><span class="n">n</span><span class="p">))]</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">cosh</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sinh</span><span class="p">(</span><span class="n">r</span><span class="p">)],</span>\
+              <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cosh</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sinh</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span>\
+              <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sinh</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cosh</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span>\
+              <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sinh</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cosh</span><span class="p">(</span><span class="n">r</span><span class="p">)]])</span>
+<span class="n">O</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="p">[</span><span class="n">a_</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span> <span class="k">for</span> <span class="n">a_</span> <span class="ow">in</span> <span class="n">a</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">O</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">O</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">sum</span><span class="p">([</span><span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">O</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>\
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>\
+                     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+<span class="n">O2</span> <span class="o">=</span> <span class="n">apply_bog</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+
+<span class="n">S</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span><span class="o">*</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()))</span><span class="o">.</span><span class="n">expm</span><span class="p">()</span>
+<span class="n">O3</span> <span class="o">=</span> <span class="p">[</span><span class="n">S</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">o</span><span class="o">*</span><span class="n">S</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">O</span><span class="p">]</span>
+
+<span class="n">vac</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">vac</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+<span class="n">squeezed_vac</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">vac</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Na on vac: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vac</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nb on vac: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">vac</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;N2a on vac: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">O2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">O2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vac</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;N2b on vac: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">O2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">O2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">vac</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;N3a on vac: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">O3</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">O3</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vac</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;N3b on vac: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">O3</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">O3</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">vac</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Na on squeezed vac: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">squeezed_vac</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nb on squeezed vac: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">squeezed_vac</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;N2a on squeezed vac: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">O2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">O2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">squeezed_vac</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;N2b on squeezed vac: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">O2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">O2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">squeezed_vac</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;N3a on squeezed vac: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">O3</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">O3</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">squeezed_vac</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;N3b on squeezed vac: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">O3</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">O3</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">squeezed_vac</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<p>Another application of the "two mode squeezed vacuum" is in relativistic quantum field theory in curved space.</p>
+<p>For example, consider the famous Unruh effect. An inertial observer is hanging around Minkowski space, not detecting any particles of some scalar field. In other words, the scalar field is in its vacuum state, without any particles. All inertial observers agree on this vacuum state, and hence: on what is meant by a particle. The vacuum state is "Lorentz invariant." But what about an accelerated observer? For example, a constantly accelerated observer. The prediction of Unruh is that such an observer would detect particles: in other words, the scalar field would not be in its vacuum state.</p>
+<p>One can describe the situation with respect to this constantly acceleration observer with "Rindler coordinates."</p>
+<p><img src="img/rindler.png"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The idea is that because of their constant acceleration, the world of the accelerated observer is divided into two: they're confined to the $I$ region. There is a kind of "horizon" to their experience.</p>
+<p>Let's consider the creation and annihilation operators of a mode of momentum $w$ of the scalar field in regions $I$ and $II$ of Rindler space. In other words, $r_{I}, r_{I}^{\dagger}$ and $r_{II}, r_{II}^{\dagger}$. Suppose our observer is moving with acceleration $a$.</p>
+<p>Define $r = arcsinh ((e^{ \frac{2\pi w}{a}} - 1)^{-\frac{1}{2}})$</p>
+<p>And with it the two mode squeezing operator:</p>
+<p>$ S = e^{ r (r_{I}r_{II} - r_{I}^{\dagger}r_{II}^{\dagger})}$</p>
+<p>If $\mid 0 \rangle_{I}\mid 0 \rangle_{II}$ is the Rindler vacuum, then: $ S^{\dagger}\mid 0 \rangle_{I}\mid 0 \rangle_{II} = \mid 0 \rangle_{M}$ gives the Minkowski vacuum.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">rI</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">destroy</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="n">rII</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">destroy</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="n">r_vac</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsinh</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">w</span><span class="o">/</span><span class="n">acc</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">SQ</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span><span class="o">*</span><span class="p">(</span><span class="n">rI</span><span class="o">*</span><span class="n">rII</span> <span class="o">-</span> <span class="n">rI</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">rII</span><span class="o">.</span><span class="n">dag</span><span class="p">()))</span><span class="o">.</span><span class="n">expm</span><span class="p">()</span>
+<span class="n">m_vac</span> <span class="o">=</span> <span class="n">SQ</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">r_vac</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">destroy</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">],</span> <span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">]]</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">SQ</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">m</span><span class="o">*</span><span class="n">SQ</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;N in rI on rindler vac: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">rI</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">rI</span><span class="p">,</span> <span class="n">r_vac</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;N in rII on rindler vac: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">rII</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">rII</span><span class="p">,</span> <span class="n">r_vac</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;N in M on rindler vac: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">m</span><span class="p">,</span> <span class="n">r_vac</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;N in rI on minkowski vac: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">rI</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">rI</span><span class="p">,</span> <span class="n">m_vac</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;N in rII on minkoswki vac: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">rII</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">rII</span><span class="p">,</span> <span class="n">m_vac</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;N in M on minkowski vac: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">m</span><span class="p">,</span> <span class="n">m_vac</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There is an inverse relationship: if an inertial observer would measure no particles in the mode $w$, then an accelerated observer would measure some particles. And if an accelerated obeserver measured no particles, then an inertial observer would measure some.</p>
+<p>Moreover, the accelerated observer has to trace over anything that happens in region $II$ since no signals can reach them from there. Whereas a signal from $II$ could reach our inertial observer.</p>
 
 </div>
 </div>

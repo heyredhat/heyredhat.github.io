@@ -3,6 +3,8 @@ import numpy as np
 import vpython as vp
 from magic import *
 
+scene = vp.canvas(height=600, width=800)
+
 def osc_op_upgrade(O, a):
     n = len(a)
     O = O.full()
@@ -110,8 +112,7 @@ z = (np.random.randn(1)[0] + np.random.randn(1)[0]*1j)/2
 coherent_state = coherent(z, n_pos)
 spinor = qt.rand_ket(2)
 xyz = spin_XYZ(spinor)[0]
-#print(xyz)
-
+s
 state = (osc_state_upgrade(qt.tensor(coherent_state, spinor), a)*vacuum).unit()
 state.dims = [[n_max]*n_pos*2, [1]*n_pos*2]
 

@@ -13251,6 +13251,8 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
 <h2 id="On-the-connection-to-classical-probability-distributions">On the connection to classical probability distributions<a class="anchor-link" href="#On-the-connection-to-classical-probability-distributions">&#182;</a></h2><p>So we have our quantum harmonic oscillator coherent state:</p>
 <p>$\mid z \rangle = e^{-\frac{|z|^{2}}{2}} \sum_{n=0}^{\infty} \frac{z^{n}}{\sqrt{n!}}\mid n \rangle$</p>
 <p>Let's work out $\langle n \mid z \rangle$, the amplitude for the coherent state associated with the complex number $z$ to be in the $n^{th}$ number state.</p>
@@ -13293,13 +13295,11 @@ div#notebook {
 <p>Their action of a $\mid j, m\rangle$ state is given by:</p>
 <p>$\sigma_{+}\mid j, m \rangle = \sqrt{(j-m)(j+m+1)}\mid j, m+1 \rangle$</p>
 <p>$\sigma_{-}\mid j, m \rangle = \sqrt{(j+m)(j-m+1)}\mid j, m-1 \rangle$</p>
-<p>Note that the raising operator kills the top state and the lowering operator kills the bottom state: 
-$\sigma_{+}\mid j, j \rangle = 0$</p>
+<p>Note that the raising operator kills the top state and the lowering operator kills the bottom state:</p>
+<p>$\sigma_{+}\mid j, j \rangle = 0$</p>
 <p>$\sigma_{-}\mid j, -j \rangle = 0$</p>
 <p>Finally, we can obtain all the $\mid j, m\rangle$ states by repeated application of the raising/lowering operators on the lowest/highest states:</p>
 <p>$\mid j, m \rangle = \sqrt{\frac{(j-m)!}{(j+m)!2j!}} \sigma_{+}^{j+m} \mid j, -j \rangle = \sqrt{\frac{(j+m)!}{(j-m)!2j!}} \sigma_{-}^{j-m} \mid j, j \rangle$</p>
-<p>It's worth recalling that:</p>
-<p>$ \begin{pmatrix} n \\ k \end{pmatrix} = \frac{n!}{(n-k)!k!}$</p>
 
 </div>
 </div>
@@ -13330,6 +13330,7 @@ $\sigma_{+}\mid j, j \rangle = 0$</p>
 
 <p>Now recall the binomial distribution. We have $n$ trials, and there is a probability $p$ of success and a probability $1-p$ of failure in each trial. The question is: what is the probability of getting $k$ successes?</p>
 <p>$Pr(k) = \begin{pmatrix}n \\ k \end{pmatrix}p^{k}(1-p)^{n-k}$</p>
+<p>Why? To quote <a href="https://en.wikipedia.org/wiki/Binomial_distribution">wikipedia</a>: "$k$ successes occur with probability $p^{k}$ and $n − k$ failures occur with probability $(1 − p)^{n − k}$. However, the $k$ successes can occur anywhere among the $n$ trials, and there are ${\binom {n}{k}}$ different ways of distributing $k$ successes in a sequence of $n$ trials."</p>
 <p>Suppose we have $n=2j$ trials, and $p_{win} = cos^{2}(\frac{\theta}{2})$ and $p_{loss} = 1 - p_{win} = sin^{2}(\frac{\theta}{2})$. We're interested in the probability of winning $k = j+m$ trials.</p>
 <p>We then have $Pr(k) = \begin{pmatrix}2j \\ j+m \end{pmatrix}cos^{2}(\frac{\theta}{2})^{j+m}sin^{2}(\frac{\theta}{2})^{j-m} = |\langle j, m \mid \theta, \phi \rangle|^{2}$</p>
 <p>In other words, $|\langle j, m \mid \theta, \phi \rangle|^{2}$, the probability of measuring a coherent state at $(\theta, \phi)$ to be in the basis state $\mid j, m\rangle$ is that same as the probability of winning $j+m$ out of $2j$ trials where the probability of winning a single trial is given by $cos^{2}(\frac{\theta}{2})$.</p>
@@ -13350,7 +13351,7 @@ $\sigma_{+}\mid j, j \rangle = 0$</p>
 <p>$e^{-i\theta(-sin(\phi)\sigma_{X} + cos(\phi)\sigma_{Y})}$.</p>
 <p>Now if we define $\chi = -\frac{\theta}{2}e^{-i\phi}$, this can be rewritten: $e^{(\chi\sigma_{+} - \overline{\chi}\sigma_{-})}$.</p>
 <p>The $\mid j, j \rangle$ state is the state with all the stars at the North Pole. Since a spin coherent state is defined by all the stars located at the same point, each spin coherent state can be obtained from rotating the $\mid j, j \rangle$ state.</p>
-<p>$\mid \theta, \phi \rangle = e^{(\chi\sigma_{+} - \overline{\chi}\sigma_{-})}\mid j, j \rangle$, where $\chi = -\frac{\theta}{2}e^{-i\phi}$.</p>
+<p>$\mid \theta, \phi \rangle = e^{(\chi\sigma_{+} - \overline{\chi}\sigma_{-})}\mid j, j \rangle$, where again $\chi = -\frac{\theta}{2}e^{-i\phi}$.</p>
 <p>Using the Baker-Campell-Hausdorff formula, one can finagle $e^{(\chi\sigma_{+} - \overline{\chi}\sigma_{-})}$ into the following form:</p>
 <p>$e^{-\overline{z}\sigma_{+}}e^{ln(1+|z|^{2})\sigma_{Z}}e^{z\sigma_{-}} = e^{z\sigma_{-}}e^{-ln(1+|z|^{2})\sigma_{Z}}e^{-\overline{z}\sigma_{+}}$</p>
 <p>Here, $z = - \frac{\overline{\chi}}{|\chi|} \frac{sin(|\chi|)}{cos(|\chi|)} = tan(\frac{\theta}{2})e^{i\phi}$, the stereographic projection from the South Pole.</p>

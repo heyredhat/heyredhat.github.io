@@ -3,7 +3,8 @@ import numpy as np
 import vpython as vp
 from magic import *
 from itertools import product
-vp.scene.background = vp.color.white
+scene = vp.canvas(background=vp.color.white, height=600, width=800)
+
 
 ####################################################################################
 
@@ -15,16 +16,19 @@ def upgrade(O, a):
             terms.append(a[i].dag()*O[i][j]*a[j])
     return sum(terms)
 
-def upgrade_state(spin, a):
-    n = spin.shape[0]
-    z, w = [a_.dag() for a_ in a]
-    return sum([c*((z**(n-i-1))*(w**(i)))/\
-                    np.sqrt(np.math.factorial(i)*np.math.factorial(n-i-1))\
-                         for i, c in enumerate(spin.full().T[0])])
 
-def upgrade_state2(spin, a):
-    return reduce(lambda x, y: x*y, [sum([c*a[i].dag()\
-        for i, c in enumerate(xyz_spinor(xyz))]) for xyz in spin_XYZ(spin)])
+def upgrade_state(spin, a):
+    n = spin.shape[0]-1
+    j = (spin.shape[0]-1)/2.
+    v = spin.full().T[0]
+    terms = []
+    z, w = [a_.dag() for a_ in a]
+    for m in np.arange(-j, j+1, 1):
+        i = int(m+j)
+        terms.append(v[i]*(z**(n-i))*(w**i)*\
+                (math.sqrt(math.factorial(2*j)/\
+                        (math.factorial(j-m)*math.factorial(j+m)))))
+    return sum(terms)
 
 ####################################################################################
 
@@ -72,7 +76,6 @@ state.dims = [[n, n], [1,1]]
 
 spin = qt.rand_ket(4)
 state = upgrade_state(spin, a)*state
-#state = (upgrade_state2(spin, a)*state).unit()
 
 H = N + 1#X#qt.rand_herm(n*n)
 H.dims = [[n, n], [n, n]]
@@ -93,6 +96,8 @@ vorig_sph = vp.sphere(pos=vp.vector(0, 5, 0), color=vp.color.red, opacity=0.5)
 voring_stars = [vp.sphere(pos=vorig_sph.pos + vp.vector(*xyz), radius=0.2, emissive=True)\
                     for xyz in spin_XYZ(spin)]
 
+print(spin_XYZ(spin))
+
 ####################################################################################
 
 jstates = extract(state)
@@ -105,6 +110,7 @@ vstars = []
 for i in range(L):
     vsrow = []
     if jstates[i].norm() != 0:
+        print(spin_XYZ(jstates[i]))
         for xyz in spin_XYZ(jstates[i]):
             vsrow.append(vp.sphere(pos=vspheres[i].pos + vp.vector(*xyz),\
                              radius=0.2, emissive=True))
@@ -194,7 +200,7 @@ def keyboard(e):
         H.dims = [[n, n], [n, n]]
         U = (-1j*H*dt).expm()
 
-vp.scene.bind('keydown', keyboard)
+scene.bind('keydown', keyboard)
 
 ####################################################################################
 

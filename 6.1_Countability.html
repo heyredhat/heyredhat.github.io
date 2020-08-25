@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>5.9_A_Quantum</title>
+<title>6.1_Countability</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13077,387 +13077,184 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="What-is-an-atom?">What is an atom?<a class="anchor-link" href="#What-is-an-atom?">&#182;</a></h1><h2 id="9.-A-Quantum?">9. A Quantum?<a class="anchor-link" href="#9.-A-Quantum?">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Once upon a time, we started with a single pebble, and called it an "atom." We graduated to a "pile of pebbles," each pebble within a pile treated as identical, fungible. Even if the actual pebbles we might use to represent a pile are irregular in some respect, what we meant by "grouping them into a pile" was that insofar as they were in the pile, the pebbles were to be regarded as "indistinguishable" from each other, considered only insofar as they contributed to the "number of pebbles." And so we invented the counting numbers.</p>
-<p>We then ascended the dialectical ladder, from counting numbers to integers to rationals to complex numbers to polynomials and at last to tensors, the latter corresponding the multiple joint perspectives of entangled quantum systems.</p>
-<p>We're now going to consider "piles" of a yet higher-order sort, piles of identical quantum systems, piles which can keep track of a variable number of  quantum systems, as indistinguishable as the "1"'s in a counting number. The mathematical structure we're looking for is essentially that of a "quantum field," although to call it a "field" is to emphasize one application of the structure, as we'll see. The general process of moving from ordinary quantum mechanics to a quantum mechanics of a variable number of indistinguishable "particles" is called "second quantization."</p>
-<p>But to understand that, we first need to become familiar with the quantum harmonic oscillator. Then we can discuss perhaps the simplest example of second quantization, the oscillator representation of spin, also known as the "Jordan-Schwinger" representation. Since we already know so about spin states, we are already half-way there!</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>A review of the 1-dimensional quantum harmonic oscillator:</p>
-<p>It's Hamiltonian is basically: $H = \frac{1}{2}(P^{2} + Q^{2})$, where $P$ is the momentum operator, whose eigenstates are states of definite momentum, and $Q$ is the position operator, whose eigenstates are states of definite position. These two operators are related to each other via the Fourier transform.</p>
-<p>One great thing to do is define the creation and annihilation operators:</p>
-<p>$a = \frac{1}{\sqrt 2} (Q + iP)$</p>
-<p>$a^{\dagger} = \frac{1}{\sqrt 2} (Q - iP)$</p>
-<p>So that: $Q = \frac{1}{\sqrt 2} (a^{\dagger} + a)$ and $P =  \frac{1}{\sqrt 2} (a^{\dagger} - a)$.</p>
-<p>Note that $[Q, P] = QP - PQ = i$. This is the Heisenberg uncertainty principle. And one thing it implies is that not only are $P$ and $Q$ not simultaneous measureable, but also, they can't be represented by any finite dimensional matrices, but only by "infinite" matrices. We'll see what this means.</p>
-<p>Now what's nice about the creation and annihilation operators is that you can interpret them as adding or subtracting a "quantum" from the oscillator, kicking it up to a higher or lower "number" state (each of which has a higher or lower energy). These "number" states form a basis for the states of the oscillator, just as the position (or momentum) eigenstates do. To wit, if you can get the $\mid 0 \rangle$ quantum state, the ground state of the oscillator, then you can get all the other states, $\mid 1 \rangle, \mid 2 \rangle, \mid 3 \rangle, \ldots$ by repeated action of the creation operator.</p>
-<p>The number operator, which counts the number of quanta, is $N = a^{\dagger}a$, and the hamiltonian can be rewritten $H = N + \frac{1}{2}$.</p>
-<p>Notice:</p>
-<p>$ N = \frac{1}{\sqrt 2}(Q - iP)\frac{1}{\sqrt 2}(Q + iP)$</p>
-<p>$= \frac{1}{2}(Q^{2} + iQP - iPQ + P^{2}) $
-$= \frac{1}{2}(Q^{2} + i(QP - PQ) + P^{2})$.</p>
-<p>But $QP - PQ = i$, so we get $ N = \frac{1}{2}(P^{2} + Q^{2}) + -\frac{1}{2} = H - \frac{1}{2}$.</p>
-<p>So $H = N + \frac{1}{2}$.</p>
-<p>Already we can see that at least one way of thinking about a quantum harmonic oscillator is as a little guy that "counts quanta."</p>
-<hr >
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We should give a few words on the formalism of position and momentum wave functions, since hitherto we've only worked with finite dimensional Hilbert spaces.</p>
-<p>A position wave function $\psi(x)$ is a function from the real numbers to the complex numbers, which is square integrable, and so can be interpreted as an "infinite dimensional vector." We have:</p>
-<p>$Q\mid x \rangle = x\mid x \rangle$</p>
-<p>$\langle x \mid x' \rangle = \delta(x - x')$</p>
-<p>$\int \mid x \rangle \langle x \mid dx = I$</p>
-<p>You can think of $\psi(x)$ as $\langle x \mid \psi \rangle$, where $x$ is a "Dirac delta" that spikes at position $x$. (There are some subleties here: because the deltas have infinite norm, they aren't technically vectors in the Hilbert space. One consequence is that to actually calculate legitimate probabilities, you need to integrate over some finite interval.)</p>
-<p>You can take the Fourier transform of $\psi(x)$ to get $\psi(p)$, the momentum wave function. Similarly, you can use Dirac deltas that spike at momentum $p$, etc.</p>
-<p>$P \mid p \rangle = p\mid p \rangle$</p>
-<p>$\langle p \mid p' \rangle = \delta(p - p')$</p>
-<p>$\int \mid p \rangle \langle p \mid dp = I$</p>
-<p>By the nature of Fourier duality, a spike in position means an “oscillation” across momentum space. A spike in momentum means a “oscillation” across position space. For example, $\psi_{p}(x) = Ce^{ipx}$ where $C$ is a constant.</p>
-<p>$\langle x \mid p \rangle = e^{ipx} $</p>
-<p>$\langle p \mid x \rangle = e^{-ipx} $</p>
-<p>$ \psi(x) = \int e^{ipx}\psi(p) dp = \int \langle x \mid p \rangle \langle p \mid \psi \rangle dp$</p>
-<p>$ \psi(p) = \int e^{-ipx}\psi(x) dx = \int \langle p \mid x \rangle \langle x \mid \psi \rangle dx$</p>
-<p>Given that we're working with infinite dimensional vector spaces, we have to treat the inner product as an integral, an infinite sum. In other words:</p>
-<p>$\langle \phi \mid \psi \rangle =  \int_{-\infty}^{+\infty} \phi(x)^{*}\psi(x) dx$, where the $*$ means take the complex conjugate.</p>
-<p>Square summable means that $|\psi(x)|^{2} = \int_{-\infty}^{+\infty} \psi(x)^{*}\psi(x) dx$ converges to a real number (and so can be normalized to 1), and thus really can think of our wave function as being an vector in infinite dimensional space.</p>
-<hr>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We recall that $Q\psi(x) = x\psi(x)$, that the position operator acts on a position wave function like multiplication by x, and $P\psi(x) = -i\frac{d}{dx}\psi(x)$, that the momentum operator acts like (multiplication by $-i$ and) differentiation. This was one of the initial insights of quantum mechanics: the so-called canonical quantization, promoting the classical variables $q$ and $p$ to linear operators $Q$ and $P$.</p>
-<p>With this set of correspondences, we consider the time dependent Schrodinger equation for the harmonic oscillator.</p>
-<p>$H\psi(x, t) = i\frac{d\psi(x, t)}{dt}$</p>
-<p>$\frac{1}{2}(P^{2} + Q^{2})\psi(x, t) = i\frac{d\psi(x, t)}{dt}$</p>
-<p>$\frac{1}{2}(-\frac{d^{2}}{dx^{2}} + x^{2})\psi(x, t) = i\frac{d\psi(x, t)}{dt}$</p>
-<p>$ -\frac{1}{2}\frac{d^{2}\psi(x, t)}{dx^{2}} + \frac{1}{2}x^{2}\psi(x, t) = i\frac{d\psi(x, t)}{dt}$.</p>
-<p>In terms of the time independent Schrodinger equation:</p>
-<p>$ -\frac{1}{2}\frac{d^{2}\psi(x)}{dx^{2}} + \frac{1}{2}x^{2}\psi(x) - e\psi(x) = 0$, where $e$ is the eigenvalue corresponding to a given energy level.</p>
-<p>There is a whole beautiful theory of these differential equations and how to solve them, and one finds that its infinitude of solutions are proportional to the Hermite polynomials. But actually there are some tricks we can use without actually solving the equations directly.</p>
-<hr>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>For example, we know that we want the annihilation operator to annihilate the ground state, which is also the 0 number state.</p>
-<p>$a \psi_{0}(x) = 0$</p>
-<p>$\frac{1}{\sqrt 2} (x + \frac{d}{dx})\psi_{0}(x) = 0 $</p>
-<p>$x\psi_{0}(x) + \frac{d}{dx}\psi_{0}(x) = 0 $</p>
-<p>A solution is given by:</p>
-<p>$ \psi_{0}(x) = e^{-\frac{x^{2}}{2}}$</p>
-<p>Which we can confirm:</p>
-<p>$ \frac{d}{dx}\psi_{0}(x) = -xe^{-\frac{x^{2}}{2}}$</p>
-<p>$ xe^{-\frac{x^{2}}{2}} -xe^{-\frac{x^{2}}{2}} = 0 $</p>
-<p>Since $\int_{-\infty}^{+\infty} \psi(x)^{*}\psi(x) dx = \int_{-\infty}^{+\infty} e^{-x^{2}} dx = \sqrt{\pi}$, we should really use $\psi_{0}(x) = \pi^{\frac{1}{4}}e^{-\frac{x^{2}}{2}}$, but let's not get bogged down.</p>
-<p>This function $\psi_{0}(x) = e^{-\frac{x^{2}}{2}}$ is interesting. It's a Gaussian, and it's invariant under the Fourier transform.</p>
-<p>$\frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} e^{ipx}e^{-\frac{x^{2}}{2}}dx = e^{-\frac{p^{2}}{2}}$.</p>
-<p>In other words, it represents the best compromise you can get between knowing both position and momentum given the Heisenberg uncertainty relations.</p>
-<p>But is $\psi_{0}(x)$ really an eigenstate of $H$? Consider:</p>
-<p>$H \psi_{0}(x) = (a^{\dagger}a + \frac{1}{2})\psi_{0}(x) = a^{\dagger}a\psi_{0}(x) + \frac{1}{2}\psi_{0}(x)$.</p>
-<p>But we know that $a\psi_{0}(x)= 0$, so $H \psi_{0}(x) = \frac{1}{2}\psi_{0}(x)$.</p>
-<p>Thus, $\psi_{0}(x)$ is an eigenvector of the harmonic oscillator hamiltonian: $H$ acts on $\psi_{0}(x)$ by multiplication by a scalar eigenvalue, in this case $\frac{1}{2}$. Since the annihilator annihilates it, we know that $\psi_{0}(x)$ is the lowest eigenvector of $N$ (and $H$), and we can get all the rest of the number states via the creation operator, just like climbing a ladder: indeed, they're known as ladder operators.</p>
-<p>$\psi_{n}(x) = \frac{(a^{\dagger})^{n}}{\sqrt{n!}}\psi_{0}(x)$</p>
-<p>This set of set of states $\psi_{n}(x)$ form a countable basis for our quantum harmonic oscillator.  In other words, we can express any state $\phi(x)$ as an infinite series in the number states:</p>
-<p>$\phi(x) = \sum_{n=0}^{\infty} c_{n}\psi_{n}(x)$, where:</p>
-<p>$c_{n} = \frac{\psi_{n} \cdot \phi}{\psi_{n} \cdot \psi_{n}} = \frac{\int \psi_{n}^{*}(x)\phi(x)dx}{\int \psi_{n}^{*}(x)\psi_{n}(x)dx}$.</p>
-<p>In other words, the projection of the function $\phi(x)$ onto the number state $\psi_{n}$, just like in the finite dimensional case, gives the coordinate in that "direction."</p>
-<hr>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We can compare this to the case of breaking down sound waves into their harmonics.</p>
-<p>If we have a <em>real</em>, continuous, periodic function $f(x)$ defined over the interval $r$ to $s$, we can write it as a Fourier series:</p>
-<p>$ f(x) = a_{0}C_{0}(x) + \sum_{n=1}^{\infty} \Big{(} a_{n}C_{n}(x) + b_{n}S_{n}(x) \Big{)} $.</p>
-<p>Here: $C_{0}(x) = 1$, $C_{n}(x) = cos(\frac{2\pi n x}{T})$, and $S_{n}(x) = sin(\frac{2\pi n x}{T})$, where $T$ is the period, and $n \in 1,2,3,\dots$.</p>
-<p>$a_{0} = \frac{C_{0} \cdot f}{C_{0} \cdot C_{0}} = \frac{\int_{r}^{s} C_{0}(x)f(x) dx }{\int_{r}^{s} C_{0}(x)C_{0}(x) dx }$</p>
-<p>$a_{n} = \frac{C_{n} \cdot f}{C_{n} \cdot C_{n}} = \frac{\int_{r}^{s} C_{n}(x)f(x) dx }{\int_{r}^{s} C_{n}(x)C_{n}(x) dx }$</p>
-<p>$b_{n} = \frac{S_{n} \cdot f}{S_{n} \cdot S_{n}} = \frac{\int_{r}^{s} S_{0}(x)f(x) dx }{\int_{r}^{s} S_{n}(x)S_{n}(x) dx }$</p>
-<p>This works because sines (and cosines) of different integer $n$ values are orthogonal, and so these functions can be treated as separate "directions" in infinite dimensional space.</p>
-<p>Note that there are many ways of representing a function as an infinite series, often with different inner products, given by different measures.</p>
-<hr>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Returing to the oscillator, let's prove that the number operator $N = a^{\dagger}a$ actually does count the number of quanta.</p>
-<p>First, we consider the eigenvalue equation for $N$:</p>
-<p>$N\psi_{n} = n\psi_{n}$</p>
-<p>In other words, on a state of definite number, the number operator acts by multiplication by $n$, the number.</p>
-<p>Let's consider acting with $N$ after we've raised the number by one: $Na^{\dagger}\psi_{n}$.</p>
-<p>To evaluate this, first we note that:</p>
-<p>$[a, a^{\dagger}] = aa^{\dagger} - a^{\dagger}a = \frac{1}{\sqrt 2} (Q + iP)\frac{1}{\sqrt 2} (Q - iP) - \frac{1}{\sqrt 2} (Q - iP)\frac{1}{\sqrt 2} (Q + iP)$</p>
-<p>$ = \frac{1}{2} (Q^{2} -iQP +iPQ + P^2 - Q^{2} - iQP + iPQ - P^{2})$</p>
-<p>$ = \frac{1}{2} (2iPQ - 2iQP)$</p>
-<p>$ = i[P, Q] = -i[Q,P] = 1$</p>
-<p>We then note that:</p>
-<p>$[N, a^{\dagger}] = Na^{\dagger} - a^{\dagger}N = a^{\dagger}aa^{\dagger} - a^{\dagger}a^{\dagger}a = a^{\dagger}(aa^{\dagger} - a^{\dagger}a) = a^{\dagger}[a, a^{\dagger}] = a^{\dagger}$.</p>
-<p>If $Na^{\dagger} - a^{\dagger}N = a^{\dagger}$, then $Na^{\dagger} = a^{\dagger}N + a^{\dagger}$.</p>
-<p>So we can rewrite $Na^{\dagger}\psi_{n}$ as: $(a^{\dagger}N + a^\dagger)\psi_{n} = a^{\dagger}N\psi_{n} + a^\dagger\psi_{n}$.</p>
-<p>But by the eigenvalue equation, this is: $na^{\dagger}\psi_{n} + a^\dagger\psi_{n} = (n+1)a^{\dagger}\psi_{n}$.</p>
-<p>In short, $Na^{\dagger}\psi_{n} = (n+1)a^{\dagger}\psi_{n}$. $N$ knows we've raised the number by 1!</p>
-<p>Similarly, given that $[N, a] = -a$, $Na\psi_{n} = aN\psi_{n} - a\psi_{n} = na\psi_{n} - a\psi_{n} = (n-1)a\psi_{n}$.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>Let's do a sanity check.</p>
-<p>$\psi_{0}(x) = e^{-\frac{x^{2}}{2}}$</p>
-<p>$ \int_{-\infty}^{\infty} \psi_{0}(x)^{*}\psi_{0}(x) dx = e^{-x^{2}}dx = \sqrt{\pi}$</p>
-<p>$\langle \psi_{0} \mid N \mid \psi_{0} \rangle = \frac{1}{\sqrt{\pi}} \int_{-\infty}^{+\infty} \psi_{0}(x)^{*}N\psi_{0}(x) dx = \frac{1}{\sqrt{\pi}} \int_{-\infty}^{+\infty}  e^{-\frac{x^{2}}{2}}\frac{1}{2}(-\frac{d^{2}}{dx^{2}} + x^{2} - 1)e^{-\frac{x^{2}}{2}} dx$</p>
-<p>$\frac{1}{2\sqrt{\pi}} \int_{-\infty}^{+\infty}  e^{-\frac{x^{2}}{2}}(-\frac{d^{2}}{dx^{2}}e^{-\frac{x^{2}}{2}}  + x^{2}e^{-\frac{x^{2}}{2}}  - e^{-\frac{x^{2}}{2}}) dx$</p>
-<p>$\frac{d}{dx} e^{-\frac{x^{2}}{2}} = -xe^{-\frac{x^{2}}{2}}$</p>
-<p>$\frac{d^{2}}{dx^{2}} e^{-\frac{x^{2}}{2}} = x^{2}e^{-\frac{x^{2}}{2}} -e^{-\frac{x^{2}}{2}}$</p>
-<p>$\frac{1}{2\sqrt{\pi}} \int_{-\infty}^{+\infty}  e^{-\frac{x^{2}}{2}}(-x^{2}e^{-\frac{x^{2}}{2}} + e^{-\frac{x^{2}}{2}} + x^{2}e^{-\frac{x^{2}}{2}}  - e^{-\frac{x^{2}}{2}}) dx = 0$.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Going up a level:</p>
-<p>$\psi_{1}(x) = a^{\dagger}e^{-\frac{x^{2}}{2}} = \frac{1}{\sqrt 2} (Q - iP)e^{-\frac{x^{2}}{2}} = \frac{1}{\sqrt 2} (x - i(-i\frac{d}{dx})e^{-\frac{x^{2}}{2}} = \frac{1}{\sqrt 2} (xe^{-\frac{x^{2}}{2}} - \frac{d}{dx}e^{-\frac{x^{2}}{2}}) = \frac{1}{\sqrt 2}(xe^{-\frac{x^{2}}{2}} + xe^{-\frac{x^{2}}{2}}) = \frac{2}{\sqrt 2}xe^{-\frac{x^{2}}{2}}$</p>
-<p>$\langle \psi_{1} \mid N \mid \psi_{1} \rangle = \frac{1}{\sqrt{\pi}} \int_{-\infty}^{+\infty} \psi_{1}(x)^{*}N\psi_{1}(x) dx =  \frac{1}{\sqrt{\pi}} \int_{-\infty}^{+\infty} xe^{-\frac{x^{2}}{2}}(-\frac{d^{2}}{dx^{2}} + x^{2} - 1)xe^{-\frac{x^{2}}{2}} dx$</p>
-<p>$\frac{1}{\sqrt{\pi}}  \int_{-\infty}^{+\infty} xe^{-\frac{x^{2}}{2}}(-\frac{d^{2}}{dx^{2}}xe^{-\frac{x^{2}}{2}} + x^{3}e^{-\frac{x^{2}}{2}} - xe^{-\frac{x^{2}}{2}}) dx$</p>
-<p>$ \frac{d}{dx} xe^{-\frac{x^{2}}{2}} = -x^{2}e^{-\frac{x^{2}}{2}} + e^{-\frac{x^{2}}{2}}$</p>
-<p>$ \frac{d^{2}}{dx^{2}} xe^{-\frac{x^{2}}{2}} = x^{3}e^{-\frac{x^{2}}{2}} - 2xe^{-\frac{x^{2}}{2}} - xe^{-\frac{x^{2}}{2}} = x^{3}e^{-\frac{x^{2}}{2}} - 3xe^{-\frac{x^{2}}{2}}$</p>
-<p>$\frac{1}{\sqrt{\pi}}  \int_{-\infty}^{+\infty} xe^{-\frac{x^{2}}{2}}(-x^{3}e^{-\frac{x^{2}}{2}} + 3xe^{-\frac{x^{2}}{2}} + x^{3}e^{-\frac{x^{2}}{2}} - xe^{-\frac{x^{2}}{2}}) dx$</p>
-<p>$\frac{1}{\sqrt{\pi}}  \int_{-\infty}^{+\infty} xe^{-\frac{x^{2}}{2}}( 2xe^{-\frac{x^{2}}{2}}) dx$</p>
-<p>$\frac{2}{\sqrt{\pi}}  \int_{-\infty}^{+\infty} x^{2}e^{-x^{2}} dx = 1.$</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Continuing doggedly on, and recalling an earlier comment that:</p>
-<p>$\psi_{n}(x) = \frac{(a^{\dagger})^{n}}{\sqrt{n!}}\psi_{0}(x)$</p>
-<p>$\psi_{2}(x) = \frac{1}{\sqrt{2}} \frac{2}{\sqrt{2}} a^{\dagger} xe^{-\frac{x^{2}}{2}} = \frac{1}{\sqrt{2}} (Q - iP)xe^{-\frac{x^{2}}{2}} = \frac{1}{\sqrt{2}}  (x - \frac{d}{dx})xe^{-\frac{x^{2}}{2}} = \frac{1}{\sqrt{2}}   \big{(} x^{2}e^{-\frac{x^{2}}{2}} - \frac{d}{dx}xe^{-\frac{x^{2}}{2}} \big{)}  = \frac{1}{\sqrt{2}}  \big{(} x^{2}e^{-\frac{x^{2}}{2}} + x^{2}e^{-\frac{x^{2}}{2}} - e^{-\frac{x^{2}}{2}} \big{)} = \frac{1}{\sqrt{2}} \big{(} (2x^{2} - 1)e^{-\frac{x^{2}}{2}} \big{)} $</p>
-<p>$\langle \psi_{1} \mid N \mid \psi_{1} \rangle = \frac{1}{\sqrt{\pi}} \int_{-\infty}^{+\infty} \psi_{1}(x)^{*}N\psi_{1}(x) dx$</p>
-<p>$= \frac{1}{4\sqrt{\pi}} \int_{-\infty}^{+\infty} (2x^{2} - 1)e^{-\frac{x^{2}}{2}}(-\frac{d^{2}}{dx^{2}} + x^{2} - 1)(2x^{2} - 1)e^{-\frac{x^{2}}{2}} dx$</p>
-<p>$= \frac{1}{4\sqrt{\pi}} \int_{-\infty}^{+\infty} (2x^{2} - 1)e^{-\frac{x^{2}}{2}}(-\frac{d^{2}}{dx^{2}}(2x^{2} - 1)e^{-\frac{x^{2}}{2}} + x^{2}(2x^{2} - 1)e^{-\frac{x^{2}}{2}} - (2x^{2} - 1)e^{-\frac{x^{2}}{2}}) dx$</p>
-<p>$= \frac{1}{4\sqrt{\pi}} \int_{-\infty}^{+\infty} (2x^{2} - 1)e^{-\frac{x^{2}}{2}}(-e^{-\frac{x^{2}}{2}}(x^{2} - 5)(2x^{2} -1) + x^{2}(2x^{2} - 1)e^{-\frac{x^{2}}{2}} - (2x^{2} - 1)e^{-\frac{x^{2}}{2}}) dx$</p>
-<p>$= \frac{1}{4\sqrt{\pi}} \int_{-\infty}^{+\infty} (2x^{2} - 1)\big{(}-(x^{2} - 5)(2x^{2} -1) + x^{2}(2x^{2} - 1) - (2x^{2} - 1)\big{)}e^{-x^{2}}dx$</p>
-<p>$= \frac{1}{4\sqrt{\pi}} \int_{-\infty}^{+\infty} (2x^{2} - 1)^{2}\big{(}-(x^{2} - 5) + x^{2} - 1\big{)}e^{-x^{2}}dx$</p>
-<p>$= \frac{1}{\sqrt{\pi}} \int_{-\infty}^{+\infty} (2x^{2} - 1)^{2}e^{-x^{2}}dx = 2$</p>
-<p>(Compare the <a href="https://en.wikipedia.org/wiki/Hermite_polynomials">Hermite polynomials</a>, which are orthogonal under the Gaussian measure $e^{-x^{2}}$.)</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>One upshot of all this is we can conveniently work in the number basis: aka the Fock basis, or "occupation number basis." $\mid 0 \rangle$, $\mid 1 \rangle$, $\mid 2 \rangle$, are the states with 0, 1, 2, and three quanta respectively. In terms of a matrix representation, we have the vacuum state is just $\begin{pmatrix} 1 \\ 0 \\ 0 \\ \vdots \end{pmatrix}$.</p>
-<p>And:</p>
-<p>$a^\dagger =\begin{pmatrix}           
-0 &amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp;\dots \\
-\sqrt{1} &amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; \dots\\
-0 &amp; \sqrt{2} &amp; 0 &amp; \dots &amp; 0 &amp; \dots\\
-0 &amp; 0 &amp; \sqrt{3} &amp; \dots &amp; 0 &amp; \dots\\
-\vdots &amp; \vdots &amp; \vdots &amp; \ddots  &amp; \vdots  &amp; \dots\\
-0 &amp; 0 &amp; 0 &amp; \dots &amp; \sqrt{n} &amp;\dots &amp;  \\
-\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots  &amp;\ddots \end{pmatrix}$</p>
-<p>$a =\begin{pmatrix}
-0 &amp; \sqrt{1} &amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; \dots \\
-0 &amp; 0 &amp; \sqrt{2} &amp; 0 &amp; \dots &amp; 0 &amp; \dots \\
-0 &amp; 0 &amp; 0 &amp; \sqrt{3} &amp; \dots &amp; 0 &amp; \dots \\
-0 &amp; 0 &amp; 0 &amp; 0 &amp; \ddots &amp; \vdots &amp; \dots \\
-\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \sqrt{n} &amp; \dots \\
-0 &amp; 0 &amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; \ddots \\
-\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \ddots \end{pmatrix}$</p>
-<p>One thing that's nice is that we can truncate the number of possible quanta in our oscillator and obtain a finite dimensional oscillator representation, although the commutation relations between $P$ and $Q$ won't be exactly satisfied.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>Here's an interesting fact:</p>
-<p>While $a^{\dagger}\psi_{n} = \psi_{n+1}$, we actually have $a\psi_{n} = n\psi_{n-1}$. Here's a little proof:</p>
-<p>We have $a\psi_{0} = 0$, which satisfies $a\psi_{n} = n\psi_{n-1}$, since multiplying by $0$ gives the $0$ vector, when $n=0$. We assume: $a\psi_{n} = n\psi_{n-1}$.</p>
-<p>Consider $a\psi_{n+1}$, which is really just $aa^{\dagger}\psi_{n}$. Since $[a, a^\dagger] = 1$, or $aa^{\dagger} - a^{\dagger}a = 1$, or $aa^{\dagger} = a^{\dagger}a + 1$, we can rewrite $aa^{\dagger}\psi_{n}$ as $(a^{\dagger}a + 1)\psi_{n} = a^{\dagger}a\psi_{n} + \psi_{n}$. We assumed that $a\psi_{n} = n\psi_{n-1}$, so we have: $a^{\dagger}n\psi_{n-1} + \psi_{n}$, which is just $n\psi_{n} + \psi_{n}$, or $(n+1)\psi_{n}$.</p>
-<p>In other words, if $a\psi_{n} = n\psi_{n-1}$, then $a\psi_{n+1} = (n+1)\psi_{n}$, and so if it was true for $n=0$, which it is since $a\psi_{0} = 0$, it's true for all $n+1$. Love it!</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>Take a look this expresion again: $a\psi_{n} = n\psi_{n-1}$.</p>
-<p>It looks kind of like: $\frac{d}{dz} z^{n} = nz^{n-1}$, the rule for taking the derivative!</p>
-<p>And so, another way of thinking about all this is that we represent the state of a quantum harmonic oscillator as a <em>polynomial</em>, where the powers of $z$ represent the number of quanta. This analogy can be made rigorous and goes by the name the Segal-Bargmann representation. There, $a \rightarrow \frac{d}{dz}$ and $ a^{\dagger} \rightarrow z$, the latter being multiplication by $z$. There are some technicalities involved in this construction, but the long and short of it is that we can represent our wave function as a function $f(z)$ from $\mathbb{C} \rightarrow \mathbb{C}$, instead of a wavefunction $\psi(x)$ from $\mathbb{R} \rightarrow \mathbb{C}$.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Which brings us to: just as we had spin coherent states parameterized by a $\mathbb{C} + \infty$, points on the sphere, we have coherent states of the quantum oscillator parameterized by $\mathbb{C}$, points on the plane.</p>
-<p>$\mid z \rangle = e^{-\frac{|z|^{2}}{2}} \sum_{n=0}^{\infty} \frac{z^{n}}{\sqrt{n!}}\mid n \rangle$, where $\mid n \rangle$ are all the number states.</p>
-<p>We have here a polynomial with an infinite number of terms, and notice it's just like the infinite series for $e^{x}$ from way back when. One consequence is that a coherent state $\mid z \rangle$ is an eigenstate of the annihilation operator: you can subtract a quanta and it doesn't make a difference!</p>
-<p>Check this out:</p>
-<p>$ \mid z \rangle = \sum_{n=0}^{\infty} c_{n}\mid n \rangle$</p>
-<p>$ \mid z \rangle = \sum_{n=0}^{\infty} \mid n \rangle \langle n \mid z \rangle$</p>
-<p>But if $\mid n \rangle = \frac{(a^{\dagger})^{n}}{\sqrt{n!}}\mid 0 \rangle$, then: $\langle n \mid  \ =  \langle 0 \mid  \frac{(a)^{n}}{\sqrt{n!}}$.</p>
-<p>So we can make the following move:</p>
-<p>$ \mid z \rangle = \sum_{n=0}^{\infty} \mid n \rangle \langle 0 \mid \frac{(a)^{n}}{\sqrt{n!}} \mid z \rangle$</p>
-<p>And since the coherent state is an eigenvector of the annihilation operator, $a\mid z \rangle = z \mid z \rangle$:</p>
-<p>$ \mid z \rangle = \sum_{n=0}^{\infty} \mid n \rangle \langle 0 \mid \frac{(z)^{n}}{\sqrt{n!}} \mid z \rangle = \ \langle 0 \mid z \rangle \sum_{n=0}^{\infty} \frac{(z)^{n}}{\sqrt{n!}} \mid n \rangle$</p>
-<p>The length of this as a vector has to be 1, so:</p>
-<p>$1 = \ \mid \langle 0 \mid z \rangle \mid^{2} \sum_{n=0}^{\infty} \frac{(\mid z \mid^{n})^{2}}{n!}$.</p>
-<p>And by the infinite series definition of $e^{x}$, we get $1 = \  \mid \langle 0 \mid z \rangle \mid^{2} e^{\mid z \mid^{2}}$.</p>
-<p>Thus we must have $ \langle 0 \mid z \rangle = e^{-\frac{\mid z \mid^{2}}{2}}$, since then $\mid \langle 0 \mid z \rangle \mid^{2} = e^{-\mid z \mid^{2}}$, which cancels out the $e^{\mid z \mid^{2}}$ to get $1$.</p>
-<p>So we've derived our expression from before:</p>
-<p>$\mid z \rangle = e^{-\frac{|z|^{2}}{2}} \sum_{n=0}^{\infty} \frac{z^{n}}{\sqrt{n!}}\mid n \rangle$.</p>
-<p>We then declare:</p>
-<p>$\psi(z) = \langle \overline{z} \mid \psi \rangle  = e^{-\frac{|z|^{2}}{2}} \sum_{n=0}^{\infty} \frac{z^{n}}{\sqrt{n!}}\langle n \mid \psi \rangle $.</p>
-<p>Ignoring the exponential, this is a complex polynomial in $z$, where the coefficient of the $n^{th}$ power of $z$ is the amplitude for $\psi$ being in the $n^{th}$ number state.</p>
-<p>In other words, instead of writing $\alpha\mid 0 \rangle + \beta \mid 1 \rangle + \gamma \mid 2 \rangle$, we could write: $f(z) = \frac{1}{\sqrt{2}}\gamma z^{2} + \beta z + \alpha$, and find some zeros!</p>
-<p>We can define the inner product as an integral over the complex plane:</p>
-<p>$ \int_{\mathbb{C}} f(z)^{*}g(z)e^{-|z|^2} dz$</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>Any state of the oscillator can be written in terms of all the $\mid z \rangle$'s. In other words, the $\mid z \rangle$'s form an overcomplete basis for states of the oscillator.</p>
-<p>In other words, we have the following resolution of the identity: $\frac{1}{\pi} \int_{\mathbb{C}} \mid z \rangle \langle z \mid dz = I$</p>
-<p>We start with $\mid z \rangle = e^{-\frac{|z|^2}{2}} \sum_{n=0}^{\infty} \frac{z^{n}}{\sqrt{n!}} \mid n \rangle$. So:</p>
-<p>$\frac{1}{\pi} \int_{\mathbb{C}} \mid z \rangle \langle z \mid dz = \frac{1}{\pi}  \int_{\mathbb{C}}  e^{-\frac{|z|^2}{2}} \sum_{n=0}^{\infty} \frac{z^{n}}{\sqrt{n!}} \mid n \rangle \langle m \mid  e^{-\frac{|z|^2}{2}} \sum_{m=0}^{\infty} \frac{\overline{z}^{m}}{\sqrt{m!}} dz$</p>
-<p>$ \sum_{n=0}^{\infty} \sum_{m=0}^{\infty} \mid n \rangle \langle m \mid \frac{1}{\pi}\int_{\mathbb{C}} \frac{z^{n}}{\sqrt{n!}}\frac{\overline{z}^{m}}{\sqrt{m!}}e^{-|z|^{2}} dz$</p>
-<p>$\sum_{n=0}^{\infty} \sum_{m=0}^{\infty} \mid n \rangle \langle m \mid\delta_{n,m} = \sum_{n=0}^{\infty} \mid n \rangle \langle n \mid = I$</p>
-<p>We can derive the amplitude between two coherent states to be:</p>
-<p>$\langle w \mid z \rangle = e^{-\frac{1}{2}(|z|^{2} + |w|^{2}) + z\overline{w}}$.</p>
-<p>The probability: $\mid \langle w \mid z \rangle \mid^{2} = e^{-|z - w|^{2}}$.</p>
-<p>The average number of quanta in a coherent state is just $|z|^{2}$. Its expected position is just (up to some factor) $z + z^{*}$, and its expected momentum is just $ z - z^{*}$, in other words, its position is proportional to its real part, and its momentum is proportional to its imaginary part. So that we can interpret the real axis as the "positon axis" and the imaginary axis as the "momentum axis"!</p>
-<p>If you look at their behavior, these states act as little coherent wavepackets closely resembling classical particles (or classical electromagnetic waves), maintaining their shape as they zip along. This is just like how the spin coherent states closely resemble the classical states of a spinning particle, all the stars along one axis.</p>
-<p>When you look at the time evolution of a coherent state itself, it makes a perfect circle in this position/momentum plane.</p>
-<p>Moreover, the expectation value of the position operator obeys the classical equations of motion for a harmonic oscillator: $\frac{d^{2}x}{dx^{2}} + \frac{1}{2}x^{2} = 0$.</p>
-<p>$\langle z \mid Q(t) \mid z \rangle = c|z|cos(t - \phi)$, where $Q(t) = e^{iHt}Qe^{-iHt}$, $z = |z|e^{i\phi}$, and $c$ is some constant we're ignoring.</p>
-<p>This was first noticed by Schrodinger himself!</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>Now, it's clear that each coherent state corresponds to a <em>complex number</em>, a point in the plane interpreted as the position/momentum plane, the phase space of a classical harmonic oscillator.</p>
-<p>This is just like before. We had each spin coherent state corresponding to a point on the sphere, which also happens to be the phase space of a spinning object. And just as we could use the spin coherent states over the sphere as a basis, we can use the oscillator coherent states over the plane as a basis.</p>
-<p>Furthermore just as in the case of the sphere, it is interesting that we are able to break down the quantum system in a basis consisting of <em>the most classical states</em></p>
-<p>Moreover, in the spin case, when we consider the coherent state wave function on the sphere, it's completely characterized by the points opposite to the Majorana stars, in other words, by the places of 0% probability (for all the stars to be found in that location, for the spin to be in a "classical state" pointing in that direction). Similarly, in the harmonic oscillator case, we can use the coherent state representation to work with a polynomial, and can characterize the state by its 0% probability points, 0% probability, that is, for it to be in certain "most-classical" coherent states (with a given position and momentum). (Incidentally, one can show that the oscillator coherent states can be related to the Poisson distribution, and the spin coherent states to the binomial distribution.)</p>
-<p>In other words, we seem to be able to define a quantum state in terms of <em>which classical states it definitely isn't</em>, by a kind of negative definition.</p>
-<p>What's funny is that: while I may have an intuitive difficulty understanding how something can be in a superposition of being in multiple ways at once, I have no problem understanding how something <em>can't</em> be in multiple ways at once. So that it actually seems more sensible to define thing in terms of what they aren't rather than what they are.</p>
-<p>What is perhaps remarkable is that in the spin case, the coherent state sphere is identified with <em>the actual 3D space we live in</em>. On the other hand, if we admit we can't specify a classical harmonic oscillator state without specifying a position <em>and</em> a momentum, we can still make contact with the very real phase space of a classical harmonic oscillator--only now we have to consider a "constellation" of such classical oscillators to get our quantum state.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>Using further trickiness, including the Baker-Campell-Hausdorff formula, we can derive this useful expression for a coherent state:</p>
-<p>$\mid z \rangle = e^{za^{\dagger} - \overline{z}a}\mid 0 \rangle$, where $\mid 0 \rangle$ is the vacuum state which we are "displacing."</p>
-<p>To see this, we note that if $[A, B]$ commutes with both $A$ and $B$, then:</p>
-<p>$e^{A+B} = e^{\frac{1}{2}[A, B]}e^{A}e^{B}$</p>
-<p>In our case, $[za^{\dagger}, \overline{z}a] = -|z|$, since $[a^{\dagger}, a] = -1$.</p>
-<p>So we have $e^{za^{\dagger} - \overline{z}a} = e^{-\frac{|z|}{2}}e^{za^\dagger}e^{-\overline{z}a}$</p>
-<p>Now consider that $e^{-\overline{z}a}\mid 0 \rangle = \sum_{n=0}^{\infty} \frac{(-1)^{n}}{n!} \overline{z}^{n}a^{n} \mid 0 \rangle$</p>
-<p>This gives the $0$ vector for $n&gt;0$, and so reduces down to $a^{0}\mid 0 \rangle = \mid 0 \rangle$. Thus: $e^{-\overline{z}a}\mid 0 \rangle = \mid 0 \rangle$.</p>
-<p>Therefore:</p>
-<p>$e^{-\frac{|z|}{2}}e^{za^\dagger}e^{-\overline{z}a}\mid 0 \rangle = e^{-\frac{|z|}{2}}e^{za^{\dagger}}\mid 0 \rangle$.</p>
-<p>But $e^{za^{\dagger}}\mid 0 \rangle$ by the infinite series for the exponential is just:</p>
-<p>$\sum_{n=0}^{\infty} \frac{z^{n}(a^{\dagger})^{n}}{n!}  \mid 0 \rangle = \sum_{n=0}^{\infty} \frac{z^{n}}{\sqrt{n!}} \mid n \rangle$</p>
-<p>Thus we have it that:</p>
-<p>$\mid z \rangle = e^{za^{\dagger} - \overline{z}a}\mid 0 \rangle = e^{-\frac{|z|}{2}}\sum_{n=0}^{\infty} \frac{z^{n}}{\sqrt{n!}} \mid n \rangle$, connecting up with what we derived before.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>Anyway, check out a (truncated) 1D oscilllator in <a href="examples/oscillator.py">oscillator.py</a>. You can set the maximum energy value, and view the amplitudes at each location along the line as it evolves under the oscillator hamiltonian, as well as view the probabilities (in red). Use "0", "1", "2", "3", etc, to explore the different number states. Use "i" to generate a random state. And finally, use "c" to generate a random coherent state! The yellow dot shows the expected value of the position operator on the current state.</p>
-<p>For the energy states, you'll see something like:</p>
-<p><img src="img/oscillator_eigenstates.jpg"></p>
-<p>Note that ignoring the endpoints, the $0$ state has 1 hump, the $1$ state has $2$ humps, the $2$ state has $3$ humps. Recall the harmonics of a vibrating string.</p>
-<p>Also check out <a href="examples/osc_coherent_picker.py">osc_coherent_picker.py</a> where you can drag a point around the plane and see the corresponding coherent state. And <a href="examples/osc_coherent_basis.py">osc_coherent_basis.py</a> is just like <code>oscillator.py</code> except it shows you the amplitudes for each coherent state in the plane, given the current state, as well as the roots of the corresponding polynomial in purple. Use <code>i</code> to choose a random state, <code>c</code> to choose a random coherent state, <code>h</code> to choose a random hamiltonian, <code>e</code> to use the oscillator hamiltonian, <code>n</code> to nudge the hamiltonian just a little. Use <code>0,1,2,3,...</code> to check out the energy eigenstates. We can see that under the oscillator hamiltonian, the roots of the polynomial simply rotate around rigidly as a constellation in the complex position/momentum plane.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>Finally, we want to emphasize again the significance of "coherent state quantization," which we've seen in the case of the quantum harmonic oscillator and the quantum spin. It turns out that we can describe a <em>quantum</em> harmonic oscillator state as a constellation of <em>classical</em> oscillator states, precisely those which are forbidden. In other words, we can interpret the quantum system as some number of copies of the classical system, which represent the classical states <em>the quantum system can't be in</em>, that have 0% probability of occuring. Materially, we can use coherent states to turn the quantum state into a polynomial and find the roots. This works in the case of the oscillator, where classical states refer to Gaussian wavepackets; and in the case of the spin, where classical states refer to states where all the angular momentum is concentrated in one direction. Whereas the "metaphysics" of a superposition of position states seems strange (a particle can be simultaneously in many locations?), we can perhaps find some clarity here: we can interpret a quantum state as specifying <em>which classical states it's not</em>. Moreover, we can describe the Schrodinger dynamics of an isolated system in terms of interactions <em>between the constellation of classical states the system can't be in</em>.</p>
-<p>One is reminded of the "negative theology" of late Antiquity and the Middle Ages. For example, Maimonides urges us only to define God in negative terms, never attributing some positive quality to God, since after all, all our ideas of qualities are relative human ideas gained through comparison, which can't apply absolutely to God. So it's best to say, instead, what God isn't. We can't actually get a positive idea of God; we can only try and fail to capture God's image, realize how we failed, and thus ever so slowly characterize God by <em>how God can't be pinned down</em>.</p>
-<p>Divinity aside, it is interesting that one can characterize quantum mechanics as an extension of classical mechanics that allows for systems to be defined <em>negatively</em>.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><hr>
-We can also gain a new perspective on entanglement.</p>
-<p>Suppose we have two polynomials $f(w) = (w-1)(w-2)$ and $g(z) = (z-3)(z-4)$. We can form the tensor product through simple multiplication: $(f \otimes g)(w, z) = (w-1)(w-2)(z-3)(z-4)$.</p>
-<p>We could form a plot of the roots of $(f \otimes g)(w, z)$:</p>
+<h1 id="Rehash-of-the-Climax">Rehash of the Climax<a class="anchor-link" href="#Rehash-of-the-Climax">&#182;</a></h1><h2 id="On-countability">On countability<a class="anchor-link" href="#On-countability">&#182;</a></h2><p>Let's see things a little more concretely. We begin with a lowly spin-$\frac{1}{2}$ state:</p>
+<p>$\alpha\mid \uparrow \rangle + \beta\mid\downarrow\rangle = \begin{pmatrix} \alpha \\ \beta \end{pmatrix}$</p>
+<p>To second quantize we introduce two quantum harmonic oscillators, one associated with $\mid \uparrow \rangle$ and one associated with $\mid \downarrow \rangle$. The $\uparrow$ oscillator counts the number of $\uparrow$ quanta, and the $\downarrow$ oscillator counts the number of $\downarrow$ quanta.  And for simplicity, we cap the number of excitations in each oscillator to two.</p>
+<p>This leads to a three dimensional trunctation of the quantum harmonic oscillator Hilbert space, and we have the following matrix representation for:</p>
+<p>$a = \begin{pmatrix} 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; \sqrt{2} \\ 0 &amp; 0 &amp; 0 \end{pmatrix}$</p>
+<p>$a^{\dagger} = \begin{pmatrix} 0 &amp; 0 &amp; 0 \\ 1 &amp; 0 &amp; 0 \\ 0 &amp; \sqrt{2} &amp; 0 \\\end{pmatrix}$</p>
+<p>We have:</p>
+<p>$a_{\uparrow} = a \otimes I_{3} = \begin{pmatrix} 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; \sqrt{2} \\ 0 &amp; 0 &amp; 0 \end{pmatrix} \otimes \begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{pmatrix}$</p>
+<p>$a_{\downarrow} =  I_{3} \otimes a = \begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{pmatrix} \otimes \begin{pmatrix} 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; \sqrt{2} \\ 0 &amp; 0 &amp; 0 \end{pmatrix}$</p>
+<p>We can consider the total number operator, which is going to count the "number of stars."</p>
+<p>$ N = N_{\uparrow} + N_{\downarrow} = a_{\uparrow}^{\dagger}a_{\uparrow} + a_{\downarrow}^{\dagger}a_{\downarrow}$</p>
+<p>It's matrix representation is:</p>
+<p>$\begin{pmatrix}
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; \\ 
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; \\
+0 &amp; 0 &amp; 2 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; \\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 2 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 3 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 2 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 3 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 4 \end{pmatrix}$</p>
+<p>We can list out the basis states:</p>
+<p>$ \{{} \mid 00 \rangle, \mid 01 \rangle, \mid 02 \rangle, \mid 10 \rangle, \mid 11 \rangle, \mid 12 \rangle, \mid 20 \rangle, \mid 21 \rangle, \mid 22 \rangle \} $</p>
+<p>We can see that the total number in each of these states is:</p>
+<p>$\{{} 0, 1, 2, 1, 2, 3, 2, 3, 4 \}$</p>
+<p>Which are exactly the eigenvalues of the matrix for $N$, and indeed: they are the values along the diagonal.</p>
+<p>We can expand a state vector in terms of these basis states:</p>
+<p>$\alpha\mid 00 \rangle + \beta\mid 01 \rangle + \gamma\mid 02 \rangle +\delta \mid 10 \rangle + \epsilon\mid 11 \rangle + \zeta\mid 12 \rangle + \eta\mid 20 \rangle + \theta \mid 21 \rangle + \iota
+\mid 22 \rangle$</p>
+<p>But what if we rearranged the basis vectors in a different order:</p>
+<p>$ \{{} \mid 00 \rangle, \mid 10 \rangle, \mid 01 \rangle, \mid 20 \rangle, \mid 11 \rangle, \mid 02 \rangle, \mid 21 \rangle, \mid 12 \rangle, \mid 22 \rangle \} $</p>
+<p>With total numbers:</p>
+<p>$\{{} 0, 1, 1, 2, 2, 2, 3, 3, 4 \}$</p>
+<p>In other words, we could obviously order the basis vectors in terms of their eigenvalues instead of using the naive ordering that the tensor product gave us. If we wanted we could apply a matrix which does the permutation:</p>
+<p>$\begin{pmatrix}1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+ 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+ 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\
+ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+ 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
+ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 \end{pmatrix} $</p>
+<p>So we could think about our state vector like this:</p>
+<p>$\alpha\mid 00 \rangle + \delta \mid 10 \rangle + \beta\mid 01 \rangle + \eta\mid 20 \rangle + \epsilon\mid 11 \rangle + \gamma\mid 02 \rangle + \theta \mid 21 \rangle + \zeta\mid 12 \rangle + \iota\mid 22 \rangle$</p>
+<p>More better yet, like this:</p>
+<p>$\alpha \oplus \begin{pmatrix} \delta \\ \beta \end{pmatrix} \oplus \begin{pmatrix} \eta \\ \epsilon \\ \gamma \end{pmatrix} \oplus \begin{pmatrix} \theta \\ \zeta \end{pmatrix} \oplus \iota $</p>
+<p>In other words, as a concatenation of Hilbert spaces:</p>
+<p>$ H_{1} \oplus H_{2} \oplus H_{3} \oplus H_{2} \oplus H_{1} $</p>
+<p>Now the idea is that that the subspace with $N$ total excitations should correspond to the spin-$\frac{N}{2}$  Hilbert space. In what follows, the notation should be interpreted as $\mid n m\rangle \rightarrow \mid j, m\rangle$.</p>
+<p>Total number: $0$</p>
+<p>$\mid 0 0 \rangle \rightarrow \mid 0, 0 \rangle$.</p>
+<p>Not that interesting.</p>
+<p>The Hilbert space with 1 total excitations should correspond to the spin-$\frac{1}{2}$ Hilbert space.  Its basis states are: one star at the North Pole, and one star at the South Pole.</p>
+<p>Total number: $1$</p>
+<p>$\mid 1 0 \rangle \rightarrow \mid \frac{1}{2}, \frac{1}{2} \rangle$</p>
+<p>$\mid 0 1 \rangle \rightarrow \mid \frac{1}{2}, -\frac{1}{2} \rangle$</p>
+<p>The Hilbert space with 2 total excitations should correspond to the spin-$1$ Hilbert space. We have two stars, and its basis states are: two stars at the North Pole, one star at the North and South Poles, and two stars at the South Pole.</p>
+<p>Total number: $2$</p>
+<p>$\mid 2 0 \rangle \rightarrow \mid 1, 1 \rangle$</p>
+<p>$\mid 1 1 \rangle \rightarrow \mid 1, 0 \rangle$</p>
+<p>$\mid 0 2 \rangle \rightarrow \mid 1, -1 \rangle$</p>
+<p>Next we have the basis states: $\mid 21 \rangle$ and $\mid 12 \rangle$. These have 3 total excitations, and so should live in the spin-$\frac{3}{2}$ Hilbert space. But because of the finite truncation of our oscillators, we only have two out of the three basis vectors. We could add in: $\mid 30\rangle$ and $\mid 0 3\rangle$, and just set their components to zero.</p>
+<p>Total number: $3$</p>
+<p>$\mid 3 0 \rangle \rightarrow \mid \frac{3}{2}, \frac{3}{2} \rangle$</p>
+<p>$\mid 2 1 \rangle \rightarrow \mid \frac{3}{2}, \frac{1}{2} \rangle$</p>
+<p>$\mid 1 2 \rangle \rightarrow \mid \frac{3}{2}, -\frac{1}{2} \rangle$</p>
+<p>$\mid 0 3 \rangle \rightarrow \mid \frac{3}{2}, -\frac{3}{2} \rangle$</p>
+<p>Similarly, we end with the basis state $\mid 22\rangle$, which has 4 total excitations, and so should live in the spin-$2$ Hilbert space, so we have to add four extra basis vectors</p>
+<p>Total number: $4$</p>
+<p>$\mid 4 0 \rangle \rightarrow \mid 2, 2 \rangle$</p>
+<p>$\mid 3 1 \rangle \rightarrow \mid 2, 1 \rangle$</p>
+<p>$\mid 2 2 \rangle \rightarrow \mid 2, 0 \rangle$</p>
+<p>$\mid 1 3 \rangle \rightarrow \mid 2, -1 \rangle$</p>
+<p>$\mid 04 \rangle \rightarrow \mid 2, -2 \rangle$</p>
+<p>We can then rewrite our state vector as:</p>
+<p>$\alpha \oplus \begin{pmatrix} \delta \\ \beta \end{pmatrix} \oplus \begin{pmatrix} \eta \\ \epsilon \\ \gamma \end{pmatrix} \oplus \begin{pmatrix} 0 \\ \theta \\ \zeta \\0 \end{pmatrix} \oplus \begin{pmatrix} 0 \\ 0 \\ \iota \\ 0 \\ 0 \end{pmatrix} $</p>
+<p>which lives in the Hilbert space: $S_{0} \oplus S_{\frac{1}{2}} \oplus S_{1} \oplus S_{\frac{3}{2}} \oplus S_{2}$.</p>
+<p>So we can decompose the Hilbert space of two quantum harmonic oscillators into a tower of spin-$j$ states.</p>
+<p>But there is an additional overlay. We can interpret the two oscillators as providing a second quantization of the spin-$\frac{1}{2}$ Hilbert space: in other words, we can have a variable number of spin-$\frac{1}{2}$'s', any number of such "particles" as we like, including superpositions over different number states.</p>
+<p>Here's the crucial point: Quantum mechanics adds a layer of complementarity to the idea of counting.</p>
+<p>To interpret the states as having a definite number of spin-$\frac{1}{2}$'s is to regard these particles as all precisely indistinguishable <em>so that they can be counted</em>. In other words, indistinguishability is the precondition for countability. Indeed, only indistinguishable things can be counted because they can be exchanged for each other like pebbles in a pile, $1$'s in a whole number.</p>
+<p>When we combine quantum systems we use the tensor product: $H_{A} \otimes H_{B}$. Now if we tensor two states 
+$A \otimes B$, in general, this is going to be different from $B \otimes A$. The order matters. Now classically speaking, the only combined states where the order doesn't matter are just $n$ copies of the same state: e.g., $\mid \uparrow \uparrow \rangle$ or $\mid \downarrow\downarrow \rangle$. I mean: If we permute the order of the two subspaces in the tensor product, we get the same result.</p>
+<p>But quantum mechanically, we can take sums of tensor states and they also live in the tensor product Hilbert space. So we could also consider the state: $\mid \uparrow \downarrow \rangle + \mid \downarrow \uparrow \rangle$. This is an entangled state. If we permute the order of the two subspaces, it remains the same.</p>
+<p>So in the quantum case, we actually have not two, but <em>three</em> permutation invariant states $\mid \uparrow \uparrow \rangle, \mid \uparrow \downarrow \rangle + \mid \downarrow \uparrow \rangle, \mid \downarrow \downarrow \rangle$.</p>
+<p>If we add in the permutation antisymmetric state $\mid \uparrow \downarrow \rangle - \mid \downarrow \uparrow \rangle$ into the mix, we get a complete basis for $H_{A} \otimes H_{B}$.</p>
+<p>But let's just consider the perfectly permutation symmetric states. There are three of them, and the correspond to the three states of a spin-$1$ particle:</p>
+<p>$\mid \uparrow \uparrow \rangle \rightarrow \mid 1, 1 \rangle$</p>
+<p>$ \mid \uparrow \downarrow \rangle + \mid \downarrow \uparrow \rangle \rightarrow \mid 1, 0 \rangle$</p>
+<p>$ \mid \downarrow \downarrow \rangle \rightarrow \mid 1, -1 \rangle$</p>
+<p>But thinking of them in second quantized terms, we see just as desired: we have states of two spin-$\frac{1}{2}$'s, and precisely those states which are permutation invariant, where their ordering doesn't matter, and so we can imagine them "jumbled up" in a pile, and thus be counted: these are the states with exactly two spin-$\frac{1}{2}$'s' indistinguishable with respect to the ordering of the tensor product.</p>
+<p>Going up the chain, we'll have:</p>
+<p>$0 \oplus S_{\frac{1}{2}} \oplus P(S_{\frac{1}{2}}, S_{\frac{1}{2}}) \oplus P(S_{\frac{1}{2}}, S_{\frac{1}{2}}, S_{\frac{1}{2}}) \oplus \dots $</p>
+<p>Where $P()$ denotes the permutation symmetric subspace of the full tensor product of $n$ spin-$\frac{1}{2}$ Hilbert spaces.</p>
+<p>So we could also think of our state vector:</p>
+<p>$\alpha\mid 00 \rangle + \delta \mid 10 \rangle + \beta\mid 01 \rangle + \eta\mid 20 \rangle + \epsilon\mid 11 \rangle + \gamma\mid 02 \rangle + \theta \mid 21 \rangle + \zeta\mid 12 \rangle + \iota\mid 22 \rangle$</p>
+<p>as:</p>
+<p>$\alpha\mid 0 \rangle \\ + \delta \mid \uparrow \rangle \\ + \beta\mid \downarrow \rangle \\ + \eta\mid \uparrow \uparrow \rangle \\ + \epsilon(\mid \uparrow \downarrow \rangle + \mid \downarrow \uparrow \mid) \\ + \gamma\mid \downarrow \downarrow \rangle \\ + \theta (\mid \uparrow \uparrow \downarrow \rangle + \mid \uparrow \downarrow \uparrow \rangle + \mid\downarrow\uparrow\uparrow\rangle) \\+  \zeta(\mid \downarrow \downarrow \uparrow \rangle + \mid \downarrow \uparrow \downarrow \rangle+ \mid\uparrow\downarrow\downarrow\rangle) \\ +\iota( \mid\uparrow\uparrow\downarrow\downarrow\rangle + \mid\downarrow\downarrow\uparrow\uparrow\rangle + \mid \uparrow \downarrow \downarrow \uparrow \rangle + \mid \downarrow \uparrow \uparrow \downarrow \rangle + \mid \uparrow \downarrow \uparrow \downarrow \rangle + \mid \downarrow \uparrow \downarrow \uparrow \rangle )$</p>
+<p>It's clear that the tensor space of the two oscillators can be interpreted as a tower of states with variable numbers of  spin-$\frac{1}{2}$'s, indistinguishable with respect to the tensor product, each of which corresponds to a state in the $\mid j, m\rangle$ representation.</p>
+<p>Moreover, suppose we choose $n$ random spinors, say two of them: $\begin{pmatrix}a \\ b\end{pmatrix}$ and $ \begin{pmatrix}c \\ d \end{pmatrix} $, and we take their permutation symmetric product:</p>
+<p>$ \frac{1}{2} \Big{(} \begin{pmatrix} a \\ b \end{pmatrix} \otimes \begin{pmatrix} c \\ d \end{pmatrix} + \begin{pmatrix} c \\ d \end{pmatrix} \otimes \begin{pmatrix} a \\ b \end{pmatrix} \Big{)} = \frac{1}{2} \Big{(} \begin{pmatrix} ac \\ ad \\ bc \\ bd \end{pmatrix} + \begin{pmatrix} ca \\ cb \\ da \\ db \end{pmatrix} \Big{)} = \begin{pmatrix} ac \\ \frac{1}{2}(ad + bc) \\ \frac{1}{2}(ad + bc) \\ bd \end{pmatrix}$.</p>
+<p>This is a map from the two <em>unordered</em> spinors into the permutation symmetric product of two spin-$\frac{1}{2}$. And we can see, in the end, the vector space is clearly 3 dimensional.</p>
+<p>It turns out every permutation symmetric state can be obtained by a choice of $n$ unordered spinors to symmeterize, up to phase.</p>
+<p>One way of seeing this is to consider the two polynomials:</p>
+<p>$f(z) = az - b$ and $g(z) = cz - d$.</p>
+<p>Let's multiply them together:</p>
+<p>$(f \odot g)(z) = (az - b)(cz - d) = acz^{2} - adz - bcz + bd = acz^{2} - (ad + bc)z + bd$.</p>
+<p>This polynomial has two roots at $\frac{b}{a}$ and $\frac{d}{c}$.  This is why the bijection is between unordered spinors up to phase, since we only remember the ratios between the components. These ratios, considered as roots of a polynomial, by the fundamental theorem of algebra, uniquely pick out an ordered sequence of  coefficients. Specifically, these polynomials lie in a three dimensional vector space, which can be bijected onto the four dimensional vector space of the permutation symmetric product of the spinors. To take the permutation symmetric tensor product is as much to: multiply two polynomials <em>in the same variable</em> and follow the laws of algebra.</p>
+<p>Indeed, we can interpret the symmeterized product as picking out the location of, in this case, two points on the complex plane, which are formed from the ratios of the spinors. Moreover, these ratios can be interpreted as roots of a polynomial, and these polynomials form a three dimensional vector space. And so, additionally, we can interpret this space as the space of a spin-$1$ particle. Using the Majorana formula in reverse,  we get: $\begin{pmatrix} \frac{ac}{ (-1)^{0}\sqrt{\begin{pmatrix} 2 \\ 0 \end{pmatrix}}} \\ \frac{-(ad + bc)}{(-1)^{1}\sqrt{\begin{pmatrix} 2 \\ 1 \end{pmatrix}}} \\ \frac{bd}{(-1)^{2}\sqrt{\begin{pmatrix} 2 \\ 2 \end{pmatrix}}} \end{pmatrix}$ or $\begin{pmatrix} ac \\ \frac{1}{\sqrt{2}}(ad + bc) \\ bd \end{pmatrix}$. This is a spin-$1$ state.</p>
+<p>So clearly, we can interpret a permutation symmetric state of $n$ spin-$\frac{1}{2}$ particles as a constellation of $n$ points on the Riemann sphere, which pick out, up to phase, a spin-$\frac{n}{2}$ state.</p>
+<p>Why the sphere? Recall that in order to deal with a spinor like $\begin{pmatrix} 0 \\ 1 \end{pmatrix}$, which has no roots as a polynomial, since $f(z) = -1 \neq 0$, we have to add one extra point to the complex plane, a point at infinity, which turns the plane into the sphere. We could have alternatively begun with homogenous polynomials$f(w,z) = az - bw$ and $g(w, z) = cz - dw$, whose roots coincide with the single variable polynomial up to a choice of w (e.g., $w=1$), but which allow for a root at $h(0, 1)$ if for example $h(w, z)=w$. This leads directly to the second quantized picture, interpreting $z$ and $w$ as the creation operators of the two harmonic oscillators.</p>
+<p>For example, suppose we had a constellation of $n$ points on the sphere, and we wanted to rotate $\theta$ around the $x$ axis. We could:</p>
+<ul>
+<li>Draw the points on an actual sphere, and do the rotation ourselves.</li>
+<li>We could act on $(x, y, z)$ coordinates with a  $3$ x $3$ real $SO(3)$ matrix. This would be the obvious thing to do. Maybe instead we work in polar coordinates.</li>
+<li>We could stereographically project the points on the sphere to the complex plane $\mathbb{C} + \infty$ and use a certain Mobius transformation: $f(z) = \frac{az+b}{cz+d}$, remembering the rules about dealing with $\infty$.</li>
+<li><p>We could create spinors $\begin{pmatrix} z \\ 1\end{pmatrix}$ or $\begin{pmatrix} 1 \\ 0 \end{pmatrix}$if $z=\infty$ such that the ratio between the components is $z$ the streographic projection of $(x, y, z)$. We could act on these with $U = e^{-iX_{\frac{1}{2}}\frac{\theta}{2}}$ , where $X_{\frac{1}{2}}$ corresponds to the spin-$\frac{1}{2}$ representation: the Pauli matrix: $\begin{pmatrix} 0 &amp; 1\\1 &amp; 0 \end{pmatrix}$. This $U$ is just $U = \begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix}$, the same $a, b, c, d$ in the expression for the Mobius transformation. In other words, we could do $U\mid \phi_{0} \rangle$, $U\mid \phi_{1} \rangle$,$U\mid \phi_{2} \rangle$, in other words transform all the spinors by $U$. If we normalize these, we have $n$ spin-$\frac{1}{2}$ quantum states.</p>
+</li>
+<li><p>We could apply $ \Big{(} (U\otimes I_{2} \otimes I_{2}) + (I_{2} \otimes U \otimes I_{2}) + (I_{2} \otimes I_{2} \otimes U)(\mid \phi_{0} \otimes \phi_{1} \otimes \phi_{2} \rangle + \\ \mid \phi_{0} \otimes \phi_{2} \otimes \phi_{1}\rangle + \mid \phi_{1} \otimes \phi_{0} \otimes \phi_{2}\rangle + \mid\phi_{1} \otimes \phi_{2} \otimes \phi_{0}\rangle + \mid\phi_{2} \otimes \phi_{0} \otimes \phi_{1}\rangle + \mid\phi_{2} \otimes \phi_{1} \otimes \phi_{0}\rangle)$, appropriately normalized.</p>
+<ul>
+<li>In other words, apply: $(U_{0} + U_{1} + U_{2})P(\phi_{0}, \phi_{1}, \phi_{2})$.</li>
+<li>In other other words, we could take the permutation tensor product of the spinors and rotate each of the permutation symmetric spin-$\frac{1}{2}$ tensor pieces equally under $U$.</li>
+</ul>
+</li>
+<li>We could form the polynomial$f(z) = (z-\alpha)(z-\beta)(z-\gamma)$ whose roots are $\alpha, \beta, \gamma$, which correspond to the ratios between the components of each of the three spinors, and are the stereographic projections of the ($x, y, z$) points. Normalizing via the Majorana equation, the coefficients can be interpreted as the components of a state in the $\mid j, m \rangle$ representation, where $j$ in this case is $\frac{3}{2}$. We could then form: $V = e^{-iX_{\frac{3}{2}}\frac{\theta}{2}}$, where $X_{\frac{3}{2}}$ corresponds to the spin-$\frac{3}{2}$ Pauli: $\begin{pmatrix} 0 &amp; \frac{\sqrt{3}}{2} &amp; 0 &amp; 0 \\ \frac{\sqrt{3}}{2} &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; \frac{\sqrt{3}}{2} \\ 0 &amp; 0 &amp; \frac{\sqrt{3}}{2} &amp; 0\end{pmatrix} $. </li>
+<li>Finally, we could upgrade $U$ to $W = \begin{pmatrix} a_{0}^{\dagger} &amp; a_{1}^{\dagger} \end{pmatrix} \begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix} \begin{pmatrix} a_{0} \\ a_{1}\end{pmatrix}$, which acts on the double quantum harmonic oscillator space, specifically the state obtained by: reinterpreting the spin-$\frac{3}{2}$ state $\alpha\mid \frac{3}{2}, \frac{3}{2} \rangle + \beta \mid \frac{3}{2}, \frac{1}{2} \rangle + \gamma\mid \frac{3}{2}, -\frac{1}{2} \rangle + \delta \mid \frac{3}{2}, -\frac{3}{2} \rangle$ state as $\alpha\mid 30 \rangle + \beta \mid 21 \rangle + \gamma\mid 12 \rangle + \delta\mid 03 \rangle$. <ul>
+<li>For example, if we second quantize the $X_{\frac{1}{2}}$ operator, then the resulting matrix, when properly permuted, is just a block matrix with $X_{0}, X_{\frac{1}{2}}, X_{1}, \dots$, the Pauli matrices for each $j$, along the diagonal. In other words, an $X$ rotation of the whole "field" of a variable number of spin-$\frac{1}{2}$ particles leads to an $X$ rotation individually on each of the spin-$j$ subspaces. This space can also be interpreted via the position basis as the polarization plane of a light wave.</li>
+</ul>
+</li>
+</ul>
+<p>Now let's do a simple example not involving spin, just for comparison. Suppose we want a second quantize a scalar particle, one which has only a position state, and in fact, it can only be in $3$ possible locations: $\mid I  \rangle, \mid II \rangle, \mid III \rangle$. So we introduce three quantum harmonic oscillators, with annihilation operators $a_{I}, a_{II}, a_{III}$, each acting on each separate piece of the tensor product of the three oscillators. Let's say we cap each one at $d$ excitations. We could list out the basis vectors in terms of the total number $n$ of excitations, and associate them with states in the permutation symmetric tensor product of $n$ position states. It's a map from the tensor product of three oscillator Hilbert spaces $O_{d}$ to a tower of permutation symmetric products of $H_{3}$, the position Hilbert space.</p>
+<p>$ O_{d} \otimes O_{d} \otimes O_{d} \rightarrow 0 \oplus H_{3} \oplus P(H_{3}, H_{3}) \oplus  P(H_{3}, H_{3}, H_{3}) \oplus \dots$</p>
+<p>$\begin{matrix}\mid 000 \rangle &amp; \mid 0\rangle\\ \\ \mid 100 \rangle &amp; \mid I \rangle\\ \mid 010\rangle &amp; \mid II \rangle \\ \mid 001 \rangle &amp; \mid III \rangle \\ \\  \mid 2 0 0 \rangle &amp; \mid I, I \rangle \\ \mid 110\rangle &amp; \mid I, II \rangle + \mid II, I \rangle \\\mid 020 &amp; \mid II, II \rangle \\ \mid 101 \rangle &amp; \mid I, III \rangle + \mid III, I \rangle \\\mid 011 \rangle &amp; \mid II, III \rangle + \mid III, II \rangle \\\mid002\rangle &amp; \mid III, III \rangle \\ \\\mid 300 \rangle &amp; \mid I, I, I \rangle \\ \mid 210 \rangle &amp; \mid I, I, II \rangle + \mid I, II, I \rangle + \mid II, I, I \rangle \\ \mid 120 \rangle &amp; \mid I, II, II \rangle + \mid II, I, II \rangle + \mid II, II, I \rangle \\ \mid 102\rangle &amp; \mid I, III, III \rangle + \mid III, I, III \rangle + \mid III, III, I \rangle \\ \mid 111 \rangle &amp; \mid I, II, III \rangle + \mid II, I, III \rangle + \mid I, III, II \rangle + \mid II, III, I \rangle + \mid III, I, II + \mid III, II, I \rangle  \\ \mid 201\rangle &amp; \mid I, I, III \rangle + \mid I, III, I \rangle + \mid III, I, I \rangle \\ \mid 021 \rangle &amp; \mid II, II, III \rangle + \mid II III II \rangle + \mid III, II, II \rangle \\ \mid 012\rangle &amp; \mid II, III, III \rangle + \mid III, II, III \rangle + \mid III, III, II \rangle \\ \mid 003\rangle &amp; \mid III, III, III \rangle \\ \vdots &amp; \vdots\end{matrix}$</p>
+<p>If you think about it, you can't measure these tensored position states directly: since in what number subspace should you act? One thing you <em>can</em> do is measure the number of particles at a given location.</p>
+<p>Suppose you measure $1$ particle at $I$.</p>
+<p>You've collapsed into the subspace of: $\mid 1 0 0 \rangle, \mid 11 0 \rangle, \mid 101 \rangle, \mid 120 \rangle, \mid 102 \rangle, \mid 111 \rangle, \dots$, a superposition of states of different numbers of particles consistent with you measuring $1$ particle at $I$.</p>
+<p>Now you might ask: before we had a three way correspondence between the occupation number basis of two oscillators, permutation symmetric spin-$\frac{1}{2}$ basis states, and the $\mid j, m \rangle$ basis vectors of an $SU(2)$ representation.</p>
+<p>If we have three oscillators, permutation symmetric states of $3D$ complex vectors, maybe we should be able to represent representations of $SU(3)$ with them. For example, we could second quantize the $8$ Gell-Man matrices (the equivalent of the $3$ Pauli's for $SU(2)$), shamelessly stolen from wikipedia:</p>
+<p>$\lambda_1 = \begin{pmatrix} 0 &amp; 1 &amp; 0 \\ 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 \end{pmatrix} 
+\lambda_2 = \begin{pmatrix} 0 &amp; -i &amp; 0 \\ i &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 \end{pmatrix} 
+\lambda_3 = \begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; -1 &amp; 0 \\ 0 &amp; 0 &amp; 0 \end{pmatrix}
+\lambda_4 = \begin{pmatrix} 0 &amp; 0 &amp; 1 \\ 0 &amp; 0 &amp; 0 \\ 1 &amp; 0 &amp; 0 \end{pmatrix} \\ \lambda_5 = \begin{pmatrix} 0 &amp; 0 &amp; -i \\ 0 &amp; 0 &amp; 0 \\ i &amp; 0 &amp; 0 \end{pmatrix} 
+\lambda_6 = \begin{pmatrix} 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 \\ 0 &amp; 1 &amp; 0 \end{pmatrix} 
+\lambda_7 = \begin{pmatrix} 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; -i \\ 0 &amp; i &amp; 0 \end{pmatrix} 
+\lambda_8 = \frac{1}{\sqrt{3}} \begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; -2 \end{pmatrix}$</p>
+<p>Well, the answer is yes, but we actually need six oscillators to represent both quarks and antiquarks, since $SU(3)$ is rank-2. And in general for $SU(N)$, the group will be rank-$(n-1)$, andu'll need $(n-1)$ copies of $n$ oscillators. Then via second quantization, you'll obtain all the irriducible representations of these groups.</p>
+<p>E.g., following <a href="https://arxiv.org/abs/0901.0644">this nice paper</a>, for $SU(3)$ we have two sets of 3 oscillators $\{a_{\alpha}^{\dagger} \}$ and $\{b_{i}^{\dagger\alpha} \}$ for $\alpha = 1,2,3$. We can upgrade the Gellman matrices $\lambda^{a}$ for $a=1,2,3,4,5,6,7,8$ and $\lambda^{T}$ being the transpose:</p>
+<p>$Q_{a} = a^{\dagger} \frac{\lambda^{a}}{2}a - b^{\dagger}\frac{\lambda^{a^{T}}}{2} b$</p>
+<p>The operators are second quantizing the $3, 3^{*}$ representation. Whereas $SU(2)$, we classified representations with a $j$ value, which are an eigenvaluse of the $\sigma^{2}$ operator, with $SU(3)$ we require a $p$ and $q$: two conserved quantities. Whereas before the eigenvalues of the total occupation number operator of the double oscillator give us the $j$ values (basically), now with $SU(3)$ we have two sets of representations labeled by the eigenvalues of the two total number operators $N_{a}, N_{b}$. We can pick apart the components of the oscillator basis states intos irriducible representations of $SU(3)$, as well as associating them to permutation symmetric states of the fundamental representation</p>
+<p>Furthermore, we can make coherent states, and so express states as functions/evaluations of the inner product of a variable coherent state and an arbitrary state, just as with spin.</p>
+<p>Indeed, before we go, lets remind ourselves a little of the magic of coherent states.</p>
+<p>For the oscillator, we have: $\mid z \rangle = e^{-\frac{|z|^{2}}{2}} \sum_{n=0}^{\infty} \frac{z^{n}}{\sqrt{n!}}\mid n \rangle$.</p>
+<p>So that we can write: $\psi(z) = \langle \overline{z} \mid \psi \rangle  = e^{-\frac{|z|^{2}}{2}} \sum_{n=0}^{\infty} \frac{z^{n}}{\sqrt{n!}}\langle n \mid \psi \rangle $. Ignoring the initial exponential, which we'll absorb into the measure on the inner product, this is a polynomial in $z$ where powers of $z$ are weighted by a coefficient proportional to the amplitude for $\mid \psi \rangle$ to be in the $\mid n \rangle$ number state. The $\mid z \rangle$'s form an overcomplete basis of the Hilbert space of the oscillator, and the complex plane can be interpreted as the position/momentum plane, the phase space of the classical oscillator.</p>
+<p>If we represent two states as polynomials, we can recover the inner product with an integral over $C$: $\int_{\mathbb{C}} f(z)^{*}g(z)e^{-|z|^2} dz$.</p>
+<p>Finally, we note that $a\mid z \rangle = z \mid z \rangle$, the $z$'s are eigenstates of the annihilation operator, and that on polynomials the annihilation operator is $\frac{d}{dz}$, the creation operator being multiplication by the variable $z$.</p>
+<p>Now, let's think about the spin coherent states, also some $\mid z \rangle$, but where $z$ is in $C + \infty$.</p>
+<p>We know as a polynomial we should have $f(w) = (w-z)^{n}$. $n$ stars at the point $z$. The derivatives are $f'(w) = n(w-z)^{n-1}$, $f^{\prime\prime}(w) = n(n-1)(w-z)^{n-2}$, etc. Notice that the roots stay the same.</p>
+<p>If we have a polynomial  $f(z) = \langle \overline{z} \mid \psi \rangle$ we can interpret the spin lowering operator as $\frac{d}{dz}$. Acting on a spin coherent state, it removes a root, but leaves the rest the same. In this sense, a spin coherent state is an eigenstate of $\frac{d}{dz}$, now interpreted as the spin lowering operator, although its degree may change.</p>
+<p>If we multiply out $f(z) = (z-w)^{3}$ for example we get: $ z^{3} - 3wz^{2} + 3w^{2}z - w^{3}$, which interpreted as a two variable polynomial $f(w,z)$ is homogenous with degree three. The point is that the variable corresponding to the coherent state is treated symmetrically with the variable that corresponds to the actual unknown. When we take $f(z) = \langle \overline{z} \mid \psi \rangle $, we end up reproducing our polynomial from before, where the unknown has become the paramter for the coherent state.</p>
+<p>Finally, I note we can take the inner product on the single variable polynomials, extracting a measure from the fact that  we want our coherent states normalized.</p>
+<p>$\langle f \mid g \rangle= \int_{\mathbb{C}} f(z)^{*}g(z)\frac{1}{(1+|z|^{2})^{2j + 1}} dz$.</p>
+<p>But now we can consider spin coherent states in the following light as: pick a spinor representating a point on the sphere as some $\begin{pmatrix} \alpha \\ \beta \end{pmatrix}$ . It's corresponding creation operator is: $\alpha a_{\uparrow}^{\dagger} + \beta a_{\downarrow}^{\dagger}$. We could form: $(\alpha a_{\uparrow}^{\dagger} + \beta a_{\downarrow}^{\dagger})^{n}$ which would create  $n$ stars at the given point, in other words a spin coherent state with $j=\frac{n}{2}$.</p>
+<p>$\mid z \rangle = e^{\alpha a_{\uparrow}^{\dagger} + \beta a_{\downarrow}^{\dagger}} \mid 00 \rangle = \sum_{n=0}^{\infty} \frac{(\alpha a_{\uparrow}^{\dagger} + \beta a_{\downarrow}^{\dagger})^{n}}{n!}\mid 0,0 \rangle = \sum_{n=0}^{\infty}\mid z \rangle_{n}$, where $\mid z \rangle_{n}$ is a coherent state with $n$ stars at $z$, in other words, a $j=n-1$ state. In other words, we get a superposition of coherent states with $0, 1, 2, 3, 4, \dots$ stars at the given location.</p>
+<p>Given $\sum_{n=0}^{\infty} \frac{(\alpha a_{\uparrow}^{\dagger} + \beta a_{\downarrow}^{\dagger})^{n}}{n!}\mid 0,0 \rangle = \sum_{n=0}^{\infty}\mid z \rangle_{n}$, we can generalize to the two variable spin coherent polynomial $f(\alpha, \beta) = \langle 0,0 \mid\sum_{n=0}^{\infty} \frac{(\alpha a_{\uparrow} + \beta a_{\downarrow})^{n}}{n!} \mid \psi \rangle$. This is just our homogenous polynomial representation from before.</p>
+<p>We can play this same trick with however many oscillators we have and form $SU(N)$ coherent states, which turn states into functions, whose zeros we can examine as constellations, ever more broadly defined.</p>
+<p>Indeed, by second quantization, we can represent states as functions, which take as input a state in the basic representation, and which can be characterized by their $0$'s, in other words: where the amplitude is zero on the given coherent state. And we interpret these basic representations as something like classical phase spaces (as we do in the case of the oscillator (with the position/momentum plane) and the spin (the angular momentum sphere)). At the same time, we can interpret the resulting second quantized theory as a superposition of a whole tower of different representations: and what is counted is the number of $0$'s in these representations, in other words: the number of <em>forbidden</em> classical states. A set of constellations of forbidden states is equivalent to all the magic of the permutation symmetric tensor product by the laws of algebra.</p>
+<p>You could say: what is countable in quantum mechanics is the number of classical states forbidden together. This picture is dual to: for particles to be countable in quantum mechanics, they must be indistinguishable, unordered with respect to the tensor product. This is philosophically satisfying: otherwise we wouldn't know they were the same, and so couldn't justifiably model them like: pebbles in a pile: a sum. Again, classically, when we combine systems, the only way the systems to be unordered is for them to be in exactly the same state. But because of the possibility of entangled superpositions in the quantum mechanical tensor product, the countable states are much more interesting: for example $\mid \uparrow \downarrow \rangle + \mid \downarrow \uparrow \rangle$, which is permutation symmetric, and from this the whole theory of second quantization follows--the vastness of quantum mechanics reduced down to: the science of what can be counted at the same time, which provides context to a pile of pebbles.</p>
+<p>You might wonder if we can continue the construction. Following <a href="http://math.ucr.edu/home/baez/nth_quantization.html"> John Baez</a>, we could imagine this ladder:</p>
+<p>Zeroth quantization is hit a set with a functor, which takes each element of the set to a basis vector in some Hilbert space, where the dimensionality of the space is the size of the set. We start with the empty set, and get the 0-dimensional Hilbert space.</p>
+<p>We down define a "second quantization functor," which takes a Hilbert space to the Fock space built atop it: in other words, the tensor product of $d$ harmonic oscillators, where $d$ is the dimensionality of the original Hilbert space.</p>
+<p>First quantization: we hit the 0-dim Hilbert space with the "second quantization functor" and get: $C$, the complex numbers, since we have only one basis vector $\mid \rangle$, with an amplitude: we live in the 1-dim Hilbert space.</p>
+<p>Second quantization: hit the 1-dim Hilbert space with the "second quantization functor" and get the quantum harmonic oscillator, which counts an arbitrary finite collection of indistinguishable quanta: some number of $\mid \rangle$'s: $\mid 0 \rangle, \mid 1 \rangle, \mid 2 \rangle, \dots$.</p>
+<p>Third quantization: introduce a harmonic oscillator for each state of a harmonic oscillator. Each state consists of a finite multiset like: $\mid \mid 1,1,1\rangle, \mid 1 \rangle, \mid 1, 1 \rangle\rangle = \mid 3, 1, 2\rangle$, where the order doesn't matter. In other words, we can interpret this as an unordered "pile" of a harmonic oscillators: for example, we could be in a superposition of representations of $SU(2)$ and $SU(3)$, etc. Evidently, we can think of this like the Hilbert space of the right-moving modes of a quantum string, in string theory. The idea is you can interpret these as states of a massless scalar field theory on a cylindrical spacetime, where the momentum of each particle corresponds to the the different number states of the oscillators: e.g., $\mid 3, 1, 2\rangle$ where there is 1 particle with momentum 3, 1 particle with momentum 2, and 1 particle with momentum 3. And if we simply upgrade the number operator from the previous level, we get the Hamiltonian for the massless scalar field on a cylindrical spacetime. If we tensor another copy of this, to get left-moving modes, we have the complete theory, which can be interpreted this as a string evolving in 1-dim spacetime. It's quite clear that in an almost trivial sense, string theory works: we have a whole pile of oscillators to play with, and we can use them to represent tons of symmetry groups using our tricks.</p>
+<p>Fourth quantization: a multiset of multisets of oscillators, an arbitrary collection of indistinguishable strings.</p>
+<p>But why stop there?</p>
+<p>A more interesting question to ask is: how does distinguishability, in order words, uncountability or uniqueness arise from a fundamentally permutation symmetric theory?</p>
 
 </div>
 </div>
@@ -13467,285 +13264,13 @@ We can also gain a new perspective on entanglement.</p>
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">sympy</span> <span class="k">import</span> <span class="o">*</span>
-
-<span class="n">z</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;z w&quot;</span><span class="p">)</span>
-<span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">state_poly</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
-    <span class="k">global</span> <span class="n">z</span><span class="p">,</span> <span class="n">w</span>
-    <span class="n">v</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-    <span class="n">terms</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-            <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">n</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">w</span><span class="o">**</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">**</span><span class="n">j</span><span class="p">))</span>
-    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>    
-
-<span class="k">def</span> <span class="nf">make_lines</span><span class="p">(</span><span class="n">roots</span><span class="p">):</span>
-    <span class="k">global</span> <span class="n">z</span><span class="p">,</span> <span class="n">w</span>
-    <span class="n">n_grid</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">20</span>
-    <span class="k">for</span> <span class="n">root</span> <span class="ow">in</span> <span class="n">roots</span><span class="p">:</span>
-        <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">root</span><span class="p">:</span>
-            <span class="n">r</span> <span class="o">=</span> <span class="n">root</span><span class="p">[</span><span class="n">w</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">is_number</span><span class="p">:</span>
-                <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">N</span><span class="p">(</span><span class="n">r</span><span class="p">)]</span><span class="o">*</span><span class="n">n_grid</span><span class="p">)</span>
-                <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">L</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">n_grid</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">L</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">n_grid</span><span class="p">)</span>
-                <span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">Y</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">root</span><span class="p">:</span>
-            <span class="n">r</span> <span class="o">=</span> <span class="n">root</span><span class="p">[</span><span class="n">z</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">is_number</span><span class="p">:</span>
-                <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">L</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">n_grid</span><span class="p">)</span>
-                <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">N</span><span class="p">(</span><span class="n">r</span><span class="p">)]</span><span class="o">*</span><span class="n">n_grid</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">L</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">n_grid</span><span class="p">)</span>
-                <span class="n">Y</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="p">]</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="n">make_lines</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 
     </div>
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The x-axis is the $w$ axis and the y-axis is the $z$ axis. We see two vertical lines at $1$ and $2$ cooresponding to $(w-1)(w-2)$. We get a line because $w$ must be 1 or 2 independently of $z$: the lines represents the fact that for all values of $z$, $w=1$ and $w=2$ are roots. Similarly, we have two horizontal lines at $3$ and $4$ corresponding to $(z-3)(z-4)$. We've chosen to stick with real roots since we can visualize things nicely with lines. Otherwise, we'd have to imagine: for every point in the complex plane, a map to another point on the complex plane.</p>
-<p>What happens, though, if we add a term mixing $w$ and $z$?</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="n">p2</span> <span class="o">=</span> <span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="n">w</span><span class="p">)</span>
-<span class="n">make_lines</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">p2</span><span class="p">))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="n">p2</span> <span class="o">=</span> <span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="n">w</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">make_lines</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">p2</span><span class="p">))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>In this last image, we have a relationship: $w = \frac{10}{z}$. This function has two branches, asymptoting to the $x$ and $y$ axes. Note there's a distortion in the middle as matplotlib connects the two branches.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-
-<span class="n">p3</span> <span class="o">=</span> <span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="n">z</span><span class="o">*</span><span class="n">w</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">make_lines</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">p3</span><span class="p">))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>In other words, when systems are entangled we can't imagine simply: a constellation of excluded classical states of $A$ and a separate constellation of excluded classical states of $B$. Instead, we might have a joint, mutually dependent relationship: for each possible choice of excluded classical state of $A$, we can get an excluded classical state of $B$, and vice versa. In other words, the excluded classical states of $B$ are only defined up to a choice of excluded classical states of $A$. These joint root of $A$ and $B$ exclude a whole swath of the space of their togetherness.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>Okay, so we have a 1D quantum harmonic oscillator. Intriguingly, we can view it as a coexistence or constellation of banned classical oscillator states; for our purposes now, however, we will view it primarily as a little guy that "counts" quanta: we can add quanta to it, subtract quanta from it, measure the number of quanta. The more quanta, the higher the energy. A general state of the oscillator is a superposition of different numbers of quanta. What is a quantum? Here, it's like a nugget of energy. It doesn't have an identity of its own: it's like the idea of a pebble: simple, indistinguishable.</p>
-<p>Now here's a very important connection.</p>
-<p>One of the simplest ways of understanding quantum field theory, at least at first, is via something called second quantization.</p>
-<p>If you start with a quantum system living in some Hilbert space of dimension $d$, then you can construct a theory of a <em>variable number of indistinguishable "copies" of that quantum system</em> by introducing a quantum harmonic oscillator for each basis state of the original quantum system. Hence, "second quantization". (Later we'll get into the eventual difficulties with this view as regards QFT as a whole.) Note: now we're talking about not a constellation of classical systems, but a constellation of <em>quantum systems</em>, as it were.</p>
-<p>As I say, in second quantized quantum mechanics, an oscillator is associated with each basis state of the original quantum system, and each oscillator counts the number of "particles" in the state it is associated with. And because we use quantum harmonic oscillators to count them, the particles so described will always be as indistinguishable as the quanta in a harmonic oscillator.</p>
-<p>For a "bosonic field," there can be any number of particles in the same state, and the particles are always in the permutation symmetric state. For a "fermionic field," there can be at most one particle in a given state, and the particles are always in the permutation antisymmetric state. In what follows, we'll mainly be considering the bosonic case.</p>
-<p>The point is that, remarkably, our current theories of physics regard all so-called "particles" as quanta of some quantum field, as indistinguishable, countable nuggets.</p>
-<p>In "field theory" proper, one can think about a "quantum field" as the "first quantization" of a classical field; or as the "second quantization" of the ordinary Hilbert space of a single particle. The latter has an amplitude for each position (or momentum), and so we'll have an associated quantum harmonic oscillator at each location, counting the number of particles at that location (or in that momentum mode), and indeed: this is like a quantized model of a field, with little oscillators at each point. One can add other things to the first quantized state besides "position," like spin, and even make it relativistic. (The difficulty comes in dealing with interactions.)</p>
-<p>But actually, the simplest "quantum field theory" involves second quantizing a little spin-$\frac{1}{2}$ particle. Such a system has two states, and so we introduce two quantum harmonic oscillators. We could say: the first oscillator keeps track of the number of $\uparrow$ quanta, and the second oscillator keeps track of the number of $\downarrow$ quanta. By construction, we'll get a theory of a variable number of permutation symmetric spin-$\frac{1}{2}$ particles. But we know what a permutation symmetric state of spin-$\frac{1}{2}$'s is! It's a spin-$j$ particle! And so, we can look at our double oscillator construction as a model of spin with <em>variable $j$</em>, where the $j$ value can change, and indeed, where we can have a superposition of different $j$ values.</p>
-<hr>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We could write this out in "Fock" notation, but let's use polynomials first. Given two oscillators states (coeffcients suppressed):</p>
-<p>$f(z) = z^{0} + z^{1} + z^{2} + z^{3} + \dots$</p>
-<p>$g(w) = w^{0} + w^{1} + w^{2} + w^{3} + \dots $</p>
-<p>We can tensor them:</p>
-<p>$F(z, w) = z^{0}w^{0} + z^{0}w^{1} + z^{0}w^{2} + z^{0}w^{3} + \dots + z^{1}w^{0} + z^{1}w^{1} + z^{1}w^{2} + z^{1}w^{3} + \dots + z^{2}w^{0} + z^{2}w^{1} + z^{2}w^{2} + z^{2}w^{3} + \dots + z^{3}w^{0} + z^{3}w^{1} + z^{3}w^{2} + z^{3}w^{3} + \dots$</p>
-<p>But this can be rearranged:</p>
-<p>$F(z, w) = \Big{\{} z^{0}w^{0} \Big{\}} + \Big{\{} z^{1}w^{0} + z^{0}w^{1} \Big{\}} + \Big{\{} z^{2}w^{0} + z^{1}w^{1} + z^{0}w^{2} \Big{\}} + \Big{\{} z^{3}w^{0} + z^{2}w^{1} + z^{1}w^{2} + z^{0}w^{3} \Big{\}} + \dots$</p>
-<p>In other words, we can regard the two variable polynomial as a sum of <em>homogenous</em> polynomials, of degree $0, 1, 2, 3, 4, \ldots$. (Recall our use of homogenous polynomials way back during our discussion of the Majorana representation.) Each such sector of the Hilbert space, corresponding to a given total $n$, can be interpreted as a spin-$\frac{n}{2}$ state. In other words, $n$ is just $2j$, the number of stars.</p>
-<p>The correspondence between the occupation number basis of the two oscillators, the spin basis states in the $\mid j, m \rangle$ representation, and the states of $2j$ symmeterized spin-$\frac{1}{2}$'s is:</p>
-<p><em>Total Number: 0</em></p>
-<p>$\begin{matrix}\mid 0 0 \rangle &amp; \mid 0, 0 \rangle &amp; \mid 0 \rangle \end{matrix}$</p>
-<p><em>Total Number: 1</em></p>
-<p>$\begin{matrix}
-\mid 1 0 \rangle &amp; \mid \frac{1}{2}, \frac{1}{2} \rangle &amp; \mid \uparrow \rangle \\
-\mid 0 1 \rangle &amp; \mid \frac{1}{2}, -\frac{1}{2} \rangle &amp; \mid \downarrow \rangle 
-\end{matrix}$</p>
-<p><em>Total Number: 2</em></p>
-<p>$\begin{matrix}
-\mid 2 0 \rangle &amp; \mid 1, 1 \rangle &amp; \mid \uparrow \uparrow \rangle  \\
-\mid 1 1 \rangle &amp; \mid 1, 0 \rangle &amp; \mid \uparrow \downarrow \rangle + \mid \downarrow \uparrow \rangle \\ 
-\mid 0 2 \rangle &amp; \mid 1, -1 \rangle &amp; \mid \downarrow \downarrow \rangle
-\end{matrix}$</p>
-<p><em>Total Number: 3</em></p>
-<p>$\begin{matrix}
-\mid 3 0 \rangle &amp; \mid \frac{3}{2}, \frac{3}{2} \rangle &amp; \mid \uparrow \uparrow \uparrow \rangle \\
-\mid 2 1 \rangle &amp; \mid \frac{3}{2}, \frac{1}{2} \rangle &amp; \mid \uparrow \uparrow \downarrow \rangle + \mid \uparrow \downarrow \uparrow \rangle + \mid \downarrow \uparrow \uparrow \rangle \\ 
-\mid 1 2 \rangle &amp; \mid \frac{3}{2}, -\frac{1}{2} \rangle &amp; \mid \downarrow \downarrow \uparrow \rangle + \mid \downarrow \uparrow \downarrow \rangle + \mid \uparrow \downarrow \downarrow \rangle \\
-\mid 0 3 \rangle &amp; \mid \frac{3}{2}, -\frac{3}{2} \rangle &amp; \mid \downarrow \downarrow \downarrow \rangle
-\end{matrix}$</p>
-<p>And so on...</p>
-<hr>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We can upgrade any $2$ x $2$ operator on the spin-$\frac{1}{2}$ Hilbert space to act globally on the Hilbert space of the oscillators via simple map:</p>
-<p>$ \textbf{O} = \sum_{i, j} a_{i}^{\dagger} O_{i, j} a_{j} $</p>
-<p>Or: $\textbf{O} = \begin{pmatrix} a_{0}^{\dagger} &amp; a_{1}^{\dagger} \end{pmatrix} \begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix} \begin{pmatrix} a_{0} \\ a_{1}\end{pmatrix}$, where I emphasize that the  $a_{i}$'s and $a_{i}^{\dagger}$'s are themselves operators.</p>
-<p>So that:</p>
-<p>$X = \begin{pmatrix} a_{0}^{\dagger} &amp; a_{1}^{\dagger} \end{pmatrix} \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} \begin{pmatrix} a_{0} \\ a_{1}\end{pmatrix} = \begin{pmatrix} a_{0}^{\dagger} &amp; a_{1}^{\dagger} \end{pmatrix} \begin{pmatrix} a_{1} \\ a_{0}\end{pmatrix} = a_{0}^{\dagger}a_{1} + a_{1}^{\dagger}a_{0}$</p>
-<p>$Y = \begin{pmatrix} a_{0}^{\dagger} &amp; a_{1}^{\dagger} \end{pmatrix} \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix} \begin{pmatrix} a_{0} \\ a_{1}\end{pmatrix} = \begin{pmatrix} a_{0}^{\dagger} &amp; a_{1}^{\dagger} \end{pmatrix} \begin{pmatrix} -ia_{1} \\ ia_{0}\end{pmatrix} = -ia_{0}^{\dagger}a_{1} + ia_{1}^{\dagger}a_{0}$</p>
-<p>$Z = \begin{pmatrix} a_{0}^{\dagger} &amp; a_{1}^{\dagger} \end{pmatrix} \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} \begin{pmatrix} a_{0} \\ a_{1}\end{pmatrix} = \begin{pmatrix} a_{0}^{\dagger} &amp; a_{1}^{\dagger} \end{pmatrix} \begin{pmatrix} a_{0} \\ -a_{1}\end{pmatrix} = a_{0}^{\dagger}a_{0} - a_{1}^{\dagger}a_{1}$</p>
-<p>If we upgrade the $X$ operator, for example, it will act as an $X$ operator on each of the spin-$j$ subspaces. If we use it to rotate, it'll rotate all the subspaces at the same time.</p>
-<p>We can also form a creation operator that creates a star at a given location. Given some spinor $\begin{pmatrix} \alpha \\ \beta \end{pmatrix}$, the star creation operator is $a_{star}^{\dagger} = \alpha a_{0}^{\dagger} + \beta a_{1}^{\dagger}$.</p>
-<p>We could decompose a spin-$j$ state into $2j$ spinors, and then lift the constellation into the double harmonic ocillator Hilbert space one star at a time. Or we could form a homogenous polynomial in the creation operators:</p>
-<p>$a_{constellation}^{\dagger} = \sum_{m=-j}^{j} \begin{pmatrix}2j \\ j+m \end{pmatrix} c_{j+m} (a_{0}^{\dagger})^{j-m}(a_{1}^{\dagger})^{j+m}$</p>
-<p>where the $c_{i}$'s are the components of the $\mid j, m \rangle$ state: $\begin{pmatrix} c_{0} \\ c_{1} \\ c_{2} \\ \vdots \end{pmatrix}$. Recall the binomial coefficient enters into the game due to the relationship between the roots and coefficients of a polynomial. Majorana returns! In fact, Schwinger learned about Majorana's representation at some point in the 30's and 40's, and it bugged him so much he invented a lot of this.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">vpython</span> <span class="k">as</span> <span class="nn">vp</span>
-<span class="n">scene</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">canvas</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">white</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">spinor_xyz</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">(),</span> <span class="n">s</span><span class="p">),</span>\
-                     <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmay</span><span class="p">(),</span> <span class="n">s</span><span class="p">),</span>\
-                     <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">(),</span> <span class="n">s</span><span class="p">)])</span>
-
-<span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>
-<span class="n">xyz</span> <span class="o">=</span> <span class="n">spinor_xyz</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="n">vsphere</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">blue</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-<span class="n">varrow</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vsphere</span><span class="o">.</span><span class="n">pos</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">*</span><span class="n">xyz</span><span class="p">))</span>
-
-<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">real</span>
-<span class="n">vpt</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">yellow</span><span class="p">,</span> <span class="n">make_trail</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.001</span>
-<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span><span class="o">*</span><span class="n">a</span>
-    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">real</span>
-    <span class="n">vpt</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">vp</span><span class="o">.</span><span class="n">rate</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>So we have a model for the polarization state of a photon, ignoring its momentum. When we consider the double oscillator construction, we can view this as the polarization state of potentially several photons, all with the same momentum. Each photon has a qubit representing its polarization state, and photons are a bosonic field, so the qubits are all in the permutation symmetric state.</p>
-<p>A word to the wise: a photon is technically a spin-$1$ particle, but because it's massless, it has only two possible states.</p>
-<p>Finally, we have a new way of thinking about the duality between the plane and the sphere: the same state can represent the polarization of a massless particle (plane) or the spin of a massive particle (spin).</p>
-<p>One nice consequence of this duality is that we can build quantum computers out of spins and also quantum computers out of light, and easily translate between them. I can represent my spin operators on the photons; and the photonic operators on the spins. And so, the one can simulate the other. Of course, this is more profound than a mere classical simulation. If I load a given quantum state into a quantum computer made of spins, of light, of whatever, this won't in principle affect its entanglement to other systems.  So when you download something from the quantum internet onto a quantum computer even with a different architecture, it really is <em>that unique non-clonable</em> quantum state, and not merely a <em>representation</em>, a <em>copy</em> of it, as would be the case if you loaded some classical data into your computer.</p>
-<p>One thing that is also clear is that there can be many perspectives conceptually on the same quantum system. We have a constellation on the sphere. Is it a spin-$j$ particle? Is it $2j$ spin-$\frac{1}{2}$'s, is it two quantum harmonic oscillators, is it the polarization of a beam of photons? The interpretation is physically fixed by how the system interacts with the rest of the world; and conceptually each new interpretation brings with it a whole unheralded set of ideas and connections to the rest of the world.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>Check out <a href="examples/spin_oscillators.py">spin_oscillators.py</a>! One can choose a max number of quanta in each of the two oscillators, as well as a random spin state to be loaded into the double oscillator Hilbert space, and a Hamiltonian to evolve with. One sees above a red sphere representing the original spin state (just to make sure it's loaded in correctly!), and below a series of blue spheres representing the spin-$0$, spin-$\frac{1}{2}$, spin-$1$, $\dots$ states that the Hilbert space decomposes into. Their opacity is just the norm of that sector. In the middle, one sees the plane, with little arrows at each point representing the amplitude at that location. Using the keyboard, one can measure the X, Y, Z, N (number), and Q (position) operators with "x", "y", "z", "n", and "q". "i" gives you a random state, "h" picks a random hamiltonian, "e" returns you to the oscillator hamiltonian, "s" picks X, Y, Z to be hamiltonian. Play around with it! (Note because we're using truncated oscillators, the decompositions into spins is symmeterical.)</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>Spin is all about representations of the group SU(2), which is the double cover of 3D rotations. We can view the spin-$\frac{1}{2}$ representation as a kind of template, and build up the higher spin representations as "constellations" of spin-$\frac{1}{2}$'s. This is done systematically through second quantizing the basic representation.</p>
-<p>Instead of using SU(2), we could use SU(3), which acts on 3D complex states, and then we'd have 3 harmonic oscillators, but actually we'd need 6, since SU(3) is rank 2. Indeed, the same pattern can be applied to SU(N). Generally speaking, we can construct theories of a variable number of indistinguishable "particles" with different symmeteries. The oscillator space can be interpreted as a superposition of higher order representations, each of which can be itself represented as an unordered collection of "stars," or basic states, to be symmeterized. Thus the atomic pattern continues.</p>
-<p>Furthermore, in a second quantized context, we could regard any measurement as, in fact, the measurement of the <em>number</em> of particles in a certain state. We could rephrase a spin measurement along the $Z$ axis in terms of the of "the number of quanta in the $\uparrow$ oscillator" and "the number of quanta in the $\downarrow$ oscillator" (at a certain location). Indeed, we could rotate the creation and annihilation operators themselves to count $\rightarrow$ and $\leftarrow$ quanta instead.</p>
-<p>Due to second quantization, we can think about any measurement, in some sense, as being reducible to the measurement of <em>some</em> number operator.</p>
-<p>In a way, we've come full circle. We can now contextualize our pebbles as counting the number of indistinguishable quanta of some mode of a quantum field. And any actual distinguishable clay pebble has emerged in the limit of this quantum theory.</p>
-<hr>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Check out <a href="examples/qft.py">qft.py</a> for an very rudimentary example of a 1D quantum field theory. Choose the number of discrete positions, the max num of excitations per oscillator. Each position also carries a spin. In fact, since we have to introduce two oscillators per position, we can have a variable spin-$j$ at each location.</p>
-<p>The height of the cylinders is the expectation value of the number of particles at each location. Below, you see the expected spin axis at that location, as well as the expected values of the number operators for up and down quanta.</p>
-<p>We begin by upgrading an oscillator coherent state with a definite spin, and also upgrading the oscillator hamiltonian to an operator that acts on the field. Also try simply creating a "star" at a given location out of the vacuum. The free field hamiltonian is given by the sum of the momentum oscillator hamiltonians.</p>
-<p>Crucially, by building operators out of the creation and annihilation operators at a given position, one can guarantee that spacelike separated operators commute: this is useful if for whatever reason there fail to be tensor products in the Hilbert space.</p>
-<p>Obviously, we could add other dimensions of space and other internal symmetries. We could try to make the theory relativistic. In the general case, once you include interactions, there is a theorem (Haag's theorem), which says that the resulting theory will be unitarily inequivalent to one built out of oscillators. We'll return to these ideas in the next section.</p>
-
-</div>
-</div>
 </div>
     </div>
   </div>

@@ -13421,10 +13421,14 @@ Now you might wonder about the following fact:</p>
 <span class="k">def</span> <span class="nf">second_quantize_operator</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
     <span class="n">O</span> <span class="o">=</span> <span class="n">O</span><span class="o">.</span><span class="n">full</span><span class="p">()</span>
     <span class="n">terms</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
             <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">O</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
     <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">second_quantize_state</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">))])</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
 
 <span class="k">def</span> <span class="nf">second_quantize_spin_state</span><span class="p">(</span><span class="n">spin</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">spin</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span>
@@ -13463,12 +13467,16 @@ Now you might wonder about the following fact:</p>
 <span class="n">vac</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
 <span class="n">a_state</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">b_state</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-
 <span class="c1"># try spin-1/2</span>
 <span class="n">state</span> <span class="o">=</span> <span class="n">second_quantize_spin_state</span><span class="p">(</span><span class="n">a_state</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">second_quantize_spin_state</span><span class="p">(</span><span class="n">b_state</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">vac</span>
-
 <span class="c1"># try spin-1</span>
 <span class="c1">#state = second_quantize_spin_state(a_state, a)*second_quantize_spin_state(b_state, b)*second_quantize_spin_state(a_state, a)*second_quantize_spin_state(b_state, b)*vac</span>
+
+<span class="c1"># try tensor state</span>
+<span class="c1">#ab_state = qt.bell_state(&quot;00&quot;)</span>
+<span class="c1">#ab_tensor = [a[0]*b[0], a[0]*b[1], a[1]*b[0], a[1]*b[1]]</span>
+<span class="c1">#state = second_quantize_state(ab_state, ab_tensor)*second_quantize_state(ab_state, ab_tensor)*vac</span>
+
 <span class="n">state</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>
 
 <span class="n">vA</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">Na</span><span class="p">,</span> <span class="n">state</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">blue</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
@@ -13517,13 +13525,21 @@ Now you might wonder about the following fact:</p>
     <span class="k">if</span> <span class="n">t</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">phase</span> <span class="o">=</span> <span class="n">get_phase</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
         <span class="n">vphase</span><span class="o">.</span><span class="n">axis</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="n">phase</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">phase</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="n">vp</span><span class="o">.</span><span class="n">rate</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+    <span class="n">vp</span><span class="o">.</span><span class="n">rate</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We note, interestingly, that if half integer spin fermions are in the antisymmetric state, then the sign flip from the antisymmetric state cancels out the sign flip from the rotation, so that the antisymmetric state is left completely invariant by the swap. Therefore, the antisymmetric state must be an eigenstate of the rotation/swap with eigenvalue 0. In contrast, for integer spins, the symmetric state is also eigenstate of the rotation/swap with eigenvalue 0.</p>
+
+</div>
+</div>
 </div>
     </div>
   </div>

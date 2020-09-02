@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>2.2_Time_Evolution</title>
+<title>6.2_Fermionic_Quantization</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13077,90 +13077,27 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="How-to-Make-a-Wormhole">How to Make a Wormhole<a class="anchor-link" href="#How-to-Make-a-Wormhole">&#182;</a></h1><h2 id="Part-3:-Time-Evolution">Part 3: Time Evolution<a class="anchor-link" href="#Part-3:-Time-Evolution">&#182;</a></h2>
+<h1 id="Fermionic-Quantization-(and-the-Spin-Statistics-Theorem)">Fermionic Quantization (and the Spin Statistics Theorem)<a class="anchor-link" href="#Fermionic-Quantization-(and-the-Spin-Statistics-Theorem)">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Consider the Schrodinger equation.</p>
-$$ \dot \psi = -iE\psi$$<p>The dot above the $\psi$ means the change in time of $\psi$, in other words, its first derivative. $\psi$ is our state vector. $ E $ is the energy operator: $ \langle \psi \mid E \mid \psi \rangle $ is the expected value of the energy. One of the most important equations in linear algebra is the one relating the "eigenvalues" and "eigenvectors" of an operator.</p>
-$$ E\mid v \rangle = \lambda\mid v \rangle$$<p>The action of an operator E on an eigenvector $ v $ is just $ v $ multiplied by a scalar $ \lambda $. "Eigen" in German means "the same." So the eigenvectors of an operator are the vectors which are left "unrotated" by the operator: the eigenvectors are merely scaled by some eigenvalue. Now the eigenvalues can be complex, leading to a complex rotation, or phase shift, but the vector itself isn't rotated as a whole. And if the eigenvalue is 0, then the eigenvector remains completely unchanged. Now, operators corresponding to "observables" in quantum mechanics are Hermitian: in otherwords, they are equal to their conjugate transpose. $ H = H^{\dagger} $: these matrices have real eigenvalues, so their expectation values are real; and their eigenvectors are all orthogonal, and so they form a complete basis for the space on which they operate.</p>
-<p>So what is the Schrodinger equation saying? It's saying according to quantum mechanics, the time derivative of an energy eigenstate is just given by the state itself times $-1j\lambda$. And if $ \lambda = 0 $, the state doesn't change at all. So we describe change in quantum mechanics in terms of those states which don't change in time. To wit, if you're in an energy eigenstate, you stay in an energy eigenstate, just phasing around at a certain rate given by the eigenvalue. Superpositions of energy eigenstates, in other words, states with an uncertainty about their energy, correspond to states that <em>change in time</em>.</p>
-<hr>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>There are many ways to approach solving the Schrodinger equation depending on the circumstances. Let's work through just one example.</p>
-<p>But first, a quick detour into the geometry of a qubit so we can interpret our results. The qubit is a little spinning object. It can be described in terms of its axis of rotation (which gives a point on the sphere) along with a phase which describes how it's turned around that axis. The axis of rotation can be easily obtained:</p>
-$$ (x, y, z) = (\langle \psi \mid X \mid \psi \rangle, \langle \psi \mid Y \mid \psi \rangle, \langle \psi \mid Z \mid \psi \rangle)$$<p>It's just the "expected value" of the Pauli X, Y, Z operators. Remember we can't observe this axis of rotation directly: if we measure X, Y, or Z, we are projecting into an eigenstate with some probability, thus destroying whatever the origional rotation axis was.  Another point is that for a pure state, the (x, y, z) point lies on the surface of the sphere, while for mixed/partial states it lies within the sphere. For the perfectly mixed state (given by, for example, the partial state of the left or right half of a cup), we find (0, 0, 0): there's complete ambiguity about which axis the qubit is spinning around.</p>
-<p>We note that the eigenstates of X, which are orthogonal complex vectors, correspond to X+ and X-, antipodal points on the sphere. The same goes for Y and Z.</p>
-<p><img src="img/qubit.png" width="300" /></p>
-<p>A geometric way of interpreting the relationship between a qubit and its rotation axis can be given in terms of the stereographic projection. First, we recognize that our qubit is a <em>complex projective space</em> which means there's a map from a qubit to $ \left\{ \mathbb{C} + \infty \right\} $.</p>
-<p>$ \begin{pmatrix} a \\ b \end{pmatrix} \to \frac{a}{b} $ if $b \neq 0 $ else $ \infty $</p>
-<p>Inversely:</p>
-<p>$ c \to \begin{pmatrix} c \\ 1 \end{pmatrix} $ if $c \neq \infty$ else $\begin{pmatrix} 1 \\ 0 \end{pmatrix} $</p>
-<p>We can normalize the qubit if we like. It's clear that the qubit encodes its axis up to multiplication by a scalar. (And that projective spaces allow you to divide by 0!)</p>
-<p>We then do an inverse stereographic projection from $ \left\{ \mathbb{C} + \infty \right\} $ to the 2-sphere. By choosing a "north pole," we are choosing an axis of quantization. The usualy choice is in terms of eigenstates of Z.</p>
-<p>$ x+iy \to (\frac{2x}{1 + x^{2} + y^{2}}, \frac{2y}{1 + x^{2} + y^{2}}, \frac{-1 + x^{2} + y^{2}}{1 + x^{2} + y^{2}}) $ or $ (0, 0, 1) $ if $ \infty $</p>
-<p>Inversely: $ (x, y, z) \to \frac{x}{1-z} + i\frac{y}{1-z} $ or $ \infty $ if $ z = 1 $</p>
-<p><img src="img/stereographic_projection.jpg"></p>
-<hr>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>So here's a problem. Suppose we start at the north pole $ \begin{pmatrix} 1 \\ 0 \end{pmatrix} $ and we want to rotate around the X axis. Solving the Schrodinger equation will allow us to watch this unfold in time. We take our energy operator to be X.</p>
-$$ \dot \psi = -iX\psi $$<p>Now let's expand this out, taking into account that our state vector is two dimensional. We'll use x and y to denote these components although that may be confusing.</p>
-$$ \begin{pmatrix} \dot x \\ \dot y \end{pmatrix} = -i\begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\begin{pmatrix} x \\ y \end{pmatrix} $$$$ \begin{pmatrix} \dot x \\ \dot y \end{pmatrix} = \begin{pmatrix} 0 &amp; -i \\ -i &amp; 0 \end{pmatrix}\begin{pmatrix} x \\ y \end{pmatrix} $$$$ \begin{pmatrix} \dot x \\ \dot y \end{pmatrix} = \begin{pmatrix} -iy \\ -ix \end{pmatrix} $$$$ \frac{dx}{dt} = -iy \\ \frac{dy}{dt} = -ix $$
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>There's a standard way to solve such equations. First, we have to find the eigenvalues and eigenvectors of the matrix $ \begin{pmatrix} 0 &amp; -i \\ -i &amp; 0 \end{pmatrix} $, which we'll call A.</p>
-<p>We recall our equation relating eigenvalues and eigenvectors $ A\mid v \rangle = \lambda\mid v \rangle $:</p>
-$$ A\mid v \rangle = \lambda\mid v \rangle $$$$ A\mid v \rangle - \lambda\mid v \rangle = 0 $$$$ (A - \lambda I)\mid v \rangle = 0 $$<p>In the above, 0 is the 0 vector. If the last equation is true, it means that the matrix $ (A - \lambda I) $ is not invertible: after all, it sends all the eigenvectors of A to the zero vector from which there is no return. It's a linear algebraic fact that this implies that the determinant of $ (A - \lambda I) $ is 0.</p>
-<p>Recall that the determinant of a 2x2 matrix is: $ \begin{vmatrix} a &amp; b \\ c &amp; d \end{vmatrix} = ad - bc $.</p>
-$$ \begin{vmatrix} 0 - \lambda &amp; -i \\ -i &amp; 0-\lambda \end{vmatrix} = 0$$<p></p>
+<p>So far we've essentially discussed "bosonic" second quantization in which we assign a harmonic oscillator to each degree of freedom of some single particle Hilbert space, and the number operator of each oscillator keeps track of how many particles are in <em>that state</em>. It works out that this "Fock space" corresponds dimensionally to a tower of permutation symmetric tensor products of $0, 1, 2, 3, \dots$ particles. In other words, the use of harmonic oscillators automatically imposes for us that condition that the second quantized particles be permutation symmetric.</p>
+<p>It's worth remember that although the creation and annihilation operators are not hermitian, they can be used as building blocks for hermitian operators. And if we have multiple oscillators, we can just tensor these creation and annihilation operators with identities so they act on the appropriate subspaces.</p>
+<p>If we have multiple creation and annihilation operators, they should obey the following commutation relations:</p>
+$$ [b_{i}, b_{j}] = [b^{\dagger}_{i}, b^{\dagger}_{j}] = 0 $$$$ [b_{i}, b^{\dagger}_{j}] = \delta^{i}_{j} $$<p>Where $ b^{\dagger} $ is a creation operator, $ b $ is an annihilation operator, and: the commutator is $ [A, B] = AB - BA $.</p>
+<p>In practice, if we work in finite dimensions, we can cap the maximum number of quanta in a given harmonic oscillator, and get finite dimensional "creation" and "annihilation" operators, which add and subtract quanta from each oscillator, although they don't satisfy perfectly the correct commutation relations.</p>
+<p>Okay, so here's the thing:</p>
+<p>If we want to second quantize fermionically, as opposed to bosonically, we have to make some changes. First, our oscillators can only have 0 or 1 excitations. In other words, at maximum only 1 fermion can be in a given state. This is the Pauli exclusion principle at work. The whole thing has to do with the fact while fermions and bosons are both "indistinguishable" (with respect to the tensor product) particles, fermions must always in the permutation <em>antisymmetric</em> particles, unlike bosons which are permutation <em>symmetric</em>. Look what happens if we try to antisymmetrize two identical states via $A, B \rightarrow A \otimes B - B \otimes A$: $\mid \uparrow \rangle \mid \uparrow \rangle - \mid \uparrow \rangle \mid \uparrow \rangle = 0$: we get the zero vector. The Pauli exclusion principle is just a fancy way of saying that fermions, by nature, are permutation antisymmetric particles. If we permute them, then the whole tensor state is multiplied by -1. This just changes the overall phase, and not the probabilities: indeed, they are still indistinguishable particles, despite them all picking up a sign flip when they are swapped in the tensor product.</p>
+<p>For this reason, in terms of second quantization, it doesn't matter the order in which we create bosons, but it does matter for fermions: $ f^{\dagger}_{i} f^{\dagger}_{j} \mid 0 \rangle = -f^{\dagger}_{i} f^{\dagger}_{j} \mid 0 \rangle $, where $ \mid 0 \rangle $ is the fermion vacuum aka the state of all oscillators having 0 quanta.</p>
+<p>The upshot is that the commutation relations between fermions involve the anticommutator $ \{A, B\} = AB + BA $, instead of the commutator.</p>
+$$ \{f_{i}, f_{j}\} = \{f^{\dagger}_{i}, f^{\dagger}_{j}\} = 0 $$$$ \{f_{i}, f^{\dagger}_{j}\} = \delta^{i}_{j} $$<p>Luckily, with a trick, it's not hard to construct the right matrix representation for these operators. Indeed, it's kinda nice that the fermion excitations are capped at 1, since we can use $2$ x $2$ matrices for their creation and annihilation operators (aside from tensoring them with identities): we can deal with a nice actually finite dimensional vector space.</p>
+<p>For example, suppose we have 5 fermions. The standard $2$ x $2$ matrices for creation and annihilation operators are just:</p>
+$$ f^{\dagger} = \begin{pmatrix} 0 &amp; 0 \\ 1 &amp; 0 \end{pmatrix} $$$$ f = \begin{pmatrix} 0 &amp; 1 \\ 0 &amp; 0 \end{pmatrix} $$<p>To get 5 annihilation operators with the correct commutation relations, preserving the antisymmetry of the fermions:</p>
+$$ f_{0} = f \otimes I \otimes I \otimes I \otimes I $$$$ f_{1} = Z \otimes f \otimes I \otimes I \otimes I $$$$ f_{2} = Z \otimes Z \otimes f \otimes I \otimes I $$$$ f_{3} = Z \otimes Z \otimes Z \otimes f \otimes I $$$$ f_{4} = Z \otimes Z \otimes Z \otimes Z \otimes f $$<p>The idea is that there is a "normal ordering" for the fermions. When the operators are applied to the vacuum in the descending order, the $Z$'s in $ f_{4} $, don't matter since there are no excitations in those oscillators: we're in the vacuum after all. But when the operators are applied in the reverse order, they pick up a negative sign from the $Z$'s. You can check that this works:</p>
 
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-$$ (-\lambda)(-\lambda) - (-i)(-i) = 0 $$$$ \lambda^{2} + 1 = 0 $$$$ \lambda^{2} = -1 $$$$ \lambda  = \pm i $$<p>So we have eigenvalues $ \pm i $. (This makes sense: the X operator has eigenvalues $ \pm 1 $.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>According to our equation,</p>
-$$ \begin{pmatrix} - \lambda &amp; -i \\ -i &amp; -\lambda \end{pmatrix} \begin{pmatrix} v_{0} \\ v_{1} \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix} $$<p>So we plug in $ \lambda = i $.</p>
-$$ \begin{pmatrix} -i &amp; -i \\ -i &amp; -i \end{pmatrix} \begin{pmatrix} v_{0} \\ v_{1} \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix} $$
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-$$ -i v_{0} -i v_{1} = 0 $$$$ v_{0} = -v_{1} $$<p>So we could take $ \lambda = i , v = \begin{pmatrix} 1 \\ -1 \end{pmatrix} $, although any scalar multiple would do. Then we do the same for $ \lambda = -1 $.</p>
-$$ \begin{pmatrix} i &amp; -i \\ -i &amp; i \end{pmatrix} \begin{pmatrix} v_{0} \\ v_{1} \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix} $$$$ i v_{0} -i v_{1} = 0 $$$$ v_{0} = v_{1} $$<p>So we can take $ \lambda = -i , v = \begin{pmatrix} 1 \\ 1 \end{pmatrix} $. (Indeed, these are also the eigenvalues of the X operator itself.)</p>
-<p>We can immediately write down a general solution to our original equation.</p>
-$$ \begin{pmatrix} x(t) \\ y(t) \end{pmatrix} = c_{0} e^{it} \begin{pmatrix} 1 \\ -1 \end{pmatrix} + c_{1} e^{-it} \begin{pmatrix} 1 \\ 1 \end{pmatrix} $$<p>The exponentials are $ e^{\lambda t} $, and $ c_{0} $ and $ c_{1} $ are coefficients which are undetermined. We can determine them by choosing an initial condition, that at time t = 0, we start at the north pole: $ \begin{pmatrix} 1 \\ 0 \end{pmatrix} $.</p>
-<p>Our matrix equation then reduces to:</p>
-$$ \begin{pmatrix} 1 \\ 0 \end{pmatrix} = c_{0} e^{i0} \begin{pmatrix} 1 \\ -1 \end{pmatrix} + c_{1} e^{-i0} \begin{pmatrix} 1 \\ 1 \end{pmatrix} = \begin{pmatrix} c_{0} \\ - c_{0} \end{pmatrix} + \begin{pmatrix} c_{1} \\ c_{1} \end{pmatrix} = \begin{pmatrix} c_{0} + c_{1}\\ -c_{0} + c_{1} \end{pmatrix}$$$$ c_{0} + c_{1} = 1 $$$$ -c_{0} + c_{1} = 0 $$$$ c_{0} = c_{1} $$$$ 2c_{1} = 1 $$$$ c_{0}, c_{1} = \frac{1}{2}$$<p>So our final solution is:</p>
-$$ \begin{pmatrix} x(t) \\ y(t) \end{pmatrix} = \frac{1}{2} \Big( e^{it} \begin{pmatrix} 1 \\ -1 \end{pmatrix} + e^{-it} \begin{pmatrix} 1 \\ 1 \end{pmatrix} \Big) $$$$ \begin{pmatrix} x(t) \\ y(t) \end{pmatrix} = \frac{1}{2}  \begin{pmatrix} e^{it} + e^{-it} \\ e^{-it} - e^{it} \end{pmatrix}  $$<hr>
 </div>
 </div>
 </div>
@@ -13169,265 +13106,47 @@ $$ \begin{pmatrix} x(t) \\ y(t) \end{pmatrix} = \frac{1}{2} \Big( e^{it} \begin{
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Let&#39;s check it in python.</span>
-<span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">vpython</span> <span class="k">as</span> <span class="nn">vp</span>
-<span class="n">scene</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">canvas</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">white</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">xyz</span><span class="p">(</span><span class="n">qubit</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">(),</span> <span class="n">qubit</span><span class="p">),</span>\
-            <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmay</span><span class="p">(),</span> <span class="n">qubit</span><span class="p">),</span>\
-            <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">(),</span> <span class="n">qubit</span><span class="p">)]</span>
-
-<span class="n">qubit</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">t</span><span class="p">),</span>\
-                                          <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">t</span><span class="p">)]))</span>
-
-<span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">blue</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">vstar</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">*</span><span class="n">xyz</span><span class="p">(</span><span class="n">qubit</span><span class="p">(</span><span class="mi">0</span><span class="p">))),</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">emissive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="n">dt</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">t_max</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span>
-<span class="k">while</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">t_max</span><span class="p">:</span>
-    <span class="n">vstar</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">*</span><span class="n">xyz</span><span class="p">(</span><span class="n">qubit</span><span class="p">(</span><span class="n">t</span><span class="p">)))</span>
-    <span class="n">t</span> <span class="o">+=</span> <span class="n">dt</span>
-    <span class="n">vp</span><span class="o">.</span><span class="n">rate</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<div id="glowscript" class="glowscript"></div>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-
-<div id="1b037674-a904-433b-926a-7e9e4024e5c0"></div>
-<div class="output_subarea output_javascript ">
-<script type="text/javascript">
-var element = $('#1b037674-a904-433b-926a-7e9e4024e5c0');
-if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container: $("#glowscript").removeAttr("id")};}else{ element.textContent = ' ';}
-</script>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<div id="glowscript" class="glowscript"></div>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-
-<div id="97da4c81-d60b-41dd-bad7-bf861544292d"></div>
-<div class="output_subarea output_javascript ">
-<script type="text/javascript">
-var element = $('#97da4c81-d60b-41dd-bad7-bf861544292d');
-if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container: $("#glowscript").removeAttr("id")};}else{ element.textContent = ' ';}
-</script>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-
-<div id="b8f7339d-38cc-4329-8fe7-df160f66b956"></div>
-<div class="output_subarea output_javascript ">
-<script type="text/javascript">
-var element = $('#b8f7339d-38cc-4329-8fe7-df160f66b956');
-if (typeof Jupyter !== "undefined") {require.undef("nbextensions/vpython_libraries/glow.min");}else{element.textContent = ' ';}
-</script>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-
-<div id="93c628c2-0093-41c4-ba66-9dca0bd8d6e9"></div>
-<div class="output_subarea output_javascript ">
-<script type="text/javascript">
-var element = $('#93c628c2-0093-41c4-ba66-9dca0bd8d6e9');
-if (typeof Jupyter !== "undefined") {require.undef("nbextensions/vpython_libraries/glowcomm");}else{element.textContent = ' ';}
-</script>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-
-<div id="e15c226a-8c84-44c0-89fd-ec41cfc84cd7"></div>
-<div class="output_subarea output_javascript ">
-<script type="text/javascript">
-var element = $('#e15c226a-8c84-44c0-89fd-ec41cfc84cd7');
-if (typeof Jupyter !== "undefined") {require.undef("nbextensions/vpython_libraries/jquery-ui.custom.min");}else{element.textContent = ' ';}
-</script>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-
-<div id="35c2b337-d8f7-4902-8d3b-43993831e6ce"></div>
-<div class="output_subarea output_javascript ">
-<script type="text/javascript">
-var element = $('#35c2b337-d8f7-4902-8d3b-43993831e6ce');
-if (typeof Jupyter !== "undefined") {require(["nbextensions/vpython_libraries/glow.min"], function(){console.log("GLOW LOADED");});}else{element.textContent = ' ';}
-</script>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-
-<div id="11065a56-6362-496a-a77f-24a474aa611e"></div>
-<div class="output_subarea output_javascript ">
-<script type="text/javascript">
-var element = $('#11065a56-6362-496a-a77f-24a474aa611e');
-if (typeof Jupyter !== "undefined") {require(["nbextensions/vpython_libraries/glowcomm"], function(){console.log("GLOWCOMM LOADED");});}else{element.textContent = ' ';}
-</script>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-
-<div id="fe5df09c-03d2-473a-9309-dec1b759031d"></div>
-<div class="output_subarea output_javascript ">
-<script type="text/javascript">
-var element = $('#fe5df09c-03d2-473a-9309-dec1b759031d');
-if (typeof Jupyter !== "undefined") {require(["nbextensions/vpython_libraries/jquery-ui.custom.min"], function(){console.log("JQUERY LOADED");});}else{element.textContent = ' ';}
-</script>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>But there's another way we can calculate the time evolution. We can reformulate the Schrodinger equation ( $\dot \psi = -iE\psi )$ as:</p>
-$$ \psi (t) = e^{-iEt}\psi (0)$$<p>$ e^{-iEt} $ is the matrix exponential. It has many interesting properties. It's a matrix which at t=0 is just the identity matrix. Its columns are solutions to the differential equation we solved before. And it is able to impart time evolution to a quantum state. We generalize the classic Euler formula ($ e^{i\pi} = -1 $) in a big way. In quantum mechanics, if $E $ is hermitian, then $ e^{-iEt} $ is unitary: in other words, it has purely imaginary eigenvalues, and preserves probability. It's these matrices that represent time evolution. Geometrically, in the case of our qubit, we can think of $ e^{-iX\frac{\theta}{2}} $ as a rotation by $ \theta $ degrees around the $ X $ axis.</p>
-<hr>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>One way to define the matrix exponential is in terms of an infinite series, just like the normal exponential function.</p>
-$$ e^{Et} = I + At + \frac{A^{2}t^{2}}{2!} + \frac{A^{3}t^{3}}{3!} + \frac{A^{4}t^{4}}{4!} + \dots $$<p>The exclaimation point means take the factorial.</p>
-<p>We can also define it terms of the general solution we found before. Recall:</p>
-$$ \begin{pmatrix} x(t) \\ y(t) \end{pmatrix} =  \begin{pmatrix} c_{0} e^{it} \\ -c_{0} e^{it} \end{pmatrix} +  \begin{pmatrix} c_{1} e^{-it} \\ c_{1} e^{-it} \end{pmatrix} $$<p>We need the matrix exponential to be the identity matrix $\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} $ at t = 0 and have solutions to the differential equation as columns.</p>
-<p>So at t = 0, we require for the first column:</p>
-$$ \begin{pmatrix} 1 \\ 0 \end{pmatrix} =  \begin{pmatrix} c_{0} \\ -c_{0} \end{pmatrix} +  \begin{pmatrix} c_{1} \\ c_{1} \end{pmatrix} $$<p>And so:</p>
-$$ 1 = c_{0} + c_{1} $$$$ 0 = -c_{0} + c_{1}  $$$$ c_{0} = c_{1} $$$$ 1 = 2c_{0} $$$$ c_{0}, c_{1} = \frac{1}{2} $$<p>So our first column will be $ \frac{1}{2} \begin{pmatrix} e^{it} + e^{-it} \\ e^{-it} - e^{it} \end{pmatrix} $.</p>
-<p>At t = 0, we require for the second column:</p>
-$$ \begin{pmatrix} 0 \\ 1 \end{pmatrix} =  \begin{pmatrix} c_{0} \\ -c_{0} \end{pmatrix} +  \begin{pmatrix} c_{1} \\ c_{1} \end{pmatrix} $$<p>And so:</p>
-$$ 0 = c_{0} + c_{1} $$$$ 1 = -c_{0} + c_{1}  $$$$ c_{0} = -c_{1} $$$$ 1 = -2c_{0} $$$$ c_{0} = -\frac{1}{2}, c_{1} = \frac{1}{2} $$<p>So our second column will be $ \frac{1}{2} \begin{pmatrix} e^{-it} - e^{it} \\ e^{it} + e^{-it} \end{pmatrix} $.</p>
-<p>Putting the two together gives us our matrix:</p>
-$$ e^{-iEt} = \frac{1}{2} \begin{pmatrix} e^{it} + e^{-it} &amp; e^{-it} - e^{it} \\ e^{-it} - e^{it} &amp; e^{it} + e^{-it} \end{pmatrix} $$<hr >
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Let&#39;s test it out in python</span>
-<span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">vpython</span> <span class="k">as</span> <span class="nn">vp</span>
-<span class="n">scene</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">canvas</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">white</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">xyz</span><span class="p">(</span><span class="n">qubit</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">(),</span> <span class="n">qubit</span><span class="p">),</span>\
-            <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmay</span><span class="p">(),</span> <span class="n">qubit</span><span class="p">),</span>\
-            <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">(),</span> <span class="n">qubit</span><span class="p">)]</span>
-
-<span class="n">initial_qubit</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
-<span class="n">MEXP</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">t</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">t</span><span class="p">)],</span>\
-                                         <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">t</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">t</span><span class="p">)]]))</span>
-
-<span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">blue</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">vstar</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">*</span><span class="n">xyz</span><span class="p">(</span><span class="n">qubit</span><span class="p">(</span><span class="mi">0</span><span class="p">))),</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">emissive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="n">dt</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">t_max</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span>
-<span class="k">while</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">t_max</span><span class="p">:</span>
-    <span class="n">vstar</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">*</span><span class="n">xyz</span><span class="p">(</span><span class="n">MEXP</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">initial_qubit</span><span class="p">))</span>
-    <span class="n">t</span> <span class="o">+=</span> <span class="n">dt</span>
-    <span class="n">vp</span><span class="o">.</span><span class="n">rate</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">anticommutator</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">a</span>
+
+<span class="c1">#########################################################################################</span>
+
+<span class="k">def</span> <span class="nf">fermion_operators</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">destroy</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span>\
+                <span class="k">else</span> <span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">()</span> <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span>\
+                    <span class="k">else</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>\
+                        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>\
+                            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+
+<span class="k">def</span> <span class="nf">test_fermion_operators</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)):</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">test1</span> <span class="o">=</span> <span class="n">anticommutator</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">.</span><span class="n">full</span><span class="p">()</span>
+            <span class="n">test2</span> <span class="o">=</span> <span class="n">anticommutator</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">())</span><span class="o">.</span><span class="n">full</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> \
+                <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">test1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">d</span><span class="p">,</span><span class="n">d</span><span class="p">)))</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>\
+                    <span class="ow">and</span> \
+                <span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">test2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">d</span><span class="p">,</span><span class="n">d</span><span class="p">)))</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">)</span>\
+                        <span class="ow">or</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">test2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="p">))</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">))):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+<span class="c1">#########################################################################################</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">IDn</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">n</span><span class="p">)</span>
+<span class="n">IDn</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">]</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">fermion_operators</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">test_fermion_operators</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">f</span><span class="p">])</span> <span class="c1"># number operator</span>
+<span class="n">I</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># vacuum state</span>
+<span class="n">I</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -13438,13 +13157,13 @@ $$ e^{-iEt} = \frac{1}{2} \begin{pmatrix} e^{it} + e^{-it} &amp; e^{-it} - e^{it
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Finally, a third way of calculating the matrix exponential. We can instead diagonalize our matrix. First, we form a change-of-basis matrix: a matrix whose columns are eigenvectors of $-iE$.</p>
-$$ P = \begin{pmatrix} 1 &amp; 1 \\ -1 &amp; 1 \end{pmatrix} $$<p>If we multiply the change-of-basis matrix by a vector, it gives the vector in the reference frame defined by the original matrix. Operators can be transformed too, but they require action on two sides. So we define the inverse of the change-of-basis matrix. This is easy in the 2x2 case.</p>
-$$ A^{-1} = \begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix}^{-1} = \frac{1}{det A}\begin{pmatrix} d &amp; -b \\ -c &amp; a \end{pmatrix} $$$$ P^{-1} = \frac{1}{2}\begin{pmatrix} 1 &amp; -1 \\ 1 &amp; 1 \end{pmatrix} $$<p>We then consider:</p>
-$$ P^{-1} A P = \frac{1}{2}\begin{pmatrix} 1 &amp; -1 \\ 1 &amp; 1 \end{pmatrix} \begin{pmatrix} 0 &amp; -i \\ -i &amp; 0 \end{pmatrix} \begin{pmatrix} 1 &amp; 1 \\ -1 &amp; 1 \end{pmatrix} =  \frac{1}{2}\begin{pmatrix} 1 &amp; -1 \\ 1 &amp; 1 \end{pmatrix}\begin{pmatrix} i &amp; -i \\ -i &amp; -i \end{pmatrix} = \frac{1}{2}\begin{pmatrix} 2i &amp; 0 \\ 0 &amp; -2i \end{pmatrix} = \begin{pmatrix} i &amp; 0 \\ 0 &amp; -i \end{pmatrix}$$<p>In its "own" basis, the matrix A is a diagonal matrix with its eigenvalues along the diagonal. In this basis, the matrix exponential is actually just the naive:</p>
-$$ e^{\begin{pmatrix} i &amp; 0 \\ 0 &amp; -i \end{pmatrix}t} = \begin{pmatrix} e^{it} &amp; 0 \\ 0 &amp; e^{-it} \end{pmatrix} $$<p>Then we transform back home.</p>
-$$ P D P^{-1} = \begin{pmatrix} 1 &amp; 1 \\ -1 &amp; 1 \end{pmatrix}\begin{pmatrix} e^{it} &amp; 0 \\ 0 &amp; e^{-it} \end{pmatrix}\frac{1}{2}\begin{pmatrix} 1 &amp; -1 \\ 1 &amp; 1 \end{pmatrix} =  \frac{1}{2}\begin{pmatrix} 1 &amp; 1 \\ -1 &amp; 1 \end{pmatrix} \begin{pmatrix} e^{it} &amp; - e^{it} \\ e^{-it} &amp; e^{-it} \end{pmatrix} = \frac{1}{2}\begin{pmatrix} e^{it} + e^{-it} &amp; e^{-it} - e^{it} \\ e^{-it} - e^{it} &amp; e^{-it} + e^{it} \end{pmatrix} $$<p>This is precisely what we got before.</p>
-<hr>
+<p>Okay, so we have $n$ fermionic oscillators to play with. We want to second quantize an $n$ dimensional single particle Hilbert space fermionically. So now we have to talk about what the tower of antisymmetric multi-particle states looks like.</p>
+<p>First, we observe that $sgn(\sigma) = (-1)^{T(\sigma)}$, where $\sigma$ is some permutation: e.g., $132$ as a permutation of $123$. $T(\sigma)$ is the number of transpositions in the permutation. And $sgn(\sigma)$ is known as the parity of the permutation.</p>
+<p>If we want to antisymmetrize a set of states, we basically want to sum over all permutations of the states, forming the tensor product of the pieces in each order, multiplying each tensor product by $-1$ for each swap in the permutation:</p>
+<p>$ \sum_{\sigma} (-1)^{T(\sigma)} ( \sigma_{i} \otimes \sigma_{j } \otimes \dots)$</p>
+<p>We can easily calculate the basis states for the permutation antisymmetric subspace of $n$ particles who each live in a $d$ dimensional Hilbert space.</p>
+<p>We take each set of the $d$ basis vectors, each set that has $n$ elements and contains no repeats, and antisymmeterize those basis vectors. We'll actually end up with $\begin{pmatrix} d \\ n \end{pmatrix}$ basis vectors. We can form a rectangular matrix out of them, which will let us translate between a state of $\begin{pmatrix} d \\ n \end{pmatrix}$ dimensions, and a state of $n$ antisymmeterized particle states.</p>
+
 </div>
 </div>
 </div>
@@ -13453,28 +13172,43 @@ $$ P D P^{-1} = \begin{pmatrix} 1 &amp; 1 \\ -1 &amp; 1 \end{pmatrix}\begin{pmat
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># In practice...</span>
-<span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">vpython</span> <span class="k">as</span> <span class="nn">vp</span>
-<span class="n">scene</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">canvas</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">white</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+<span class="kn">from</span> <span class="nn">qutip.qip.operations</span> <span class="k">import</span> <span class="n">swap</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
 
-<span class="k">def</span> <span class="nf">xyz</span><span class="p">(</span><span class="n">qubit</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">(),</span> <span class="n">qubit</span><span class="p">),</span>\
-            <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmay</span><span class="p">(),</span> <span class="n">qubit</span><span class="p">),</span>\
-            <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">(),</span> <span class="n">qubit</span><span class="p">)]</span>
+<span class="k">def</span> <span class="nf">perm_parity</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+    <span class="n">parity</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">i</span><span class="p">:</span>
+            <span class="n">parity</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="n">mn</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)),</span> <span class="n">key</span><span class="o">=</span><span class="n">lst</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">)</span>
+            <span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">lst</span><span class="p">[</span><span class="n">mn</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="n">mn</span><span class="p">],</span><span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">parity</span>    
 
-<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.01</span>
-<span class="n">qubit</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
-<span class="n">U</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">()</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span><span class="o">.</span><span class="n">expm</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">antisymmetrize</span><span class="p">(</span><span class="o">*</span><span class="n">states</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">perm_parity</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">perm</span><span class="p">))</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">states</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">perm</span><span class="p">])</span>\
+                <span class="k">for</span> <span class="n">perm</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">))))])</span>
+    <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">a</span>
 
-<span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">blue</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">vstar</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">*</span><span class="n">xyz</span><span class="p">(</span><span class="n">qubit</span><span class="p">)),</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">emissive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">antisymmetric_basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">states</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">perm</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">combinations_with_replacement</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)),</span> <span class="n">r</span><span class="o">=</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">antisymmetrize</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">perm</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">states</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">state</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">states</span><span class="p">]))</span>
+    <span class="n">Q</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="p">]</span><span class="o">*</span><span class="n">n</span>
+    <span class="k">return</span> <span class="n">Q</span>
+    
+<span class="n">a</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">antisymmetrize</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">swap</span><span class="p">()</span><span class="o">*</span><span class="n">c</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5000</span><span class="p">):</span>
-    <span class="n">qubit</span> <span class="o">=</span> <span class="n">U</span><span class="o">*</span><span class="n">qubit</span>
-    <span class="n">vstar</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">*</span><span class="n">xyz</span><span class="p">(</span><span class="n">qubit</span><span class="p">))</span>
-    <span class="n">vp</span><span class="o">.</span><span class="n">rate</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">antisymmetric_basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13485,12 +13219,324 @@ $$ P D P^{-1} = \begin{pmatrix} 1 &amp; 1 \\ -1 &amp; 1 \end{pmatrix}\begin{pmat
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>It's interesting that a vector transforms under a change-of-basis like $P\mid v \rangle $, but an operator transforms like $P^{-1} A P $. It turns out we can actually formulate time evolution in quantum mechanics in two  different but completely equivalent ways.</p>
-<p>The first is the Schrodinger picture. We have $ \mid \psi (t) \rangle = e^{-iEt}\mid \psi (0) $, and we can track the expectation values of interesting operators on the time evolving state: $ \langle \psi (t) \mid O_{0} \mid \psi (t) \rangle, \langle \psi (t) \mid O_{2} \mid \psi (t) \rangle \dots $, but the operators are fixed for all time as a reference.</p>
-<p>The second is the Heisenberg picture. Here the state is fixed once and for all, and it's the operators that evolve in time. It's the difference between rotating a point on a sphere, and rotating the X/Y/Z axes so that the point appears to rotate in exactly the same way.</p>
-<p>So we have $ \mid \psi (t) \rangle $ fixed, but operators evolve like:</p>
-$$ O(t) = e^{iEt} O e^{-iEt} $$<p>It is a nice fact about unitary matrices that their conjugate transpose is their inverse! Given a hermitian matrix $E$:</p>
-$$ U^{\dagger} = U^{-1} = (e^{-iEt})^{\dagger} = e^{iEt} $$<p>So all the operators evolve like $ \langle \psi \mid O_{0}(t) \mid \psi \rangle, \langle \psi \mid O_{2}(t) \mid \psi \rangle \dots $</p>
+<p>Now we put the two together.</p>
+<p>We tensor together, say, $3$ fermionic oscillators, and construct the number operator. We construct a permutation matrix that rearranges the number operator so that its eigenvalues are in order. We can also use this permutation matrix $P$ to rearrange a Fock state so that it's of the form: $H_{1} \oplus H_{3} \oplus H_{3} \oplus H_{1}$. The dimensionality of these Hilbert spaces corresponds to the dimensionality of the antisymmetric subspace of the tensor product of $0, 1, 2$, and $3$ particles. So once we've picked apart out state, we can apply the linear map constructed above which sends:</p>
+<p>$H{1} \oplus H_{3} \oplus H_{3} \oplus H_{1} \rightarrow 0 \oplus A(H_{3}) \oplus A(H_{3}, H_{3}) \oplus A(H_{3}, H_{3}, H_{3})$, where $A()$ denotes the antisymmetric subspace of the tensor product of the particles.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">product</span>
+
+<span class="k">def</span> <span class="nf">construct_permutation</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>    
+    <span class="n">tensor_basis_labels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="n">n</span><span class="p">))</span>
+    <span class="n">total_n_basis_labels</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">total_n_basis_labels</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>\
+            <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="n">n</span><span class="p">))))[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="o">**</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="n">n</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tensor_basis_labels</span><span class="p">):</span>
+        <span class="n">P</span><span class="p">[</span><span class="n">total_n_basis_labels</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">label</span><span class="p">)][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+    <span class="n">P</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">]</span>
+    <span class="n">sums</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sum</span><span class="p">(</span><span class="n">label</span><span class="p">)</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">total_n_basis_labels</span><span class="p">]</span>
+    <span class="n">unique_sums</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">sums</span><span class="p">)</span>
+    <span class="n">dims</span> <span class="o">=</span> <span class="p">[</span><span class="n">sums</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">us</span><span class="p">)</span> <span class="k">for</span> <span class="n">us</span> <span class="ow">in</span> <span class="n">unique_sums</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">P</span><span class="p">,</span> <span class="n">dims</span>    
+
+<span class="k">def</span> <span class="nf">extract_states</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">dims</span><span class="p">):</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">running</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">blocks</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dims</span><span class="p">:</span>
+        <span class="n">blocks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">running</span><span class="p">:</span><span class="n">running</span><span class="o">+</span><span class="n">d</span><span class="p">]))</span>
+        <span class="n">running</span> <span class="o">+=</span> <span class="n">d</span>
+    <span class="k">return</span> <span class="n">blocks</span>
+
+<span class="k">def</span> <span class="nf">osc_antisymmetrics</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">P</span><span class="p">,</span> <span class="n">dim</span> <span class="o">=</span> <span class="n">construct_permutation</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">extracted</span> <span class="o">=</span> <span class="n">extract_states</span><span class="p">(</span><span class="n">P</span><span class="o">*</span><span class="n">state</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span>
+    <span class="n">finished</span> <span class="o">=</span> <span class="p">[</span><span class="n">extracted</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">extracted</span><span class="p">)):</span>
+        <span class="n">finished</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">antisymmetric_basis</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">extracted</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">finished</span>
+    
+<span class="c1">#########################################################################################</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">IDn</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">n</span><span class="p">)</span>
+<span class="n">IDn</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">]</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">fermion_operators</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">f</span><span class="p">])</span> <span class="c1"># number operator</span>
+<span class="n">I</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># vacuum state</span>
+<span class="n">I</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">P</span><span class="p">,</span> <span class="n">dim</span> <span class="o">=</span> <span class="n">construct_permutation</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">N_</span> <span class="o">=</span> <span class="n">P</span><span class="o">*</span><span class="n">N</span><span class="o">*</span><span class="n">P</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">N_</span><span class="p">)</span>
+
+<span class="n">state</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">n</span><span class="p">)</span>
+<span class="n">state</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Extracted sectors:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">extract_states</span><span class="p">(</span><span class="n">P</span><span class="o">*</span><span class="n">state</span><span class="p">,</span> <span class="n">dim</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Tower of antisymmetric states:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">antisymmetric_tower</span> <span class="o">=</span> <span class="n">osc_antisymmetrics</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">antisymmetric_tower</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So there you have it: fermionic quantization.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><hr>
+Now you might wonder about the following fact:</p>
+<p>It is often said that bosons are permutation symmetric particles with <em>half integer spin</em> and fermions are permutation antisymmetric particles with <em>integer spin</em>. This doesn't actually follow from anything we've discussed so far, even though we know quite a lot about spin, and also how to quantize things bosonically and fermionically. What it has to do with is the so-called "Spin-statistics theorem."</p>
+<p>First, a word about integer vs. half integer spin. This is the first clue. It can be phrased like this: what is the effect of representing rotations with $SU(2)$ acting on spinors instead of $SO(3)$ acting on $(x, y, z)$ vectors? We actually get something extra. $SU(2)$ isn't just identical to the 3D rotation group: in fact, it's the double cover of the 3D rotation group: for each element of the 3D rotation group, there are <em>two</em> elements of $SU(2)$. Take a spin-$\frac{1}{2}$ state and rotate it a full turn by exponentiating some Pauli matrix. You'll find that the state actually comes back to itself times $-1$. It'll only come back to itself exactly if you give it another full turn. So you actually have to turn a spin-$\frac{1}{2}$ state $720^{\circ}$ to make a full "rotation": it takes twice has much. Hence, the double cover: there are effectively two copies of the rotation group sitting inside $SU(2)$ so they can keep track of this negative sign. This is true for all half integer spin states: a full turn takes them to the negative of themselves, but the phase will wind around a bunch of times as it gets there. In contrast, integer spin states come back to themselves under a $360^{\circ}$ rotation (although the phase might wind around a lot for higher states.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">vpython</span> <span class="k">as</span> <span class="nn">vp</span>
+<span class="kn">from</span> <span class="nn">examples.magic</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="k">def</span> <span class="nf">get_phase</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+
+<span class="n">scene</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">canvas</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">white</span><span class="p">)</span>
+
+<span class="n">j</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.001</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">jmat</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">U</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">H</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span><span class="o">.</span><span class="n">expm</span><span class="p">()</span>
+
+<span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">blue</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">initial_vstars</span> <span class="o">=</span> <span class="p">[</span><span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">*</span><span class="n">xyz</span><span class="p">),</span>\
+                           <span class="n">radius</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">emissive</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
+                           <span class="n">color</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">yellow</span><span class="p">)</span> 
+                                <span class="k">for</span> <span class="n">xyz</span> <span class="ow">in</span> <span class="n">spin_XYZ</span><span class="p">(</span><span class="n">state</span><span class="p">)]</span>
+
+<span class="n">vstars</span> <span class="o">=</span> <span class="p">[</span><span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">*</span><span class="n">xyz</span><span class="p">),</span>\
+                    <span class="n">radius</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">emissive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+                                <span class="k">for</span> <span class="n">xyz</span> <span class="ow">in</span> <span class="n">spin_XYZ</span><span class="p">(</span><span class="n">state</span><span class="p">)]</span>
+
+<span class="n">phase</span> <span class="o">=</span> <span class="n">get_phase</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="n">initial_vphase</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">yellow</span><span class="p">,</span>\
+                  <span class="n">axis</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="n">phase</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">phase</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">vphase</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>\
+                  <span class="n">axis</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="n">phase</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">phase</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">U</span><span class="o">*</span><span class="n">state</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">xyz</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">spin_XYZ</span><span class="p">(</span><span class="n">state</span><span class="p">)):</span>
+        <span class="n">vstars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">*</span><span class="n">xyz</span><span class="p">)</span>
+        <span class="n">phase</span> <span class="o">=</span> <span class="n">get_phase</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+        <span class="n">vphase</span><span class="o">.</span><span class="n">axis</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="n">phase</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">phase</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">vp</span><span class="o">.</span><span class="n">rate</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So already, it sort of might make intuitive sense that half integer particles might have to do with fermions: there's that $-1$! But: what's the relationship between <em>rotations</em> and <em>permutations in the tensor product</em>? Since after all, we've quantized spin-$\frac{1}{2}$ particles as bosons and everything turned out fine. We can form permutation symmetric states, and swap the particles in them without picking up a $-1$. That only comes in if we were to rotate one of the particles individually, but of course, that would break the permutation symmetry until we've come a full turn, which suggests we can't act on just one boson, but have to act on them all symmetrically. Either way, the full state will pick up a global negative $-1$ due to the rotation, but won't break the permutation symmetry.</p>
+<p>In fact, the classic proofs of the spin statistics theorem involve invoking some high powered machinery from quantum field theory and special relativity, which we can't go into here.</p>
+<p>Instead, however, let's look at an interesting construction thanks to Berry and Robbins, who approach the proof from a different angle. It involves the oscillator representation of spin, so it'll be a good example of that too!</p>
+<p>So we have three concepts we want to combine: that of a swap in the tensor product, a rotation of spin, and an actual exchange of position. Take two objects $A$ and $B$, put them side to side, and swap them. Imagine you were $A$: what would you see? As $B$ circles around you, you start to see $B$'s underside, and then eventually $B$'s far side. In other words, $A$ would see a swap as: half a rotation of $B$, a rotation of $\pi$ radians. So let's ignore their actual position, and describe things just from $A$ and $B$'s point of view on each other. That leaves us with two things: we want to combine a $180^{\circ}$ rotation with a swap in the tensor product.</p>
+<p>In order to do this, we're going to use our oscillator construction of spin, where each spin gets two oscillators. By the way, you can think of this like taking the "square root" of the spin. Being able to split a spin into two oscillators turns out to be very useful here.</p>
+<p>Suppose we have two spins. So we have four oscillators in total, with annihilators: $a_{\uparrow}, a_{\downarrow}, b_{\uparrow}, b_{\downarrow}$. As we well know, we can upgrade our spin-$\frac{1}{2}$ $X, Y, Z$ operators to act on the pair of $a$ oscillators.</p>
+<p>$X = \begin{pmatrix} a_{\uparrow}^{\dagger} &amp; a_{\downarrow}^{\dagger} \end{pmatrix} \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} \begin{pmatrix} a_{\uparrow} \\ a_{\downarrow}\end{pmatrix} = \begin{pmatrix} a_{\uparrow}^{\dagger} &amp; a_{\downarrow}^{\dagger} \end{pmatrix} \begin{pmatrix} a_{\downarrow} \\ a_{\uparrow}\end{pmatrix} = a_{\uparrow}^{\dagger}a_{\downarrow} + a_{\downarrow}^{\dagger}a_{\uparrow}$</p>
+<p>$Y = \begin{pmatrix} a_{\uparrow}^{\dagger} &amp; a_{\downarrow}^{\dagger} \end{pmatrix} \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix} \begin{pmatrix} a_{\uparrow} \\ a_{\downarrow}\end{pmatrix} = \begin{pmatrix} a_{\uparrow}^{\dagger} &amp; a_{\downarrow}^{\dagger} \end{pmatrix} \begin{pmatrix} -ia_{\downarrow} \\ ia_{\uparrow}\end{pmatrix} = -ia_{\uparrow}^{\dagger}a_{\downarrow} + ia_{\downarrow}^{\dagger}a_{\uparrow}$</p>
+<p>$Z = \begin{pmatrix} a_{\uparrow}^{\dagger} &amp; a_{\downarrow}^{\dagger} \end{pmatrix} \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} \begin{pmatrix} a_{\uparrow} \\ a_{\downarrow}\end{pmatrix} = \begin{pmatrix} a_{\uparrow}^{\dagger} &amp; a_{\downarrow}^{\dagger} \end{pmatrix} \begin{pmatrix} a_{\uparrow} \\ -a_{\downarrow}\end{pmatrix} = a_{\uparrow}^{\dagger}a_{\uparrow} - a_{\downarrow}^{\dagger}a_{\downarrow}$</p>
+<p>We can do the same with the $b$ oscillators:</p>
+<p>$X = \begin{pmatrix} b_{\uparrow}^{\dagger} &amp; b_{\downarrow}^{\dagger} \end{pmatrix} \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} \begin{pmatrix} b_{\uparrow} \\ b_{\downarrow}\end{pmatrix} = \begin{pmatrix} b_{\uparrow}^{\dagger} &amp; b_{\downarrow}^{\dagger} \end{pmatrix} \begin{pmatrix} b_{\downarrow} \\ b_{\uparrow}\end{pmatrix} = b_{\uparrow}^{\dagger}b_{\downarrow} + b_{\downarrow}^{\dagger}b_{\uparrow}$</p>
+<p>$Y = \begin{pmatrix} b_{\uparrow}^{\dagger} &amp; b_{\downarrow}^{\dagger} \end{pmatrix} \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix} \begin{pmatrix} b_{\uparrow} \\ b_{\downarrow}\end{pmatrix} = \begin{pmatrix} b_{\uparrow}^{\dagger} &amp; b_{\downarrow}^{\dagger} \end{pmatrix} \begin{pmatrix} -ib_{\downarrow} \\ ib_{\uparrow}\end{pmatrix} = -ib_{\uparrow}^{\dagger}b_{\downarrow} + ib_{\downarrow}^{\dagger}b_{\uparrow}$</p>
+<p>$Z = \begin{pmatrix} b_{\uparrow}^{\dagger} &amp; b_{\downarrow}^{\dagger} \end{pmatrix} \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} \begin{pmatrix} b_{\uparrow} \\ b_{\downarrow}\end{pmatrix} = \begin{pmatrix} b_{\uparrow}^{\dagger} &amp; b_{\downarrow}^{\dagger} \end{pmatrix} \begin{pmatrix} b_{\uparrow} \\ -b_{\downarrow}\end{pmatrix} = b_{\uparrow}^{\dagger}b_{\uparrow} - b_{\downarrow}^{\dagger}b_{\downarrow}$</p>
+<p>But why stop there? We have four oscillators after all. We could consider spins built out of <em>cross-oscillators</em>:</p>
+<p>$X = \begin{pmatrix} a_{\uparrow}^{\dagger} &amp; b_{\uparrow}^{\dagger} \end{pmatrix} \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} \begin{pmatrix} a_{\uparrow} \\ b_{\uparrow}\end{pmatrix} = \begin{pmatrix} a_{\uparrow}^{\dagger} &amp; b_{\uparrow}^{\dagger} \end{pmatrix} \begin{pmatrix} b_{\uparrow} \\ a_{\uparrow}\end{pmatrix} = a_{\uparrow}^{\dagger}b_{\uparrow} + b_{\uparrow}^{\dagger}a_{\uparrow}$</p>
+<p>$Y = \begin{pmatrix} a_{\uparrow}^{\dagger} &amp; b_{\uparrow}^{\dagger} \end{pmatrix} \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix} \begin{pmatrix} a_{\uparrow} \\ b_{\uparrow}\end{pmatrix} = \begin{pmatrix} a_{\uparrow}^{\dagger} &amp; b_{\uparrow}^{\dagger} \end{pmatrix} \begin{pmatrix} -ib_{\uparrow} \\ ia_{\uparrow}\end{pmatrix} = -ia_{\uparrow}^{\dagger}b_{\uparrow} + ib_{\uparrow}^{\dagger}a_{\uparrow}$</p>
+<p>$Z = \begin{pmatrix} a_{\uparrow}^{\dagger} &amp; b_{\uparrow}^{\dagger} \end{pmatrix} \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} \begin{pmatrix} a_{\uparrow} \\ b_{\uparrow}\end{pmatrix} = \begin{pmatrix} a_{\uparrow}^{\dagger} &amp; b_{\uparrow}^{\dagger} \end{pmatrix} \begin{pmatrix} a_{\uparrow} \\ -b_{\uparrow}\end{pmatrix} = a_{\uparrow}^{\dagger}a_{\uparrow} - b_{\uparrow}^{\dagger}b_{\uparrow}$</p>
+<p>As well as:</p>
+<p>$X = \begin{pmatrix} a_{\downarrow}^{\dagger} &amp; b_{\downarrow}^{\dagger} \end{pmatrix} \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} \begin{pmatrix} a_{\downarrow} \\ b_{\downarrow}\end{pmatrix} = \begin{pmatrix} a_{\downarrow}^{\dagger} &amp; b_{\downarrow}^{\dagger} \end{pmatrix} \begin{pmatrix} b_{\downarrow} \\ a_{\downarrow}\end{pmatrix} = a_{\downarrow}^{\dagger}b_{\downarrow} + b_{\downarrow}^{\dagger}a_{\downarrow}$</p>
+<p>$Y = \begin{pmatrix} a_{\downarrow}^{\dagger} &amp; b_{\downarrow}^{\dagger} \end{pmatrix} \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix} \begin{pmatrix} a_{\downarrow} \\ b_{\downarrow}\end{pmatrix} = \begin{pmatrix} a_{\downarrow}^{\dagger} &amp; b_{\downarrow}^{\dagger} \end{pmatrix} \begin{pmatrix} -ib_{\downarrow} \\ ia_{\downarrow}\end{pmatrix} = -ia_{\downarrow}^{\dagger}b_{\downarrow} + ib_{\downarrow}^{\dagger}a_{\downarrow}$</p>
+<p>$Z = \begin{pmatrix} a_{\downarrow}^{\dagger} &amp; b_{\downarrow}^{\dagger} \end{pmatrix} \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} \begin{pmatrix} a_{\downarrow} \\ b_{\downarrow}\end{pmatrix} = \begin{pmatrix} a_{\downarrow}^{\dagger} &amp; b_{\downarrow}^{\dagger} \end{pmatrix} \begin{pmatrix} a_{\downarrow} \\ -b_{\downarrow}\end{pmatrix} = a_{\downarrow}^{\dagger}a_{\downarrow} - b_{\downarrow}^{\dagger}b_{\downarrow}$</p>
+<p>Now suppose we evolve with $e^{-i\theta (Y_{a_{\downarrow}b_{\downarrow}} + Y_{a_{\uparrow}b_{\uparrow}})}$, in other words, perform a simultaneous $Y$ rotation of $\theta$ degrees to the two cross spins. If we watch what happens to the original spins during this $Y$ rotation, after a turn of $\pi$, the two spins have swapped places in the tensor product. A turn of $2\pi$ returns them back to where they began. And so, we've unified rotations and permutations.</p>
+<p>Moreover, if we consider doing this permutation/rotation to states with different $j$ values, trying out $\frac{1}{2}, 1, \frac{3}{2}, 2, \dots$, we find that: for half-integer spins, the state is multiplied by $-1$ after a swap, but not for integer spins. So that if we do a rotation/swap, half integer spins act like fermions, picking up a sign; but integer spins act like bosons, permuting without picking up a sign. That's hardly a complete proof, but it's suggestive!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">vpython</span> <span class="k">as</span> <span class="nn">vp</span>
+
+<span class="n">scene</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">canvas</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">white</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_phase</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">second_quantize_operator</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+    <span class="n">O</span> <span class="o">=</span> <span class="n">O</span><span class="o">.</span><span class="n">full</span><span class="p">()</span>
+    <span class="n">terms</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+            <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">O</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">second_quantize_state</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">))])</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">second_quantize_spin_state</span><span class="p">(</span><span class="n">spin</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">spin</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="p">(</span><span class="n">spin</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mf">2.</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">spin</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">terms</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">z</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="p">[</span><span class="n">a_</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span> <span class="k">for</span> <span class="n">a_</span> <span class="ow">in</span> <span class="n">a</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="n">j</span><span class="p">)</span>
+        <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="n">w</span><span class="o">**</span><span class="n">i</span><span class="p">)</span><span class="o">*</span>\
+                <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="p">)</span><span class="o">/</span>\
+                        <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="n">m</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="n">m</span><span class="p">)))))</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>
+    
+<span class="k">def</span> <span class="nf">upgrade</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">ID</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">O</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">ID</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="n">O</span><span class="o">.</span><span class="n">dims</span>
+    <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">O</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="n">j</span> <span class="k">else</span> <span class="n">ID</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+
+<span class="n">max_ex</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">upgrade</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">destroy</span><span class="p">(</span><span class="n">max_ex</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">upgrade</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">destroy</span><span class="p">(</span><span class="n">max_ex</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="n">upgrade</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">destroy</span><span class="p">(</span><span class="n">max_ex</span><span class="p">),</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">upgrade</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">destroy</span><span class="p">(</span><span class="n">max_ex</span><span class="p">),</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]</span>
+
+<span class="n">XYZ</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">(),</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmay</span><span class="p">(),</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">()]</span>
+<span class="n">XYZa</span> <span class="o">=</span> <span class="p">[</span><span class="n">second_quantize_operator</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">O</span> <span class="ow">in</span> <span class="n">XYZ</span><span class="p">]</span>
+<span class="n">XYZb</span> <span class="o">=</span> <span class="p">[</span><span class="n">second_quantize_operator</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">O</span> <span class="ow">in</span> <span class="n">XYZ</span><span class="p">]</span>
+<span class="n">XYZab</span> <span class="o">=</span> <span class="p">[</span><span class="n">second_quantize_operator</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span> <span class="k">for</span> <span class="n">O</span> <span class="ow">in</span> <span class="n">XYZ</span><span class="p">]</span>
+<span class="n">XYZba</span> <span class="o">=</span> <span class="p">[</span><span class="n">second_quantize_operator</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span> <span class="k">for</span> <span class="n">O</span> <span class="ow">in</span> <span class="n">XYZ</span><span class="p">]</span>
+
+<span class="n">Na</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">a_</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">a_</span> <span class="k">for</span> <span class="n">a_</span> <span class="ow">in</span> <span class="n">a</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">Nb</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">b_</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">b_</span> <span class="k">for</span> <span class="n">b_</span> <span class="ow">in</span> <span class="n">b</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">Nab</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">Nba</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span>
+
+<span class="n">vac</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">vac</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+<span class="n">a_state</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">b_state</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># try spin-1/2</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">second_quantize_spin_state</span><span class="p">(</span><span class="n">a_state</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">second_quantize_spin_state</span><span class="p">(</span><span class="n">b_state</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">vac</span>
+<span class="c1"># try spin-1</span>
+<span class="c1">#state = second_quantize_spin_state(a_state, a)*second_quantize_spin_state(b_state, b)*second_quantize_spin_state(a_state, a)*second_quantize_spin_state(b_state, b)*vac</span>
+
+<span class="c1"># try tensor state</span>
+<span class="c1">#ab_state = qt.bell_state(&quot;00&quot;)</span>
+<span class="c1">#ab_tensor = [a[0]*b[0], a[0]*b[1], a[1]*b[0], a[1]*b[1]]</span>
+<span class="c1">#state = second_quantize_state(ab_state, ab_tensor)*second_quantize_state(ab_state, ab_tensor)*vac</span>
+
+<span class="n">state</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>
+
+<span class="n">vA</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">Na</span><span class="p">,</span> <span class="n">state</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">blue</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">vB</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">Nb</span><span class="p">,</span> <span class="n">state</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">red</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">vAB</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">Nab</span><span class="p">,</span> <span class="n">state</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">yellow</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">vBA</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">Nba</span><span class="p">,</span> <span class="n">state</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">green</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">vA_arrow</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vA</span><span class="o">.</span><span class="n">pos</span><span class="p">,</span>\
+                    <span class="n">axis</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span> <span class="k">for</span> <span class="n">O</span> <span class="ow">in</span> <span class="n">XYZa</span><span class="p">]))</span>
+<span class="n">vB_arrow</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vB</span><span class="o">.</span><span class="n">pos</span><span class="p">,</span>\
+                    <span class="n">axis</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span> <span class="k">for</span> <span class="n">O</span> <span class="ow">in</span> <span class="n">XYZb</span><span class="p">]))</span>
+<span class="n">vAB_arrow</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vAB</span><span class="o">.</span><span class="n">pos</span><span class="p">,</span>\
+                    <span class="n">axis</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span> <span class="k">for</span> <span class="n">O</span> <span class="ow">in</span> <span class="n">XYZab</span><span class="p">]))</span>
+<span class="n">vBA_arrow</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vBA</span><span class="o">.</span><span class="n">pos</span><span class="p">,</span>\
+                    <span class="n">axis</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span> <span class="k">for</span> <span class="n">O</span> <span class="ow">in</span> <span class="n">XYZba</span><span class="p">]))</span>
+
+<span class="n">vA_origA</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vA</span><span class="o">.</span><span class="n">pos</span><span class="o">+</span><span class="n">vA_arrow</span><span class="o">.</span><span class="n">axis</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">blue</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="n">vA_origB</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vB</span><span class="o">.</span><span class="n">pos</span><span class="o">+</span><span class="n">vA_arrow</span><span class="o">.</span><span class="n">axis</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">blue</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="n">vB_origA</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vA</span><span class="o">.</span><span class="n">pos</span><span class="o">+</span><span class="n">vB_arrow</span><span class="o">.</span><span class="n">axis</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">red</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="n">vB_origB</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vB</span><span class="o">.</span><span class="n">pos</span><span class="o">+</span><span class="n">vB_arrow</span><span class="o">.</span><span class="n">axis</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">red</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+
+<span class="n">phase</span> <span class="o">=</span> <span class="n">get_phase</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="n">initial_vphase</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">yellow</span><span class="p">,</span>\
+                  <span class="n">axis</span><span class="o">=</span><span class="mf">0.5</span><span class="o">*</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="n">phase</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">phase</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">vphase</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>\
+                  <span class="n">axis</span><span class="o">=</span><span class="mf">0.5</span><span class="o">*</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="n">phase</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">phase</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.0005</span>
+<span class="n">U</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="p">(</span><span class="n">XYZba</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">XYZab</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span><span class="o">.</span><span class="n">expm</span><span class="p">()</span>
+
+<span class="n">T</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+<span class="c1">#while T &lt; np.pi:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">U</span><span class="o">*</span><span class="n">state</span>
+    <span class="n">vA_arrow</span><span class="o">.</span><span class="n">axis</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span> <span class="k">for</span> <span class="n">O</span> <span class="ow">in</span> <span class="n">XYZa</span><span class="p">])</span>
+    <span class="n">vB_arrow</span><span class="o">.</span><span class="n">axis</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span> <span class="k">for</span> <span class="n">O</span> <span class="ow">in</span> <span class="n">XYZb</span><span class="p">])</span>
+    <span class="n">vAB_arrow</span><span class="o">.</span><span class="n">axis</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span> <span class="k">for</span> <span class="n">O</span> <span class="ow">in</span> <span class="n">XYZab</span><span class="p">])</span>
+    <span class="n">vBA_arrow</span><span class="o">.</span><span class="n">axis</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span> <span class="k">for</span> <span class="n">O</span> <span class="ow">in</span> <span class="n">XYZba</span><span class="p">])</span>
+    <span class="n">vA</span><span class="o">.</span><span class="n">radius</span><span class="o">=</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">Na</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+    <span class="n">vB</span><span class="o">.</span><span class="n">radius</span><span class="o">=</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">Nb</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+    <span class="n">vAB</span><span class="o">.</span><span class="n">radius</span><span class="o">=</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">Nab</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+    <span class="n">vBA</span><span class="o">.</span><span class="n">radius</span><span class="o">=</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">Nba</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+    <span class="n">T</span> <span class="o">+=</span> <span class="n">dt</span>
+
+    <span class="n">t</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">phase</span> <span class="o">=</span> <span class="n">get_phase</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+        <span class="n">vphase</span><span class="o">.</span><span class="n">axis</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="n">phase</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">phase</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">vp</span><span class="o">.</span><span class="n">rate</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We note, interestingly, that if half integer spin fermions are in the antisymmetric state, then the sign flip from the antisymmetric state cancels out the sign flip from the rotation, so that the antisymmetric state is left completely invariant by the swap. Therefore, the antisymmetric state must be an eigenstate of the rotation/swap with eigenvalue 0. In contrast, for integer spins, the symmetric state is also eigenstate of the rotation/swap with eigenvalue 0.</p>
 
 </div>
 </div>

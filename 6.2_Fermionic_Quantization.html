@@ -13137,7 +13137,7 @@ $$ f_{0} = f \otimes I \otimes I \otimes I \otimes I $$$$ f_{1} = Z \otimes f \o
 
 <span class="c1">#########################################################################################</span>
 
-<span class="n">n</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">IDn</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">n</span><span class="p">)</span>
 <span class="n">IDn</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">]</span>
 
@@ -13203,12 +13203,15 @@ $$ f_{0} = f \otimes I \otimes I \otimes I \otimes I $$$$ f_{1} = Z \otimes f \o
     <span class="k">return</span> <span class="n">Q</span>
     
 <span class="n">a</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="n">b</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
 <span class="n">c</span> <span class="o">=</span> <span class="n">antisymmetrize</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">swap</span><span class="p">()</span><span class="o">*</span><span class="n">c</span><span class="p">)</span>
 
-<span class="n">antisymmetric_basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">antisymmetric_basis</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13311,7 +13314,7 @@ $$ f_{0} = f \otimes I \otimes I \otimes I \otimes I $$$$ f_{1} = Z \otimes f \o
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><hr>
 Now you might wonder about the following fact:</p>
-<p>It is often said that bosons are permutation symmetric particles with <em>half integer spin</em> and fermions are permutation antisymmetric particles with <em>integer spin</em>. This doesn't actually follow from anything we've discussed so far, even though we know quite a lot about spin, and also how to quantize things bosonically and fermionically. What it has to do with is the so-called "spin-statistics theorem."</p>
+<p>It is often said that bosons are permutation symmetric particles with <em>integer spin</em> and fermions are permutation antisymmetric particles with <em>half integer spin</em>. This doesn't actually follow from anything we've discussed so far, even though we know quite a lot about spin, and also how to quantize things bosonically and fermionically. What it has to do with is the so-called "spin-statistics theorem."</p>
 <p>First, a word about integer vs. half integer spin. This is the first clue. After all, what is the effect of representing rotations with $SU(2)$ acting on spinors instead of $SO(3)$ acting on $(x, y, z)$ vectors? We actually get something extra. $SU(2)$ isn't just identical to the 3D rotation group: in fact, it's the double cover of the 3D rotation group: for each element of the 3D rotation group, there are <em>two</em> elements of $SU(2)$. Take a spin-$\frac{1}{2}$ state and rotate it a full turn by exponentiating some Pauli matrix. You'll find that the state actually comes back to itself times $-1$. It'll only come back to itself exactly if you give it another full turn. So you actually have to turn a spin-$\frac{1}{2}$ state $720^{\circ}$ to make a full "rotation": it takes twice has much. Hence, the double cover: there are effectively two copies of the rotation group sitting inside $SU(2)$ so they can keep track of this negative sign. This is true for all half integer spin states: a full turn takes them to the negative of themselves, but the phase will wind around a bunch of times as it gets there. In contrast, integer spin states come back to themselves under a $360^{\circ}$ rotation (although the phase might wind around a lot for higher states.</p>
 
 </div>
@@ -13333,7 +13336,7 @@ Now you might wonder about the following fact:</p>
 
 <span class="n">scene</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">canvas</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">white</span><span class="p">)</span>
 
-<span class="n">j</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">j</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">dt</span> <span class="o">=</span> <span class="mf">0.001</span>
 <span class="n">state</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
@@ -13480,12 +13483,12 @@ Now you might wonder about the following fact:</p>
 <span class="n">vac</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">vac</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
 <span class="n">a_state</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">b_state</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">b_state</span> <span class="o">=</span> <span class="n">a_state</span><span class="c1">#qt.rand_ket(2)</span>
 
 <span class="c1"># try spin-1/2</span>
-<span class="c1">#state = second_quantize_spin_state(a_state, a)*second_quantize_spin_state(b_state, b)*vac</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">second_quantize_spin_state</span><span class="p">(</span><span class="n">a_state</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">second_quantize_spin_state</span><span class="p">(</span><span class="n">b_state</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">vac</span>
 <span class="c1"># try spin-1</span>
-<span class="n">state</span> <span class="o">=</span> <span class="n">second_quantize_spin_state</span><span class="p">(</span><span class="n">a_state</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">second_quantize_spin_state</span><span class="p">(</span><span class="n">b_state</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">second_quantize_spin_state</span><span class="p">(</span><span class="n">a_state</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">second_quantize_spin_state</span><span class="p">(</span><span class="n">b_state</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">vac</span>
+<span class="c1">#state = second_quantize_spin_state(a_state, a)*second_quantize_spin_state(b_state, b)*second_quantize_spin_state(a_state, a)*second_quantize_spin_state(b_state, b)*vac</span>
 
 <span class="c1"># try tensor state</span>
 <span class="c1">#ab_state = qt.bell_state(&quot;00&quot;)</span>
@@ -13557,6 +13560,16 @@ Now you might wonder about the following fact:</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<p>Some references:</p>
+<p><a href="https://heyredhat.github.io/refs/1805.04552.pdf">Back and forth from Fock space to Hilbert space: a guide for commuters</a></p>
+<p><a href="https://heyredhat.github.io/refs/Indistinguishability_for_Quantum_Particles_Spin_St.pdf">Indistinguishability for Quantum Particles: Spin, Statistics and the Geometric Phase</a></p>
+<p><a href="https://heyredhat.github.io/refs/jmhthesis-uu2dpx.pdf">Group Representations and the Quantum Statistics of Spin</a></p>
+<p><a href="https://heyredhat.github.io/refs/atiyahpart.pdf">The Geometry of Classical Particles</a></p>
+<p><a href="https://heyredhat.github.io/refs/atiyahpoints.pdf">Configurations of Points</a></p>
+<p><a href="https://heyredhat.github.io/refs/1009.4827.pdf">Atiyah's Edinburgh Lectures on Geometry, Analysis and Physics
+</a></p>
 
 </div>
 </div>

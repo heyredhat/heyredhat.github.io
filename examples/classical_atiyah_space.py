@@ -119,19 +119,19 @@ def display_su2n(s, e, annotations):
 
 #######################################################################################
 
-inverted = False
+inverted = True
 show_originals = True
 
 n = 2
-#pts = [3*np.random.randn(3) for i in range(n)] 
-pts = [np.array([0, 0, 3*i - n/2]) for i in range(n)]
+pts = [3*np.random.randn(3) for i in range(n)] 
+#pts = [np.array([0, 0, 3*i - n/2]) for i in range(n)]
 
 views = make_views(pts)
 spinors = [qt.rand_ket(2) for i in range(n)]
 state = su2n_state(spinors)
-phases = su2n_phases(state)
 S, E, annotations = su2(n)
 P = constellations_matrix(views_constellations(views))
+phases = su2n_phases(state)
 
 initial_state = P*state if inverted else P.dag()*state
 
@@ -188,10 +188,9 @@ def update_viz(verbose=False):
     global S, E, annotations, vspins_, inverted
     views = make_views(pts)
     P = constellations_matrix(views_constellations(views))
-    s, e = decompose_su2n(P, S, E)
     spin_state = P.dag()*initial_state if inverted else P*initial_state
-    pieces = split_su2n_state(spin_state)
     phases = su2n_phases(spin_state)
+    pieces = split_su2n_state(spin_state)
     #summing = [] if verbose else None
     for i in range(n):
         vspheres[i].pos = vp.vector(*pts[i])
@@ -210,6 +209,7 @@ def update_viz(verbose=False):
             for j in range(n):
                 vorig[i][j].pos = vspheres[i].pos+vspins_[j].axis
     if verbose:
+        s, e = decompose_su2n(P, S, E)
         print("*****************************************")
         display_su2n(s, e, annotations)
         print("*****************************************")

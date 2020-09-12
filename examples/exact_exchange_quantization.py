@@ -1,5 +1,4 @@
 from sympy import *
-#from symengine import *
 import qutip as qt
 import numpy as np
 import scipy as sc
@@ -235,9 +234,11 @@ def coeffs_mat(C, basis):
 #######################################################################################
 
 def su(n):
+    annotations = []
     diagonals = [np.zeros((n,n), dtype=complex) for i in range(n)]
     for i in range(n):
         diagonals[i][i,i] = 1
+        annotations.append(('Ez', i))
     xlike = [np.zeros((n, n), dtype=complex) for i in range(int(n*(n-1)/2))]
     r = 0
     for i in range(n):
@@ -246,6 +247,7 @@ def su(n):
                 xlike[r][i,j] = 1/np.sqrt(2)
                 xlike[r][j,i] = 1/np.sqrt(2)
                 r +=1 
+                annotations.append(('Ex', i, j))
     ylike = [np.zeros((n, n), dtype=complex) for i in range(int(n*(n-1)/2))]
     r = 0
     for i in range(n):
@@ -254,7 +256,8 @@ def su(n):
                 ylike[r][i,j] = 1j/np.sqrt(2)
                 ylike[r][j,i] = -1j/np.sqrt(2)
                 r +=1 
-    return [qt.Qobj(o) for o in diagonals + xlike + ylike]
+                annotations.append(('Ey', i, j))
+    return [qt.Qobj(o) for o in diagonals + xlike + ylike], annotations
 
 def su2(n, half=True):
     XYZ = {"X": qt.sigmax(), "Y": qt.sigmay(), "Z": qt.sigmaz()}
@@ -264,10 +267,11 @@ def su2(n, half=True):
                 for j in range(n)]))) \
                     for o in XYZ.keys()])
                         for i in range(n)]
-    E = [qt.tensor(o, qt.identity(2)) for o in su(n)]
+    sun, annotations = su(n)
+    E = [(1/np.sqrt(2))*qt.tensor(o, qt.identity(2)) for o in sun]
     for e in E:
         e.dims = [[e.shape[0]], [e.shape[0]]]
-    return S, E
+    return S, E, annotations
 
 def rand_su2n_state(n):
     return su2n_state([qt.rand_ket(2) for i in range(n)])
@@ -282,16 +286,38 @@ def split_su2n_state(state):
 def su2n_phases(state):
     return [get_phase(spinor) for spinor in split_su2n_state(state)]
 
+def decompose_su2n(O, S, E):
+    s = [dict([(o, (S[i][o]*O).tr()) for o in ["X", "Y", "Z"]]) for i in range(len(S))]
+    e = [(E[i]*O).tr() for i in range(len(E))]
+    return s, e
+
+def reconstruct_su2n(s, e, S, E):
+    terms = []
+    for i in range(len(S)):
+        for o in ["X", "Y", "Z"]:
+            terms.append(s[i][o]*S[i][o]) if not np.isclose(s[i][o], 0) else None
+    for i in range(len(E)):
+        terms.append(e[i]*E[i]) if not np.isclose(e[i], 0) else None
+    return sum(terms)
+
+def display_su2n(s, e, annotations):
+    r = 0
+    for i in range(len(S)):
+        print("s%d: %s" % (i, "".join(["%s: %s " % (o, s[i][o]) for o in ["X", "Y", "Z"]])))
+    for i in range(len(E)):
+        print("%s : %s" % (annotations[i], e[i]))
+
+
 ##################################################################
 
-f = Field(2)
+#f = Field(2)
 
-a = qt.rand_ket(2)
-XYZ = [qt.sigmax(), qt.sigmay(), qt.sigmaz()]
-xyz = [qt.expect(o, a) for o in XYZ]
+#a = qt.rand_ket(2)
+#XYZ = [qt.sigmax(), qt.sigmay(), qt.sigmaz()]
+#xyz = [qt.expect(o, a) for o in XYZ]
 
-XYZf = [f.quantize_operator(o) for o in XYZ]
-f.apply(f.quantize_state(a))
+#XYZf = [f.quantize_operator(o) for o in XYZ]
+#f.apply(f.quantize_state(a))
 #xyzf = [f.expect(o) for o in XYZf]
 
 ##################################################################
@@ -320,7 +346,7 @@ f.apply(f.quantize_state(a))
 class Spinors:
     def __init__(self, n, spinors=[]):
         self.n = n
-        self.S, self.E = su2(n)
+        self.S, self.E, self.annotations = su2(n)
         self._ = su2n_state(spinors)\
                       if len(spinors) > 0 else rand_su2n_state(n)
 
@@ -424,7 +450,7 @@ def constellations_matrix_(spins, orth=True):
 ##################################################################
 
 n = 2
-s = Spins(n, spinors=[qt.basis(2,0), qt.basis(2,1)])
+s = Spins(n, spinors=[qt.rand_ket(2) for i in range(n)])
 
 #pts = [np.array([0, 0, i-1/2]) for i in range(n)]
 pts = [np.random.randn(3) for i in range(n)]
@@ -435,4 +461,3 @@ s.apply(SUN)
 
 print(s)
 print(s.f._.dag()*s.f._)
-# s.f._.dag()*s.f._ == 1

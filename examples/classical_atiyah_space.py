@@ -119,12 +119,12 @@ def display_su2n(s, e, annotations):
 
 #######################################################################################
 
-inverted = False
+inverted = True
 show_originals = True
 
-n = 2
+n = 4
 #pts = [3*np.random.randn(3) for i in range(n)] 
-pts = [np.array([0, 0, 3*i - n/2]) for i in range(n)]
+pts = [np.array([0, 0, 4*i - n/2]) for i in range(n)]
 
 views = make_views(pts)
 spinors = [qt.rand_ket(2) for i in range(n)]

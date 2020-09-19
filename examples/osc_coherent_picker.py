@@ -20,6 +20,10 @@ def coherent(s):
 	global n, a
 	return np.exp(-s*np.conjugate(s)/2)*(s*a.dag()).expm()*(-np.conjugate(s)*a).expm()*qt.basis(n,0)
 
+def squeezed_coherent(s):
+	global n, a
+	return ((s.conjugate()*a*a - s*a.dag()*a.dag())/2).expm()*qt.basis(n,0)
+
 def oscillator_roots(q):
 	n = q.shape[0]
 	poly = [(c/np.sqrt(np.math.factorial(n-i))) for i, c in enumerate(q.full().T[0][::-1])]
@@ -73,7 +77,9 @@ def display():
 T = 0
 print("Loaded.")
 while True:
-	state = coherent(s)
+	#state = coherent(s) 
+	state = squeezed_coherent(s)
+	#print(qt.expect(N, state))
 	display() if T % 5 == 0 else None
 	if CALC_ROOTS:
 		if T % 5 == 0:

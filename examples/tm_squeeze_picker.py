@@ -235,5 +235,5 @@ while True:
             amp = state.overlap(Qstates[i][j])
             vpos[i][j].axis = vp.vector(amp.real, amp.imag, 0)
 
-    vpos_exp.pos = vp.vector(qt.expect(Q[0], state).real, qt.expect(Q[1], state).real, 0)
+    vpos_exp.pos = 4*vp.vector(qt.expect(Q[0], state).real, qt.expect(Q[1], state).real, 0)
             

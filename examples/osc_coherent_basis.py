@@ -28,7 +28,13 @@ def oscillator_roots(q):
 	poly = [(c/np.sqrt(np.math.factorial(n-i))) for i, c in enumerate(q.full().T[0][::-1])]
 	return [c.conjugate() for c in np.roots(poly)]
 
-state = qt.basis(n,0)
+def squeezed_coherent(s):
+	global n, a
+	return ((s.conjugate()*a*a - s*a.dag()*a.dag())/2).expm()*qt.basis(n,0)
+
+#state = qt.basis(n,0)
+state = squeezed_coherent(np.random.rand()+np.random.rand()*1j)#qt.basis(n,0)
+
 amps = [state.overlap(v) for v in QV]
 vamps = [vp.arrow(pos=vp.vector(QL[i], 0, 0),\
 	      axis=vp.vector(amps[i].real, amps[i].imag, 0)) for i in range(n)]

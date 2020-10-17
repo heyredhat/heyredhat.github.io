@@ -13486,9 +13486,9 @@ Now you might wonder about the following fact:</p>
 <span class="n">b_state</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="c1"># try spin-1/2</span>
-<span class="c1">#state = second_quantize_spin_state(a_state, a)*second_quantize_spin_state(b_state, b)*vac</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">second_quantize_spin_state</span><span class="p">(</span><span class="n">a_state</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">second_quantize_spin_state</span><span class="p">(</span><span class="n">b_state</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">vac</span>
 <span class="c1"># try spin-1</span>
-<span class="n">state</span> <span class="o">=</span> <span class="n">second_quantize_spin_state</span><span class="p">(</span><span class="n">a_state</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">second_quantize_spin_state</span><span class="p">(</span><span class="n">b_state</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">second_quantize_spin_state</span><span class="p">(</span><span class="n">a_state</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">second_quantize_spin_state</span><span class="p">(</span><span class="n">b_state</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">vac</span>
+<span class="c1">#state = second_quantize_spin_state(a_state, a)*second_quantize_spin_state(b_state, b)*second_quantize_spin_state(a_state, a)*second_quantize_spin_state(b_state, b)*vac</span>
 
 <span class="c1"># try tensor state</span>
 <span class="c1">#ab_state = qt.bell_state(&quot;00&quot;)</span>
@@ -13543,6 +13543,7 @@ Now you might wonder about the following fact:</p>
     <span class="n">vB</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">Nb</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
     <span class="n">vAB</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">Nab</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
     <span class="n">vBA</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">Nba</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+    <span class="c1">#print(qt.entropy_vn(state.ptrace(0,1)), qt.entropy_vn(state.ptrace(2,3)))</span>
     <span class="n">T</span> <span class="o">+=</span> <span class="n">dt</span>
 
     <span class="n">t</span> <span class="o">+=</span> <span class="mi">1</span>

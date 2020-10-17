@@ -269,7 +269,7 @@ big_N = qt.tensor(qt.identity(2), tiny_N)#N)
 
 def teleportation(state, g, t=10):
     global big_EL, big_ER, big_N, INSERT
-    return (1j*big_ER*t).expm()*(1j*g*big_N).expm()*(-1j*big_EL*t).expm()*INSERT*(1j*big_EL*t).expm()*state
+    return (-1j*big_ER*t).expm()*(1j*g*big_N).expm()*(-1j*big_EL*t).expm()*INSERT*(1j*big_EL*t).expm()*state
 
 G = np.linspace(-10, 10, 300)
 Zs = [qt.expect(RXYZ["Z"], teleportation(state, g)) for g in G]
@@ -394,7 +394,7 @@ def evolve(op=None, dt=0.1, T=100, sign=-1j):
         state = (U*state).unit()
         syk.view()
 
-def insert(t):
+def insert(t=0):
     global state, syk, big_EL, INSERT
     #print("evolving back in time...")
     #dt = 0.1 if t < 0 else -0.1

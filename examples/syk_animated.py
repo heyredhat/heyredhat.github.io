@@ -96,8 +96,13 @@ def syk_ham(couplings, m):
     return (-1/(math.factorial(4)))*sum(Jterms)
 
 def construct_thermal_dm(H, beta=0):
-    return (-beta*H*(1/2)).expm()/np.sqrt((-beta*H*(1/2)).expm().tr())
+    return (-beta*H).expm()/(-beta*H).expm().tr()
 
+def construct_tfd(H, beta=0):
+    rho_ = (-beta*H*(1/2)).expm()/np.sqrt((-beta*H*(1/2)).expm().tr())
+    rhoL = coeffs_op(op_coeffs(rho_, M), ML)
+    return (rhoL*c_vac).unit()
+    
 #########################################################################################
 
 def majoranas_qubit(m):
@@ -170,8 +175,7 @@ HL = syk_ham(SYK, mL)
 HR = syk_ham(SYK, [-1j*m_ for m_ in mR]) 
 
 rho = construct_thermal_dm(H, beta=beta)
-rhoL = coeffs_op(op_coeffs(rho, M), ML)
-TFD = (rhoL*c_vac).unit()
+TFD = construct_tfd(H, beta=beta)
 
 ######################################################################################### 
 

@@ -93,6 +93,8 @@ for k in range(1, n):
         circ.append(T(i+1, k).adjoint(), [offset+i+1, offset+i])    
     circ.append(U(k).adjoint(), [offset])
 
+circ.draw() 
+
 tomog_circs = state_tomography_circuits(circ, list(range(p, p+n)))
 tomog_circs_sans_aux = deepcopy(tomog_circs)
 ca = ClassicalRegister(p)

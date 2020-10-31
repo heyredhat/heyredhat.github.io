@@ -13509,6 +13509,7 @@ $$ \frac{1}{\sqrt{k+1}}(\mid 00 \dots 0 \rangle + \mid 10 \dots 0 \rangle + \mid
 <p>Finally, we measure all the controls, and if they're all in the $0/\uparrow$ state, then our qubits will have been symmetrized!</p>
 <p>Here's the circuit for the $n=4$ case:</p>
 <p><img width=400 src="img/four_qubit_symmetrizer.png"></p>
+<p>The key is that, for example, by the third round, the first three qubits have already been symmetrized, so we only need three controlled swaps to symmetrize them with the fourth.</p>
 <p>Let's check it out! (Note that the indices are offset from the discussion above as we start counting from 0 as opposed to 1.)</p>
 
 </div>

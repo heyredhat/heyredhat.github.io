@@ -48,12 +48,12 @@ def sph_xyz(phi, theta):
 ############################################################################
 
 # operators for preparing the control qubits
-def U(k):
+def Uk(k):
     return Operator((1/np.sqrt(k+1))*\
                     np.array([[1, -np.sqrt(k)],\
                               [np.sqrt(k), 1]]))
 
-def T(j,k):
+def Tkj(k, j):
     return Operator((1/np.sqrt(k-j+1))*\
                     np.array([[np.sqrt(k-j+1), 0, 0, 0],\
                               [0, 1, np.sqrt(k-j), 0],\
@@ -62,7 +62,7 @@ def T(j,k):
 
 ############################################################################
 
-j = 1
+j = 2
 backend_name = "qasm_simulator"
 shots = 10000
 
@@ -101,14 +101,14 @@ for i in range(n):
 offset = p
 for k in range(1, n):
     offset = offset-k
-    circ.append(U(k), [offset])
+    circ.append(Uk(k), [offset])
     for i in range(k-1):
-        circ.append(T(i+1, k), [offset+i+1, offset+i])
-    for i in range(k):
+        circ.append(Tkj(k, i+1), [offset+i+1, offset+i])
+    for i in range(k-1, -1, -1):
         circ.fredkin(offset+i, p+k, p+i)
-    for i in range(k-1-1, -1, -1):
-        circ.append(T(i+1, k).adjoint(), [offset+i+1, offset+i])    
-    circ.append(U(k).adjoint(), [offset])
+    for i in range(k-2, -1, -1):
+        circ.append(Tkj(k, i+1).adjoint(), [offset+i+1, offset+i])    
+    circ.append(Uk(k).adjoint(), [offset])
 
 # let's look at it!
 print(circ.draw())
@@ -173,4 +173,3 @@ S = spin_sym(j)
 correct_jrho = spin_state*spin_state.dag()
 our_jrho = S.dag()*qt.Qobj(rho, dims=[[2]*n, [2]*n])*S
 print("overlap between actual and expected: %.4f" % (correct_jrho*our_jrho).tr().real)
-

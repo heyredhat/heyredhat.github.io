@@ -13097,7 +13097,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -13149,22 +13149,22 @@ div#notebook {
 <pre>spin state:
 Quantum object: dims = [[4], [1]], shape = (4, 1), type = ket
 Qobj data =
-[[-0.49218396+0.42571807j]
- [ 0.50111799+0.40478841j]
- [-0.02774794-0.10626508j]
- [ 0.29129176-0.25423035j]]
+[[-0.30376126+0.43331784j]
+ [ 0.309971  -0.24660853j]
+ [ 0.5414951 -0.42922488j]
+ [ 0.22623725+0.18556056j]]
 
 permutation symmetric qubits:
 Quantum object: dims = [[2, 2, 2], [1]], shape = (8, 1), type = ket
 Qobj data =
-[[-0.49218396+0.42571807j]
- [ 0.28932061+0.2337047j ]
- [ 0.28932061+0.2337047j ]
- [-0.01602028-0.06135217j]
- [ 0.28932061+0.2337047j ]
- [-0.01602028-0.06135217j]
- [-0.01602028-0.06135217j]
- [ 0.29129176-0.25423035j]]
+[[-0.30376126+0.43331784j]
+ [ 0.17896184-0.1423795j ]
+ [ 0.17896184-0.1423795j ]
+ [ 0.31263234-0.2478131j ]
+ [ 0.17896184-0.1423795j ]
+ [ 0.31263234-0.2478131j ]
+ [ 0.31263234-0.2478131j ]
+ [ 0.22623725+0.18556056j]]
 
 transformation an isometry?: True
 </pre>
@@ -13190,7 +13190,7 @@ transformation an isometry?: True
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">examples.magic</span> <span class="k">import</span> <span class="o">*</span>
@@ -13223,16 +13223,46 @@ transformation an isometry?: True
     <div class="prompt"></div>
 
 
+
+<div class="output_html rendered_html output_subarea ">
+<div id="glowscript" class="glowscript"></div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+
+<div id="ffb8eecf-f5d6-47c2-a213-719e3546d50a"></div>
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+var element = $('#ffb8eecf-f5d6-47c2-a213-719e3546d50a');
+if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container: $("#glowscript").removeAttr("id")};}else{ element.textContent = ' ';}
+</script>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>initial stars:
-[ 0.04285381 -0.88779865 -0.45823259]
-[-0.81433748 -0.52722878  0.24266084]
-[0.44809802 0.61813944 0.64584193]
+[-0.70904876 -0.16436818 -0.68573534]
+[ 9.96578204e-01 -8.26547850e-02  2.63198755e-04]
+[0.03138124 0.45074681 0.89210007]
 
 final stars:
-[ 0.04285381 -0.88779865 -0.45823259]
-[-0.81433748 -0.52722878  0.24266084]
-[0.44809802 0.61813944 0.64584193]
+[-0.70904876 -0.16436818 -0.68573534]
+[ 9.96578204e-01 -8.26547850e-02  2.63198755e-04]
+[0.03138124 0.45074681 0.89210007]
 
 </pre>
 </div>
@@ -13290,7 +13320,7 @@ $$\begin{bmatrix} 1&amp;0&amp;0&amp;0\\0&amp;0&amp;1&amp;0\\0&amp;1&amp;0&amp;0\
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="k">import</span> <span class="n">block_diag</span>
@@ -13359,8 +13389,8 @@ $$\begin{bmatrix} 1&amp;0&amp;0&amp;0\\0&amp;0&amp;1&amp;0\\0&amp;1&amp;0&amp;0\
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>p(up): 0.7391
-p(down): 0.2609
+<pre>p(up): 0.7465
+p(down): 0.2535
 obtained: down
 got correct antisymmetrized state?: True
 </pre>
@@ -13387,7 +13417,7 @@ $$ \sum_{p_{i} \in perm} \sum_{j=0}^{2^n} \mid i \rangle P_{i}\mid j \rangle \la
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
@@ -13517,7 +13547,7 @@ $$ \frac{1}{\sqrt{k+1}}(\mid 00 \dots 0 \rangle + \mid 10 \dots 0 \rangle + \mid
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qutip.qip.operations</span> <span class="k">import</span> <span class="n">fredkin</span>
@@ -13527,7 +13557,7 @@ $$ \frac{1}{\sqrt{k+1}}(\mid 00 \dots 0 \rangle + \mid 10 \dots 0 \rangle + \mid
                       <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>\
                         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
 
-<span class="k">def</span> <span class="nf">Uk</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">Rk</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="p">)],</span>\
                                               <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="mi">1</span><span class="p">]]))</span>
 
@@ -13549,7 +13579,7 @@ $$ \frac{1}{\sqrt{k+1}}(\mid 00 \dots 0 \rangle + \mid 10 \dots 0 \rangle + \mid
 <span class="n">offset</span> <span class="o">=</span> <span class="n">p</span>
 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
     <span class="n">offset</span> <span class="o">=</span> <span class="n">offset</span><span class="o">-</span><span class="n">k</span>
-    <span class="n">U</span> <span class="o">=</span> <span class="n">upgrade</span><span class="p">(</span><span class="n">Uk</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">offset</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="n">upgrade</span><span class="p">(</span><span class="n">Rk</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">offset</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="n">p</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
         <span class="n">T</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span><span class="o">*</span><span class="p">(</span><span class="n">offset</span><span class="o">+</span><span class="n">j</span><span class="p">),</span> <span class="n">Tkj</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span><span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="n">n</span><span class="o">-</span><span class="n">offset</span><span class="o">-</span><span class="n">j</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span>
         <span class="n">U</span> <span class="o">=</span> <span class="n">T</span><span class="o">*</span><span class="n">U</span>
@@ -13607,7 +13637,7 @@ got the right permutation symmetric state?: True
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[71]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -13660,7 +13690,7 @@ got the right permutation symmetric state?: True
 <span class="c1">############################################################################</span>
 
 <span class="c1"># operators for preparing the control qubits</span>
-<span class="k">def</span> <span class="nf">Uk</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">Rk</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">Operator</span><span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span>\
                     <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="p">)],</span>\
                               <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="mi">1</span><span class="p">]]))</span>
@@ -13713,14 +13743,14 @@ got the right permutation symmetric state?: True
 <span class="n">offset</span> <span class="o">=</span> <span class="n">p</span>
 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
     <span class="n">offset</span> <span class="o">=</span> <span class="n">offset</span><span class="o">-</span><span class="n">k</span>
-    <span class="n">circ</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Uk</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="p">[</span><span class="n">offset</span><span class="p">])</span>
+    <span class="n">circ</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Rk</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="p">[</span><span class="n">offset</span><span class="p">])</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
         <span class="n">circ</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Tkj</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="p">[</span><span class="n">offset</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">offset</span><span class="o">+</span><span class="n">i</span><span class="p">])</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span> <span class="c1"># because it&#39;s prettier</span>
         <span class="n">circ</span><span class="o">.</span><span class="n">fredkin</span><span class="p">(</span><span class="n">offset</span><span class="o">+</span><span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="o">+</span><span class="n">k</span><span class="p">,</span> <span class="n">p</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
         <span class="n">circ</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Tkj</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">adjoint</span><span class="p">(),</span> <span class="p">[</span><span class="n">offset</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">offset</span><span class="o">+</span><span class="n">i</span><span class="p">])</span>    
-    <span class="n">circ</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Uk</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">adjoint</span><span class="p">(),</span> <span class="p">[</span><span class="n">offset</span><span class="p">])</span>
+    <span class="n">circ</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Rk</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">adjoint</span><span class="p">(),</span> <span class="p">[</span><span class="n">offset</span><span class="p">])</span>
 
 <span class="c1"># let&#39;s look at it!</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">circ</span><span class="o">.</span><span class="n">draw</span><span class="p">())</span>
@@ -13801,49 +13831,49 @@ got the right permutation symmetric state?: True
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>       ┌─────────┐    ┌──────────┐                                           »
-q_0: ──┤ unitary ├────┤1         ├───────────────────────────────────────────»
-       └─────────┘    │  unitary │  ┌──────────┐                             »
-q_1: ─────────────────┤0         ├──┤1         ├─────────────────────────────»
-                      └──────────┘  │  unitary │                             »
-q_2: ───────────────────────────────┤0         ├─────────────────────────────»
-       ┌─────────┐    ┌──────────┐  └──────────┘                 ┌──────────┐»
-q_3: ──┤ unitary ├────┤1         ├─────────────────────────────■─┤1         ├»
-       └─────────┘    │  unitary │                             │ │  unitary │»
-q_4: ─────────────────┤0         ├──────────────────────────■──┼─┤0         ├»
-       ┌─────────┐    └──────────┘              ┌─────────┐ │  │ └──────────┘»
-q_5: ──┤ unitary ├───────────────────────■──────┤ unitary ├─┼──┼─────────────»
-      ┌┴─────────┴─┐ ┌────────────┐      │      └─────────┘ │  │             »
-q_6: ─┤ RY(1.9609) ├─┤ RZ(3.1258) ├──────X──────────────────┼──X─────────────»
-      ├────────────┤ ├────────────┤      │                  │  │             »
-q_7: ─┤ RY(1.9378) ├─┤ RZ(1.3373) ├──────X──────────────────X──┼─────────────»
-      ├────────────┤┌┴────────────┴┐                        │  │             »
-q_8: ─┤ RY(1.4606) ├┤ RZ(-0.46442) ├────────────────────────X──X─────────────»
-     ┌┴────────────┤└┬────────────┬┘                                         »
-q_9: ┤ RY(0.18426) ├─┤ RZ(2.4224) ├──────────────────────────────────────────»
-     └─────────────┘ └────────────┘                                          »
-«                                     ┌──────────┐┌─────────┐
-«q_0: ──────────────────■─────────────┤1         ├┤ unitary ├
-«                       │ ┌──────────┐│  unitary │└─────────┘
-«q_1: ───────────────■──┼─┤1         ├┤0         ├───────────
-«                    │  │ │  unitary │└──────────┘           
-«q_2: ─■─────────────┼──┼─┤0         ├───────────────────────
-«      │ ┌─────────┐ │  │ └──────────┘                       
-«q_3: ─┼─┤ unitary ├─┼──┼────────────────────────────────────
-«      │ └─────────┘ │  │                                    
-«q_4: ─┼─────────────┼──┼────────────────────────────────────
-«      │             │  │                                    
-«q_5: ─┼─────────────┼──┼────────────────────────────────────
-«      │             │  │                                    
-«q_6: ─┼─────────────┼──X────────────────────────────────────
-«      │             │  │                                    
-«q_7: ─┼─────────────X──┼────────────────────────────────────
-«      │             │  │                                    
-«q_8: ─X─────────────┼──┼────────────────────────────────────
-«      │             │  │                                    
-«q_9: ─X─────────────X──X────────────────────────────────────
-«                                                            
-overlap between actual and expected: 0.9892
+<pre>       ┌─────────┐    ┌──────────┐                                             »
+q_0: ──┤ unitary ├────┤1         ├─────────────────────────────────────────────»
+       └─────────┘    │  unitary │ ┌──────────┐                                »
+q_1: ─────────────────┤0         ├─┤1         ├────────────────────────────────»
+                      └──────────┘ │  unitary │                                »
+q_2: ──────────────────────────────┤0         ├──────────────────────────────■─»
+       ┌─────────┐    ┌──────────┐ └──────────┘                 ┌──────────┐ │ »
+q_3: ──┤ unitary ├────┤1         ├────────────────────────────■─┤1         ├─┼─»
+       └─────────┘    │  unitary │                            │ │  unitary │ │ »
+q_4: ─────────────────┤0         ├─────────────────────────■──┼─┤0         ├─┼─»
+       ┌─────────┐    └──────────┘             ┌─────────┐ │  │ └──────────┘ │ »
+q_5: ──┤ unitary ├──────────────────────■──────┤ unitary ├─┼──┼──────────────┼─»
+      ┌┴─────────┴─┐ ┌────────────┐     │      └─────────┘ │  │              │ »
+q_6: ─┤ RY(2.0481) ├─┤ RZ(1.4809) ├─────X──────────────────┼──X──────────────┼─»
+      ├────────────┤┌┴────────────┤     │                  │  │              │ »
+q_7: ─┤ RY(1.7431) ├┤ RZ(-2.2791) ├─────X──────────────────X──┼──────────────┼─»
+     ┌┴────────────┤├─────────────┤                        │  │              │ »
+q_8: ┤ RY(0.95046) ├┤ RZ(-0.5727) ├────────────────────────X──X──────────────X─»
+     ├─────────────┤├─────────────┤                                          │ »
+q_9: ┤ RY(0.40226) ├┤ RZ(-1.2166) ├──────────────────────────────────────────X─»
+     └─────────────┘└─────────────┘                                            »
+«                                  ┌──────────┐┌─────────┐
+«q_0: ───────────────■─────────────┤1         ├┤ unitary ├
+«                    │ ┌──────────┐│  unitary │└─────────┘
+«q_1: ────────────■──┼─┤1         ├┤0         ├───────────
+«                 │  │ │  unitary │└──────────┘           
+«q_2: ────────────┼──┼─┤0         ├───────────────────────
+«     ┌─────────┐ │  │ └──────────┘                       
+«q_3: ┤ unitary ├─┼──┼────────────────────────────────────
+«     └─────────┘ │  │                                    
+«q_4: ────────────┼──┼────────────────────────────────────
+«                 │  │                                    
+«q_5: ────────────┼──┼────────────────────────────────────
+«                 │  │                                    
+«q_6: ────────────┼──X────────────────────────────────────
+«                 │  │                                    
+«q_7: ────────────X──┼────────────────────────────────────
+«                 │  │                                    
+«q_8: ────────────┼──┼────────────────────────────────────
+«                 │  │                                    
+«q_9: ────────────X──X────────────────────────────────────
+«                                                         
+overlap between actual and expected: 0.9904
 </pre>
 </div>
 </div>

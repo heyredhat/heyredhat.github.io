@@ -48,7 +48,7 @@ def sph_xyz(phi, theta):
 ############################################################################
 
 # operators for preparing the control qubits
-def Uk(k):
+def Rk(k):
     return Operator((1/np.sqrt(k+1))*\
                     np.array([[1, -np.sqrt(k)],\
                               [np.sqrt(k), 1]]))
@@ -69,7 +69,7 @@ shots = 10000
 #backend_name = "ibmq_qasm_simulator"
 #backend_name = "ibmq_16_melbourne"
 #backend_name = "ibmq_athens"
-#shots = 8192
+shots = 8192
 
 ############################################################################
 
@@ -101,14 +101,14 @@ for i in range(n):
 offset = p
 for k in range(1, n):
     offset = offset-k
-    circ.append(Uk(k), [offset])
+    circ.append(Rk(k), [offset])
     for i in range(k-1):
         circ.append(Tkj(k, i+1), [offset+i+1, offset+i])
     for i in range(k-1, -1, -1):
         circ.fredkin(offset+i, p+k, p+i)
     for i in range(k-2, -1, -1):
         circ.append(Tkj(k, i+1).adjoint(), [offset+i+1, offset+i])    
-    circ.append(Uk(k).adjoint(), [offset])
+    circ.append(Rk(k).adjoint(), [offset])
 
 # let's look at it!
 print(circ.draw())

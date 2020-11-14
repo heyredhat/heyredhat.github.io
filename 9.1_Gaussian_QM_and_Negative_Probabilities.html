@@ -13117,7 +13117,7 @@ div#notebook {
 <p>$P_{z_{\uparrow}x_{\uparrow}} = \frac{1}{4}(I + Z + X) = \begin{pmatrix}\frac{1}{2} &amp; \frac{1}{4} \\ \frac{1}{4} &amp; 0 \end{pmatrix}$</p>
 <p>and</p>
 <p>$P_{z_{\uparrow}x_{\downarrow}} = \frac{1}{4}(I + Z - X) = \begin{pmatrix}\frac{1}{2} &amp; -\frac{1}{4} \\ -\frac{1}{4} &amp; 0 \end{pmatrix}$</p>
-<p>Obviously, $P_{z_{\uparrow}} = P_{z_{\uparrow}x_{\uparrow}} + P_{z_{\uparrow}x_{\downarrow}}$, since the $+X$ and $-X$ cancel out.</p>
+<p>Obviously, $P_{z_{\uparrow}} = P_{z_{\uparrow}x_{\uparrow}} + P_{z_{\uparrow}x_{\downarrow}}$, since the $+X$ and $-X$ cancel out, and we've scaled both operators by $\frac{1}{4}$.</p>
 <p>Similarly, let's define:</p>
 <p>$P_{z_{\downarrow}x_{\uparrow}} = \frac{1}{4}(I - Z + X) = \begin{pmatrix}0 &amp; \frac{1}{4} \\ \frac{1}{4} &amp; \frac{1}{2} \end{pmatrix}$</p>
 <p>and</p>
@@ -13132,8 +13132,8 @@ div#notebook {
 <p>$Pr(z_{\downarrow}) = Pr(z_{\downarrow}x_{\uparrow}) + Pr(z_{\downarrow}x_{\downarrow})$</p>
 <p>$Pr(x_{\uparrow}) = Pr(z_{\uparrow}x_{\uparrow}) + Pr(z_{\downarrow}x_{\uparrow})$</p>
 <p>$Pr(x_{\downarrow}) = Pr(z_{\uparrow}x_{\downarrow}) + Pr(z_{\downarrow}x_{\downarrow})$</p>
-<p>This looks just like we're dealing with a joint probability distribution! Here the joint probability distribution is a function of two variables, Z and X, each of which can only take two possible values $\uparrow$ and $\downarrow$. The probability for a given value of Z can be found by summing/integrating over possible values of X, and the probability of a given value of X can be found by summing/integrating over possible values of Z.</p>
-<p>And indeed, just like with a joint probability distribution, integrating over both variables, leads to 1, which follows from:</p>
+<p>This looks just like we're dealing with a joint probability distribution! Specifically, a joint probability distribution over two  variables, Z and X, each of which can only take two possible values $\uparrow$ and $\downarrow$. The probability for a given value of Z can be found by summing over possible values of X, and the probability of a given value of X can be found by summing over possible values of Z.</p>
+<p>And indeed, just like with a joint probability distribution, summing over both variables gives you 1, which follows from:</p>
 <p>$P_{z_{\uparrow}x_{\uparrow}} + P_{z_{\uparrow}x_{\downarrow}} + P_{z_{\downarrow}x_{\uparrow}} + P_{z_{\downarrow}x_{\downarrow}}$</p>
 <p>$=\begin{pmatrix}\frac{1}{2} &amp; \frac{1}{4} \\ \frac{1}{4} &amp; 0 \end{pmatrix} + \begin{pmatrix}\frac{1}{2} &amp; -\frac{1}{4} \\ -\frac{1}{4} &amp; 0 \end{pmatrix} + \begin{pmatrix}0 &amp; \frac{1}{4} \\ \frac{1}{4} &amp; \frac{1}{2} \end{pmatrix} + \begin{pmatrix}0 &amp; -\frac{1}{4} \\ -\frac{1}{4} &amp; \frac{1}{2} \end{pmatrix}$</p>
 <p>$= \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}$.</p>
@@ -13146,16 +13146,18 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
 
-<span class="n">Zp</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">())</span>
-<span class="n">Zm</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">())</span>
+<span class="c1"># Projectors onto X and Z eigenstates</span>
 <span class="n">Xp</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">())</span>
 <span class="n">Xm</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">())</span>
+<span class="n">Zp</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">())</span>
+<span class="n">Zm</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">())</span>
 
+<span class="c1"># Our &quot;quasiprobability&quot; operators</span>
 <span class="n">PP</span> <span class="o">=</span>  <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">()</span> <span class="o">+</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">())</span> 
 <span class="n">PM</span>  <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">()</span> <span class="o">-</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">())</span>
 <span class="n">MP</span>  <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">()</span> <span class="o">+</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">())</span>
@@ -13202,14 +13204,14 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>P(Z+, X+): 0.3321
-P(Z+, X-): 0.3363
-P(Z-, X+): 0.1637
-P(Z-, X-): 0.1679
-P(Z+): 0.6683 == P(Z+, X+) + P(Z+, X-): 0.6683
-P(Z-): 0.3317 == P(Z-, X+) + P(Z-, X-): 0.3317
-P(X+): 0.4958 == P(Z+, X+) + P(Z-, X+): 0.4958
-P(X-): 0.5042 == P(Z+, X-) + P(Z-, X-): 0.5042
+<pre>P(Z+, X+): 0.5799
+P(Z+, X-): 0.1424
+P(Z-, X+): 0.3576
+P(Z-, X-): -0.0799
+P(Z+): 0.7224 == P(Z+, X+) + P(Z+, X-): 0.7224
+P(Z-): 0.2776 == P(Z-, X+) + P(Z-, X-): 0.2776
+P(X+): 0.9375 == P(Z+, X+) + P(Z-, X+): 0.9375
+P(X-): 0.0625 == P(Z+, X-) + P(Z-, X-): 0.0625
 Total probability: 1.000000
 </pre>
 </div>
@@ -13222,7 +13224,7 @@ Total probability: 1.000000
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Indeed, the catch is that the "joint probabilities" can be negative!</p>
+<p>Run it a bunch of times, and you'll see the catch is that the "joint probabilities" can be negative!</p>
 <hr>
 </div>
 </div>
@@ -13230,7 +13232,7 @@ Total probability: 1.000000
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Okay, so now let's take it to the next level: the Wigner quasiprobability distribution over position and momentum.</p>
+<p>Now let's take it to the next level: the Wigner quasiprobability distribution over position and momentum.</p>
 <p>Here, we'll only consider the case of pure states, but the extension to mixed states is natural. See the <a href="https://en.wikipedia.org/wiki/Wigner_quasiprobability_distribution">wikipedia article</a>. Suppose we have some position wavefunction $\psi(x)$. We can define its Wigner quasiprobability distribution:</p>
 <p>$W(x,p) = \frac{1}{\pi\hbar} \int_{-\infty}^{\infty} \psi^{*}(x+f)\psi(x-f)e^{\frac{2ipf}{\hbar}}df$</p>
 <p>Or if we had some momentum wavefunction $\phi(p)$:</p>
@@ -13261,7 +13263,7 @@ Total probability: 1.000000
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> widget
@@ -13279,13 +13281,15 @@ Total probability: 1.000000
 <span class="n">state</span> <span class="o">=</span> <span class="n">eng</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">prog</span><span class="p">)</span><span class="o">.</span><span class="n">state</span>
 
 <span class="n">N</span> <span class="o">=</span> <span class="mi">50</span>
-<span class="n">x</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">W</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">wigner</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="n">q</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">wigner</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
 
-<span class="n">X</span><span class="p">,</span> <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="n">Q</span><span class="p">,</span> <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
-<span class="n">plot</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> \
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;p&quot;</span><span class="p">)</span>
+<span class="n">plot</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> \
         <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdYlGn&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">rstride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cstride</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -13308,13 +13312,13 @@ Total probability: 1.000000
 
  
  
-<div id="e350825e-8777-4505-812d-2624308ab694"></div>
+<div id="31cd85c8-29e2-4ad6-83d1-334c75c3c1cc"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#e350825e-8777-4505-812d-2624308ab694');
+var element = $('#31cd85c8-29e2-4ad6-83d1-334c75c3c1cc');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "7e4ce703aac344bcb887d5b109d4d177", "version_major": 2, "version_minor": 0}
+{"model_id": "16861928ebeb492da1451bc0a6af6efe", "version_major": 2, "version_minor": 0}
 </script>
 </div>
 
@@ -13329,10 +13333,10 @@ var element = $('#e350825e-8777-4505-812d-2624308ab694');
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 
-<h2 id="Gaussian-QM">Gaussian QM<a class="anchor-link" href="#Gaussian-QM">&#182;</a></h2><p>Okay, now let's talk about Gaussian states and Gaussian operations. Don't worry, we'll have more to do with quasiprobability distributions. Indeed, one interesting fact about (multimode) Gaussian states is that even as they might be quite entangled, nevertheless: their quasiprobability distributions are never negative! (It's clear therefore that definite number states are not Gaussian--although the vacuum state is!)</p>
-<p>The basic fact about Gaussian states is that they are fully characterized by their first and second "moments."</p>
+<h2 id="Gaussian-QM">Gaussian QM<a class="anchor-link" href="#Gaussian-QM">&#182;</a></h2><p>Okay, now let's talk about Gaussian states and Gaussian operations. Don't worry, we'll have more to do with quasiprobability distributions. Indeed, one interesting fact about (multimode) Gaussian states is that even as they might be quite entangled, nevertheless: their quasiprobability distributions are never negative--and what's more, they can be efficiently classically simulated! (And it's clear from the above that definite number states are not Gaussian--except the vacuum state, that is!)</p>
+<p>The essential fact about Gaussian states is that they are fully characterized by their first and second "moments."</p>
 <p>Suppose we have $n$ oscillators. Each has a position and momentum operator. Let's form a $2n$ dimensional vector $V$ out of these operators:</p>
-<p>$V = \begin{pmatrix} \hat{Q_{0}} \\ \hat{Q_{1}} \\ \hat{Q_{2}} \\ \vdots \\ \hat{P_{0}} \\ \hat{P_{1}} \\ \hat{P_{2}} \\ \vdots \end{pmatrix}$</p>
+<p>$\vec{V} = \begin{pmatrix} \hat{Q_{0}} \\ \hat{Q_{1}} \\ \hat{Q_{2}} \\ \vdots \\ \hat{P_{0}} \\ \hat{P_{1}} \\ \hat{P_{2}} \\ \vdots \end{pmatrix}$</p>
 <p>We'll index this vector of operators like $\hat{V}_{i}$.</p>
 <p>The "first moment" is a vector of the expectation values of these operators, in other words, the expectation values of all the position and momentum operators.</p>
 <p>$\vec{m_{1}} = \begin{pmatrix} \langle\hat{V_{0}}\rangle \\ \langle\hat{V_{1}}\rangle \\ \langle\hat{V_{2}}\rangle \\ \langle\hat{V_{3}}\rangle \\ \langle\hat{V_{4}}\rangle \\ \langle\hat{V_{5}}\rangle \\ \vdots \end{pmatrix}$</p>
@@ -13368,16 +13372,16 @@ var element = $('#e350825e-8777-4505-812d-2624308ab694');
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Gaussian operations are operations that preserve Gaussian states. Gaussian states include: the vacuum state, position eigenstates, momentum eigenstates, coherent states (aka displaced vacuum states), squeezed states, and displaced squezed states.</p>
-<p>Corresponding to these, for a single oscillator, we have displacement operators, squeezing operators, and evolution by the harmonic oscillator hamiltonian itself. For multimode states, we also add in our favorite two mode squeezing operator, and the beamsplitter gate while we're at it. In general, if an operator can be written as an expression quadratic in creation and annihilation operators, then it's Gaussian.</p>
-<p>As operators that act on wavefunctions, these can all be written:</p>
+<p>Gaussian operations are operations that preserve Gaussian states. Gaussian states include: the vacuum state, position eigenstates, momentum eigenstates, coherent states (aka displaced vacuum states), squeezed states, and displaced squeezed states.</p>
+<p>Corresponding to these, for a single oscillator, we have displacement operators, squeezing operators, and evolution by the harmonic oscillator Hamiltonian itself. For multimode states, we can also add in our favorite two mode squeezing operator, and the "beamsplitter gate" too for that matter. In general, if an operator can be written as an expression quadratic in creation and annihilation operators, then it's Gaussian.</p>
+<p>As operators that act on wavefunctions, these operators can be written:</p>
 <p>Displacement: $D(z) = e^{z\hat{a}^{\dagger} - z^{*}\hat{a}}$</p>
 <p>Squeezing: $S(z) = e^{\frac{1}{2}(z^{*}\hat{a}^{2} - z\hat{a}^{\dagger 2})}$</p>
 <p>Rotation/Oscillator Hamiltonian: $R(\theta) = e^{i\theta \hat{a}^{\dagger}\hat{a}}$</p>
 <p>Two-Mode Squeezing: $S_{i,j}(z) = e^{\frac{1}{2}(z^{*}\hat{a}\hat{b} - z\hat{a}^{\dagger}\hat{b}^{\dagger})}$</p>
 <p>Beamsplitter: $B_{i,j}(\theta, \phi) = e^{\theta(e^{i\phi}\hat{a_{i}}^{\dagger}\hat{a_{j}} - e^{-i\phi}\hat{a_{i}}\hat{a_{j}}^{\dagger}))}$</p>
-<p>So that's cool, but before we go on, however, let's take a quick tour of single mode Gaussian states. Again, we'll be using StrawberryFields for the heavy lifting.</p>
-<p>Below, you'll see a plot of the probability distributions for position and momentum for the oscillator mode, which starts off in the vacuum state. Using the sliders below, you can parameterize position and momentum displacements, the real and imaginary part of the squeezing operator, and the angle of rotation (aka how long to apply the oscillator hamiltonian for).</p>
+<p>Before we go on, however, let's take a quick tour of single mode Gaussian states.</p>
+<p>Below, you'll see a plot of the probability distributions for position and momentum for a single oscillator mode, which starts off in the vacuum state. Using the sliders below, you can parameterize position and momentum displacements, the real and imaginary part of the squeezing operator, and the angle of rotation (aka how long to apply the oscillator Hamiltonian for).</p>
 <p>As you can see, we're using StrawberryField's Gaussian backend, and they provide useful functions for sampling the position and momentum distributions.</p>
 
 </div>
@@ -13385,7 +13389,7 @@ var element = $('#e350825e-8777-4505-812d-2624308ab694');
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[165]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> widget
@@ -13484,13 +13488,13 @@ var element = $('#e350825e-8777-4505-812d-2624308ab694');
 
  
  
-<div id="7cdaef77-db2e-4b0f-9c8d-e98274c2c4d1"></div>
+<div id="f990c91c-c239-4121-9b5b-004f2b6edb9b"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#7cdaef77-db2e-4b0f-9c8d-e98274c2c4d1');
+var element = $('#f990c91c-c239-4121-9b5b-004f2b6edb9b');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "25a576851e774decb6c0a137915c900a", "version_major": 2, "version_minor": 0}
+{"model_id": "b08baee85bf0492796d6866795aa576a", "version_major": 2, "version_minor": 0}
 </script>
 </div>
 
@@ -13505,10 +13509,11 @@ var element = $('#7cdaef77-db2e-4b0f-9c8d-e98274c2c4d1');
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 
-<p>The crucial fact is that Gaussian operations can be represented as <em>symplectic transformations</em> on the first and second moments of the state.</p>
-<p>Recall that a symplectic transformation acts on a space of even dimensions and preserves the special relationship between positions and momenta. To wit, it preserves the symplectic form $\Omega$, which in this case is a $2n \times 2n$ dimensional matrix:</p>
-<p>$\Omega = \begin{pmatrix} 0 &amp; I \\ -I &amp; 0 \end{pmatrix}$,</p>
-<p>where 0 refers to a $n \times n$ matrix of 0's, and $I$ refers to the $n \times n$ identity. A symplectic matrix $S$ satisfies: $S^{T}\Omega S = \Omega$.</p>
+<p>So one profound fact is that Gaussian operations can be represented as <em>symplectic transformations</em> on the first and second moments of the state.</p>
+<p>Recall that a symplectic transformation acts on a space of even dimensions and preserves the special commutation relationship between positions and momenta. To wit, it preserves the symplectic form $\Omega$, which in this case is a $2n \times 2n$ dimensional matrix:</p>
+<p>$\Omega = \begin{pmatrix} 0_{n} &amp; I_{n} \\ -I_{n} &amp; 0_{n} \end{pmatrix}$,</p>
+<p>where $0_{n}$ refers to a $n \times n$ matrix of 0's, and $I_{n}$ refers to the $n \times n$ identity.</p>
+<p>When we say a symplectic matrix preserves the symplectic form, we mean that a symplectic matrix $S$ satisfies: $S\Omega S^{T} = \Omega$.</p>
 <p>A general (finite, linear) symplectic transformation consists of a symplectic matrix $S$ and a displacement vector $\vec{d}$, and it transforms the first and second moments of a state like:</p>
 <p>$\vec{m}_{1} \rightarrow S\vec{m}_{1} + \vec{d} $</p>
 <p>$M_{2} \rightarrow SM_{2}S^{T}$</p>
@@ -13525,17 +13530,17 @@ var element = $('#7cdaef77-db2e-4b0f-9c8d-e98274c2c4d1');
 <p>$M_{2} \rightarrow (PR)M(PR)^{T}$</p>
 <p>Finally, considering the two mode squeezing operation, we have the symplectic matrix:</p>
 <p>$SQ_{i,j} = \begin{pmatrix} \cosh(r) &amp; 0 &amp; \sinh(r) &amp; 0 \\ 0 &amp; \cosh(r) &amp; 0 &amp; -\sinh(r) \\ \sinh(r) &amp; 0 &amp; \cosh(r) &amp; 0 \\ 0 &amp; -\sinh(r) &amp; 0 &amp; \cosh(r) \end{pmatrix}$</p>
-<p>Indeed, if we have to act on more than one mode, we simply take a $2n \times 2n$ identity matrix and replace the relevant components corresponding to the p's and q's.</p>
+<p>Indeed, if we have to act on one or more mode of many modes, we simply take a $2n \times 2n$ identity matrix and replace the relevant components corresponding to the p's and q's with our operator.</p>
 <hr>
 
-<p>Now let's go a little deeper. Just for fun, we'll be doing our calculations by hand instead of with StrawberryFields. Below, you'll be able to explore a multimode Gaussian state, visualization a given mode's Wigner quasiprobability distribution, as well as position and momentum distributions.</p>
+<p>Now let's go a little deeper. Just for fun, we'll be doing our calculations by hand instead of with StrawberryFields. Below, you'll be able to explore a multimode Gaussian state, visualizing a given mode's Wigner quasiprobability distribution, as well as its position and momentum distributions.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[166]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> widget
@@ -13552,6 +13557,7 @@ var element = $('#7cdaef77-db2e-4b0f-9c8d-e98274c2c4d1');
 <span class="k">def</span> <span class="nf">tensor_upgrade</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">O</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="n">j</span> <span class="k">else</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">O</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
 
+<span class="c1"># upgrades a single mode operator O to act on the i&#39;th of n modes</span>
 <span class="k">def</span> <span class="nf">direct_upgrade</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
     <span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
     <span class="n">cols</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">intp</span><span class="p">)</span>
@@ -13560,6 +13566,7 @@ var element = $('#7cdaef77-db2e-4b0f-9c8d-e98274c2c4d1');
     <span class="n">I</span><span class="p">[</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">]</span> <span class="o">=</span> <span class="n">O</span><span class="p">[:]</span>
     <span class="k">return</span> <span class="n">I</span>
 
+<span class="c1"># extracts the partial state of the i&#39;th mode</span>
 <span class="k">def</span> <span class="nf">partial</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">M</span><span class="p">):</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">n</span><span class="p">]]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">],</span> <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="n">n</span><span class="p">]],</span>\
@@ -13595,6 +13602,7 @@ var element = $('#7cdaef77-db2e-4b0f-9c8d-e98274c2c4d1');
                   <span class="p">[</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)]])</span>
     <span class="k">return</span> <span class="n">d</span><span class="p">,</span> <span class="n">direct_upgrade</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 
+<span class="c1"># two mode squeezing operator on modes i and j</span>
 <span class="k">def</span> <span class="nf">tm_squeeze</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
     <span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">cosh</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sinh</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span>\
                   <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cosh</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sinh</span><span class="p">(</span><span class="n">r</span><span class="p">)],</span>\
@@ -13612,6 +13620,7 @@ var element = $('#7cdaef77-db2e-4b0f-9c8d-e98274c2c4d1');
 
 <span class="c1">#####################################################################################</span>
 
+<span class="c1"># returns a dictionary of variables and a sympy expression for the wigner function</span>
 <span class="k">def</span> <span class="nf">wigner</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">M</span><span class="p">):</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">symbols</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;q</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span><span class="o">+</span>\
@@ -13623,7 +13632,8 @@ var element = $('#7cdaef77-db2e-4b0f-9c8d-e98274c2c4d1');
 <span class="c1">#####################################################################################</span>
 
 <span class="n">n_modes</span><span class="p">,</span> <span class="n">cutoff</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
-                         
+ 
+<span class="c1"># technically unnecessary, but why not start with an actual state and get its moments</span>
 <span class="n">V</span> <span class="o">=</span> <span class="p">[</span><span class="n">tensor_upgrade</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">position</span><span class="p">(</span><span class="n">cutoff</span><span class="p">),</span> <span class="n">i</span><span class="p">,</span> <span class="n">n_modes</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_modes</span><span class="p">)]</span> <span class="o">+</span>\
     <span class="p">[</span><span class="n">tensor_upgrade</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">momentum</span><span class="p">(</span><span class="n">cutoff</span><span class="p">),</span> <span class="n">i</span><span class="p">,</span> <span class="n">n_modes</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_modes</span><span class="p">)]</span>
                          
@@ -13633,8 +13643,9 @@ var element = $('#7cdaef77-db2e-4b0f-9c8d-e98274c2c4d1');
 <span class="c1">#####################################################################################</span>
 
 <span class="n">state</span> <span class="o">=</span> <span class="n">vac</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-
 <span class="n">m</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="n">first_moments</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">V</span><span class="p">),</span> <span class="n">second_moments</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>
+
+<span class="c1"># apply some operators!</span>
 <span class="n">m</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="n">apply_symplectic</span><span class="p">(</span><span class="o">*</span><span class="n">displacement</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">+</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n_modes</span><span class="p">),</span> <span class="n">m</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
 <span class="n">m</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="n">apply_symplectic</span><span class="p">(</span><span class="o">*</span><span class="n">squeeze</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n_modes</span><span class="p">),</span> <span class="n">m</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
 <span class="n">m</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="n">apply_symplectic</span><span class="p">(</span><span class="o">*</span><span class="n">rotation</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n_modes</span><span class="p">),</span> <span class="n">m</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
@@ -13646,12 +13657,15 @@ var element = $('#7cdaef77-db2e-4b0f-9c8d-e98274c2c4d1');
 <span class="c1">#####################################################################################</span>
 
 <span class="k">def</span> <span class="nf">plot_mode</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
-    <span class="n">m_partial</span><span class="p">,</span> <span class="n">M_partial</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
-    <span class="n">v</span><span class="p">,</span> <span class="n">W</span> <span class="o">=</span> <span class="n">wigner</span><span class="p">(</span><span class="n">m_partial</span><span class="p">,</span> <span class="n">M_partial</span><span class="p">)</span>
+    <span class="n">m_partial</span><span class="p">,</span> <span class="n">M_partial</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span> <span class="c1"># get the partial state of the i&#39;th mode</span>
+    <span class="n">v</span><span class="p">,</span> <span class="n">W</span> <span class="o">=</span> <span class="n">wigner</span><span class="p">(</span><span class="n">m_partial</span><span class="p">,</span> <span class="n">M_partial</span><span class="p">)</span> <span class="c1"># and its wigner function</span>
                          
-    <span class="n">xdist</span> <span class="o">=</span> <span class="n">W</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="n">sy</span><span class="o">.</span><span class="n">oo</span><span class="p">,</span> <span class="n">sy</span><span class="o">.</span><span class="n">oo</span><span class="p">))</span>
-    <span class="n">pdist</span> <span class="o">=</span> <span class="n">W</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;q&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="n">sy</span><span class="o">.</span><span class="n">oo</span><span class="p">,</span> <span class="n">sy</span><span class="o">.</span><span class="n">oo</span><span class="p">))</span>
+    <span class="n">xdist</span> <span class="o">=</span> <span class="n">W</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="n">sy</span><span class="o">.</span><span class="n">oo</span><span class="p">,</span> <span class="n">sy</span><span class="o">.</span><span class="n">oo</span><span class="p">))</span> <span class="c1"># integrate over momentum to get position</span>
+    <span class="n">pdist</span> <span class="o">=</span> <span class="n">W</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;q&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="n">sy</span><span class="o">.</span><span class="n">oo</span><span class="p">,</span> <span class="n">sy</span><span class="o">.</span><span class="n">oo</span><span class="p">))</span> <span class="c1"># integrate over position to get momentum</span>
     
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;norm check: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">W</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="n">sy</span><span class="o">.</span><span class="n">oo</span><span class="p">,</span> <span class="n">sy</span><span class="o">.</span><span class="n">oo</span><span class="p">),</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;q&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="n">sy</span><span class="o">.</span><span class="n">oo</span><span class="p">,</span> <span class="n">sy</span><span class="o">.</span><span class="n">oo</span><span class="p">)))</span>
+    
+    <span class="c1"># turn our sympy expressions into functions</span>
     <span class="n">Wf</span><span class="p">,</span> <span class="n">xdistf</span><span class="p">,</span> <span class="n">pdistf</span>  <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">([</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;q&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]],</span> <span class="n">W</span><span class="p">),</span>\
                           <span class="n">sy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;q&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">xdist</span><span class="p">),</span>\
                           <span class="n">sy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">pdist</span><span class="p">)</span>
@@ -13669,6 +13683,7 @@ var element = $('#7cdaef77-db2e-4b0f-9c8d-e98274c2c4d1');
     <span class="n">q_axis</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">223</span><span class="p">)</span>
     <span class="n">q_axis</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">)</span>
     <span class="n">q_axis</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_label_position</span><span class="p">(</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
+    <span class="n">q_axis</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_ticks_position</span><span class="p">(</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
     <span class="n">q_axis</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Pr(q)&#39;</span><span class="p">)</span>
     <span class="n">q_axis</span><span class="o">.</span><span class="n">set_box_aspect</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">q_plot</span> <span class="o">=</span> <span class="n">q_axis</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">xdistf</span><span class="p">(</span><span class="n">x_</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x_</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]))</span>
@@ -13703,12 +13718,13 @@ var element = $('#7cdaef77-db2e-4b0f-9c8d-e98274c2c4d1');
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>first moments:
-[-0.32202237  0.          1.26529513  0.        ]
+[0.47901701 0.         0.70717291 0.        ]
 second moments:
-[[ 1.26351326  0.         -0.31166826  0.        ]
- [ 0.          1.83057591  0.         -1.53329976]
- [-0.31166826  0.          0.86832259  0.        ]
- [ 0.         -1.53329976  0.          1.83057591]]
+[[ 1.13451215  0.          1.80322997  0.        ]
+ [ 0.          2.558259    0.         -2.35471636]
+ [ 1.80322997  0.          3.74754763  0.        ]
+ [ 0.         -2.35471636  0.          2.558259  ]]
+norm check: Matrix([[0.999999999999998]])
 </pre>
 </div>
 </div>
@@ -13723,16 +13739,27 @@ second moments:
 
  
  
-<div id="5c3572c8-b9f8-4943-9748-044560dc7e74"></div>
+<div id="f36e6015-a422-4db6-8907-720942ec9a0d"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#5c3572c8-b9f8-4943-9748-044560dc7e74');
+var element = $('#f36e6015-a422-4db6-8907-720942ec9a0d');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "ce3d61846c064d218058e748bffbc32e", "version_major": 2, "version_minor": 0}
+{"model_id": "7bd3cb4ec2f746b5b6880398bdc7361a", "version_major": 2, "version_minor": 0}
 </script>
 </div>
 
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>norm check: Matrix([[0.999999999999989]])
+</pre>
+</div>
 </div>
 
 <div class="output_area">
@@ -13745,13 +13772,13 @@ var element = $('#5c3572c8-b9f8-4943-9748-044560dc7e74');
 
  
  
-<div id="22e8d901-2576-4931-b046-66339f598f89"></div>
+<div id="4f8985d3-2430-48ec-a2c5-f78e29450a83"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#22e8d901-2576-4931-b046-66339f598f89');
+var element = $('#4f8985d3-2430-48ec-a2c5-f78e29450a83');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "1054eb81c5034063ad140da0bd6204c4", "version_major": 2, "version_minor": 0}
+{"model_id": "2278970be16547ad84c6907b0cd91365", "version_major": 2, "version_minor": 0}
 </script>
 </div>
 
@@ -13766,8 +13793,8 @@ var element = $('#22e8d901-2576-4931-b046-66339f598f89');
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 
-<p>So now let's get serious about these symplectic transformations. In general, how do we find them?</p>
-<p>So a Gaussian unitary can be written $U = e^{iH}$, where $H$ is quadratic in creation and annihilation operators.</p>
+<p>So you might wonder, in general, how do we find these symplectic transformations?</p>
+<p>A Gaussian unitary can be written $U = e^{iH}$, where $H$ is quadratic in creation and annihilation operators.</p>
 <p>If we define $\xi = \begin{pmatrix}\hat{a}_{0} \\ \hat{a}_{1} \\ \vdots \\ \hat{a}_{0}^{\dagger} \\ \hat{a}_{1}^{\dagger} \\ \vdots \end{pmatrix}$ to be a vector of $n$ annihilation operators and $n$ creation operators (analogously to our vector of position and momentum operators), then $H$ can be written:</p>
 $$H = \frac{1}{2}\xi^{\dagger}\textbf{H}\xi + \xi^{\dagger}\textbf{h}$$<p>,</p>
 <p>where $\textbf{H} = \begin{pmatrix} A &amp; B \\ B^{*} &amp; A^{*} \end{pmatrix}$, is a $2n \times 2n$ Hermitian matrix and $\textbf{h} = \begin{pmatrix} h \\ h^{*} \end{pmatrix}$ is a $2n$ complex column vector. Here, $A$ is an $n \times n$ Hermitian matrix, and $B$ is symmetric.</p>
@@ -13777,7 +13804,7 @@ $$H = \frac{1}{2}\xi^{\dagger}\textbf{H}\xi + \xi^{\dagger}\textbf{h}$$<p>,</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -13813,7 +13840,7 @@ $$H = \frac{1}{2}\xi^{\dagger}\textbf{H}\xi + \xi^{\dagger}\textbf{h}$$<p>,</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>It turns out that evolving the creation and annihilation operators by a Gaussian unitary is equivalent to an affine transformation:</p>
+<p>It turns out that evolving all the creation and annihilation operators by a Gaussian unitary is equivalent to an affine transformation:</p>
 $$e^{iH} \xi e^{-iH} = \textbf{S}\xi + \textbf{s}$$<p>where $\textbf{S}$ is a <em>complex</em> symplectic matrix: $\textbf{S} = e^{-i\Omega_{c}\textbf{H}}$ and $\textbf{s} = (\textbf{S}-I_{2n})\textbf{H}^{-1}\textbf{h}$.</p>
 <p>Here the complex symplectic form is $\Omega_{c} = \begin{pmatrix}I_{n} &amp; 0 \\ 0 &amp; -I_{n} \end{pmatrix}$, and if $\textbf{H}$ has no inverse, one should use the pseudoinverse instead to calculate $\textbf{h}$.</p>
 
@@ -13822,13 +13849,13 @@ $$e^{iH} \xi e^{-iH} = \textbf{S}\xi + \textbf{s}$$<p>where $\textbf{S}$ is a <e
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">omega_c</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">sc</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">block_diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
 
-<span class="k">def</span> <span class="nf">make_Ss</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">expm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">make_Ss</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">expm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span> <span class="c1"># the theta is for later </span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">omega</span> <span class="o">=</span> <span class="n">omega_c</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
     <span class="n">S</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">expm</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="p">(</span><span class="n">theta</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">omega</span><span class="nd">@H</span><span class="p">)</span> <span class="k">if</span> <span class="n">expm</span> <span class="k">else</span> <span class="n">H</span>
@@ -13875,18 +13902,26 @@ $$e^{iH} \xi e^{-iH} = \textbf{S}\xi + \textbf{s}$$<p>where $\textbf{S}$ is a <e
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>So we can use a complex symplectic matrix to perform a Gaussian unitary transformation on a vector of creation and annihilation operators. There is an equivalent real symplectic matrix that implements the same transformation on the vector of positions and momenta.</p>
-$$\vec{V} \rightarrow \textbf{R}\vec{V} + \textbf{r}$$<p>We can convert between $\xi$, the vector of annihilation and creation operators, and $\vec{V}$, the vector of positions and momenta, via $\vec{V} = L\xi$, where $L = \frac{1}{\sqrt{2}}\begin{pmatrix} I_{n} &amp; I_{n} \\ -iI_{n} &amp; iI_{n} \end{pmatrix}$, so that $R = L\textbf{S}L^{\dagger}$ and $\textbf{r} = L\textbf{s}$.</p>
-<p>If we write $\textbf{S}$ as $\begin{pmatrix} E &amp; F \\ F^{*} &amp; E^{*} \end{pmatrix}$, and $\textbf{s}$ as $\begin{pmatrix} s \\ s^{*} \end{pmatrix}$ then equivalently:</p>
+<hr>
+
+<p>So we can use a complex symplectic matrix to perform a Gaussian unitary transformation on a vector of creation and annihilation operators.</p>
+<p>At the same time, there is an equivalent real symplectic matrix $\textbf{R}$ and real displacement vector $\textbf{r}$ that implements the same transformation on the vector of position and momentum operators $\vec{V}$.</p>
+$$\vec{V} \rightarrow \textbf{R}\vec{V} + \textbf{r}$$<p>We can easily convert between $\xi$, the vector of annihilation and creation operators, and $\vec{V}$, the vector of positions and momenta, via:</p>
+$$\vec{V} = L\xi$$<p>Where $L = \frac{1}{\sqrt{2}}\begin{pmatrix} I_{n} &amp; I_{n} \\ -iI_{n} &amp; iI_{n} \end{pmatrix}$.</p>
+<p>This comes from the definition of position and momentum operators in terms of creation and annihilation operators, e.g.:</p>
+$$\hat{Q} = \frac{1}{\sqrt{2}}(\hat{a} + \hat{a}^{\dagger})$$<p></p>
+$$\hat{P} = -\frac{i}{\sqrt{2}}(\hat{a} - \hat{a}^{\dagger})$$<p>Therefore, we can turn our complex symplectic transformation into a real symplectic transformation via:</p>
+$$\textbf{R} = L\textbf{S}L^{\dagger}$$<p></p>
+$$\textbf{r} = L\textbf{s}$$<p>Incidentally, if we write $\textbf{S}$ as $\begin{pmatrix} E &amp; F \\ F^{*} &amp; E^{*} \end{pmatrix}$, and $\textbf{s}$ as $\begin{pmatrix} s \\ s^{*} \end{pmatrix}$ then equivalently:</p>
 $$\textbf{R} = \begin{pmatrix}\Re(E+F) &amp; -\Im(E-F) \\ \Im(E+F) &amp; \Re(E-F) \end{pmatrix}$$<p>and $$\textbf{r} = \sqrt{2}\begin{pmatrix} \Re(s) \\ \Im(s) \end{pmatrix}$$</p>
-<p>And if it wasn't obvious, if we've represented our Gaussian state in terms of its first and second moments, then the sympectic transformations act on those guys.</p>
+<p>And if it wasn't obvious, if we've represented our Gaussian state in terms of its first and second moments, then the real sympectic transformations act on those guys!</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">omega_r</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -13915,7 +13950,7 @@ $$\textbf{R} = \begin{pmatrix}\Re(E+F) &amp; -\Im(E-F) \\ \Im(E+F) &amp; \Re(E-F
 <span class="n">H</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">rand_Hh</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="n">S</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">make_Ss</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
 <span class="n">R</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">make_Rr</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
-<span class="n">R2</span><span class="p">,</span> <span class="n">r2</span> <span class="o">=</span> <span class="n">make_Rr2</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+<span class="n">R2</span><span class="p">,</span> <span class="n">r2</span> <span class="o">=</span> <span class="n">make_Rr2</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="c1"># let&#39;s calculate R and r both ways, and check we get the same!</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;equivalent? </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">R2</span><span class="p">)</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">r2</span><span class="p">)))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;real symplectic? </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">test_r</span><span class="p">(</span><span class="n">R</span><span class="p">))</span>
 </pre></div>
@@ -13948,15 +13983,15 @@ real symplectic? True
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now let's consider we're in a second quantization context. Our first quantized system has $n$ basis states, and so we introduce $n$ bosonic oscillators to keep track of the number of particles in those states. Recall that we can upgrade a first quantized operator $O$ to a second quantized operator $\textbf{O}$ via:</p>
-$$\textbf{O} = \begin{pmatrix} \hat{a_{0}}^{\dagger} &amp; \hat{a_{1}}^{\dagger} &amp; \dots \end{pmatrix} O \begin{pmatrix} \hat{a_{0}} \\ \hat{a_{1}} \\ \vdots \end{pmatrix}$$<p>Clearly, $\textbf{O}$ is going to be no more than quadratic in the creation and annihilation operators! Therefore we can represent it as a real symplectic transformation. In fact, $O$ just becomes $A$ in $\textbf{H} = \begin{pmatrix} A &amp; B \\ B^{*} &amp; A^{*} \end{pmatrix}$, and we proceed as above.</p>
-<p>Indeed, thinking about our second quantization picture of spin, we could represent the Pauli matrices as symplectic transformations!</p>
+$$\textbf{O} = \begin{pmatrix} \hat{a_{0}}^{\dagger} &amp; \hat{a_{1}}^{\dagger} &amp; \dots \end{pmatrix} O \begin{pmatrix} \hat{a_{0}} \\ \hat{a_{1}} \\ \vdots \end{pmatrix}$$<p>Clearly, $\textbf{O}$ is going to be no more than quadratic in the creation and annihilation operators! Therefore we can represent it as a real symplectic transformation. In fact, $O$ just becomes $A$ in $\textbf{H} = \begin{pmatrix} A &amp; B \\ B^{*} &amp; A^{*} \end{pmatrix}$, while the $B$ are 0's, and we proceed as above, to complex symplectic and finally real symplectic.</p>
+<p>Indeed, thinking about our second quantization picture of spin, we could represent the Pauli operators as real symplectic matrices!</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">second_quantize</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">expm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
@@ -13970,7 +14005,7 @@ $$\textbf{O} = \begin{pmatrix} \hat{a_{0}}^{\dagger} &amp; \hat{a_{1}}^{\dagger}
 <span class="k">def</span> <span class="nf">make_XYZ</span><span class="p">():</span>
     <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="n">second_quantize</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">(),</span> <span class="n">expm</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>\
             <span class="s2">&quot;Y&quot;</span><span class="p">:</span> <span class="n">second_quantize</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmay</span><span class="p">(),</span> <span class="n">expm</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>\
-            <span class="s2">&quot;Z&quot;</span><span class="p">:</span> <span class="n">second_quantize</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">(),</span> <span class="n">expm</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="mi">0</span><span class="p">]}</span>
+            <span class="s2">&quot;Z&quot;</span><span class="p">:</span> <span class="n">second_quantize</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">(),</span> <span class="n">expm</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="mi">0</span><span class="p">]}</span> <span class="c1"># note we don&#39;t exponentiate them</span>
 
 <span class="n">XYZ</span> <span class="o">=</span> <span class="n">make_XYZ</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">o</span><span class="p">,</span> <span class="n">O</span> <span class="ow">in</span> <span class="n">XYZ</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -14025,7 +14060,7 @@ Z:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">state_xyz</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">XYZ</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -14045,14 +14080,14 @@ Z:
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Here <code>state</code> is a StrawberryFields state. They have a nice function that calculates expectation values for us in this context.</p>
+<p>Here <code>state</code> is a StrawberryFields state. They have a nice function that calculates expectation values for us in this context, where our symplectic Paulis are interpreted as second-order polynomials in the position and momentum operators.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
@@ -14086,7 +14121,7 @@ Z:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> widget
@@ -14109,39 +14144,45 @@ Z:
 <span class="n">thetas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">frn</span><span class="p">)</span>
 <span class="n">Rs</span> <span class="o">=</span> <span class="p">[</span><span class="n">GaussianTransform</span><span class="p">(</span>\
         <span class="n">second_quantize</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">expm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>\
-            <span class="k">for</span> <span class="n">theta</span> <span class="ow">in</span> <span class="n">thetas</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">theta</span> <span class="ow">in</span> <span class="n">thetas</span><span class="p">]</span> <span class="c1"># Generate a Gaussian transformation for each step in the movie</span>
 
-<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">X_</span><span class="p">,</span> <span class="n">P_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span>
+<span class="n">Q_</span><span class="p">,</span> <span class="n">P_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span>
 
+<span class="c1"># These will hold the Wigner data for each step in the movie, for each oscillator</span>
 <span class="n">zarray0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">frn</span><span class="p">))</span>
 <span class="n">zarray1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">frn</span><span class="p">))</span>
+
+<span class="c1"># This will hold the XYZ data for the qubit, for each step in the movie</span>
 <span class="n">xyzs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="n">frn</span><span class="p">))</span>
 <span class="n">XYZ</span> <span class="o">=</span> <span class="n">make_XYZ</span><span class="p">()</span>
 
 <span class="k">if</span> <span class="n">initial_state</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">IR1</span><span class="p">,</span> <span class="n">IR2</span> <span class="o">=</span> <span class="n">xyz_gaussianTransforms</span><span class="p">(</span><span class="n">initial_state</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">theta</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">thetas</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">theta</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">thetas</span><span class="p">):</span> <span class="c1"># for each frame</span>
     <span class="n">prog</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="n">Program</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">prog</span><span class="o">.</span><span class="n">context</span> <span class="k">as</span> <span class="n">q</span><span class="p">:</span>
-        <span class="n">Vac</span> <span class="o">|</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">Sgate</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">Vac</span> <span class="o">|</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># start off in the vacuum</span>
+        <span class="n">Vac</span> <span class="o">|</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">Sgate</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># squeeze the first qubit to get Z+</span>
         <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">initial_state</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">):</span>
-            <span class="n">IR1</span> <span class="o">|</span> <span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-            <span class="n">IR2</span> <span class="o">|</span> <span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="n">Rs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">|</span> <span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">state</span> <span class="o">=</span> <span class="n">eng</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">prog</span><span class="p">)</span><span class="o">.</span><span class="n">state</span>
+            <span class="n">IR1</span> <span class="o">|</span> <span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># apply the GaussianTransforms</span>
+            <span class="n">IR2</span> <span class="o">|</span> <span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># to prepare the initial state</span>
+        <span class="n">Rs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">|</span> <span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># perform the rotation for this frame</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">eng</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">prog</span><span class="p">)</span><span class="o">.</span><span class="n">state</span> <span class="c1"># get the state</span>
 
-    <span class="n">Z0</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">wigner</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span>
-    <span class="n">Z1</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">wigner</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span>
-    <span class="n">zarray0</span><span class="p">[:,:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Z0</span>
+    <span class="n">Z0</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">wigner</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span>
+    <span class="n">Z1</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">wigner</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span>
+    
+    <span class="n">zarray0</span><span class="p">[:,:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Z0</span> <span class="c1"># save the wigner data</span>
     <span class="n">zarray1</span><span class="p">[:,:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Z1</span>
-    <span class="n">xyzs</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">state_xyz</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">XYZ</span><span class="o">=</span><span class="n">XYZ</span><span class="p">)</span>
-    <span class="n">eng</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+    <span class="n">xyzs</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">state_xyz</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">XYZ</span><span class="o">=</span><span class="n">XYZ</span><span class="p">)</span> <span class="c1"># save the xyz data</span>
+    
+    <span class="n">eng</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span> <span class="c1"># start over</span>
 
-<span class="k">def</span> <span class="nf">sphere</span><span class="p">():</span>
+<span class="k">def</span> <span class="nf">sphere</span><span class="p">():</span> <span class="c1"># makes a mesh of a sphere</span>
     <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">:</span><span class="mi">20</span><span class="n">j</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">:</span><span class="mi">10</span><span class="n">j</span><span class="p">]</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
@@ -14150,10 +14191,10 @@ Z:
 
 <span class="k">def</span> <span class="nf">update_plot</span><span class="p">(</span><span class="n">frame_number</span><span class="p">,</span> <span class="n">zarray0</span><span class="p">,</span> <span class="n">zarray1</span><span class="p">,</span> <span class="n">xyzs</span><span class="p">,</span> <span class="n">plot</span><span class="p">):</span>
     <span class="n">plot</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
-    <span class="n">plot</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">ax0</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X_</span><span class="p">,</span> <span class="n">P_</span><span class="p">,</span> <span class="n">zarray0</span><span class="p">[:,:,</span><span class="n">frame_number</span><span class="p">],</span>\
+    <span class="n">plot</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">ax0</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">Q_</span><span class="p">,</span> <span class="n">P_</span><span class="p">,</span> <span class="n">zarray0</span><span class="p">[:,:,</span><span class="n">frame_number</span><span class="p">],</span>\
                             <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdYlGn&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">rstride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cstride</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">plot</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
-    <span class="n">plot</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X_</span><span class="p">,</span> <span class="n">P_</span><span class="p">,</span> <span class="n">zarray1</span><span class="p">[:,:,</span><span class="n">frame_number</span><span class="p">],</span>\
+    <span class="n">plot</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">Q_</span><span class="p">,</span> <span class="n">P_</span><span class="p">,</span> <span class="n">zarray1</span><span class="p">[:,:,</span><span class="n">frame_number</span><span class="p">],</span>\
                             <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdYlGn&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">rstride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cstride</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">plot</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
     <span class="n">plot</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="o">*</span><span class="n">sphere</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
@@ -14163,13 +14204,19 @@ Z:
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
 <span class="n">ax0</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">131</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
 <span class="n">ax0</span><span class="o">.</span><span class="n">set_zlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.18</span><span class="p">)</span>
+<span class="n">ax0</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">)</span>
+<span class="n">ax0</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;p&quot;</span><span class="p">)</span>
 <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">132</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_zlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.18</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;p&quot;</span><span class="p">)</span>
 <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">133</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
 
-<span class="n">plot</span> <span class="o">=</span> <span class="p">[</span><span class="n">ax0</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X_</span><span class="p">,</span> <span class="n">P_</span><span class="p">,</span> <span class="n">zarray0</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">],</span>\
+<span class="n">plot</span> <span class="o">=</span> <span class="p">[</span><span class="n">ax0</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">Q_</span><span class="p">,</span> <span class="n">P_</span><span class="p">,</span> <span class="n">zarray0</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">],</span>\
                             <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdYlGn&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">rstride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cstride</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>\
-        <span class="n">ax1</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X_</span><span class="p">,</span> <span class="n">P_</span><span class="p">,</span> <span class="n">zarray1</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">],</span>\
+        <span class="n">ax1</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">Q_</span><span class="p">,</span> <span class="n">P_</span><span class="p">,</span> <span class="n">zarray1</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">],</span>\
                             <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdYlGn&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">rstride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cstride</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>\
         <span class="n">ax2</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="o">*</span><span class="n">sphere</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span>\
         <span class="n">ax2</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">*</span><span class="n">xyzs</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">arrow_length_ratio</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)]</span>
@@ -14201,13 +14248,13 @@ Z:
 
  
  
-<div id="3384bc4f-f720-4d63-8419-5ec65ac70b11"></div>
+<div id="0d35b1e3-c0b8-4e19-b8ca-924124ff5ab3"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#3384bc4f-f720-4d63-8419-5ec65ac70b11');
+var element = $('#0d35b1e3-c0b8-4e19-b8ca-924124ff5ab3');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "82bb0d155504408188bbd9d36a339f1d", "version_major": 2, "version_minor": 0}
+{"model_id": "54741c77e48845edb3bde71aabd97932", "version_major": 2, "version_minor": 0}
 </script>
 </div>
 
@@ -14245,7 +14292,7 @@ var element = $('#3384bc4f-f720-4d63-8419-5ec65ac70b11');
 <p><a href="https://arxiv.org/abs/1704.02008">From Hamiltonians to complex symplectic transformations</a></p>
 <p><a href="https://arxiv.org/abs/1401.4679">Continuous variable quantum information: Gaussian states and beyond</a></p>
 <p><a href="https://arxiv.org/abs/quant-ph/0702069">Entanglement of Gaussian states</a></p>
-<p><a href="https://www.osti.gov/etdeweb/servlets/purl/21084338">Quantum Information Theorywith Gaussian Systems</a></p>
+<p><a href="https://www.osti.gov/etdeweb/servlets/purl/21084338">Quantum Information Theory with Gaussian Systems</a></p>
 <p><a href="https://cds.cern.ch/record/154856/files/pre-27827.pdf">Negative Probabilities</a></p>
 
 </div>

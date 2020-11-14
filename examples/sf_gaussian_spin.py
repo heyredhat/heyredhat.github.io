@@ -126,39 +126,45 @@ if __name__ == "__main__":
     thetas = np.linspace(0, 2*np.pi, frn)
     Rs = [GaussianTransform(\
             second_quantize(E, expm=True, theta=theta)[0])\
-                for theta in thetas]
+                for theta in thetas] # Generate a Gaussian transformation for each step in the movie
 
-    X = np.linspace(-5, 5, N+1)
+    Q = np.linspace(-5, 5, N+1)
     P = np.linspace(-5, 5, N+1)
-    X_, P_ = np.meshgrid(X, P)
+    Q_, P_ = np.meshgrid(Q, P)
 
+    # These will hold the Wigner data for each step in the movie, for each oscillator
     zarray0 = np.zeros((N+1, N+1, frn))
     zarray1 = np.zeros((N+1, N+1, frn))
+
+    # This will hold the XYZ data for the qubit, for each step in the movie
     xyzs = np.zeros((3, frn))
     XYZ = make_XYZ()
 
     if initial_state != None:
         IR1, IR2 = xyz_gaussianTransforms(initial_state)
 
-    for i, theta in enumerate(thetas):
+    for i, theta in enumerate(thetas): # for each frame
         prog = sf.Program(2)
         with prog.context as q:
-            Vac | q[0]
-            Sgate(1) | q[0]
+            Vac | q[0] # start off in the vacuum
+            Vac | q[1]
+            Sgate(1) | q[0] # squeeze the first qubit to get Z+
             if type(initial_state) != type(None):
-                IR1 | (q[0], q[1])
-                IR2 | (q[0], q[1])
-            Rs[i] | (q[0], q[1])
-        state = eng.run(prog).state
+                IR1 | (q[0], q[1]) # apply the GaussianTransforms
+                IR2 | (q[0], q[1]) # to prepare the initial state
+            Rs[i] | (q[0], q[1]) # perform the rotation for this frame
+        state = eng.run(prog).state # get the state
 
-        Z0 = state.wigner(0, X, P)
-        Z1 = state.wigner(1, X, P)
-        zarray0[:,:,i] = Z0
+        Z0 = state.wigner(0, Q, P)
+        Z1 = state.wigner(1, Q, P)
+
+        zarray0[:,:,i] = Z0 # save the wigner data
         zarray1[:,:,i] = Z1
-        xyzs[:,i] = state_xyz(state, XYZ=XYZ)
+        xyzs[:,i] = state_xyz(state, XYZ=XYZ) # save the xyz data
+
         eng.reset()
 
-    def sphere():
+    def sphere(): # makes a mesh of a sphere
         u, v = np.mgrid[0:2*np.pi:20j, 0:np.pi:10j]
         x = np.cos(u)*np.sin(v)
         y = np.sin(u)*np.sin(v)
@@ -167,10 +173,10 @@ if __name__ == "__main__":
 
     def update_plot(frame_number, zarray0, zarray1, xyzs, plot):
         plot[0].remove()
-        plot[0] = ax0.plot_surface(X_, P_, zarray0[:,:,frame_number],\
+        plot[0] = ax0.plot_surface(Q_, P_, zarray0[:,:,frame_number],\
                                 cmap="RdYlGn", lw=0.5, rstride=1, cstride=1)
         plot[1].remove()
-        plot[1] = ax1.plot_surface(X_, P_, zarray1[:,:,frame_number],\
+        plot[1] = ax1.plot_surface(Q_, P_, zarray1[:,:,frame_number],\
                                 cmap="RdYlGn", lw=0.5, rstride=1, cstride=1)
         plot[2].remove()
         plot[2] = ax2.plot_surface(*sphere(), color="g", alpha=0.1)
@@ -184,9 +190,9 @@ if __name__ == "__main__":
     ax1.set_zlim(0, 0.18)
     ax2 = fig.add_subplot(313, projection="3d")
 
-    plot = [ax0.plot_surface(X_, P_, zarray0[:,:,0],\
+    plot = [ax0.plot_surface(Q_, P_, zarray0[:,:,0],\
                                 cmap="RdYlGn", lw=0.5, rstride=1, cstride=1),\
-            ax1.plot_surface(X_, P_, zarray1[:,:,0],\
+            ax1.plot_surface(Q_, P_, zarray1[:,:,0],\
                                 cmap="RdYlGn", lw=0.5, rstride=1, cstride=1),\
             ax2.plot_surface(*sphere(), color="g", alpha=0.1),\
             ax2.quiver(0,0,0,*xyzs[:,0], arrow_length_ratio=0.3)]

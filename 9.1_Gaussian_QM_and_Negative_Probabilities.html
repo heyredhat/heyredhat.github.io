@@ -13124,9 +13124,9 @@ div#notebook {
 <p>$P_{z_{\downarrow}x_{\downarrow}} = \frac{1}{4}(I - Z - X) = \begin{pmatrix}0 &amp; -\frac{1}{4} \\ -\frac{1}{4} &amp; \frac{1}{2} \end{pmatrix}$</p>
 <p>Naturally, $P_{z_{\downarrow}} = P_{z_{\downarrow}x_{\uparrow}} + P_{z_{\downarrow}x_{\downarrow}}$.</p>
 <p>But also:</p>
-<p>$P_{x_{\uparrow}} = P_{z_{\uparrow}x_{\uparrow}} + P_{z_{\downarrow}x_{\uparrow}} = \frac{1}{4}(I + Z + X) + \frac{1}{4}(I - Z + X) = \frac{1}{4}(I + X)$</p>
+<p>$P_{x_{\uparrow}} = P_{z_{\uparrow}x_{\uparrow}} + P_{z_{\downarrow}x_{\uparrow}} = \frac{1}{4}(I + Z + X) + \frac{1}{4}(I - Z + X) = \frac{1}{2}(I + X)$</p>
 <p>and</p>
-<p>$P_{x_{\downarrow}} = P_{z_{\uparrow}x_{\downarrow}} + P_{z_{\downarrow}x_{\downarrow}} = \frac{1}{4}(I + Z - X) + \frac{1}{4}(I - Z - X) = \frac{1}{4}(I - X)$.</p>
+<p>$P_{x_{\downarrow}} = P_{z_{\uparrow}x_{\downarrow}} + P_{z_{\downarrow}x_{\downarrow}} = \frac{1}{4}(I + Z - X) + \frac{1}{4}(I - Z - X) = \frac{1}{2}(I - X)$.</p>
 <p>Since the expectation value of a sum of operators is the sum of the expectation values of those operators, we can thus write our probabilities like:</p>
 <p>$Pr(z_{\uparrow}) = Pr(z_{\uparrow}x_{\uparrow}) + Pr(z_{\uparrow}x_{\downarrow})$</p>
 <p>$Pr(z_{\downarrow}) = Pr(z_{\downarrow}x_{\uparrow}) + Pr(z_{\downarrow}x_{\downarrow})$</p>
@@ -13146,7 +13146,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
@@ -13204,14 +13204,14 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>P(Z+, X+): 0.5799
-P(Z+, X-): 0.1424
-P(Z-, X+): 0.3576
-P(Z-, X-): -0.0799
-P(Z+): 0.7224 == P(Z+, X+) + P(Z+, X-): 0.7224
-P(Z-): 0.2776 == P(Z-, X+) + P(Z-, X-): 0.2776
-P(X+): 0.9375 == P(Z+, X+) + P(Z-, X+): 0.9375
-P(X-): 0.0625 == P(Z+, X-) + P(Z-, X-): 0.0625
+<pre>P(Z+, X+): 0.3898
+P(Z+, X-): -0.0122
+P(Z-, X+): 0.5122
+P(Z-, X-): 0.1102
+P(Z+): 0.3776 == P(Z+, X+) + P(Z+, X-): 0.3776
+P(Z-): 0.6224 == P(Z-, X+) + P(Z-, X-): 0.6224
+P(X+): 0.9019 == P(Z+, X+) + P(Z-, X+): 0.9019
+P(X-): 0.0981 == P(Z+, X-) + P(Z-, X-): 0.0981
 Total probability: 1.000000
 </pre>
 </div>
@@ -13247,7 +13247,7 @@ Total probability: 1.000000
 <p>And if you take the Wigner transform of an operator:</p>
 <p>$\hat{G} \rightarrow G(x,p) = \int_{-\infty}^{\infty}\langle x- \frac{f}{2}\mid\hat{G}\mid x + \frac{f}{2}\rangle e^{\frac{ipf}{\hbar}}df$</p>
 <p>You can take expectation values:</p>
-<p>$\int_{-\infty}^{\infty} \int_{-\infty}^{\infty} W_{\phi}(x,p)G(x,p)dxdp = \langle \psi \mid \hat{G} \mid \psi \rangle$.</p>
+<p>$\int_{-\infty}^{\infty} \int_{-\infty}^{\infty} W_{\psi}(x,p)G(x,p)dxdp = \langle \psi \mid \hat{G} \mid \psi \rangle$.</p>
 <p>And in general, anything you can do with wavefunctions, you can do entirely in terms of quasiprobability distributions. It's a complete alternative formulation of quantum mechanics.</p>
 <hr>
 </div>
@@ -13263,7 +13263,7 @@ Total probability: 1.000000
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> widget
@@ -13277,7 +13277,7 @@ Total probability: 1.000000
 <span class="k">with</span> <span class="n">prog</span><span class="o">.</span><span class="n">context</span> <span class="k">as</span> <span class="n">q</span><span class="p">:</span>
     <span class="n">Fock</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="n">eng</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="n">LocalEngine</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="s2">&quot;fock&quot;</span><span class="p">,</span> <span class="n">backend_options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;cutoff_dim&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">})</span>
+<span class="n">eng</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="n">LocalEngine</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="s2">&quot;fock&quot;</span><span class="p">,</span> <span class="n">backend_options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;cutoff_dim&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">})</span>
 <span class="n">state</span> <span class="o">=</span> <span class="n">eng</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">prog</span><span class="p">)</span><span class="o">.</span><span class="n">state</span>
 
 <span class="n">N</span> <span class="o">=</span> <span class="mi">50</span>
@@ -13312,13 +13312,13 @@ Total probability: 1.000000
 
  
  
-<div id="31cd85c8-29e2-4ad6-83d1-334c75c3c1cc"></div>
+<div id="c8f31843-e8a2-4689-b291-4ed817920ae7"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#31cd85c8-29e2-4ad6-83d1-334c75c3c1cc');
+var element = $('#c8f31843-e8a2-4689-b291-4ed817920ae7');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "16861928ebeb492da1451bc0a6af6efe", "version_major": 2, "version_minor": 0}
+{"model_id": "e820ab606f4e405db22de945e3afdf44", "version_major": 2, "version_minor": 0}
 </script>
 </div>
 
@@ -13389,7 +13389,7 @@ var element = $('#31cd85c8-29e2-4ad6-83d1-334c75c3c1cc');
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> widget
@@ -13488,13 +13488,13 @@ var element = $('#31cd85c8-29e2-4ad6-83d1-334c75c3c1cc');
 
  
  
-<div id="f990c91c-c239-4121-9b5b-004f2b6edb9b"></div>
+<div id="42c42d27-af85-4995-a98a-2b21ee55fabf"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#f990c91c-c239-4121-9b5b-004f2b6edb9b');
+var element = $('#42c42d27-af85-4995-a98a-2b21ee55fabf');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "b08baee85bf0492796d6866795aa576a", "version_major": 2, "version_minor": 0}
+{"model_id": "a8facae123fb4391acec51dd35f72930", "version_major": 2, "version_minor": 0}
 </script>
 </div>
 
@@ -13519,15 +13519,15 @@ var element = $('#f990c91c-c239-4121-9b5b-004f2b6edb9b');
 <p>$M_{2} \rightarrow SM_{2}S^{T}$</p>
 <p>For a single mode, the symplectic transformation corresponding to the displacement operator $D(z)$ is just:</p>
 <p>$\vec{m}_{1} \rightarrow \vec{m}_{1} + \begin{pmatrix}\Re{(z)} \\ \Im{(z)} \end{pmatrix} $</p>
-<p>The symplectic matrix corresponding to the single mode squeezing operator $S(re^{\theta})$ is:</p>
+<p>The symplectic matrix corresponding to the single mode squeezing operator $S(re^{i\theta})$ is:</p>
 <p>$SQ = \begin{pmatrix}\cosh(r) + \cos(\theta)\sinh(r) &amp; \sin(\theta)\sinh(r) \\ \sin(\theta)\sinh(r) &amp; \cosh(r) - \cos(\theta)\sinh(r) \end{pmatrix}$</p>
 <p>When $\theta = 0$, this is just:</p>
 <p>$SQ = \begin{pmatrix} e^{-r} &amp; 0 \\ 0 &amp; e^{r} \end{pmatrix}$</p>
-<p>So $M_{2}$ transforms like: $M_{2} \rightarrow (SQ)M(SQ)^{T}$</p>
+<p>So $M_{2}$ transforms like: $M_{2} \rightarrow (SQ)M_{2}(SQ)^{T}$</p>
 <p>The oscillator hamiltonian (phase rotation) $R(\theta)$ can be represented with the symplectic matrix:</p>
 <p>$PR = \begin{pmatrix} \cos{\theta} &amp; \sin{\theta} \\ -\sin{\theta} &amp; \cos{\theta}\end{pmatrix} $</p>
 <p>And so $M_{2}$ transforms like:</p>
-<p>$M_{2} \rightarrow (PR)M(PR)^{T}$</p>
+<p>$M_{2} \rightarrow (PR)M_{2}(PR)^{T}$</p>
 <p>Finally, considering the two mode squeezing operation, we have the symplectic matrix:</p>
 <p>$SQ_{i,j} = \begin{pmatrix} \cosh(r) &amp; 0 &amp; \sinh(r) &amp; 0 \\ 0 &amp; \cosh(r) &amp; 0 &amp; -\sinh(r) \\ \sinh(r) &amp; 0 &amp; \cosh(r) &amp; 0 \\ 0 &amp; -\sinh(r) &amp; 0 &amp; \cosh(r) \end{pmatrix}$</p>
 <p>Indeed, if we have to act on one or more mode of many modes, we simply take a $2n \times 2n$ identity matrix and replace the relevant components corresponding to the p's and q's with our operator.</p>
@@ -13540,7 +13540,7 @@ var element = $('#f990c91c-c239-4121-9b5b-004f2b6edb9b');
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> widget
@@ -13686,7 +13686,7 @@ var element = $('#f990c91c-c239-4121-9b5b-004f2b6edb9b');
     <span class="n">q_axis</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_ticks_position</span><span class="p">(</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
     <span class="n">q_axis</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Pr(q)&#39;</span><span class="p">)</span>
     <span class="n">q_axis</span><span class="o">.</span><span class="n">set_box_aspect</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">q_plot</span> <span class="o">=</span> <span class="n">q_axis</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">xdistf</span><span class="p">(</span><span class="n">x_</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x_</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]))</span>
+    <span class="n">q_plot</span> <span class="o">=</span> <span class="n">q_axis</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">xdistf</span><span class="p">(</span><span class="n">x_</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x_</span> <span class="ow">in</span> <span class="n">q</span><span class="p">]))</span>
     
     <span class="n">p_axis</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">222</span><span class="p">)</span>
     <span class="n">p_axis</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Pr(p)&#39;</span><span class="p">)</span>
@@ -13718,13 +13718,13 @@ var element = $('#f990c91c-c239-4121-9b5b-004f2b6edb9b');
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>first moments:
-[0.47901701 0.         0.70717291 0.        ]
+[0.6462062  0.         0.85829548 0.        ]
 second moments:
-[[ 1.13451215  0.          1.80322997  0.        ]
- [ 0.          2.558259    0.         -2.35471636]
- [ 1.80322997  0.          3.74754763  0.        ]
- [ 0.         -2.35471636  0.          2.558259  ]]
-norm check: Matrix([[0.999999999999998]])
+[[ 0.91964926  0.          0.87715245  0.        ]
+ [ 0.          1.48348921  0.         -1.09578293]
+ [ 0.87715245  0.          1.92399047  0.        ]
+ [ 0.         -1.09578293  0.          1.48348921]]
+norm check: Matrix([[1.00000000000000]])
 </pre>
 </div>
 </div>
@@ -13739,13 +13739,13 @@ norm check: Matrix([[0.999999999999998]])
 
  
  
-<div id="f36e6015-a422-4db6-8907-720942ec9a0d"></div>
+<div id="5d01025e-4fc9-4f93-b005-92aa5e5603d3"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#f36e6015-a422-4db6-8907-720942ec9a0d');
+var element = $('#5d01025e-4fc9-4f93-b005-92aa5e5603d3');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "7bd3cb4ec2f746b5b6880398bdc7361a", "version_major": 2, "version_minor": 0}
+{"model_id": "14b06136658842ab952075c2a217e372", "version_major": 2, "version_minor": 0}
 </script>
 </div>
 
@@ -13757,7 +13757,7 @@ var element = $('#f36e6015-a422-4db6-8907-720942ec9a0d');
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>norm check: Matrix([[0.999999999999989]])
+<pre>norm check: Matrix([[1.00000000000000]])
 </pre>
 </div>
 </div>
@@ -13772,13 +13772,13 @@ var element = $('#f36e6015-a422-4db6-8907-720942ec9a0d');
 
  
  
-<div id="4f8985d3-2430-48ec-a2c5-f78e29450a83"></div>
+<div id="3a935f6f-e636-497d-b9d0-8c457278f729"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#4f8985d3-2430-48ec-a2c5-f78e29450a83');
+var element = $('#3a935f6f-e636-497d-b9d0-8c457278f729');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "2278970be16547ad84c6907b0cd91365", "version_major": 2, "version_minor": 0}
+{"model_id": "3c94f7ee905441cc9d49f2381f85b607", "version_major": 2, "version_minor": 0}
 </script>
 </div>
 
@@ -13804,7 +13804,7 @@ $$H = \frac{1}{2}\xi^{\dagger}\textbf{H}\xi + \xi^{\dagger}\textbf{h}$$<p>,</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -13849,7 +13849,7 @@ $$e^{iH} \xi e^{-iH} = \textbf{S}\xi + \textbf{s}$$<p>where $\textbf{S}$ is a <e
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">omega_c</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -13921,7 +13921,7 @@ $$\textbf{R} = \begin{pmatrix}\Re(E+F) &amp; -\Im(E-F) \\ \Im(E+F) &amp; \Re(E-F
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">omega_r</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -13991,7 +13991,7 @@ $$\textbf{O} = \begin{pmatrix} \hat{a_{0}}^{\dagger} &amp; \hat{a_{1}}^{\dagger}
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">second_quantize</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">expm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
@@ -14060,7 +14060,7 @@ Z:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">state_xyz</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">XYZ</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -14087,7 +14087,7 @@ Z:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
@@ -14121,7 +14121,7 @@ Z:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> widget
@@ -14248,13 +14248,13 @@ Z:
 
  
  
-<div id="0d35b1e3-c0b8-4e19-b8ca-924124ff5ab3"></div>
+<div id="f656d016-9fb9-4559-9c30-bbeaf2aab639"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#0d35b1e3-c0b8-4e19-b8ca-924124ff5ab3');
+var element = $('#f656d016-9fb9-4559-9c30-bbeaf2aab639');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "54741c77e48845edb3bde71aabd97932", "version_major": 2, "version_minor": 0}
+{"model_id": "6c82e2088b1e43e0bc5bb60bb9084c21", "version_major": 2, "version_minor": 0}
 </script>
 </div>
 

@@ -13118,7 +13118,7 @@ $$\alpha \mid \uparrow \rangle + \beta \mid \downarrow \rangle \Rightarrow \alph
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">spheres</span> <span class="k">import</span> <span class="o">*</span>
@@ -13145,13 +13145,43 @@ $$\alpha \mid \uparrow \rangle + \beta \mid \downarrow \rangle \Rightarrow \alph
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[46]:</div>
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div id="glowscript" class="glowscript"></div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+
+<div id="641356ac-6043-428e-ac01-3998c329af27"></div>
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+var element = $('#641356ac-6043-428e-ac01-3998c329af27');
+if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container: $("#glowscript").removeAttr("id")};}else{ element.textContent = ' ';}
+</script>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[1]:</div>
 
 
 
 
 <div class="output_latex output_subarea output_execute_result">
-Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equation*}\left(\begin{array}{*{11}c}(0.617+0.026j)\\(-0.335+0.082j)\\(0.280-0.201j)\\(0.382-0.485j)\\\end{array}\right)\end{equation*}
+Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equation*}\left(\begin{array}{*{11}c}(0.497+0.198j)\\(0.159-0.434j)\\(-0.004-0.463j)\\(0.534-0.020j)\\\end{array}\right)\end{equation*}
 </div>
 
 </div>
@@ -13170,7 +13200,7 @@ Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equati
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">right</span><span class="p">(</span><span class="n">U</span><span class="o">.</span><span class="n">trans</span><span class="p">())</span><span class="o">*</span><span class="n">cup</span>
@@ -13186,13 +13216,13 @@ Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equati
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[47]:</div>
+    <div class="prompt output_prompt">Out[2]:</div>
 
 
 
 
 <div class="output_latex output_subarea output_execute_result">
-Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equation*}\left(\begin{array}{*{11}c}(0.617+0.026j)\\(-0.335+0.082j)\\(0.280-0.201j)\\(0.382-0.485j)\\\end{array}\right)\end{equation*}
+Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equation*}\left(\begin{array}{*{11}c}(0.497+0.198j)\\(0.159-0.434j)\\(-0.004-0.463j)\\(0.534-0.020j)\\\end{array}\right)\end{equation*}
 </div>
 
 </div>
@@ -13214,10 +13244,12 @@ Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equati
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">right</span><span class="p">(</span><span class="n">U</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span><span class="o">*</span><span class="n">left</span><span class="p">(</span><span class="n">U</span><span class="p">)</span><span class="o">*</span><span class="n">cup</span>
+
+<span class="n">dirac</span><span class="p">(</span><span class="n">right</span><span class="p">(</span><span class="n">U</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span><span class="o">*</span><span class="n">left</span><span class="p">(</span><span class="n">U</span><span class="p">)</span><span class="o">*</span><span class="n">cup</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13230,15 +13262,14 @@ Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equati
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[48]:</div>
+    <div class="prompt"></div>
 
 
-
-
-<div class="output_latex output_subarea output_execute_result">
-Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equation*}\left(\begin{array}{*{11}c}0.707\\0.0\\0.0\\0.707\\\end{array}\right)\end{equation*}
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.707 |00&gt; Pr: 0.500
+0.707 |11&gt; Pr: 0.500
+</pre>
 </div>
-
 </div>
 
 </div>
@@ -13261,7 +13292,7 @@ $$\begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix} \rightarrow \frac{1}{\sqr
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">V</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_unitary</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
@@ -13278,13 +13309,13 @@ $$\begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix} \rightarrow \frac{1}{\sqr
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[49]:</div>
+    <div class="prompt output_prompt">Out[4]:</div>
 
 
 
 
 <div class="output_latex output_subarea output_execute_result">
-Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = False\begin{equation*}\left(\begin{array}{*{11}c}(0.355-0.693j) & (-0.357-0.516j)\\(-0.240-0.580j) & (0.775+0.077j)\\\end{array}\right)\end{equation*}
+Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = False\begin{equation*}\left(\begin{array}{*{11}c}(0.799-0.602j) & 0.0\\0.0 & (0.888-0.460j)\\\end{array}\right)\end{equation*}
 </div>
 
 </div>
@@ -13295,7 +13326,7 @@ Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = False\b
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">V_cup</span> <span class="o">=</span> <span class="n">left</span><span class="p">(</span><span class="n">V</span><span class="p">)</span><span class="o">*</span><span class="n">cup</span>
@@ -13312,13 +13343,13 @@ Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = False\b
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[50]:</div>
+    <div class="prompt output_prompt">Out[5]:</div>
 
 
 
 
 <div class="output_latex output_subarea output_execute_result">
-Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equation*}\left(\begin{array}{*{11}c}(0.355-0.693j)\\(-0.357-0.516j)\\(-0.240-0.580j)\\(0.775+0.077j)\\\end{array}\right)\end{equation*}
+Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equation*}\left(\begin{array}{*{11}c}(0.799-0.602j)\\0.0\\0.0\\(0.888-0.460j)\\\end{array}\right)\end{equation*}
 </div>
 
 </div>
@@ -13359,8 +13390,8 @@ Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equati
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>0.6931471805599454
-0.6931471805599454
+<pre>0.6931471805599453
+0.6931471805599453
 0.6931471805599453
 </pre>
 </div>
@@ -13395,7 +13426,7 @@ Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equati
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">V_cup</span>
@@ -13411,13 +13442,13 @@ Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equati
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[55]:</div>
+    <div class="prompt output_prompt">Out[7]:</div>
 
 
 
 
 <div class="output_latex output_subarea output_execute_result">
-Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equation*}\left(\begin{array}{*{11}c}(0.251-0.490j)\\(-0.253-0.365j)\\(-0.170-0.410j)\\(0.548+0.054j)\\\end{array}\right)\end{equation*}
+Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equation*}\left(\begin{array}{*{11}c}(0.565-0.425j)\\0.0\\0.0\\(0.628-0.325j)\\\end{array}\right)\end{equation*}
 </div>
 
 </div>
@@ -13428,7 +13459,7 @@ Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equati
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[56]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">right</span><span class="p">(</span><span class="n">V</span><span class="o">.</span><span class="n">trans</span><span class="p">()</span><span class="o">*</span><span class="n">U</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">*</span><span class="n">V</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span><span class="o">*</span><span class="n">left</span><span class="p">(</span><span class="n">U</span><span class="p">)</span><span class="o">*</span><span class="n">V_cup</span>
@@ -13444,13 +13475,13 @@ Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equati
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[56]:</div>
+    <div class="prompt output_prompt">Out[8]:</div>
 
 
 
 
 <div class="output_latex output_subarea output_execute_result">
-Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equation*}\left(\begin{array}{*{11}c}(0.251-0.490j)\\(-0.253-0.365j)\\(-0.170-0.410j)\\(0.548+0.054j)\\\end{array}\right)\end{equation*}
+Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equation*}\left(\begin{array}{*{11}c}(0.565-0.425j)\\0.0\\0.0\\(0.628-0.325j)\\\end{array}\right)\end{equation*}
 </div>
 
 </div>
@@ -13461,7 +13492,7 @@ Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equati
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">Vright</span> <span class="o">=</span> <span class="n">V</span><span class="o">.</span><span class="n">trans</span><span class="p">()</span><span class="o">*</span><span class="n">U</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">*</span><span class="n">V</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span>
@@ -13510,7 +13541,7 @@ $$ \mid \psi \rangle_{AB} = \sum_{i=1}^{d_{A}} \sigma_{i} \mid i \rangle_{A} \mi
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
@@ -13528,13 +13559,13 @@ $$ \mid \psi \rangle_{AB} = \sum_{i=1}^{d_{A}} \sigma_{i} \mid i \rangle_{A} \mi
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[58]:</div>
+    <div class="prompt output_prompt">Out[10]:</div>
 
 
 
 
 <div class="output_latex output_subarea output_execute_result">
-Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = False\begin{equation*}\left(\begin{array}{*{11}c}(-0.510-0.194j) & (-0.254-0.236j)\\(0.512-0.506j) & (0.076-0.239j)\\\end{array}\right)\end{equation*}
+Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = False\begin{equation*}\left(\begin{array}{*{11}c}(-0.551+0.410j) & (-0.088-0.529j)\\(0.295+0.106j) & (-0.228-0.299j)\\\end{array}\right)\end{equation*}
 </div>
 
 </div>
@@ -13553,7 +13584,7 @@ Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = False\b
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">Y</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">state_matrix</span><span class="p">)</span>
@@ -13570,13 +13601,13 @@ Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = False\b
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[59]:</div>
+    <div class="prompt output_prompt">Out[11]:</div>
 
 
 
 
 <div class="output_latex output_subarea output_execute_result">
-Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = False\begin{equation*}\left(\begin{array}{*{11}c}(-0.510-0.194j) & (-0.254-0.236j)\\(0.512-0.506j) & (0.076-0.239j)\\\end{array}\right)\end{equation*}
+Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = False\begin{equation*}\left(\begin{array}{*{11}c}(-0.551+0.410j) & (-0.088-0.529j)\\(0.295+0.106j) & (-0.228-0.299j)\\\end{array}\right)\end{equation*}
 </div>
 
 </div>
@@ -13595,7 +13626,7 @@ Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = False\b
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sum</span><span class="p">([</span><span class="n">Y</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span>
@@ -13615,13 +13646,13 @@ Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = False\b
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[60]:</div>
+    <div class="prompt output_prompt">Out[12]:</div>
 
 
 
 
 <div class="output_latex output_subarea output_execute_result">
-Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equation*}\left(\begin{array}{*{11}c}(-0.510-0.194j)\\(-0.254-0.236j)\\(0.512-0.506j)\\(0.076-0.239j)\\\end{array}\right)\end{equation*}
+Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equation*}\left(\begin{array}{*{11}c}(-0.551+0.410j)\\(-0.088-0.529j)\\(0.295+0.106j)\\(-0.228-0.299j)\\\end{array}\right)\end{equation*}
 </div>
 
 </div>
@@ -13641,7 +13672,7 @@ Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equati
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">separable</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
@@ -13659,13 +13690,13 @@ Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equati
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[61]:</div>
+    <div class="prompt output_prompt">Out[13]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([1.00000000e+00, 2.81331486e-17])</pre>
+<pre>array([1.00000000e+00, 2.91727029e-16])</pre>
 </div>
 
 </div>
@@ -13684,7 +13715,7 @@ Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equati
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">any_old</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
@@ -13707,7 +13738,7 @@ Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equati
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[0.8680388  0.49649636]
+<pre>[0.91786817 0.39688539]
 </pre>
 </div>
 </div>
@@ -13726,7 +13757,7 @@ Quantum object: dims = [[2, 2], [1, 1]], shape = (4, 1), type = ket\begin{equati
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[63]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">max_entangled</span> <span class="o">=</span> <span class="n">left</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">rand_unitary</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="n">cup</span>
@@ -13788,7 +13819,7 @@ $$ V_{B}^{\dagger}U_{A}\mid \psi \rangle_{AB} = \mid \psi \rangle_{AB} $$<p>Inde
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[66]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">schmidt_test</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">U</span><span class="p">):</span>
@@ -13835,7 +13866,7 @@ $$ V_{B}^{\dagger}U_{A}\mid \psi \rangle_{AB} = \mid \psi \rangle_{AB} $$<p>Inde
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[69]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">schmidt_test</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">bell_state</span><span class="p">(</span><span class="s2">&quot;00&quot;</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_unitary</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
@@ -13870,8 +13901,8 @@ singular values: [0.70710678 0.70710678]
 U:
 Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = False
 Qobj data =
-[[0.56780515+0.82316299j 0.        +0.j        ]
- [0.        +0.j         0.99312411-0.1170662j ]]
+[[ 0.88488301+0.02399593j  0.32363549-0.33416513j]
+ [-0.45755751-0.0839487j   0.70627098-0.53364317j]]
 
 V == V2? True
 V unitary? True
@@ -13895,7 +13926,7 @@ Vdag_R*U_L|psi&gt; == |psi&gt;? True
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">schmidt_test</span><span class="p">(</span><span class="n">left</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">rand_unitary</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">bell_state</span><span class="p">(</span><span class="s2">&quot;00&quot;</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_unitary</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
@@ -13916,24 +13947,22 @@ Vdag_R*U_L|psi&gt; == |psi&gt;? True
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>the state:
-0.665+0.047i |00&gt; Pr: 0.444
--0.033+-0.233i |01&gt; Pr: 0.056
-0.049+-0.231i |10&gt; Pr: 0.056
-0.667+-0.001i |11&gt; Pr: 0.444
+0.628+0.325i |00&gt; Pr: 0.500
+0.605+0.367i |11&gt; Pr: 0.500
 
 dm of subsystem:
 Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = True
 Qobj data =
-[[5.00000000e-01+0.00000000e+00j 1.04083409e-17+5.55111512e-17j]
- [1.04083409e-17-5.55111512e-17j 5.00000000e-01+0.00000000e+00j]]
+[[0.5 0. ]
+ [0.  0.5]]
 entropy of subsystem / max entropy: 1.000
 singular values: [0.70710678 0.70710678]
 
 U:
 Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = False
 Qobj data =
-[[0.91005746-0.41448211j 0.        +0.j        ]
- [0.        +0.j         0.54617982-0.83766796j]]
+[[0.98818773+0.15324821j 0.        +0.j        ]
+ [0.        +0.j         0.8414322 -0.5403627j ]]
 
 V == V2? True
 V unitary? True
@@ -13957,7 +13986,7 @@ Vdag_R*U_L|psi&gt; == |psi&gt;? True
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[79]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">schmidt_test</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">)),</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_unitary</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
@@ -13978,24 +14007,24 @@ Vdag_R*U_L|psi&gt; == |psi&gt;? True
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>the state:
-0.713+-0.231i |00&gt; Pr: 0.563
-0.376+-0.304i |01&gt; Pr: 0.234
-0.098+-0.366i |10&gt; Pr: 0.144
--0.025+-0.243i |11&gt; Pr: 0.060
+-0.036+-0.462i |00&gt; Pr: 0.214
+-0.010+-0.609i |01&gt; Pr: 0.371
+-0.375+0.104i |10&gt; Pr: 0.152
+-0.501+0.107i |11&gt; Pr: 0.263
 
 dm of subsystem:
 Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = True
 Qobj data =
-[[0.79661859+0.j         0.21918618+0.33760158j]
- [0.21918618-0.33760158j 0.20338141+0.j        ]]
-entropy of subsystem / max entropy: 0.000
-singular values: [1.00000000e+00 6.99733475e-17]
+[[ 0.58569255+0.j         -0.09445277+0.48346195j]
+ [-0.09445277-0.48346195j  0.41430745+0.j        ]]
+entropy of subsystem / max entropy: -0.000
+singular values: [1.00000000e+00 7.50848834e-17]
 
 U:
 Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = False
 Qobj data =
-[[ 0.53835656+0.59618305j -0.2147782 +0.55552526j]
- [-0.2335948 +0.54787905j  0.80161794-0.05167874j]]
+[[0.99902344+0.04418341j 0.        +0.j        ]
+ [0.        +0.j         0.92136142+0.388707j  ]]
 
 V == V2? True
 V unitary? False
@@ -14019,7 +14048,7 @@ Vdag_R*U_L|psi&gt; == |psi&gt;? False
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[82]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">schmidt_test</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_unitary</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
@@ -14040,24 +14069,24 @@ Vdag_R*U_L|psi&gt; == |psi&gt;? False
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>the state:
--0.433+0.505i |00&gt; Pr: 0.442
-0.241+0.206i |01&gt; Pr: 0.101
--0.283+-0.069i |10&gt; Pr: 0.085
--0.005+0.611i |11&gt; Pr: 0.373
+-0.212+-0.306i |00&gt; Pr: 0.139
+0.375+0.411i |01&gt; Pr: 0.310
+0.487+0.218i |10&gt; Pr: 0.284
+-0.433+-0.283i |11&gt; Pr: 0.267
 
 dm of subsystem:
 Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = True
 Qobj data =
-[[0.54251966+0.j         0.21212896-0.32058607j]
- [0.21212896+0.32058607j 0.45748034+0.j        ]]
-entropy of subsystem / max entropy: 0.510
-singular values: [0.94167849 0.33651392]
+[[ 0.4484237 +0.j         -0.44842718-0.17484892j]
+ [-0.44842718+0.17484892j  0.5515763 +0.j        ]]
+entropy of subsystem / max entropy: 0.118
+singular values: [0.99200065 0.12623279]
 
 U:
 Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = False
 Qobj data =
-[[0.87508122+0.48397609j 0.        +0.j        ]
- [0.        +0.j         0.70494883-0.70925816j]]
+[[0.99962461+0.0273978j  0.        +0.j        ]
+ [0.        +0.j         0.54696455-0.83715577j]]
 
 V == V2? True
 V unitary? False
@@ -14082,7 +14111,7 @@ Vdag_R*U_L|psi&gt; == |psi&gt;? False
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[85]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">components</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
@@ -14104,27 +14133,27 @@ Vdag_R*U_L|psi&gt; == |psi&gt;? False
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>the state:
-0.877+-0.142i |00&gt; Pr: 0.789
-0.450+-0.087i |11&gt; Pr: 0.211
+-0.694+0.237i |00&gt; Pr: 0.537
+-0.065+-0.677i |11&gt; Pr: 0.463
 
 dm of subsystem:
 Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = True
 Qobj data =
-[[0.78948176 0.        ]
- [0.         0.21051824]]
-entropy of subsystem / max entropy: 0.742
-singular values: [0.88852786 0.45882267]
+[[0.53736211 0.        ]
+ [0.         0.46263789]]
+entropy of subsystem / max entropy: 0.996
+singular values: [0.73304987 0.68017489]
 
 U:
 Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = False
 Qobj data =
-[[0.84916141-0.52813341j 0.        +0.j        ]
- [0.        +0.j         0.98585716-0.16758776j]]
+[[ 0.79811267+0.02712935j -0.32878448+0.50416359j]
+ [ 0.50046488+0.33438761j  0.72323488-0.33860173j]]
 
 V == V2? True
-V unitary? True
+V unitary? False
 U_L|psi&gt; == V_R|psi&gt;? True
-Vdag_R*U_L|psi&gt; == |psi&gt;? True
+Vdag_R*U_L|psi&gt; == |psi&gt;? False
 </pre>
 </div>
 </div>
@@ -14147,7 +14176,7 @@ Vdag_R*U_L|psi&gt; == |psi&gt;? True
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 
-<p>Finally, in view of what we're about to discuss, let's consider the action of the $X$ operator,which can be written"</p>
+<p>Finally, in view of what we're about to discuss, let's consider the action of the $X$ operator, which can be written:</p>
 $$\mid \uparrow \rangle \langle \downarrow \mid + \mid \downarrow \rangle \langle \uparrow \mid$$<p>It's unitary and hermitian, which means that it's its own inverse.</p>
 <p>Acting on a qubit, it swaps $\uparrow$ and $\downarrow$ in the $Z$ basis.</p>
 
@@ -14156,7 +14185,7 @@ $$\mid \uparrow \rangle \langle \downarrow \mid + \mid \downarrow \rangle \langl
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[86]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">qubit</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
@@ -14180,11 +14209,11 @@ $$\mid \uparrow \rangle \langle \downarrow \mid + \mid \downarrow \rangle \langl
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>0.469+-0.068i |0&gt; Pr: 0.224
-0.278+0.836i |1&gt; Pr: 0.776
+<pre>0.015+-0.708i |0&gt; Pr: 0.501
+0.642+-0.295i |1&gt; Pr: 0.499
 
-0.278+0.836i |0&gt; Pr: 0.776
-0.469+-0.068i |1&gt; Pr: 0.224
+0.642+-0.295i |0&gt; Pr: 0.499
+0.015+-0.708i |1&gt; Pr: 0.501
 </pre>
 </div>
 </div>
@@ -14203,7 +14232,7 @@ $$ X_{L} \frac{1}{\sqrt{2}}(\mid \uparrow \uparrow \rangle + \mid \downarrow \do
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[87]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">dirac</span><span class="p">(</span><span class="n">cup</span><span class="p">)</span>
@@ -14248,7 +14277,7 @@ $$ X_{L} \frac{1}{\sqrt{2}}(\mid \uparrow \uparrow \rangle + \mid \downarrow \do
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[88]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">dirac</span><span class="p">(</span><span class="n">right</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">())</span><span class="o">*</span><span class="n">left</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">())</span><span class="o">*</span><span class="n">cup</span><span class="p">)</span>
@@ -14288,7 +14317,7 @@ $$ X_{L} \frac{1}{\sqrt{2}}(\mid \uparrow \uparrow \rangle + \mid \downarrow \do
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[89]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">components</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
@@ -14315,14 +14344,14 @@ $$ X_{L} \frac{1}{\sqrt{2}}(\mid \uparrow \uparrow \rangle + \mid \downarrow \do
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-0.785+-0.572i |00&gt; Pr: 0.943
--0.238+-0.000i |11&gt; Pr: 0.057
+<pre>-0.638+-0.481i |00&gt; Pr: 0.639
+-0.411+0.439i |11&gt; Pr: 0.361
 
--0.238+-0.000i |01&gt; Pr: 0.057
--0.785+-0.572i |10&gt; Pr: 0.943
+-0.411+0.439i |01&gt; Pr: 0.361
+-0.638+-0.481i |10&gt; Pr: 0.639
 
--0.238+-0.000i |00&gt; Pr: 0.057
--0.785+-0.572i |11&gt; Pr: 0.943
+-0.411+0.439i |00&gt; Pr: 0.361
+-0.638+-0.481i |11&gt; Pr: 0.639
 </pre>
 </div>
 </div>
@@ -14426,7 +14455,7 @@ $$e^{i\phi_{a}}\sqrt{\frac{a}{n}}\mid \uparrow \rangle + e^{i\phi_{b}}\sqrt{\fra
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[107]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">3</span>
@@ -14457,11 +14486,11 @@ $$e^{i\phi_{a}}\sqrt{\frac{a}{n}}\mid \uparrow \rangle + e^{i\phi_{b}}\sqrt{\fra
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>n: 3, a: 2, b: 1
+<pre>n: 3, a: 1, b: 2
 
 qubit:
-0.816 |0&gt; Pr: 0.667
-0.577 |1&gt; Pr: 0.333
+0.577 |0&gt; Pr: 0.333
+0.816 |1&gt; Pr: 0.667
 </pre>
 </div>
 </div>
@@ -14480,7 +14509,7 @@ $$ \sqrt{\frac{a}{n}}\mid \uparrow \rangle_{S} \mid \uparrow \rangle_{A} + \sqrt
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[108]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qutip.qip.operations</span> <span class="k">import</span> <span class="n">cnot</span>
@@ -14503,8 +14532,8 @@ $$ \sqrt{\frac{a}{n}}\mid \uparrow \rangle_{S} \mid \uparrow \rangle_{A} + \sqrt
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>0.816 |00&gt; Pr: 0.667
-0.577 |11&gt; Pr: 0.333
+<pre>0.577 |00&gt; Pr: 0.333
+0.816 |11&gt; Pr: 0.667
 </pre>
 </div>
 </div>
@@ -14525,7 +14554,7 @@ $$ \mid \uparrow \rangle_{A} \rightarrow \frac{1}{\sqrt{a}}\sum_{i=0}^{a}\mid i 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[109]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">fine_up</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">a</span><span class="p">)])</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
@@ -14544,7 +14573,7 @@ $$ \mid \uparrow \rangle_{A} \rightarrow \frac{1}{\sqrt{a}}\sum_{i=0}^{a}\mid i 
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[109]:</div>
+    <div class="prompt output_prompt">Out[28]:</div>
 
 
 
@@ -14552,14 +14581,14 @@ $$ \mid \uparrow \rangle_{A} \rightarrow \frac{1}{\sqrt{a}}\sum_{i=0}^{a}\mid i 
 <div class="output_text output_subarea output_execute_result">
 <pre>(Quantum object: dims = [[3], [1]], shape = (3, 1), type = ket
  Qobj data =
- [[0.70710678]
-  [0.70710678]
-  [0.        ]],
+ [[1.]
+  [0.]
+  [0.]],
  Quantum object: dims = [[3], [1]], shape = (3, 1), type = ket
  Qobj data =
- [[0.]
-  [0.]
-  [1.]])</pre>
+ [[0.        ]
+  [0.70710678]
+  [0.70710678]])</pre>
 </div>
 
 </div>
@@ -14579,7 +14608,7 @@ $$ \mid \uparrow \rangle_{A} \rightarrow \frac{1}{\sqrt{a}}\sum_{i=0}^{a}\mid i 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[110]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">fine_grain</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span> <span class="o">+</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
@@ -14602,8 +14631,8 @@ $$ \mid \uparrow \rangle_{A} \rightarrow \frac{1}{\sqrt{a}}\sum_{i=0}^{a}\mid i 
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>0.816 |00&gt; Pr: 0.667
-0.577 |11&gt; Pr: 0.333
+<pre>0.577 |00&gt; Pr: 0.333
+0.816 |11&gt; Pr: 0.667
 </pre>
 </div>
 </div>
@@ -14622,7 +14651,7 @@ $$ \mid \uparrow \rangle_{A} \rightarrow \frac{1}{\sqrt{a}}\sum_{i=0}^{a}\mid i 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[111]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
@@ -14658,7 +14687,7 @@ $$ \mid \uparrow \rangle_{A} \rightarrow \frac{1}{\sqrt{a}}\sum_{i=0}^{a}\mid i 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[102]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">fine_up</span><span class="p">,</span> <span class="n">R</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
@@ -14674,7 +14703,7 @@ $$ \mid \uparrow \rangle_{A} \rightarrow \frac{1}{\sqrt{a}}\sum_{i=0}^{a}\mid i 
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[102]:</div>
+    <div class="prompt output_prompt">Out[31]:</div>
 
 
 
@@ -14700,7 +14729,7 @@ $$ \mid \uparrow \rangle_{A} \rightarrow \frac{1}{\sqrt{a}}\sum_{i=0}^{a}\mid i 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[103]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">fine_down</span><span class="p">,</span> <span class="n">R</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
@@ -14716,7 +14745,7 @@ $$ \mid \uparrow \rangle_{A} \rightarrow \frac{1}{\sqrt{a}}\sum_{i=0}^{a}\mid i 
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[103]:</div>
+    <div class="prompt output_prompt">Out[32]:</div>
 
 
 
@@ -14742,7 +14771,7 @@ $$ \mid \uparrow \rangle_{A} \rightarrow \frac{1}{\sqrt{a}}\sum_{i=0}^{a}\mid i 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[114]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">fine_grained</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">R</span><span class="p">)</span><span class="o">*</span><span class="n">expanded</span>
@@ -14763,8 +14792,8 @@ $$ \mid \uparrow \rangle_{A} \rightarrow \frac{1}{\sqrt{a}}\sum_{i=0}^{a}\mid i 
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>0.577 |00&gt; Pr: 0.333
-0.577 |01&gt; Pr: 0.333
+<pre>-0.577 |00&gt; Pr: 0.333
+0.577 |11&gt; Pr: 0.333
 0.577 |12&gt; Pr: 0.333
 </pre>
 </div>
@@ -14796,7 +14825,7 @@ $$ \frac{1}{\sqrt{n}}\Bigg{(}\sum_{i=0}^{a}\mid \uparrow \rangle_{S} \mid i \ran
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[115]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">bad_swap</span> <span class="o">=</span> <span class="n">fine_up</span><span class="o">*</span><span class="n">fine_down</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span> <span class="o">+</span> <span class="n">fine_down</span><span class="o">*</span><span class="n">fine_up</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
@@ -14810,7 +14839,7 @@ $$ \frac{1}{\sqrt{n}}\Bigg{(}\sum_{i=0}^{a}\mid \uparrow \rangle_{S} \mid i \ran
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[116]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">fine_up</span><span class="p">,</span> <span class="n">bad_swap_unitary</span><span class="o">*</span><span class="n">fine_down</span>
@@ -14826,7 +14855,7 @@ $$ \frac{1}{\sqrt{n}}\Bigg{(}\sum_{i=0}^{a}\mid \uparrow \rangle_{S} \mid i \ran
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[116]:</div>
+    <div class="prompt output_prompt">Out[35]:</div>
 
 
 
@@ -14834,14 +14863,14 @@ $$ \frac{1}{\sqrt{n}}\Bigg{(}\sum_{i=0}^{a}\mid \uparrow \rangle_{S} \mid i \ran
 <div class="output_text output_subarea output_execute_result">
 <pre>(Quantum object: dims = [[3], [1]], shape = (3, 1), type = ket
  Qobj data =
- [[0.70710678]
-  [0.70710678]
-  [0.        ]],
- Quantum object: dims = [[3], [1]], shape = (3, 1), type = ket
- Qobj data =
  [[1.]
   [0.]
-  [0.]])</pre>
+  [0.]],
+ Quantum object: dims = [[3], [1]], shape = (3, 1), type = ket
+ Qobj data =
+ [[-0.70710678]
+  [ 0.5       ]
+  [-0.5       ]])</pre>
 </div>
 
 </div>
@@ -14852,7 +14881,7 @@ $$ \frac{1}{\sqrt{n}}\Bigg{(}\sum_{i=0}^{a}\mid \uparrow \rangle_{S} \mid i \ran
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[117]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">fine_down</span><span class="p">,</span> <span class="n">bad_swap_unitary</span><span class="o">*</span><span class="n">fine_down</span>
@@ -14868,7 +14897,7 @@ $$ \frac{1}{\sqrt{n}}\Bigg{(}\sum_{i=0}^{a}\mid \uparrow \rangle_{S} \mid i \ran
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[117]:</div>
+    <div class="prompt output_prompt">Out[36]:</div>
 
 
 
@@ -14876,14 +14905,14 @@ $$ \frac{1}{\sqrt{n}}\Bigg{(}\sum_{i=0}^{a}\mid \uparrow \rangle_{S} \mid i \ran
 <div class="output_text output_subarea output_execute_result">
 <pre>(Quantum object: dims = [[3], [1]], shape = (3, 1), type = ket
  Qobj data =
- [[0.]
-  [0.]
-  [1.]],
+ [[0.        ]
+  [0.70710678]
+  [0.70710678]],
  Quantum object: dims = [[3], [1]], shape = (3, 1), type = ket
  Qobj data =
- [[1.]
-  [0.]
-  [0.]])</pre>
+ [[-0.70710678]
+  [ 0.5       ]
+  [-0.5       ]])</pre>
 </div>
 
 </div>
@@ -14903,7 +14932,7 @@ $$ \frac{1}{\sqrt{n}}\Bigg{(}\sum_{i=0}^{a}\mid \uparrow \rangle_{S} \mid i \ran
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[118]:</div>
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">qubit_app_env</span> <span class="o">=</span> <span class="p">(</span><span class="nb">sum</span><span class="p">([</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">a</span><span class="p">)])</span> <span class="o">+</span>\
@@ -14927,7 +14956,7 @@ $$ \frac{1}{\sqrt{n}}\Bigg{(}\sum_{i=0}^{a}\mid \uparrow \rangle_{S} \mid i \ran
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>0.577 |000&gt; Pr: 0.333
-0.577 |011&gt; Pr: 0.333
+0.577 |111&gt; Pr: 0.333
 0.577 |122&gt; Pr: 0.333
 </pre>
 </div>
@@ -14947,7 +14976,7 @@ $$ \frac{1}{\sqrt{n}}\Bigg{(}\sum_{i=0}^{a}\mid \uparrow \rangle_{S} \mid i \ran
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[119]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">k</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
@@ -14987,7 +15016,7 @@ $$ \frac{1}{\sqrt{n}}\Bigg{(}\sum_{i=0}^{a}\mid \uparrow \rangle_{S} \mid i \ran
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[120]:</div>
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">sys_app_swap</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">l</span><span class="p">))</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span> <span class="o">+</span>\
@@ -15031,7 +15060,7 @@ $$ \frac{1}{\sqrt{n}}\Bigg{(}\sum_{i=0}^{a}\mid \uparrow \rangle_{S} \mid i \ran
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[121]:</div>
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">l</span><span class="p">)),</span> <span class="n">sys_app_swap</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
@@ -15047,7 +15076,7 @@ $$ \frac{1}{\sqrt{n}}\Bigg{(}\sum_{i=0}^{a}\mid \uparrow \rangle_{S} \mid i \ran
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[121]:</div>
+    <div class="prompt output_prompt">Out[40]:</div>
 
 
 
@@ -15079,7 +15108,7 @@ $$ \frac{1}{\sqrt{n}}\Bigg{(}\sum_{i=0}^{a}\mid \uparrow \rangle_{S} \mid i \ran
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[122]:</div>
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)),</span> <span class="n">sys_app_swap</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">l</span><span class="p">))</span>
@@ -15095,7 +15124,7 @@ $$ \frac{1}{\sqrt{n}}\Bigg{(}\sum_{i=0}^{a}\mid \uparrow \rangle_{S} \mid i \ran
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[122]:</div>
+    <div class="prompt output_prompt">Out[41]:</div>
 
 
 
@@ -15135,7 +15164,7 @@ $$ \frac{1}{\sqrt{n}}\Bigg{(}\sum_{i=0}^{a}\mid \uparrow \rangle_{S} \mid i \ran
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[123]:</div>
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">env_swap</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span> <span class="o">+</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
@@ -15177,7 +15206,7 @@ $$ \frac{1}{\sqrt{n}}\Bigg{(}\sum_{i=0}^{a}\mid \uparrow \rangle_{S} \mid i \ran
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[124]:</div>
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">l</span><span class="p">),</span> <span class="n">env_swap</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
@@ -15193,7 +15222,7 @@ $$ \frac{1}{\sqrt{n}}\Bigg{(}\sum_{i=0}^{a}\mid \uparrow \rangle_{S} \mid i \ran
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[124]:</div>
+    <div class="prompt output_prompt">Out[43]:</div>
 
 
 
@@ -15219,7 +15248,7 @@ $$ \frac{1}{\sqrt{n}}\Bigg{(}\sum_{i=0}^{a}\mid \uparrow \rangle_{S} \mid i \ran
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[125]:</div>
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="n">env_swap</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
@@ -15235,7 +15264,7 @@ $$ \frac{1}{\sqrt{n}}\Bigg{(}\sum_{i=0}^{a}\mid \uparrow \rangle_{S} \mid i \ran
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[125]:</div>
+    <div class="prompt output_prompt">Out[44]:</div>
 
 
 
@@ -15269,7 +15298,7 @@ $$ \frac{1}{\sqrt{n}}\Bigg{(}\sum_{i=0}^{a}\mid \uparrow \rangle_{S} \mid i \ran
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[126]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">swap</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">sys_app_swap</span><span class="p">,</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
@@ -15304,22 +15333,22 @@ $$ \frac{1}{\sqrt{n}}\Bigg{(}\sum_{i=0}^{a}\mid \uparrow \rangle_{S} \mid i \ran
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>starting off...
 0.577 |000&gt; Pr: 0.333
-0.577 |011&gt; Pr: 0.333
+0.577 |111&gt; Pr: 0.333
 0.577 |122&gt; Pr: 0.333
 
 swapping on qubit/apparatus...
 0.577 |002&gt; Pr: 0.333
--0.577 |011&gt; Pr: 0.333
+-0.577 |111&gt; Pr: 0.333
 0.577 |120&gt; Pr: 0.333
 
 counterswapping on environment...
 0.577 |002&gt; Pr: 0.333
--0.577 |011&gt; Pr: 0.333
+-0.577 |111&gt; Pr: 0.333
 0.577 |120&gt; Pr: 0.333
 
 swap and counterswap:
 0.577 |000&gt; Pr: 0.333
-0.577 |011&gt; Pr: 0.333
+0.577 |111&gt; Pr: 0.333
 0.577 |122&gt; Pr: 0.333
 </pre>
 </div>

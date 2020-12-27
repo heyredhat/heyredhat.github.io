@@ -13115,7 +13115,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">spheres</span> <span class="k">import</span> <span class="o">*</span>
@@ -13150,6 +13150,36 @@ div#notebook {
 <div class="output_wrapper">
 <div class="output">
 
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div id="glowscript" class="glowscript"></div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+
+<div id="4aeb1c73-d329-4c6d-9549-b8251f375481"></div>
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+var element = $('#4aeb1c73-d329-4c6d-9549-b8251f375481');
+if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container: $("#glowscript").removeAttr("id")};}else{ element.textContent = ' ';}
+</script>
+</div>
+
+</div>
 
 <div class="output_area">
 
@@ -13303,7 +13333,7 @@ Qobj data =
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">operator_spherical_decomposition</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">T_basis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -13337,21 +13367,21 @@ Qobj data =
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>sigma: 0, mu: 0 = 0.500 + 0.000
-sigma: 1, mu: -1 = -0.093 + 0.006
-sigma: 1, mu: 0 = 0.098 + 0.000
-sigma: 1, mu: 1 = 0.093 + 0.006
-sigma: 2, mu: -2 = 0.122 + 0.045
-sigma: 2, mu: -1 = -0.027 + -0.002
-sigma: 2, mu: 0 = 0.042 + 0.000
-sigma: 2, mu: 1 = 0.027 + -0.002
-sigma: 2, mu: 2 = 0.122 + -0.045
-sigma: 3, mu: -3 = 0.124 + 0.001
-sigma: 3, mu: -2 = 0.040 + 0.032
-sigma: 3, mu: -1 = -0.004 + -0.075
-sigma: 3, mu: 0 = -0.116 + 0.000
-sigma: 3, mu: 1 = 0.004 + -0.075
-sigma: 3, mu: 2 = 0.040 + -0.032
-sigma: 3, mu: 3 = -0.124 + 0.001
+sigma: 1, mu: -1 = 0.057 + -0.020
+sigma: 1, mu: 0 = -0.163 + 0.000
+sigma: 1, mu: 1 = -0.057 + -0.020
+sigma: 2, mu: -2 = 0.029 + -0.049
+sigma: 2, mu: -1 = -0.025 + 0.095
+sigma: 2, mu: 0 = 0.027 + 0.000
+sigma: 2, mu: 1 = 0.025 + 0.095
+sigma: 2, mu: 2 = 0.029 + 0.049
+sigma: 3, mu: -3 = 0.020 + -0.085
+sigma: 3, mu: -2 = 0.023 + 0.038
+sigma: 3, mu: -1 = 0.029 + 0.023
+sigma: 3, mu: 0 = 0.052 + 0.000
+sigma: 3, mu: 1 = -0.029 + 0.023
+sigma: 3, mu: 2 = 0.023 + -0.038
+sigma: 3, mu: 3 = -0.020 + -0.085
 </pre>
 </div>
 </div>
@@ -13370,7 +13400,7 @@ sigma: 3, mu: 3 = -0.124 + 0.001
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">spherical_decomposition_operator</span><span class="p">(</span><span class="n">decomposition</span><span class="p">,</span> <span class="n">T_basis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -13421,7 +13451,7 @@ sigma: 3, mu: 3 = -0.124 + 0.001
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">spherical_decomposition_spins</span><span class="p">(</span><span class="n">decomposition</span><span class="p">):</span>
@@ -13458,30 +13488,30 @@ norm: 0.500
 
 Quantum object: dims = [[3], [1]], shape = (3, 1), type = ket
 Qobj data =
-[[ 0.09285355+0.00643486j]
- [ 0.09776107+0.j        ]
- [-0.09285355+0.00643486j]]
-norm: 0.164
+[[-0.05735872-0.01979219j]
+ [-0.16317337+0.j        ]
+ [ 0.05735872-0.01979219j]]
+norm: 0.184
 
 Quantum object: dims = [[5], [1]], shape = (5, 1), type = ket
 Qobj data =
-[[ 0.12201999-0.04480901j]
- [ 0.02656373-0.00197376j]
- [ 0.04180714+0.j        ]
- [-0.02656373-0.00197376j]
- [ 0.12201999+0.04480901j]]
-norm: 0.192
+[[ 0.02861079+0.04901568j]
+ [ 0.02459963+0.09513075j]
+ [ 0.02720236+0.j        ]
+ [-0.02459963+0.09513075j]
+ [ 0.02861079-0.04901568j]]
+norm: 0.163
 
 Quantum object: dims = [[7], [1]], shape = (7, 1), type = ket
 Qobj data =
-[[-0.12364429+0.0006447j ]
- [ 0.039855  -0.03218862j]
- [ 0.00447298-0.07476801j]
- [-0.11636599+0.j        ]
- [-0.00447298-0.07476801j]
- [ 0.039855  +0.03218862j]
- [ 0.12364429+0.0006447j ]]
-norm: 0.246
+[[-0.02039833-0.08492803j]
+ [ 0.02258204-0.03844422j]
+ [-0.0293161 +0.02329892j]
+ [ 0.05201113+0.j        ]
+ [ 0.0293161 +0.02329892j]
+ [ 0.02258204+0.03844422j]
+ [ 0.02039833-0.08492803j]]
+norm: 0.157
 
 </pre>
 </div>
@@ -13502,7 +13532,7 @@ norm: 0.246
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">spin</span> <span class="ow">in</span> <span class="n">spins</span><span class="p">:</span>
@@ -13526,20 +13556,20 @@ norm: 0.246
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>[[0 0 0]]
 
-[[ 0.80088424 -0.0555022  -0.59624152]
- [-0.80088424  0.0555022   0.59624152]]
+[[ 0.43999211 -0.15182358 -0.88507432]
+ [-0.43999211  0.15182358  0.88507432]]
 
-[[ 0.41870426  0.88890448 -0.18583747]
- [-0.70252107  0.6931036   0.16146683]
- [ 0.70252107 -0.6931036  -0.16146683]
- [-0.41870426 -0.88890448  0.18583747]]
+[[ 0.46757668  0.16799182 -0.86784261]
+ [ 0.18106385 -0.97598578 -0.12111003]
+ [-0.18106385  0.97598578  0.12111003]
+ [-0.46757668 -0.16799182  0.86784261]]
 
-[[-0.46949903  0.51208653 -0.71926216]
- [ 0.86915175 -0.23331018 -0.43605228]
- [-0.42986946 -0.8367581  -0.33918745]
- [-0.86915175  0.23331018  0.43605228]
- [ 0.42986946  0.8367581   0.33918745]
- [ 0.46949903 -0.51208653  0.71926216]]
+[[ 0.57930327  0.42994694 -0.69249791]
+ [-0.91340961  0.27945732 -0.29595015]
+ [-0.10296128 -0.9690529  -0.22435563]
+ [ 0.10296128  0.9690529   0.22435563]
+ [ 0.91340961 -0.27945732  0.29595015]
+ [-0.57930327 -0.42994694  0.69249791]]
 
 </pre>
 </div>
@@ -13559,7 +13589,7 @@ norm: 0.246
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">U</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_unitary</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
@@ -13584,20 +13614,20 @@ norm: 0.246
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>[[0 0 0]]
 
-[[-0.74883931 -0.26829552 -0.60601749]
- [ 0.78659781  0.61187731 -0.08288575]]
+[[-0.43499016  0.5684879  -0.69828724]
+ [ 0.61934811 -0.4581386   0.63758681]]
 
-[[ 0.11467829  0.36762492 -0.92287638]
- [-0.51739605  0.19647863 -0.83288503]
- [ 0.50305353 -0.2517693   0.82677045]
- [-0.10426964 -0.34549565  0.93260956]]
+[[-0.09655261 -0.66193919 -0.74331292]
+ [-0.28787102  0.88181202 -0.37354764]
+ [ 0.24550167 -0.75846402  0.60370627]
+ [ 0.47873896  0.60746561  0.63387265]]
 
-[[ 0.20372899  0.34699606 -0.91547159]
- [-0.76941361 -0.62055738 -0.15136461]
- [-0.99718737  0.05416912 -0.05179822]
- [ 0.64878585 -0.75958318  0.0459381 ]
- [ 0.42666881  0.83904138  0.33758449]
- [ 0.44106429  0.20609461  0.87349145]]
+[[-0.24693462 -0.82824452 -0.50302516]
+ [ 0.05194309  0.89419808 -0.44464785]
+ [-0.93706059  0.34912572  0.00535633]
+ [ 0.24735871  0.91366575  0.32253459]
+ [ 0.86531585 -0.49235821  0.09387153]
+ [-0.15893154 -0.83783322  0.52227987]]
 
 </pre>
 </div>
@@ -13617,7 +13647,7 @@ norm: 0.246
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pure_state</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
@@ -13647,27 +13677,27 @@ norm: 0.246
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>pure state stars:
-[[ 0.87172428 -0.45427202 -0.18366736]
- [-0.87666139  0.31857627 -0.36051901]
- [-0.89168973  0.18472621  0.413238  ]]
+[[-0.68817937 -0.23027966 -0.68802648]
+ [ 0.0909218   0.98752801 -0.12853656]
+ [ 0.25267089 -0.51724818  0.81768682]]
 
 pure dm stars:
 [[0 0 0]]
 
-[[-0.92477782 -0.20971344 -0.31750001]
- [ 0.92477782  0.20971344  0.31750001]]
+[[ 0.84670229 -0.4948951  -0.19538186]
+ [-0.84670229  0.4948951   0.19538186]]
 
-[[ 0.59664745 -0.74922865 -0.28752088]
- [ 0.99800193 -0.03461569 -0.05285733]
- [-0.99800193  0.03461569  0.05285733]
- [-0.59664745  0.74922865  0.28752088]]
+[[ 0.50741376  0.04097585 -0.86072775]
+ [ 0.85778717 -0.51326187 -0.02763006]
+ [-0.85778717  0.51326187  0.02763006]
+ [-0.50741376 -0.04097585  0.86072775]]
 
-[[ 0.89168973 -0.18472621 -0.413238  ]
- [ 0.87172428 -0.45427202 -0.18366736]
- [ 0.87666139 -0.31857627  0.36051901]
- [-0.87666139  0.31857627 -0.36051901]
- [-0.87172428  0.45427202  0.18366736]
- [-0.89168973  0.18472621  0.413238  ]]
+[[-0.25267089  0.51724818 -0.81768682]
+ [-0.68817937 -0.23027966 -0.68802648]
+ [ 0.0909218   0.98752801 -0.12853656]
+ [-0.0909218  -0.98752801  0.12853656]
+ [ 0.68817937  0.23027966  0.68802648]
+ [ 0.25267089 -0.51724818  0.81768682]]
 
 </pre>
 </div>
@@ -13689,7 +13719,7 @@ pure dm stars:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">spheres</span> <span class="k">import</span> <span class="o">*</span>
@@ -13741,15 +13771,53 @@ pure dm stars:
 
 
 
-<div id="c0b5883d-0a42-4a0c-8f11-2f16344b003c"></div>
+<div id="08c94d27-406d-4908-b5ad-78fbf0af107c"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#c0b5883d-0a42-4a0c-8f11-2f16344b003c');
+var element = $('#08c94d27-406d-4908-b5ad-78fbf0af107c');
 if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container: $("#glowscript").removeAttr("id")};}else{ element.textContent = ' ';}
 </script>
 </div>
 
 </div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>OperatorSphere</code> allows one to visualize a mixed state or operator using the spherical tensor decomposition. You see a series of concentric spheres whose radii are the norms of the spins, and the colors of the spheres/stars correspond to the <em>phase</em> of the spin states. You can see that the constellation with the highest $j$ value contains the original Majorana constellation (shown on the left), but also includes the antipodal points. And everything transforms nicely under and $SU(2)$ rotation. (And the label gives the value of the spin-$0$ sector).</p>
+<p>We can look at the evolution of a density matrix under some random Hamiltonian. Notice that unlike in the case of simple rotations, the radii of the spheres can change--but the antipodal symmetry is preserved. (It's also interesting to think about states which have antipodal symmetry as being "time reversal invariant," insofar as the operator that inverts the spheres is for spins the time-reversal operator.)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">spheres</span> <span class="k">import</span> <span class="o">*</span>
+<span class="n">scene</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">canvas</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">white</span><span class="p">)</span>
+
+<span class="n">j</span> <span class="o">=</span> <span class="mi">3</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">dm</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_dm</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">osphere</span> <span class="o">=</span> <span class="n">OperatorSphere</span><span class="p">(</span><span class="n">dm</span><span class="p">,</span> <span class="n">scene</span><span class="o">=</span><span class="n">scene</span><span class="p">)</span>
+
+<span class="n">H</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_herm</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">U</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">H</span><span class="o">*</span><span class="mf">0.01</span><span class="p">)</span><span class="o">.</span><span class="n">expm</span><span class="p">()</span>
+<span class="n">osphere</span><span class="o">.</span><span class="n">evolve</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
 
 <div class="output_area">
 
@@ -13771,10 +13839,10 @@ if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container:
 
 
 
-<div id="6fad72b8-f54f-472e-8b65-bfc3e1018ae2"></div>
+<div id="24ea684e-3612-4cdf-a359-6fe9219f4ce6"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#6fad72b8-f54f-472e-8b65-bfc3e1018ae2');
+var element = $('#24ea684e-3612-4cdf-a359-6fe9219f4ce6');
 if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container: $("#glowscript").removeAttr("id")};}else{ element.textContent = ' ';}
 </script>
 </div>
@@ -13786,140 +13854,47 @@ if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container:
     <div class="prompt"></div>
 
 
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">KeyboardInterrupt</span>                         Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-22-97bdd26298df&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      8</span> H <span class="ansi-blue-fg">=</span> qt<span class="ansi-blue-fg">.</span>rand_herm<span class="ansi-blue-fg">(</span>int<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">2</span><span class="ansi-blue-fg">*</span>j<span class="ansi-blue-fg">+</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      9</span> U <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">-</span><span class="ansi-cyan-fg">1j</span><span class="ansi-blue-fg">*</span>H<span class="ansi-blue-fg">*</span><span class="ansi-cyan-fg">0.01</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>expm<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 10</span><span class="ansi-red-fg"> </span>osphere<span class="ansi-blue-fg">.</span>evolve<span class="ansi-blue-fg">(</span>H<span class="ansi-blue-fg">,</span> dt<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0.01</span><span class="ansi-blue-fg">,</span> T<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">1000</span><span class="ansi-blue-fg">)</span>
 
+<span class="ansi-green-fg">~/opt/anaconda3/envs/spheres/lib/python3.8/site-packages/spheres-0.3.0.8-py3.8.egg/spheres/visualization/OperatorSphere.py</span> in <span class="ansi-cyan-fg">evolve</span><span class="ansi-blue-fg">(self, H, dt, T)</span>
+<span class="ansi-green-intense-fg ansi-bold">     99</span>             self<span class="ansi-blue-fg">.</span>dm <span class="ansi-blue-fg">=</span> U<span class="ansi-blue-fg">*</span>self<span class="ansi-blue-fg">.</span>dm<span class="ansi-blue-fg">*</span>U<span class="ansi-blue-fg">.</span>dag<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    100</span>             self<span class="ansi-blue-fg">.</span>refresh<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 101</span><span class="ansi-red-fg">             </span>vp<span class="ansi-blue-fg">.</span>rate<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">50</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    102</span> 
+<span class="ansi-green-intense-fg ansi-bold">    103</span>     <span class="ansi-green-fg">def</span> cmp_spin<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 
+<span class="ansi-green-fg">~/opt/anaconda3/envs/spheres/lib/python3.8/site-packages/vpython/rate_control.py</span> in <span class="ansi-cyan-fg">__call__</span><span class="ansi-blue-fg">(self, N)</span>
+<span class="ansi-green-intense-fg ansi-bold">    264</span>         self<span class="ansi-blue-fg">.</span>rval <span class="ansi-blue-fg">=</span> N
+<span class="ansi-green-intense-fg ansi-bold">    265</span>         <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>rval <span class="ansi-blue-fg">&lt;</span> <span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">raise</span> ValueError<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;rate value must be greater than or equal to 1&#34;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 266</span><span class="ansi-red-fg">         </span>super<span class="ansi-blue-fg">(</span>_RateKeeper2<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>__call__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>rval<span class="ansi-blue-fg">)</span> <span class="ansi-red-fg">## calls __call__ in rate_control.py</span>
+<span class="ansi-green-intense-fg ansi-bold">    267</span> 
+<span class="ansi-green-intense-fg ansi-bold">    268</span> 
 
-<div id="42e7a548-191c-44bc-b78e-38196ca26dd2"></div>
-<div class="output_subarea output_javascript ">
-<script type="text/javascript">
-var element = $('#42e7a548-191c-44bc-b78e-38196ca26dd2');
-if (typeof Jupyter !== "undefined") {require.undef("nbextensions/vpython_libraries/glow.min");}else{element.textContent = ' ';}
-</script>
-</div>
+<span class="ansi-green-fg">~/opt/anaconda3/envs/spheres/lib/python3.8/site-packages/vpython/rate_control.py</span> in <span class="ansi-cyan-fg">__call__</span><span class="ansi-blue-fg">(self, maxRate)</span>
+<span class="ansi-green-intense-fg ansi-bold">    218</span>             dt <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>lastSleep <span class="ansi-blue-fg">+</span> self<span class="ansi-blue-fg">.</span>calls<span class="ansi-blue-fg">*</span><span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>userTime <span class="ansi-blue-fg">+</span> self<span class="ansi-blue-fg">.</span>callTime <span class="ansi-blue-fg">+</span> self<span class="ansi-blue-fg">.</span>delay<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">+</span><span class="ansi-red-fg"> </span><span class="ansi-red-fg">\</span>
+<span class="ansi-green-intense-fg ansi-bold">    219</span>                  renders<span class="ansi-blue-fg">*</span>self<span class="ansi-blue-fg">.</span>renderTime <span class="ansi-blue-fg">+</span> sleeps<span class="ansi-blue-fg">*</span>self<span class="ansi-blue-fg">.</span>interactionPeriod <span class="ansi-blue-fg">-</span> _clock<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 220</span><span class="ansi-red-fg">             </span>_sleep<span class="ansi-blue-fg">(</span>dt<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    221</span>             self<span class="ansi-blue-fg">.</span>lastSleep <span class="ansi-blue-fg">=</span> _clock<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    222</span>             self<span class="ansi-blue-fg">.</span>calls <span class="ansi-blue-fg">=</span> <span class="ansi-cyan-fg">0</span>
 
-</div>
+<span class="ansi-green-fg">~/opt/anaconda3/envs/spheres/lib/python3.8/site-packages/vpython/rate_control.py</span> in <span class="ansi-cyan-fg">_sleep</span><span class="ansi-blue-fg">(dt)</span>
+<span class="ansi-green-intense-fg ansi-bold">     60</span>         dtsleep <span class="ansi-blue-fg">=</span> nticks<span class="ansi-blue-fg">*</span>_tick
+<span class="ansi-green-intense-fg ansi-bold">     61</span>         t <span class="ansi-blue-fg">=</span> _clock<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 62</span><span class="ansi-red-fg">         </span>time<span class="ansi-blue-fg">.</span>sleep<span class="ansi-blue-fg">(</span>dtsleep<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     63</span>         t <span class="ansi-blue-fg">=</span> _clock<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">-</span>t
+<span class="ansi-green-intense-fg ansi-bold">     64</span>         dt <span class="ansi-blue-fg">-=</span> t
 
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-
-<div id="50f8e69b-35f7-4dec-9034-98779bfd8152"></div>
-<div class="output_subarea output_javascript ">
-<script type="text/javascript">
-var element = $('#50f8e69b-35f7-4dec-9034-98779bfd8152');
-if (typeof Jupyter !== "undefined") {require.undef("nbextensions/vpython_libraries/glowcomm");}else{element.textContent = ' ';}
-</script>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-
-<div id="70547069-7b68-45e9-bf19-845707661e5a"></div>
-<div class="output_subarea output_javascript ">
-<script type="text/javascript">
-var element = $('#70547069-7b68-45e9-bf19-845707661e5a');
-if (typeof Jupyter !== "undefined") {require.undef("nbextensions/vpython_libraries/jquery-ui.custom.min");}else{element.textContent = ' ';}
-</script>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-
-<div id="ab3de06a-7856-49cd-bd46-7f822ca8bd5a"></div>
-<div class="output_subarea output_javascript ">
-<script type="text/javascript">
-var element = $('#ab3de06a-7856-49cd-bd46-7f822ca8bd5a');
-if (typeof Jupyter !== "undefined") {require(["nbextensions/vpython_libraries/glow.min"], function(){console.log("GLOW LOADED");});}else{element.textContent = ' ';}
-</script>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-
-<div id="7f2c680b-969d-430f-8ea3-1101aa1bf5b3"></div>
-<div class="output_subarea output_javascript ">
-<script type="text/javascript">
-var element = $('#7f2c680b-969d-430f-8ea3-1101aa1bf5b3');
-if (typeof Jupyter !== "undefined") {require(["nbextensions/vpython_libraries/glowcomm"], function(){console.log("GLOWCOMM LOADED");});}else{element.textContent = ' ';}
-</script>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-
-<div id="3a799c1e-ecb7-4bc4-8c8f-d43b9361adec"></div>
-<div class="output_subarea output_javascript ">
-<script type="text/javascript">
-var element = $('#3a799c1e-ecb7-4bc4-8c8f-d43b9361adec');
-if (typeof Jupyter !== "undefined") {require(["nbextensions/vpython_libraries/jquery-ui.custom.min"], function(){console.log("JQUERY LOADED");});}else{element.textContent = ' ';}
-</script>
-</div>
-
-</div>
-
+<span class="ansi-red-fg">KeyboardInterrupt</span>: </pre>
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><code>OperatorSphere</code> allows one to visualize a mixed state or operator using the spherical tensor decomposition. You see a series of concentric spheres whose radii are the norms of the spins, and the colors of the spheres/stars correspond to the <em>phase</em> of the spin states. You can see that the constellation with the highest $j$ value contains the original Majorana constellation (shown on the left), but also includes the antipodal points. And everything transforms nicely under and $SU(2)$ rotation. (And the label gives the value of the spin-$0$ sector).</p>
-<p>We can look at the evolution of a density matrix under some random Hamiltonian. Notice that unlike in the case of simple rotations, the radii of the spheres can change--but the antipodal symmetry is preserved. (It's also interesting to think about states which have antipodal symmetry as being "time reversal invariant," insofar as the operator that inverts the spheres is for spins the time-reversal operator.)</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">spheres</span> <span class="k">import</span> <span class="o">*</span>
-<span class="n">scene</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">canvas</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">white</span><span class="p">)</span>
-
-<span class="n">j</span> <span class="o">=</span> <span class="mi">3</span><span class="o">/</span><span class="mi">2</span>
-<span class="n">dm</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_dm</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
-<span class="n">osphere</span> <span class="o">=</span> <span class="n">OperatorSphere</span><span class="p">(</span><span class="n">dm</span><span class="p">,</span> <span class="n">scene</span><span class="o">=</span><span class="n">scene</span><span class="p">)</span>
-
-<span class="n">H</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_herm</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
-<span class="n">U</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">H</span><span class="o">*</span><span class="mf">0.01</span><span class="p">)</span><span class="o">.</span><span class="n">expm</span><span class="p">()</span>
-<span class="n">osphere</span><span class="o">.</span><span class="n">evolve</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-</pre></div>
-
-    </div>
 </div>
 </div>
 
@@ -13934,7 +13909,7 @@ if (typeof Jupyter !== "undefined") {require(["nbextensions/vpython_libraries/jq
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">spheres</span> <span class="k">import</span> <span class="o">*</span>
@@ -13953,6 +13928,75 @@ if (typeof Jupyter !== "undefined") {require(["nbextensions/vpython_libraries/jq
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div id="glowscript" class="glowscript"></div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+
+<div id="fb4c6175-93f3-4c2e-b54b-d9b37422e66a"></div>
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+var element = $('#fb4c6175-93f3-4c2e-b54b-d9b37422e66a');
+if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container: $("#glowscript").removeAttr("id")};}else{ element.textContent = ' ';}
+</script>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">KeyboardInterrupt</span>                         Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-12-fdb5d36905a2&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      8</span> H <span class="ansi-blue-fg">=</span> qt<span class="ansi-blue-fg">.</span>rand_herm<span class="ansi-blue-fg">(</span>int<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">2</span><span class="ansi-blue-fg">*</span>j<span class="ansi-blue-fg">+</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      9</span> U <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">-</span><span class="ansi-cyan-fg">1j</span><span class="ansi-blue-fg">*</span>H<span class="ansi-blue-fg">*</span><span class="ansi-cyan-fg">0.01</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>expm<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 10</span><span class="ansi-red-fg"> </span>osphere<span class="ansi-blue-fg">.</span>evolve<span class="ansi-blue-fg">(</span>H<span class="ansi-blue-fg">,</span> dt<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0.01</span><span class="ansi-blue-fg">,</span> T<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">1000</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">~/opt/anaconda3/envs/spheres/lib/python3.8/site-packages/spheres-0.3.0.8-py3.8.egg/spheres/visualization/OperatorSphere.py</span> in <span class="ansi-cyan-fg">evolve</span><span class="ansi-blue-fg">(self, H, dt, T)</span>
+<span class="ansi-green-intense-fg ansi-bold">     97</span>         U <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">-</span><span class="ansi-cyan-fg">1j</span><span class="ansi-blue-fg">*</span>H<span class="ansi-blue-fg">*</span>dt<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>expm<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     98</span>         <span class="ansi-green-fg">for</span> t <span class="ansi-green-fg">in</span> np<span class="ansi-blue-fg">.</span>linspace<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">,</span> T<span class="ansi-blue-fg">,</span> int<span class="ansi-blue-fg">(</span>T<span class="ansi-blue-fg">/</span>dt<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">---&gt; 99</span><span class="ansi-red-fg">             </span>self<span class="ansi-blue-fg">.</span>dm <span class="ansi-blue-fg">=</span> U<span class="ansi-blue-fg">*</span>self<span class="ansi-blue-fg">.</span>dm<span class="ansi-blue-fg">*</span>U<span class="ansi-blue-fg">.</span>dag<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    100</span>             self<span class="ansi-blue-fg">.</span>refresh<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    101</span>             vp<span class="ansi-blue-fg">.</span>rate<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">50</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">~/opt/anaconda3/envs/spheres/lib/python3.8/site-packages/qutip/qobj.py</span> in <span class="ansi-cyan-fg">__mul__</span><span class="ansi-blue-fg">(self, other)</span>
+<span class="ansi-green-intense-fg ansi-bold">    516</span>                                     if not m]),
+<span class="ansi-green-intense-fg ansi-bold">    517</span>                                 max([1],
+<span class="ansi-green-fg">--&gt; 518</span><span class="ansi-red-fg">                                     [dim for dim, m in zip(dims[1], mask)
+</span><span class="ansi-green-intense-fg ansi-bold">    519</span>                                     if not m])]
+<span class="ansi-green-intense-fg ansi-bold">    520</span> 
+
+<span class="ansi-red-fg">KeyboardInterrupt</span>: </pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -13964,7 +14008,7 @@ if (typeof Jupyter !== "undefined") {require(["nbextensions/vpython_libraries/jq
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">spheres</span> <span class="k">import</span> <span class="o">*</span>
@@ -14010,10 +14054,10 @@ if (typeof Jupyter !== "undefined") {require(["nbextensions/vpython_libraries/jq
 
 
 
-<div id="25886298-69c5-4218-a518-6a24ca83abd2"></div>
+<div id="688304f9-e19a-4d9e-a8b2-982a75f40c3f"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#25886298-69c5-4218-a518-6a24ca83abd2');
+var element = $('#688304f9-e19a-4d9e-a8b2-982a75f40c3f');
 if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container: $("#glowscript").removeAttr("id")};}else{ element.textContent = ' ';}
 </script>
 </div>
@@ -14034,7 +14078,7 @@ if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="p">)):</span>
@@ -14068,37 +14112,37 @@ if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container:
 <pre>ptrace [0]
 [[0 0 0]]
 
-[[-0.72149193  0.68851254 -0.07348386]
- [ 0.72149193 -0.68851254  0.07348386]]
+[[ 0.19008415  0.91445326 -0.35727196]
+ [-0.19008415 -0.91445326  0.35727196]]
 
 ptrace [0, 1]
 [[0 0 0]]
 
-[[-0.72149193  0.68851254 -0.07348386]
- [ 0.72149193 -0.68851254  0.07348386]]
+[[ 0.19008415  0.91445326 -0.35727196]
+ [-0.19008415 -0.91445326  0.35727196]]
 
-[[-0.19728399 -0.46465511 -0.863235  ]
- [-0.93025309 -0.23057713 -0.28541789]
- [ 0.93025309  0.23057713  0.28541789]
- [ 0.19728399  0.46465511  0.863235  ]]
+[[ 0.17670785 -0.44259581 -0.87913781]
+ [ 0.7129492   0.68977917 -0.12612745]
+ [-0.7129492  -0.68977917  0.12612745]
+ [-0.17670785  0.44259581  0.87913781]]
 
 full state:
 [[0 0 0]]
 
-[[-0.72149193  0.68851254 -0.07348386]
- [ 0.72149193 -0.68851254  0.07348386]]
+[[ 0.19008415  0.91445326 -0.35727196]
+ [-0.19008415 -0.91445326  0.35727196]]
 
-[[-0.19728399 -0.46465511 -0.863235  ]
- [-0.93025309 -0.23057713 -0.28541789]
- [ 0.93025309  0.23057713  0.28541789]
- [ 0.19728399  0.46465511  0.863235  ]]
+[[ 0.17670785 -0.44259581 -0.87913781]
+ [ 0.7129492   0.68977917 -0.12612745]
+ [-0.7129492  -0.68977917  0.12612745]
+ [-0.17670785  0.44259581  0.87913781]]
 
-[[-0.61425021 -0.3450242  -0.70968654]
- [-0.68145858 -0.51847265 -0.51652716]
- [-0.60399729  0.69135377 -0.3965063 ]
- [ 0.60399729 -0.69135377  0.3965063 ]
- [ 0.68145858  0.51847265  0.51652716]
- [ 0.61425021  0.3450242   0.70968654]]
+[[ 0.55856659  0.21995978 -0.79976313]
+ [-0.24191822  0.69825361 -0.67373397]
+ [ 0.91948558 -0.09641603 -0.38111706]
+ [ 0.24191822 -0.69825361  0.67373397]
+ [-0.91948558  0.09641603  0.38111706]
+ [-0.55856659 -0.21995978  0.79976313]]
 
 </pre>
 </div>
@@ -14121,7 +14165,7 @@ full state:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">scene</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">canvas</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">white</span><span class="p">)</span>
@@ -14163,10 +14207,10 @@ full state:
 
 
 
-<div id="7c46c7b8-3667-4575-a442-14cb88d96979"></div>
+<div id="7f029f52-b9f9-45db-9dc8-364a6a72a8c7"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#7c46c7b8-3667-4575-a442-14cb88d96979');
+var element = $('#7f029f52-b9f9-45db-9dc8-364a6a72a8c7');
 if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container: $("#glowscript").removeAttr("id")};}else{ element.textContent = ' ';}
 </script>
 </div>
@@ -14193,10 +14237,10 @@ if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container:
 
 
 
-<div id="4dc90fc4-9a1c-4c1a-b2e0-30cc36ddcf51"></div>
+<div id="8fdf478d-8ed4-4c76-a774-6aa80f828ed1"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#4dc90fc4-9a1c-4c1a-b2e0-30cc36ddcf51');
+var element = $('#8fdf478d-8ed4-4c76-a774-6aa80f828ed1');
 if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container: $("#glowscript").removeAttr("id")};}else{ element.textContent = ' ';}
 </script>
 </div>
@@ -14219,7 +14263,7 @@ if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">scene</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">canvas</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">white</span><span class="p">)</span>
@@ -14261,10 +14305,10 @@ if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container:
 
 
 
-<div id="5f9a9dfc-70e7-4888-8b8b-5050bdf43185"></div>
+<div id="0fd93562-5e94-4b58-8632-d90661d1ae92"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#5f9a9dfc-70e7-4888-8b8b-5050bdf43185');
+var element = $('#0fd93562-5e94-4b58-8632-d90661d1ae92');
 if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container: $("#glowscript").removeAttr("id")};}else{ element.textContent = ' ';}
 </script>
 </div>

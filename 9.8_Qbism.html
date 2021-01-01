@@ -13383,10 +13383,10 @@ $$tr(\Pi_{k}\Pi_{l}) = \frac{d\delta_{k,l} + 1}{d+1} $$
 
 
 
-<div id="8411a647-c119-4ead-829e-1cb5bb0f73d1"></div>
+<div id="35363fb3-a095-4ec5-9ddf-e52f1b7f14af"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#8411a647-c119-4ead-829e-1cb5bb0f73d1');
+var element = $('#35363fb3-a095-4ec5-9ddf-e52f1b7f14af');
 if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container: $("#glowscript").removeAttr("id")};}else{ element.textContent = ' ';}
 </script>
 </div>
@@ -14092,10 +14092,14 @@ povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[171]:</div>
+<div class="prompt input_prompt">In&nbsp;[182]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[(</span><span class="mi">1</span><span class="o">/</span><span class="n">d</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">U</span><span class="o">*</span><span class="n">ref_povm</span><span class="p">[</span><span class="s2">&quot;projectors&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">U</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">ref_povm</span><span class="p">[</span><span class="s2">&quot;projectors&quot;</span><span class="p">][</span><span class="n">j</span><span class="p">])</span><span class="o">.</span><span class="n">tr</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span><span class="o">.</span><span class="n">real</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">temporal_conditional_probs</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">U</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[(</span><span class="mi">1</span><span class="o">/</span><span class="n">d</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">U</span><span class="o">*</span><span class="n">ref_povm</span><span class="p">[</span><span class="s2">&quot;projectors&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">U</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">ref_povm</span><span class="p">[</span><span class="s2">&quot;projectors&quot;</span><span class="p">][</span><span class="n">j</span><span class="p">])</span><span class="o">.</span><span class="n">tr</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span><span class="o">.</span><span class="n">real</span>
+
+<span class="n">u</span> <span class="o">=</span> <span class="n">temporal_conditional_probs</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">)</span>
 <span class="n">pt2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">sum</span><span class="p">([((</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="n">d</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span><span class="o">.</span><span class="n">real</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;time evolved probabilities: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">pt2</span><span class="p">)</span>
 </pre></div>
@@ -14128,7 +14132,7 @@ povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We can compare this to the standard rule for stochastic evolution:</p>
 <p>$p_{t}(j) = \sum_{i} p(i)u(j|i)$</p>
-<p>And see how it is deformed in exactly the same way. Indeed $u(j|i)$ is a doubly stochastic matrix: it's rows and colums all sum to 1.</p>
+<p>And see how it is deformed in exactly the same way. Indeed $u(j|i)$ is a doubly stochastic matrix: its rows and colums all sum to 1. And we can describe the time evolution of the quantum system in terms of it.</p>
 
 </div>
 </div>

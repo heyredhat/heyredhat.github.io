@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>9_Symmetrized_Qubits</title>
+<title>9.8_Qbism</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13077,59 +13077,45 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="How-to-Prepare-a-Permutation-Symmetric-Multiqubit-State-on-an-Actual-Quantum-Computer">How to Prepare a Permutation Symmetric Multiqubit State on an Actual Quantum Computer<a class="anchor-link" href="#How-to-Prepare-a-Permutation-Symmetric-Multiqubit-State-on-an-Actual-Quantum-Computer">&#182;</a></h1>
+<h1 id="QBism">QBism<a class="anchor-link" href="#QBism">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I've made a big deal over the fact that one can represent a spin-$j$ state equivalently as a permutation symmetric state of $2j$ qubits, not least because given that our quantum computers (mostly) work with qubits, we need a way to represent everything we might care about in terms of them.</p>
-<p>For example, if we have a spin-$\frac{3}{2}$ state, we could express it in the usual $\mid j, m \rangle$ basis as:</p>
-<p>$ a\mid \frac{3}{2}, \frac{3}{2}\rangle + b\mid \frac{3}{2}, \frac{1}{2}\rangle + c\mid \frac{3}{2}, -\frac{1}{2}\rangle + d\mid \frac{3}{2}, -\frac{3}{2}\rangle\rangle $</p>
-<p>or in terms of symmeterized qubits:</p>
-<p>$ a\mid \uparrow \uparrow \uparrow \rangle + b\frac{1}{\sqrt{3}}(\mid \uparrow \uparrow \downarrow \rangle + \mid \uparrow \downarrow \uparrow \rangle + \mid \downarrow \uparrow \uparrow \rangle) + c\frac{1}{\sqrt{3}}(\mid \downarrow \downarrow \uparrow \rangle + \mid \downarrow \uparrow \downarrow \rangle + \mid \uparrow \downarrow \downarrow \rangle) + d\mid \downarrow \downarrow \downarrow \rangle$</p>
-<p>In other words, there's a one-to-one correspondence between the four $\mid j, m \rangle$ basis states and the four symmetric basis states of three qubits. To wit: the states with $3 \uparrow$, with $2 \uparrow, 1 \downarrow$, with $2 \downarrow, 1 \uparrow$, and with $3 \downarrow$.</p>
-<p>So we can easily form a linear map that takes us from the one representation to the other:</p>
+<p>QBism, as I understand it, consists of two interlocking components, one part philosophical and one part mathematical. We'll deal with the mathematical part first.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="The-Math">The Math<a class="anchor-link" href="#The-Math">&#182;</a></h2><p>A Von Neumann measurement consists in a choice of observable represented by a Hermitian operator $H$. Such an operator will have real eigenvalues and orthogonal eigenvectors. For example, $H$ could be the energy operator. Then the eigenvectors would represent possible energy states (assuming no degeneracies), and the eigenvalues would represent possible value of the energy. According to textbook quantum mechanics, which state the system ends up in after the measurement will in general be random, and quantum mechanics allows you to calculate the probabilities. The Hermitian observable provides what is known as a "projection valued measure."</p>
+<p>Suppose our system was represented by a density matrix $\rho$. We could form the projectors $P_{i} = \mid v_{i} \rangle \langle v_{i} \mid$, where $\mid v_{i} \rangle$ is the $i^{th}$ eigenvector. Then the probability for the $i^{th}$ outcome would be given by $Pr(i) = tr(P_{i}\rho)$, and the state after measurement would be given by $\frac{P_{i} \rho P_{i}}{tr(P_{i}\rho)}$. The expectation value of the observable $\langle H \rangle$ is given by $tr(H\rho)$, and it amounts to a sum over the eigenvalues weighted by the corresponding probabilities.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">product</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="k">def</span> <span class="nf">spin_sym</span><span class="p">(</span><span class="n">j</span><span class="p">):</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">N</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">product</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="n">n</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="ow">in</span> <span class="n">N</span><span class="p">:</span>
-            <span class="n">N</span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span> <span class="o">+=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">p</span><span class="p">])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">N</span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">p</span><span class="p">])</span>
-    <span class="n">Q</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">N</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]))</span>
-    <span class="n">Q</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span>
-    <span class="k">return</span> <span class="n">Q</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
+<span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">rho</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_dm</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_herm</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">L</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">H</span><span class="o">.</span><span class="n">eigenstates</span><span class="p">()</span>
+<span class="n">P</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="o">*</span><span class="n">v</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">V</span><span class="p">]</span>
+<span class="n">p</span> <span class="o">=</span> <span class="p">[(</span><span class="n">proj</span><span class="o">*</span><span class="n">rho</span><span class="p">)</span><span class="o">.</span><span class="n">tr</span><span class="p">()</span> <span class="k">for</span> <span class="n">proj</span> <span class="ow">in</span> <span class="n">P</span><span class="p">]</span>
 
-<span class="n">j</span> <span class="o">=</span> <span class="mi">3</span><span class="o">/</span><span class="mi">2</span>
-<span class="n">d</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">S</span> <span class="o">=</span> <span class="n">spin_sym</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
-
-<span class="n">spin</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-<span class="n">sym</span> <span class="o">=</span> <span class="n">S</span><span class="o">*</span><span class="n">spin</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;spin state:</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">spin</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">permutation symmetric qubits:</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">sym</span><span class="p">)</span>
-
-<span class="n">I</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">S</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">transformation an isometry?: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">I</span> <span class="o">==</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">I</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;probabilities: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">p</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;expectation value: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">H</span><span class="o">*</span><span class="n">rho</span><span class="p">)</span><span class="o">.</span><span class="n">tr</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;expectation value again: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">sum</span><span class="p">([</span><span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)])))</span>
 </pre></div>
 
     </div>
@@ -13146,27 +13132,9 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>spin state:
-Quantum object: dims = [[4], [1]], shape = (4, 1), type = ket
-Qobj data =
-[[-0.30376126+0.43331784j]
- [ 0.309971  -0.24660853j]
- [ 0.5414951 -0.42922488j]
- [ 0.22623725+0.18556056j]]
-
-permutation symmetric qubits:
-Quantum object: dims = [[2, 2, 2], [1]], shape = (8, 1), type = ket
-Qobj data =
-[[-0.30376126+0.43331784j]
- [ 0.17896184-0.1423795j ]
- [ 0.17896184-0.1423795j ]
- [ 0.31263234-0.2478131j ]
- [ 0.17896184-0.1423795j ]
- [ 0.31263234-0.2478131j ]
- [ 0.31263234-0.2478131j ]
- [ 0.22623725+0.18556056j]]
-
-transformation an isometry?: True
+<pre>probabilities: [0.6648866882772335, 0.3351133117227665]
+expectation value: -0.821
+expectation value again: -0.821
 </pre>
 </div>
 </div>
@@ -13180,34 +13148,211 @@ transformation an isometry?: True
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 
-<p>Another way of obtaining the same result is to find the roots of the Majorana polynomial of the spin, map the complex roots to the sphere, convert each resulting point into a qubit, and then symmeterize those separable qubits. Well, technically, if we do this, we lose the overall phase information of the original spin, but such is life.</p>
-<p>Just for reference, again here's the Majorana polynomial:</p>
-<p>$p(z) = \sum_{m=-j}^{m=j} (-1)^{j+m} \sqrt{\frac{(2j)!}{(j-m)!(j+m)!}} a_{j+m} z^{j-m}$, where the $a$'s run through the components of the spin. Recall that if we have an $d$ dimensional spin vector, but end up with a less than $d$ degree polynomial, we add a root at infinity for each missing degree. Having obtained the roots, we stereographically project them to the sphere to get $(x, y, z)$ points, which we enjoy poetically calling "stars."</p>
-<p>Below we take a spin, finds its stars, convert them into qubits, symmeterize the qubits, then use the inverse of the transformation above to get back the spin state, and find the stars again. We see we recover the original stars exactly. So we get the right result up to phase. (Note we could have converted the complex roots directly to qubits, as we've seen, insofar as each complex root is to be the ratio between the two components of the qubit.)</p>
+<p>But there is a more general notion of measurement: a POVM (a positive operator valued measure). A POVM consists in a set of positive semidefinite operators that sum to the identity, i.e., a set $\{E_{i}\}$ such that $\sum_{i} E_{i} = I$. Each <em>operator</em> corresponds to a possible outcome of the experiment, and whereas for a Von Neumann measurement, there would be $d$ possible outcomes, corresponding to the dimension of the Hilbert space, there can be <em>any</em> number of outcomes to a POVM measurement, as long as they all sum to the identity. The probability of an outcome, however, is similarly given by $Pr(i) = tr(E_{i}\rho)$. If we write each $E_{i}$ as a product of so-called Krauss operators $E_{i} = A_{i}^{\dagger}A_{i}$, then the state after measurement will be: $\frac{A_{i}\rho A_{i}^{\dagger}}{tr(E_{i}\rho)}$.</p>
+<p>In the case we'll be considering, however, the $\{E_{i}\}$ will be rank-1, and so the state after measurement will be $\frac{\Pi_{i}\rho \Pi_{i}}{tr(\Pi_{i}\rho)}$ as before, where $\Pi_{i}$ are normalized projectors. (More on this later.)</p>
+<p>To implement POVM's, one often will couple a system to an auxilliary system and make a measurement on the latter. The details need not concern us.</p>
+<p>We've already seen examples of such things in our travels. Recall that the spin coherent states form an "overcomplete" basis, or frame, for spin states of a given $j$ value. In this case, the frame has an infinite number of elements: and the integral over the sphere gives $1$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<p>A very special kind of POVM is a so-called SIC-POVM: a symmetric informationally complete positive operator valued measure. They've been conjectured to exist in all dimensions, and numerical evidence suggests this is the case. For a given Hilbert space of dimension $d$, a SIC is a set of $d^2$ rank-one projection operators $\Pi_{i} = \mid \psi_{i} \rangle \langle \psi_{i} \mid$ such that:</p>
+$$tr(\Pi_{k}\Pi_{l}) = \frac{d\delta_{k,l} + 1}{d+1} $$<p>Such a set of operators will be linearly independent, and if you rescale them to $\frac{1}{d}\Pi_{i}$, then form a POVM: $\sum_{i} \frac{1}{d} \Pi_{i} = I$. For any quantum state $\rho$, a SIC specifies a measurement <em>for which the probabilities of outcomes $p(i)$ specify $\rho$ itself</em>. Normally, say in the case of a qubit, we'd have to measure expectation values $(\langle X \rangle, \langle Y \rangle, \langle Z \rangle)$ to nail down the state: in other words, we'd have to repeat many times three <em>different</em> measurements. But for a SIC-POVM, the probabilities on each of the elements of the POVM fully determine the state: we're talking here about a <em>single</em> type of measurement.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<p>Thanks to Chris Fuchs and Co. we have a repository of SIC-POVM's in a variety of dimensions. One can download them <a href="http://www.physics.umb.edu/Research/QBism/solutions.html">here</a>. You'll get a zip of text files, one for each dimension: and in each text file is a single complex vector: the "fiducial" vector. From this vector, the SIC can be derived.</p>
+<p>In order to do this, we first define (with Sylvester) the clock and shift matrices for a given dimension $d$:</p>
+$$Z = 
+\begin{pmatrix}
+0      &amp; 0      &amp; 0      &amp; \cdots &amp; 0     &amp; 1\\
+1      &amp; 0      &amp; 0      &amp; \cdots &amp; 0     &amp; 0\\
+0      &amp; 1      &amp; 0      &amp; \cdots &amp; 0     &amp; 0\\
+0      &amp; 0      &amp; 1      &amp; \cdots &amp; 0     &amp; 0\\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp;\vdots &amp;\vdots\\
+0      &amp; 0      &amp; 0      &amp; \cdots &amp; 1     &amp; 0\\ 
+\end{pmatrix}$$$$X = 
+\begin{pmatrix}
+1      &amp; 0      &amp; 0        &amp; \cdots &amp; 0\\
+0      &amp; \omega &amp; 0        &amp; \cdots &amp; 0\\
+0      &amp; 0      &amp; \omega^2 &amp; \cdots &amp; 0\\
+\vdots &amp; \vdots &amp; \vdots   &amp; \ddots &amp; \vdots\\
+0      &amp; 0      &amp; 0        &amp; \cdots &amp; \omega^{d-1}
+\end{pmatrix}
+$$<p>Where $\omega = e^{\frac{2\pi i}{d}}$.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[57]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">examples.magic</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">permutations</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">clock</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>\
+                    <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">d</span><span class="o">-</span><span class="mi">1</span> <span class="k">else</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>\
+                        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)])</span><span class="o">/</span><span class="n">d</span>
 
-<span class="k">def</span> <span class="nf">symmetrize</span><span class="p">(</span><span class="n">kets</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">kets</span><span class="p">[</span><span class="n">p_</span><span class="p">]</span> <span class="k">for</span> <span class="n">p_</span> <span class="ow">in</span> <span class="n">p</span><span class="p">])</span>\
-                <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">kets</span><span class="p">))))])</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">shift</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">1</span><span class="n">j</span><span class="o">/</span><span class="n">d</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="n">w</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)]))</span>
+</pre></div>
 
-<span class="n">stars</span> <span class="o">=</span> <span class="n">spin_XYZ</span><span class="p">(</span><span class="n">spin</span><span class="p">)</span>
-<span class="n">qubits</span> <span class="o">=</span> <span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">xyz_spinor</span><span class="p">(</span><span class="n">star</span><span class="p">))</span> <span class="k">for</span> <span class="n">star</span> <span class="ow">in</span> <span class="n">stars</span><span class="p">]</span>
-<span class="n">sym2</span> <span class="o">=</span> <span class="n">symmetrize</span><span class="p">(</span><span class="n">qubits</span><span class="p">)</span>
-<span class="n">spin2</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">sym2</span>
-<span class="n">stars2</span> <span class="o">=</span> <span class="n">spin_XYZ</span><span class="p">(</span><span class="n">spin2</span><span class="p">)</span>
+    </div>
+</div>
+</div>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;initial stars:</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">star</span><span class="p">)</span> <span class="k">for</span> <span class="n">star</span> <span class="ow">in</span> <span class="n">stars</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;final stars:</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">star</span><span class="p">)</span> <span class="k">for</span> <span class="n">star</span> <span class="ow">in</span> <span class="n">stars2</span><span class="p">]))</span>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can then define displacement operators:</p>
+$$D_{a,b} = (-e^{\frac{i\pi}{d}})^{ab}X^{b}Z^{a} $$<p>For $a, b$ each from $0$ to $d$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">displace</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">Z</span><span class="p">,</span> <span class="n">X</span> <span class="o">=</span> <span class="n">clock</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">shift</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="n">d</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">X</span><span class="o">**</span><span class="n">b</span><span class="o">*</span><span class="n">Z</span><span class="o">**</span><span class="n">a</span>
+
+<span class="k">def</span> <span class="nf">displacement_operators</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">([((</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">displace</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Finally, if we act on the fiducial vector with each of the displacement operators, we obtain the $d^2$ pure states, whoe projectors, weighted by $\frac{1}{d}$ form the SIC-POVM.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[64]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">load_sic_states</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;sic_povms/d</span><span class="si">%d</span><span class="s2">.txt&quot;</span> <span class="o">%</span> <span class="n">d</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+    <span class="n">fiducial</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">re</span><span class="p">,</span> <span class="n">im</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+            <span class="n">fiducial</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">re</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">im</span><span class="p">)</span>
+    <span class="n">fiducial</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fiducial</span><span class="p">))</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">D</span><span class="o">*</span><span class="n">fiducial</span> <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">D</span> <span class="ow">in</span> <span class="n">displacement_operators</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can test that a given SIC has the property:</p>
+$$tr(\Pi_{k}\Pi_{l}) = \frac{d\delta_{k,l} + 1}{d+1} $$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[147]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_sic_states</span><span class="p">(</span><span class="n">sic</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sic</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sic</span><span class="p">):</span>
+            <span class="n">should_be</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span> <span class="k">else</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%d</span><span class="s2">, </span><span class="si">%d</span><span class="s2">): </span><span class="si">%.4f</span><span class="s2"> | should be: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">overlap</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="n">should_be</span><span class="p">))</span>
+
+<span class="n">sic_states</span> <span class="o">=</span> <span class="n">load_sic_states</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">test_sic</span><span class="p">(</span><span class="n">sic_states</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(0, 0): 1.0000 | should be: 1.0000
+(0, 1): 0.3333 | should be: 0.3333
+(0, 2): 0.3333 | should be: 0.3333
+(0, 3): 0.3333 | should be: 0.3333
+(1, 0): 0.3333 | should be: 0.3333
+(1, 1): 1.0000 | should be: 1.0000
+(1, 2): 0.3333 | should be: 0.3333
+(1, 3): 0.3333 | should be: 0.3333
+(2, 0): 0.3333 | should be: 0.3333
+(2, 1): 0.3333 | should be: 0.3333
+(2, 2): 1.0000 | should be: 1.0000
+(2, 3): 0.3333 | should be: 0.3333
+(3, 0): 0.3333 | should be: 0.3333
+(3, 1): 0.3333 | should be: 0.3333
+(3, 2): 0.3333 | should be: 0.3333
+(3, 3): 1.0000 | should be: 1.0000
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In the case of a the two dimensional Hilbert space, the SIC-POVM's will form a tetrahedron in the Bloch sphere:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">vpython</span> <span class="k">as</span> <span class="nn">vp</span>
+<span class="n">scene</span> <span class="o">=</span> <span class="n">vp</span><span class="o">.</span><span class="n">canvas</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">white</span><span class="p">)</span>
+
+<span class="n">vp</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">blue</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">sic_states</span><span class="p">:</span>
+    <span class="n">vp</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="n">vp</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">(),</span> <span class="n">state</span><span class="p">),</span>\
+                            <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmay</span><span class="p">(),</span> <span class="n">state</span><span class="p">),</span>\
+                            <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">(),</span> <span class="n">state</span><span class="p">)))</span>
 </pre></div>
 
     </div>
@@ -13238,36 +13383,16 @@ transformation an isometry?: True
 
 
 
-<div id="11d3bde6-ed8c-4e55-be3c-70a00d57150c"></div>
+<div id="8411a647-c119-4ead-829e-1cb5bb0f73d1"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#11d3bde6-ed8c-4e55-be3c-70a00d57150c');
+var element = $('#8411a647-c119-4ead-829e-1cb5bb0f73d1');
 if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container: $("#glowscript").removeAttr("id")};}else{ element.textContent = ' ';}
 </script>
 </div>
 
 </div>
 
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>initial stars:
-[-0.70904876 -0.16436818 -0.68573534]
-[ 9.96578204e-01 -8.26547850e-02  2.63198755e-04]
-[0.03138124 0.45074681 0.89210007]
-
-final stars:
-[-0.70904876 -0.16436818 -0.68573534]
-[ 9.96578204e-01 -8.26547850e-02  2.63198755e-04]
-[0.03138124 0.45074681 0.89210007]
-
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -13275,104 +13400,25 @@ final stars:
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>Another way of saying this is that if we have a state of $2j$ separable qubits, each with an $(x, y, z)$ point representing its expected rotation axis, if we permute the qubits in all possible orders and add up all these permuted states, then the resulting state is naturally permutation symmetric, but also perhaps remarkably preserves the $(x, y, z)$ points of each of the qubits. Each point is now encoded not individually in the separable qubits, but instead holistically in the state of the entangled whole. If we transform from the symmeterized qubits to a spin-$j$ state and find the roots of the Majorana polynomial, these complex roots, stereographically projected to the sphere, gives us back our original $(x, y, z)$ points. Of course, we have thrown out some information: namely, the phases of the individual qubits we symmeterized.</p>
-<p>That's all well and good, but a moment's reflection will convince you that the operation of symmeterizing a bunch of qubits is <em>not</em> a unitary operation. After all, I need to make a separate copy of the qubits, one for each possible permutation, and then add them all up. This of course would violate no-cloning.</p>
-<p>So you might wonder: Suppose I have $2j$ separable qubits loaded into my quantum computer, and I want to prepare the permutation symmetric state corresponding to them. How do I do it?! Clearly, there can be no deterministic quantum operation that will do the trick.</p>
-<hr>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Well, in this game, what one can't do deterministically, one can often do probablistically. And that turns out to be the case here.</p>
-<p>Consider the following circuit:</p>
-<p><img src="img/two_qubit_symmetrizer.png"></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The heart of this circuit is the "controlled swap" or Fredkin gate. This is a three qubit gate: if the first qubit is $\uparrow$, it leaves the second two alone; but if the first qubit is $\downarrow$, it swaps/permutes the second two.</p>
-<p>Its matrix representation is:</p>
-$$ \begin{bmatrix}
-1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
-0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 \\
-\end{bmatrix} $$<p>Which is easily obtained insofar as its just a $4 \times 4$ identity block concatenated with the usual swap gate:</p>
-$$\begin{bmatrix} 1&amp;0&amp;0&amp;0\\0&amp;0&amp;1&amp;0\\0&amp;1&amp;0&amp;0\\0&amp;0&amp;0&amp;1\end{bmatrix}$$<p>By the way, that's a general rule for constructing controlled gates: just take the gate you want to be controlled by the first qubit, and concatenate it with an identity matrix of the same dimensionality.</p>
-<p>So we have our two qubits we want to symmetrize, and the control qubit, with starts in the $\mid \uparrow \rangle$ state. We apply a Hadamard gate to the control, which takes it to an even superposition $\frac{1}{\sqrt{2}}(\mid \uparrow \rangle + \mid \downarrow \rangle$. So then when we apply the Fredkin, the two qubits to be symmetrized end up in <em>a superposition of being swapped and not being swapped</em>, relative to the control. We then apply a Hadamard again to the control, which by the way, is its own inverse ($H = H^{\dagger}$), to undo that original rotation, while leaving it entangled with the two qubits.</p>
-<p>We then measure the control qubit: if we get $\uparrow$, then our two qubits $\mid \psi \rangle$ and $\mid \phi \rangle$ end up in the symmetrized state $\frac{1}{\sqrt{2}}(\mid \psi \rangle\mid \phi \rangle + \mid \phi \rangle\mid \psi \rangle)$. On the other hand, we get $\downarrow$, then our two qubits ends up in the antisymmetrized state: $\frac{1}{\sqrt{2}}(\mid \psi \rangle\mid \phi \rangle - \mid \phi \rangle\mid \psi \rangle)$.</p>
-<p>So if we want the symmetrized state, we just keep doing the experiment over and over again until we get the answer we want!</p>
-<p>In the diagram above, you may note there are also two phase rotation gates. We can use those if we want a state of the form $\frac{1}{\sqrt{2}}(\mid \phi \rangle \mid \psi \rangle + e^{i\theta}\mid \psi \rangle \mid \phi \rangle$. If $\theta=0$, we just get the identity matrix for both of them, and everything is as I said above.</p>
+<p>And in general, in higher dimensions, the study of SIC's is as much the study of "maximal sets of complex equiangular lines," which has implications in various domains of mathematics.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[148]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="k">import</span> <span class="n">block_diag</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">sic_povm</span><span class="p">(</span><span class="n">sic_states</span><span class="p">):</span>
+    <span class="n">projectors</span> <span class="o">=</span> <span class="p">[</span><span class="n">state</span><span class="o">*</span><span class="n">state</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span> <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">sic_states</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;states&quot;</span><span class="p">:</span> <span class="n">sic_states</span><span class="p">,</span>\
+            <span class="s2">&quot;projectors&quot;</span><span class="p">:</span> <span class="n">projectors</span><span class="p">,</span>\
+            <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">1</span><span class="o">/</span><span class="n">d</span><span class="p">)</span><span class="o">*</span><span class="n">projector</span> <span class="k">for</span> <span class="n">projector</span> <span class="ow">in</span> <span class="n">projectors</span><span class="p">]}</span>
 
-<span class="c1"># construct our operators</span>
-<span class="n">H</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>\
-                                     <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]]))</span>
-<span class="n">SWAP</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>\
-                         <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>\
-                         <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>\
-                         <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]))</span>
-<span class="n">CSWAP</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">block_diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">SWAP</span><span class="o">.</span><span class="n">full</span><span class="p">()))</span>
-<span class="n">CSWAP</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span>
-
-<span class="n">theta</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">P1</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">theta</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span>\
-                       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]))</span>
-<span class="n">P2</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>\
-                       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">theta</span><span class="o">/</span><span class="mi">2</span><span class="p">)]]))</span>
-
-<span class="n">CIRCUIT</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span>\
-          <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">P2</span><span class="p">,</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span>\
-          <span class="n">CSWAP</span><span class="o">*</span>\
-          <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">P1</span><span class="p">,</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span>\
-          <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-
-<span class="n">c</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># control</span>
-<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># to be symmetrized</span>
-<span class="n">state</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">measure_control</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
-    <span class="n">Zl</span><span class="p">,</span> <span class="n">Zv</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">()</span><span class="o">.</span><span class="n">eigenstates</span><span class="p">()</span>
-    <span class="n">Zp</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="o">*</span><span class="n">v</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">Zv</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">dm</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">ptrace</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">real</span>
-    <span class="n">which</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)),</span> <span class="n">p</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">dm</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;p(up): </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">dm</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;p(down): </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">dm</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;obtained: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;up&quot;</span> <span class="k">if</span> <span class="n">which</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;down&quot;</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">which</span><span class="p">,</span> <span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">Zp</span><span class="p">[</span><span class="n">which</span><span class="p">],</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="n">state</span><span class="p">)</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>
-
-<span class="n">which</span><span class="p">,</span> <span class="n">state</span> <span class="o">=</span> <span class="n">measure_control</span><span class="p">(</span><span class="n">CIRCUIT</span><span class="o">*</span><span class="n">state</span><span class="p">)</span>
-<span class="n">answer</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">ptrace</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="c1"># throw out the control</span>
-
-<span class="n">correct_sym</span> <span class="o">=</span> <span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="p">))</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>
-<span class="n">correct_sym</span> <span class="o">=</span> <span class="n">correct_sym</span><span class="o">*</span><span class="n">correct_sym</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span> <span class="c1"># since we need to compare w/ a (pure) density matrix</span>
-<span class="n">correct_antisym</span> <span class="o">=</span> <span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="p">))</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>
-<span class="n">correct_antisym</span> <span class="o">=</span> <span class="n">correct_antisym</span><span class="o">*</span><span class="n">correct_antisym</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
-
-<span class="k">if</span> <span class="n">which</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;got correct symmetrized state?: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">answer</span> <span class="o">==</span> <span class="n">correct_sym</span><span class="p">))</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;got correct antisymmetrized state?: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">answer</span> <span class="o">==</span> <span class="n">correct_antisym</span><span class="p">))</span>
+<span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">ref_povm</span> <span class="o">=</span> <span class="n">sic_povm</span><span class="p">(</span><span class="n">load_sic_states</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;elements sum to identity? </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">ref_povm</span><span class="p">[</span><span class="s2">&quot;elements&quot;</span><span class="p">]),</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">d</span><span class="p">)))</span>
 </pre></div>
 
     </div>
@@ -13389,10 +13435,7 @@ $$\begin{bmatrix} 1&amp;0&amp;0&amp;0\\0&amp;0&amp;1&amp;0\\0&amp;1&amp;0&amp;0\
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>p(up): 0.7465
-p(down): 0.2535
-obtained: down
-got correct antisymmetrized state?: True
+<pre>elements sum to identity? True
 </pre>
 </div>
 </div>
@@ -13404,91 +13447,24 @@ got correct antisymmetrized state?: True
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>Okay, so that's great, but what if we have multiple qubits we want to symmetrize?</p>
-<p>The simplest thing to do is a direct generalization of the above. If we have $n$ qubits, there will be $n!$ possible permutations. So we'll need a control qudit that lives in $n!$ dimensions. For example, for $3$ qubits, there are $3! = 6$ possible permutations, so we need a control state that is $6$ dimensional. We start with the control in its $\mid 0 \rangle$ state, and the apply the Hadamard in $n!$ dimensions, in other words, the <a href="https://en.wikipedia.org/wiki/Quantum_Fourier_transform">"Quantum Fourier Transform,"</a> which takes $\mid 0 \rangle$ to an even superposition of all its basis states. We then do a controlled operation, which makes performing the $i^{th}$ permutation on the $n$ qubits depend on the control being in the $\mid i \rangle$ basis state. So we end up with the $n$ qubits being in a superposition of being permuted in all possible ways, relative to the control. Then we apply the inverse QFT to the control, and then measure the control: if it ends up back in the $\mid 0 \rangle$ state, then the $n$ qubits are in the permutation symmetric state. Sweet!</p>
-<p>You might wonder how to contruct such a controlled permutation gate. In braket notation, you can think of it like:</p>
-$$ \sum_{p_{i} \in perm} \sum_{j=0}^{2^n} \mid i \rangle P_{i}\mid j \rangle \langle i \mid \langle j \mid$$<p>In other words, we sum over all the permutations $p_{i}$ (where the $i$ labels both a basis state of the control $\mid i \rangle$, and also $P_{i}$, the operator which performs that permutation of the qubits), and also over the $2^n$ basis states of the $n$ qubits, labeled by $j$: $\mid j \rangle$. Clearly, if this operator acts on a state coming in on the right, it will perform the $i^{th}$ permutation to the extent that the control is in the $i^{th}$ state.</p>
-<p>Let's check it out:</p>
+<p>Given a density matrix $\rho$, we can expand it in terms of the SIC-POVM elements via $tr(E_{i}\rho)$.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[106]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">product</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">rho_prob</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">povm</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">rho</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">E</span><span class="o">*</span><span class="n">rho</span><span class="p">)</span><span class="o">.</span><span class="n">tr</span><span class="p">()</span> <span class="k">for</span> <span class="n">E</span> <span class="ow">in</span> <span class="n">povm</span><span class="p">[</span><span class="s2">&quot;elements&quot;</span><span class="p">]])</span><span class="o">.</span><span class="n">real</span>
 
-<span class="c1"># constructs a unitary operation that performs</span>
-<span class="c1"># the desired permutation of qubit subsystems</span>
-<span class="k">def</span> <span class="nf">construct_permuter</span><span class="p">(</span><span class="n">perm</span><span class="p">):</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">perm</span><span class="p">)</span>
-    <span class="n">indices</span> <span class="o">=</span> <span class="p">[[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
-    <span class="n">tensor_indices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">indices</span><span class="p">))</span>
-    <span class="n">pindices</span> <span class="o">=</span> <span class="p">[[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">perm</span><span class="p">]</span>
-    <span class="n">ptensor_indices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">pindices</span><span class="p">))</span>
-    <span class="n">d</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tensor_indices</span><span class="p">)</span>
-    <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">d</span><span class="p">,</span><span class="n">d</span><span class="p">))</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">pind</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ptensor_indices</span><span class="p">):</span>
-        <span class="n">oi</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">pind</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">tensor_indices</span><span class="p">:</span>
-                <span class="n">oi</span> <span class="o">=</span> <span class="n">tensor_indices</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-                <span class="k">break</span>
-        <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">oi</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">m</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-    <span class="n">m</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">m</span>
-
-<span class="k">def</span> <span class="nf">construct_qft</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
-    <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">1</span><span class="n">j</span><span class="o">/</span><span class="n">d</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">d</span><span class="p">))</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span>\
-                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">w</span><span class="o">**</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">j</span><span class="p">)</span>\
-                                   <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)]</span>\
-                                       <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)]))</span>
-
-<span class="c1"># constructs a unitary operator that does each of n!</span>
-<span class="c1"># permutations of n qubits relative to a control of</span>
-<span class="c1"># dimensionality n!</span>
-<span class="k">def</span> <span class="nf">construct_cperms</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">ds</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">n</span>
-    <span class="n">dp</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">perms</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">permutations</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))))</span>
-    <span class="n">terms</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">perms</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ds</span><span class="p">):</span>
-            <span class="n">permuter</span> <span class="o">=</span> <span class="n">construct_permuter</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-            <span class="n">permuter</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ds</span><span class="p">],</span> <span class="p">[</span><span class="n">ds</span><span class="p">]]</span>
-            <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>\
-                <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span> <span class="n">i</span><span class="p">),</span> <span class="n">permuter</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span><span class="o">*</span>\
-                    <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span> <span class="n">i</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span><span class="o">.</span><span class="n">dag</span><span class="p">())</span>
-    <span class="n">O</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>
-    <span class="n">O</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="n">dp</span><span class="p">]</span><span class="o">+</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="p">[</span><span class="n">dp</span><span class="p">]</span><span class="o">+</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">O</span>
-
-<span class="c1">################################################################################</span>
-
-<span class="n">n</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">dp</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-<span class="n">qubits</span> <span class="o">=</span> <span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
-
-<span class="n">QFT</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">construct_qft</span><span class="p">(</span><span class="n">dp</span><span class="p">),</span> <span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
-<span class="n">CPERMS</span> <span class="o">=</span> <span class="n">construct_cperms</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-<span class="n">PROJ</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">(),</span> <span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
-
-<span class="n">state</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="o">*</span><span class="n">qubits</span><span class="p">)</span>
-<span class="n">state</span> <span class="o">=</span> <span class="n">QFT</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">CPERMS</span><span class="o">*</span><span class="n">QFT</span><span class="o">*</span><span class="n">state</span>
-
-<span class="c1"># We&#39;re lazy, so let&#39;s just project into the right state, regardless of probability</span>
-<span class="n">final_state</span> <span class="o">=</span> <span class="p">(</span><span class="n">PROJ</span><span class="o">*</span><span class="n">state</span><span class="p">)</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span><span class="o">.</span><span class="n">ptrace</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span> <span class="c1"># throw out the control</span>
-<span class="n">correct_state</span> <span class="o">=</span> <span class="n">symmetrize</span><span class="p">(</span><span class="n">qubits</span><span class="p">)</span>
-<span class="n">correct_state</span> <span class="o">=</span> <span class="n">correct_state</span><span class="o">*</span><span class="n">correct_state</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span> <span class="c1"># want to compare with (pure) density matrix</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;got the right permutation symmetric state?: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">final_state</span> <span class="o">==</span> <span class="n">correct_state</span><span class="p">))</span>
+<span class="n">rho</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_dm</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">rho_prob</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;probabilities: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">p</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;sum to 1? </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -13505,7 +13481,265 @@ $$ \sum_{p_{i} \in perm} \sum_{j=0}^{2^n} \mid i \rangle P_{i}\mid j \rangle \la
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>got the right permutation symmetric state?: True
+<pre>probabilities: [0.05952271 0.2400031  0.26988065 0.43059354]
+sum to 1? True
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>From these probabilities, we can uniquely reconstruct the density matrix via:</p>
+$$\rho = \sum_{i} \big{(}(d+1)p(i) - \frac{1}{d}\big{)}\Pi_{i}$$<p>Where $\Pi_{i}$ are the projectors onto the SIC states: $E_{i} = \frac{1}{d}\Pi_{i}$.</p>
+<p>Or given the fact that $\sum_{i} \frac{1}{d} \Pi_{i} = I$:</p>
+$$\rho = (d+1) \sum_{i} p(i)\Pi_{i} - I $$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[91]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">prob_rho</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">povm</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">([((</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="n">d</span><span class="p">)</span><span class="o">*</span><span class="n">povm</span><span class="p">[</span><span class="s2">&quot;projectors&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span>
+
+<span class="k">def</span> <span class="nf">prob_rho2</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">povm</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="nb">sum</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">povm</span><span class="p">[</span><span class="s2">&quot;projectors&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span> <span class="o">-</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+<span class="n">rho2</span> <span class="o">=</span> <span class="n">prob_rho</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">)</span>
+<span class="n">rho3</span> <span class="o">=</span> <span class="n">prob_rho2</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;recovered? </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">rho2</span><span class="p">)</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">rho3</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>True
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now suppose we have the following situation. We first make a SIC-POVM measurement, and then we make a standard Von Neumann measurement on a given system. Following the vivid imagery of Fuchs, we'll refer to the SIC-POVM as being "up in the sky" and the Von Neumann measurement as being "down on the ground".</p>
+<p>So given our state $\rho$, above we've calculated the probabilities $p(i)$ for each outcome of the POVM. Now we'd like to assign probabilities for the outcomes of the Von Neumann measurement. What we need are the conditional probabilities $r(j|i)$, the probability of Von Neumann outcome $j$ given that the SIC-POVM returned $i$. Then:</p>
+<p>$s(j) =  \sum_{i}^{d^2} p(i)r(j|i)$</p>
+<p>This is just standard probability theory: the law of total probability. The probability for an outcome $j$ of the Von Neumann measurement is the sum over all the conditional probabilities for $j$, given some outcome $i$ of the SIC-POVM, multiplied by the probability that $i$ occured.</p>
+<p>The standard way of thinking about this would be that:</p>
+<p>$\rho^{\prime} = \sum_{i} p(i)\Pi_{i}$</p>
+<p>In other words, $\rho$ becomes a mixture of outcome states weighted by the probability of them occuring. In this simple case, where we aren't consider a subsystem of larger system, we can just use the projectors $\Pi_{j}$ corresponding to the SIC-POVM outcome states. Then the probabilities for the Von Neumann measurement are:</p>
+<p>$s(j) = tr(\tilde{\Pi_{j}}\rho^{\prime})$</p>
+<p>Where $\tilde{\Pi_{j}}$ is the projector for the $j^{th}$ Von Neumann outcome.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[117]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">von_neumann</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_herm</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">vn_projectors</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="o">*</span><span class="n">v</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">von_neumann</span><span class="o">.</span><span class="n">eigenstates</span><span class="p">()[</span><span class="mi">1</span><span class="p">]]</span>
+
+<span class="n">vn_rho</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">prob</span><span class="o">*</span><span class="n">ref_povm</span><span class="p">[</span><span class="s2">&quot;projectors&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">prob</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p</span><span class="p">)])</span>
+<span class="n">vn_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">proj</span><span class="o">*</span><span class="n">vn_rho</span><span class="p">)</span><span class="o">.</span><span class="n">tr</span><span class="p">()</span> <span class="k">for</span> <span class="n">proj</span> <span class="ow">in</span> <span class="n">vn_projectors</span><span class="p">])</span><span class="o">.</span><span class="n">real</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;vn probabilities after sic: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vn_s</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>vn probabilities after sic: [0.59849402 0.40150598]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Alternatively, however, we could form conditional probabilities directly:</p>
+<p>$r(j|i) = \sum_{i}^{d^2} tr(\Pi_{i}\tilde{\Pi}_{j})$</p>
+<p>And then use the formula:</p>
+<p>$s(j) = \sum_{i}^{d^2} p(i)r(j|i)$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[118]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">vn_conditional_probs</span><span class="p">(</span><span class="n">von_neumann</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">von_neumann</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">vn_projectors</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="o">*</span><span class="n">v</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">von_neumann</span><span class="o">.</span><span class="n">eigenstates</span><span class="p">()[</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[(</span><span class="n">ref_povm</span><span class="p">[</span><span class="s2">&quot;projectors&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">vn_projectors</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">.</span><span class="n">tr</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)])</span><span class="o">.</span><span class="n">real</span>
+
+<span class="k">def</span> <span class="nf">vn_posterior</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">von_neumann</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">rho</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">rho_prob</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">vn_conditional_probs</span><span class="p">(</span><span class="n">von_neumann</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">sum</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">r</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;vn probabilities after sic: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vn_posterior</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">von_neumann</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>vn probabilities after sic: [0.59849402 0.40150598]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Incidentally, there's no need to confine ourselves to the case of Von Neumann measurements. Suppose the "measurement on the ground" is given by another POVM. In fact, we can get one by just rotating our SIC-POVM by some random unitary.</p>
+<p>We'd form $\rho^{\prime} = \sum_{i} p(i)\Pi_{i}$ just as before, and then take $s(j) = tr(E_{j}\rho^{\prime})$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[136]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">U</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_unitary</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">ground_povm_states</span> <span class="o">=</span> <span class="p">[</span><span class="n">U</span><span class="o">*</span><span class="n">state</span> <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">sic_states</span><span class="p">]</span>
+<span class="n">ground_povm</span> <span class="o">=</span> <span class="n">sic_povm</span><span class="p">(</span><span class="n">ground_povm_states</span><span class="p">)</span>
+
+<span class="n">povm_rho</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">prob</span><span class="o">*</span><span class="n">ref_povm</span><span class="p">[</span><span class="s2">&quot;projectors&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">prob</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p</span><span class="p">)])</span>
+<span class="n">povm_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">proj</span><span class="o">*</span><span class="n">povm_rho</span><span class="p">)</span><span class="o">.</span><span class="n">tr</span><span class="p">()</span> <span class="k">for</span> <span class="n">proj</span> <span class="ow">in</span> <span class="n">ground_povm</span><span class="p">[</span><span class="s2">&quot;elements&quot;</span><span class="p">]])</span><span class="o">.</span><span class="n">real</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;povm probabilities after sic: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">povm_s</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>And alternatively, we could work with the conditional probabilities:</p>
+<p>$r(j|i) = \sum_{i}^{d^2} tr(\Pi_{i}E_{j})$</p>
+<p>And then apply:</p>
+<p>$s(j) = \sum_{i}^{d^2} p(i)r(j|i)$</p>
+<p>Where now $j$ will range from $0$ to $d^2$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[175]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">povm_conditional_probs</span><span class="p">(</span><span class="n">povm</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ref_povm</span><span class="p">[</span><span class="s2">&quot;projectors&quot;</span><span class="p">])))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[(</span><span class="n">ref_povm</span><span class="p">[</span><span class="s2">&quot;projectors&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">povm</span><span class="p">[</span><span class="s2">&quot;elements&quot;</span><span class="p">][</span><span class="n">j</span><span class="p">])</span><span class="o">.</span><span class="n">tr</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span><span class="o">.</span><span class="n">real</span>
+
+<span class="k">def</span> <span class="nf">povm_posterior</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">povm</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">rho</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">rho_prob</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">povm_conditional_probs</span><span class="p">(</span><span class="n">povm</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">sum</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">r</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;povm probabilities after sic: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">povm_posterior</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">ground_povm</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 </pre>
 </div>
 </div>
@@ -13519,86 +13753,122 @@ $$ \sum_{p_{i} \in perm} \sum_{j=0}^{2^n} \mid i \rangle P_{i}\mid j \rangle \la
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 
-<p>Okay, the final concern you might have is that our control system is $n!$ dimensions, where $n$ is the number of qubits we want to symmetrize. We, however, want to formulate <em>everything</em> in terms of qubits. Is there a way of using several qubits as controls to get the same effect? Yes! And here's how, thanks to Barenco, Berthiaume, Deutsch, Ekert, Jozsa, and Macchiavello (see reference at the end!).</p>
-<p>The basic conceptual idea is that permutations can be broken down recursively into a a series of swaps. E.g., suppose we start with an element $A$. We pop another element $B$ to the right, and perform the two possible permutations, the identity and the swap:</p>
-$$A(B) \rightarrow AB, BA$$<p>.</p>
-<p>These are the two possible permutations of two elements. We could pop another element $C$ to the right in each case: $A \rightarrow AB(C), BA(C)$, and then do all the possible swaps with $C$:</p>
-$$AB(C) \rightarrow ABC, CBA, ACB$$<p></p>
+<p>Okay, now we get to the punch line. Let's consider the case of the Von Neumann measurement. Suppose we <em>didn't</em> make the SIC-POVM measurement first. What would the probabilities be? Well, we all know:</p>
+<p>$q(j) = tr(\tilde{\Pi}_{i}\rho)$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[176]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">vn_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">proj</span><span class="o">*</span><span class="n">rho</span><span class="p">)</span><span class="o">.</span><span class="n">tr</span><span class="p">()</span> <span class="k">for</span> <span class="n">proj</span> <span class="ow">in</span> <span class="n">vn_projectors</span><span class="p">])</span><span class="o">.</span><span class="n">real</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;vn probabilities (no sic in the sky): </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vn_p</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>vn probabilities (no sic in the sky): [0.79548205 0.20451795]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now it turns out that we can get these same probabilities in a different way:</p>
+<p>$q(j) = (d+1)\big{[}\sum_{i}^{d^2} p(i)r(j|i)\big{]} - 1$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[177]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">vn_born</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">von_neumann</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">rho</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">rho_prob</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">vn_conditional_probs</span><span class="p">(</span><span class="n">von_neumann</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="nb">sum</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">r</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span><span class="o">-</span><span class="mi">1</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)])</span><span class="o">.</span><span class="n">real</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;vn probabilities (no sic in the sky): </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vn_born</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">von_neumann</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>vn probabilities (no sic in the sky): [0.79548205 0.20451795]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In other words, we can express the usual quantum probabilities in a way that looks <em>ridiculously</em> close to our formula from before. We sum over <em>hypothetical</em> outcomes of the SIC-POVM, multiplying the probability of each outcome, given our state $\rho$, by the conditional probability for the Von Neumann measurement giving the $j^{th}$ outcome, given that the SIC-POVM outcome was $i$. Except it is somewhat deformed by the the $(d+1)$ and the $-1$. Clearly, this is equivalent to the usual Born Rule: but it's expressed entirely in terms of probabilities and conditional probabilities. It makes sense, in the end, that you can do this, given that the probabilities for the SIC-POVM measurement completely nail down the state. So we can just work with the probabilities instead. We could just pick a SIC-POVM to be our "reference apparatus", and describe any quantum state we're ever interested in terms of probabilities with reference to it, and any measurement in terms of conditional probabilities.</p>
+<p>Operationally, what <em>is</em> difference between:</p>
+<p>$s(j) = \sum_{i}^{d^2} p(i)r(j|i)$</p>
 <p>and</p>
-$$BA(C) \rightarrow BAC, CAB, BCA$$<p></p>
-<p>Indeed, these are the six possible permutations of three elements. We could pop another element $D$ to the right, and do all the possible swaps with $D$:</p>
-$$ABC(D) \rightarrow ABCD, DBCA, ADCB, ABDC$$$$CBA(D) \rightarrow CBAD, DBAC, CDAB, CBDA$$$$ACB(D) \rightarrow ACBD, DCBA, ADBC, ACDB$$<p></p>
-$$BAC(D) \rightarrow BACD, DACB, BDCA, BADC$$<p></p>
-$$CAB(D) \rightarrow CABD, DABC, CDBA, CADB$$<p></p>
-$$BCA(D) \rightarrow BCAD, DCAB, BDAC, BCDA$$<p>These are the 24 possible permutations of four elements, and so on. So what we have to do is translate this idea into a quantum circuit, controlling the individual swaps with qubits.</p>
-<p>First off, let's define:</p>
-$$ R_{k} = \frac{1}{\sqrt{k+1}} \begin{bmatrix} 1 &amp; -\sqrt{k} \\ \sqrt{k} &amp; 1 \end{bmatrix}$$$$ T_{k, j} = \frac{1}{\sqrt{k-j+1}} \begin{bmatrix} \sqrt{k-j+1} &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; \sqrt{k-j} &amp; 0 \\ 0 &amp; -\sqrt{k-j} &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; \sqrt{k-j+1} \end{bmatrix}$$<p>The point of these guys it to prepare our control qubits. If we have $k$ control qubits in the $\mid 0, 0, 0, \dots \rangle$ state, if we apply $R_{k}$ to the first qubit, and $T_{k, j}$'s to adjacent qubits along the line (from $j=1$ to $j = k-1$), then we'll end up in the state:</p>
-$$ \frac{1}{\sqrt{k+1}}(\mid 00 \dots 0 \rangle + \mid 10 \dots 0 \rangle + \mid 01 \dots 0 \rangle + \mid 00 \dots 1 \rangle)$$<p>In other words, a superposition over all the qubits being $\uparrow$ or just one of the qubits being $\downarrow$. (Recall in this notation $\mid 0 \rangle$ = $\mid \uparrow \rangle$, etc.) This is the qubit equivalent of our control qudit from before being prepared in an even superposition of all its basis states. Call this whole procedure $U_{k}$.</p>
-<p>So we have $k$ control qubits prepared. In line with the recursive permutation procedure above, this is in the context of having already symmetrized $k$ qubits and we want to symmetrize an additional $k+1^{th}$ qubit. Having prepared the $k$ control qubits, we apply $k$ Fredkin gates. If $j$ runs from $1$ to $k$, then the $j^{th}$ Fredkin uses the $j^{th}$ control qubit to condition the swapping of the $j^{th}$ and $k+1^{th}$ qubits. Then, we as before apply the inverse of the preparation of the control qubits, $U_{k}^{\dagger}$.</p>
-<p>The whole construction is "cascaded" for $k = 1,2,\dots,n-1$, where $n$ is the number of qubits we want to symmetrize. So we start with $k=1$: we've "already symmetrized" one qubit and we want to symmetrize the next one, so we introduce $k=1$ control qubits, preparing them, and then fredkin-ing, and unpreparing. Then we move on to $k=2$, and we add two more control qubits, prepare them, fredkin, and unprepare, etc. In the end, we'll need $\frac{n(n-1)}{2}$ control qubits in total: so if $n=4$, we have $\frac{4(4-1)}{2} = 6$ control qubits.</p>
-<p>Finally, we measure all the controls, and if they're all in the $0/\uparrow$ state, then our qubits will have been symmetrized!</p>
-<p>Here's the circuit for the $n=4$ case:</p>
-<p><img width=400 src="img/four_qubit_symmetrizer.png"></p>
-<p>The key is that, for example, by the third round, the first three qubits have already been symmetrized, so we only need three controlled swaps to symmetrize them with the fourth.</p>
-<p>Let's check it out! (Note that the indices are offset from the discussion above as we start counting from 0 as opposed to 1.)</p>
+<p>$q(j) = (d+1)\big{[}\sum_{i}^{d^2} p(i)r(j|i)\big{]} - 1$</p>
+<p>The difference is precisely <em>whether the SIC-POVM measurement has actually been performed</em>. If it has, then we lose quantum coherence. If it hasn't, we maintain it. In other words, the difference between classical and quantum is summed up in the minor difference between these two formulas.</p>
+<p>In slogan form, due to Asher Peres, "unperformed measurements have no results." We'll get to the philosophy of this later, but the point is that classically speaking, we should be able to use the law of total probability <em>whether or not we actually do the measurement in the sky</em>: but quantum mechanically, if we don't actually do the measurement, we can't. But we have something just as good: the Born Rule.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<p>If we want to consider a more general measurement "on the ground," in particular, another SIC-POVM measurement, then our formula becomes:</p>
+<p>$q(j) = (d+1)\big{[}\sum_{i}^{d^2} p(i)r(j|i)\big{]} - \frac{1}{d}\big{[}\sum_{i}^{d^2} r(j|i) \big{]}$</p>
+<p>Where now $i$ ranges to $d^2$.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[145]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qutip.qip.operations</span> <span class="k">import</span> <span class="n">fredkin</span>
-
-<span class="k">def</span> <span class="nf">upgrade</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">O</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="n">j</span> <span class="k">else</span> \
-                      <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>\
-                        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
-
-<span class="k">def</span> <span class="nf">Rk</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="p">)],</span>\
-                                              <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="mi">1</span><span class="p">]]))</span>
-
-<span class="k">def</span> <span class="nf">Tkj</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
-    <span class="n">T</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>\
-                                             <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="n">j</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span>\
-                                             <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="n">j</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>\
-                                             <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)]]))</span>
-    <span class="n">T</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span>
-    <span class="k">return</span> <span class="n">T</span>
-
-<span class="c1">################################################################################</span>
-
-<span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="n">p</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">qubits</span> <span class="o">=</span> <span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
-<span class="n">state</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span><span class="o">*</span><span class="n">p</span><span class="p">,</span> <span class="o">*</span><span class="n">qubits</span><span class="p">)</span>
-
-<span class="n">offset</span> <span class="o">=</span> <span class="n">p</span>
-<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="n">offset</span> <span class="o">=</span> <span class="n">offset</span><span class="o">-</span><span class="n">k</span>
-    <span class="n">U</span> <span class="o">=</span> <span class="n">upgrade</span><span class="p">(</span><span class="n">Rk</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">offset</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="n">p</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">T</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span><span class="o">*</span><span class="p">(</span><span class="n">offset</span><span class="o">+</span><span class="n">j</span><span class="p">),</span> <span class="n">Tkj</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span><span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="n">n</span><span class="o">-</span><span class="n">offset</span><span class="o">-</span><span class="n">j</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span>
-        <span class="n">U</span> <span class="o">=</span> <span class="n">T</span><span class="o">*</span><span class="n">U</span>
-    <span class="n">state</span> <span class="o">=</span> <span class="n">U</span><span class="o">*</span><span class="n">state</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
-        <span class="n">state</span> <span class="o">=</span> <span class="n">fredkin</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">n</span><span class="o">+</span><span class="n">p</span><span class="p">,</span> <span class="n">control</span><span class="o">=</span><span class="n">offset</span><span class="o">+</span><span class="n">j</span><span class="p">,</span> <span class="n">targets</span><span class="o">=</span><span class="p">[</span><span class="n">p</span><span class="o">+</span><span class="n">j</span><span class="p">,</span> <span class="n">p</span><span class="o">+</span><span class="n">k</span><span class="p">])</span><span class="o">*</span><span class="n">state</span>
-    <span class="n">state</span> <span class="o">=</span> <span class="n">U</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">state</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;used </span><span class="si">%d</span><span class="s2"> control qubits for </span><span class="si">%d</span><span class="s2"> qubits to be symmetrized&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
-
-<span class="c1"># do our projections</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-    <span class="n">state</span> <span class="o">=</span> <span class="p">(</span><span class="n">upgrade</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">(),</span> <span class="n">i</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">*</span><span class="n">state</span><span class="p">)</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>
-
-<span class="n">final_state</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">ptrace</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">p</span><span class="o">+</span><span class="n">n</span><span class="p">)))</span>
-<span class="n">correct_state</span> <span class="o">=</span> <span class="n">symmetrize</span><span class="p">(</span><span class="n">qubits</span><span class="p">)</span>
-<span class="n">correct_state</span> <span class="o">=</span> <span class="n">correct_state</span><span class="o">*</span><span class="n">correct_state</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;got the right permutation symmetric state?: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">final_state</span> <span class="o">==</span> <span class="n">correct_state</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;povm probabilities (no sic in the sky): </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">rho_prob</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">ground_povm</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -13615,8 +13885,145 @@ $$ \frac{1}{\sqrt{k+1}}(\mid 00 \dots 0 \rangle + \mid 10 \dots 0 \rangle + \mid
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>used 6 control qubits for 4 qubits to be symmetrized
-got the right permutation symmetric state?: True
+<pre>povm probabilities (no sic in the sky): [0.08465191 0.21809837 0.24475145 0.45249827]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[146]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">povm_born</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">povm</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">rho</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">rho_prob</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">povm_conditional_probs</span><span class="p">(</span><span class="n">povm</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="nb">sum</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">r</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">d</span><span class="p">)</span><span class="o">*</span><span class="nb">sum</span><span class="p">([</span><span class="n">r</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span><span class="o">.</span><span class="n">real</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;povm probabilities (no sic in the sky): </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">povm_born</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">ground_povm</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>povm probabilities (no sic in the sky): [0.08465191 0.21809837 0.24475145 0.45249827]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>By the way, we can write these rules in much more compact matrix form.</p>
+<p>Define $M = (d+1)I_{d^2} - \frac{1}{d}J_{d^2}$</p>
+<p>Where $I_{d^2}$ is the $d^2 \times d^2$ identity, and $J_{d^2}$ is the $d^2 \times d^2$ matrix all full of $1$'s.</p>
+<p>If $r$ is the matrix of conditional probabilities, and $p$ is the vector of probabilities for the reference POVM in the sky, then the vector of values for $q(i)$ is:</p>
+<p>$\vec{q} = rMp$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[150]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">vn_born_matrix</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">von_neumann</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">rho</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">rho_prob</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">vn_conditional_probs</span><span class="p">(</span><span class="n">von_neumann</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">)</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="p">(</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">d</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">r</span> <span class="o">@</span> <span class="n">M</span> <span class="o">@</span> <span class="n">p</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;vn probabilities (no sic in the sky): </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vn_born_matrix</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">von_neumann</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">povm_born_matrix</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">povm</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">rho</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">rho_prob</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">povm_conditional_probs</span><span class="p">(</span><span class="n">povm</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">)</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="p">(</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">d</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">r</span> <span class="o">@</span> <span class="n">M</span> <span class="o">@</span> <span class="n">p</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;povm probabilities (no sic in the sky): </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">povm_born_matrix</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">ground_povm</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>vn probabilities (no sic in the sky): [0.79548205 0.20451795]
+povm probabilities (no sic in the sky): [0.08465191 0.21809837 0.24475145 0.45249827]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>And for that matter, we can calculate the "classical" probabilities from before in the same vectorized way: we just leave out $M$!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[163]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;vn probabilities after sic: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">vn_conditional_probs</span><span class="p">(</span><span class="n">von_neumann</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">)</span> <span class="o">@</span> <span class="n">rho_prob</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;povm probabilities after sic: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">povm_conditional_probs</span><span class="p">(</span><span class="n">ground_povm</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">)</span> <span class="o">@</span> <span class="n">rho_prob</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>vn probabilities after sic: [0.59849402 0.40150598]
+povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 </pre>
 </div>
 </div>
@@ -13630,191 +14037,23 @@ got the right permutation symmetric state?: True
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 
-<p>Finally, let's run it on an actual quantum computer! We'll be using IBM's qiskit for the job. If you look at the circuit preparation, you'll notice many of the indices have been flipped due to their convention of treating the tensor product of $A$ and $B$ as $B \otimes A$. We prepare our qubits, and then use qiskit's tomography feature to recover the density matrix of the symmetrized qubits, conditioned on the controls all being $0$. You can also find the code <a href="examples/sym_qubit_tomography.py">here</a>. Give it a whirl.</p>
+<p>Finally, consider time evolution in this picture. We evolve our $\rho$ by some unitary:</p>
+<p>$\rho_{t} = U \rho U^{\dagger}$</p>
+<p>Naturally, we can calculate the new probabilities with reference to our SIC-POVM in the sky as we did before.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[169]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">U</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_unitary</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">rhot</span> <span class="o">=</span> <span class="n">U</span><span class="o">*</span><span class="n">rho</span><span class="o">*</span><span class="n">U</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
+<span class="n">pt</span> <span class="o">=</span> <span class="n">rho_prob</span><span class="p">(</span><span class="n">rhot</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
-<span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">factorial</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">product</span>
-
-<span class="kn">from</span> <span class="nn">examples.magic</span> <span class="k">import</span> <span class="o">*</span>
-
-<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">execute</span><span class="p">,</span> <span class="n">ClassicalRegister</span>
-<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">Aer</span><span class="p">,</span> <span class="n">IBMQ</span><span class="p">,</span> <span class="n">transpile</span>
-<span class="kn">from</span> <span class="nn">qiskit.providers.ibmq.managed</span> <span class="k">import</span> <span class="n">IBMQJobManager</span>
-<span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators</span> <span class="k">import</span> <span class="n">Operator</span>
-<span class="kn">from</span> <span class="nn">qiskit.ignis.verification.tomography</span> <span class="k">import</span> <span class="n">state_tomography_circuits</span><span class="p">,</span> <span class="n">StateTomographyFitter</span>
-
-<span class="c1">############################################################################</span>
-
-<span class="c1"># constructs linear map between spin-j states and the states of</span>
-<span class="c1"># 2j symmetrized qubits</span>
-<span class="k">def</span> <span class="nf">spin_sym</span><span class="p">(</span><span class="n">j</span><span class="p">):</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">N</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">product</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="n">n</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="ow">in</span> <span class="n">N</span><span class="p">:</span>
-            <span class="n">N</span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span> <span class="o">+=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">p</span><span class="p">])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">N</span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">p</span><span class="p">])</span>
-    <span class="n">Q</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">N</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]))</span>
-    <span class="n">Q</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span>
-    <span class="k">return</span> <span class="n">Q</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
-
-<span class="c1">############################################################################</span>
-
-<span class="c1"># convert back and forth from cartesian to spherical coordinates</span>
-<span class="c1"># phi: [0, 2pi]</span>
-<span class="c1"># theta: [0, pi]</span>
-<span class="k">def</span> <span class="nf">xyz_sph</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span>\
-                     <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">z</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span><span class="p">))])</span>
-
-<span class="k">def</span> <span class="nf">sph_xyz</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi</span><span class="p">),</span>\
-                     <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">phi</span><span class="p">),</span>\
-                     <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)])</span>
-
-<span class="c1">############################################################################</span>
-
-<span class="c1"># operators for preparing the control qubits</span>
-<span class="k">def</span> <span class="nf">Rk</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">Operator</span><span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span>\
-                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="p">)],</span>\
-                              <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="mi">1</span><span class="p">]]))</span>
-
-<span class="k">def</span> <span class="nf">Tkj</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">Operator</span><span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span>\
-                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>\
-                              <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="n">j</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span>\
-                              <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="n">j</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>\
-                              <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)]]))</span>
-
-<span class="c1">############################################################################</span>
-
-<span class="n">j</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">backend_name</span> <span class="o">=</span> <span class="s2">&quot;qasm_simulator&quot;</span>
-<span class="n">shots</span> <span class="o">=</span> <span class="mi">10000</span>
-
-<span class="c1">#backend_name = &quot;ibmq_qasm_simulator&quot;</span>
-<span class="c1">#backend_name = &quot;ibmq_16_melbourne&quot;</span>
-<span class="c1">#backend_name = &quot;ibmq_athens&quot;</span>
-<span class="c1">#shots = 8192</span>
-
-<span class="c1">############################################################################</span>
-
-<span class="n">d</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="p">)</span>
-<span class="n">p</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
-
-<span class="c1"># construct a spin state, get the XYZ locations of the stars</span>
-<span class="c1"># and convert to spherical coordinates</span>
-<span class="n">spin_state</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-<span class="n">stars</span> <span class="o">=</span> <span class="n">spin_XYZ</span><span class="p">(</span><span class="n">spin_state</span><span class="p">)</span>
-<span class="n">angles</span> <span class="o">=</span> <span class="p">[</span><span class="n">xyz_sph</span><span class="p">(</span><span class="o">*</span><span class="n">star</span><span class="p">)</span> <span class="k">for</span> <span class="n">star</span> <span class="ow">in</span> <span class="n">stars</span><span class="p">]</span>
-
-<span class="c1"># the first p qubits are the control qubits</span>
-<span class="c1"># the next n are the qubits to be symmetrized</span>
-<span class="n">circ</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="n">n</span><span class="p">)</span>
-
-<span class="c1"># rotate the n qubits so they&#39;re pointing in the</span>
-<span class="c1"># directions of the stars</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">circ</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="n">angles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">p</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
-    <span class="n">circ</span><span class="o">.</span><span class="n">rz</span><span class="p">(</span><span class="n">angles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
-
-<span class="c1"># apply the symmetrization algorithm:</span>
-<span class="c1"># iterate over k, working with k control qubits</span>
-<span class="c1"># in each round: apply the preparation to the controls</span>
-<span class="c1"># (the U&#39;s and T&#39;s), then the fredkins, then the inverse</span>
-<span class="c1"># of the control preparation.</span>
-<span class="n">offset</span> <span class="o">=</span> <span class="n">p</span>
-<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="n">offset</span> <span class="o">=</span> <span class="n">offset</span><span class="o">-</span><span class="n">k</span>
-    <span class="n">circ</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Rk</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="p">[</span><span class="n">offset</span><span class="p">])</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">circ</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Tkj</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="p">[</span><span class="n">offset</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">offset</span><span class="o">+</span><span class="n">i</span><span class="p">])</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span> <span class="c1"># because it&#39;s prettier</span>
-        <span class="n">circ</span><span class="o">.</span><span class="n">fredkin</span><span class="p">(</span><span class="n">offset</span><span class="o">+</span><span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="o">+</span><span class="n">k</span><span class="p">,</span> <span class="n">p</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">circ</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Tkj</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">adjoint</span><span class="p">(),</span> <span class="p">[</span><span class="n">offset</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">offset</span><span class="o">+</span><span class="n">i</span><span class="p">])</span>    
-    <span class="n">circ</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Rk</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">adjoint</span><span class="p">(),</span> <span class="p">[</span><span class="n">offset</span><span class="p">])</span>
-
-<span class="c1"># let&#39;s look at it!</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">circ</span><span class="o">.</span><span class="n">draw</span><span class="p">())</span>
-
-<span class="c1"># create a collection of circuits to do tomography </span>
-<span class="c1"># on just the qubits to be symmetrized</span>
-<span class="n">tomog_circs</span> <span class="o">=</span> <span class="n">state_tomography_circuits</span><span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">p</span><span class="o">+</span><span class="n">n</span><span class="p">)))</span>
-
-<span class="c1"># create a copy for later</span>
-<span class="n">tomog_circs_sans_aux</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">tomog_circs</span><span class="p">)</span>
-
-<span class="c1"># add in the measurements of the controls to </span>
-<span class="c1"># the tomography circuits</span>
-<span class="n">ca</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">tomog_circ</span> <span class="ow">in</span> <span class="n">tomog_circs</span><span class="p">:</span>
-    <span class="n">tomog_circ</span><span class="o">.</span><span class="n">add_register</span><span class="p">(</span><span class="n">ca</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-        <span class="n">tomog_circ</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">ca</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-
-<span class="c1"># run on the backend</span>
-<span class="k">if</span> <span class="n">backend_name</span> <span class="o">==</span> <span class="s2">&quot;qasm_simulator&quot;</span><span class="p">:</span>
-    <span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s2">&quot;qasm_simulator&quot;</span><span class="p">)</span>
-    <span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">tomog_circs</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">)</span>
-    <span class="n">raw_results</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">provider</span> <span class="o">=</span> <span class="n">IBMQ</span><span class="o">.</span><span class="n">load_account</span><span class="p">()</span>
-    <span class="n">job_manager</span> <span class="o">=</span> <span class="n">IBMQJobManager</span><span class="p">()</span>
-    <span class="n">backend</span> <span class="o">=</span> <span class="n">provider</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="n">backend_name</span><span class="p">)</span>
-    <span class="n">job</span> <span class="o">=</span> <span class="n">job_manager</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transpile</span><span class="p">(</span><span class="n">tomog_circs</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">),</span>\
-                    <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;spin_sym&quot;</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">)</span>
-    <span class="n">raw_results</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">results</span><span class="p">()</span><span class="o">.</span><span class="n">combine_results</span><span class="p">()</span>
-
-<span class="c1"># have to hack the results to implement post-selection </span>
-<span class="c1"># on the controls all being 0&#39;s:</span>
-<span class="n">new_result</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">raw_results</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">resultidx</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">raw_results</span><span class="o">.</span><span class="n">results</span><span class="p">):</span>
-    <span class="n">old_counts</span> <span class="o">=</span> <span class="n">raw_results</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">resultidx</span><span class="p">)</span>
-    <span class="n">new_counts</span> <span class="o">=</span> <span class="p">{}</span>
-
-    <span class="c1"># remove the internal info associated to the control registers</span>
-    <span class="n">new_result</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">resultidx</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">creg_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="n">new_result</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">resultidx</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">creg_sizes</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-    <span class="n">new_result</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">resultidx</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">clbit_labels</span> <span class="o">=</span> <span class="n">new_result</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">resultidx</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">clbit_labels</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="n">p</span><span class="p">]</span>
-    <span class="n">new_result</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">resultidx</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">memory_slots</span> <span class="o">=</span> <span class="n">n</span>
-
-    <span class="c1"># go through the results, and only keep the counts associated</span>
-    <span class="c1"># to the desired post-selection of all 0&#39;s on the controls</span>
-    <span class="k">for</span> <span class="n">reg_key</span> <span class="ow">in</span> <span class="n">old_counts</span><span class="p">:</span>
-        <span class="n">reg_bits</span> <span class="o">=</span> <span class="n">reg_key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">reg_bits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;0&quot;</span><span class="o">*</span><span class="n">p</span><span class="p">:</span>
-            <span class="n">new_counts</span><span class="p">[</span><span class="n">reg_bits</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">old_counts</span><span class="p">[</span><span class="n">reg_key</span><span class="p">]</span>
-        <span class="n">new_result</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">resultidx</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">counts</span> <span class="o">=</span> <span class="n">new_counts</span>
-
-<span class="c1"># fit the results (note we use the copy of the tomography circuits</span>
-<span class="c1"># w/o the measurements of the controls) and obtain a density matrix</span>
-<span class="n">tomog_fit</span> <span class="o">=</span> <span class="n">StateTomographyFitter</span><span class="p">(</span><span class="n">new_result</span><span class="p">,</span> <span class="n">tomog_circs_sans_aux</span><span class="p">)</span>
-<span class="n">rho</span> <span class="o">=</span> <span class="n">tomog_fit</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-
-<span class="c1"># downsize the density matrix for the 2j symmerized qubits</span>
-<span class="c1"># to the density matrix of a spin-j system, and compare</span>
-<span class="c1"># to the density matrix of the spin we started out with via the trace</span>
-<span class="n">S</span> <span class="o">=</span> <span class="n">spin_sym</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
-<span class="n">correct_jrho</span> <span class="o">=</span> <span class="n">spin_state</span><span class="o">*</span><span class="n">spin_state</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
-<span class="n">our_jrho</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="p">[[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">])</span><span class="o">*</span><span class="n">S</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;overlap between actual and expected: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">correct_jrho</span><span class="o">*</span><span class="n">our_jrho</span><span class="p">)</span><span class="o">.</span><span class="n">tr</span><span class="p">()</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;time evolved probabilities: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">pt</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13831,49 +14070,7 @@ got the right permutation symmetric state?: True
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>       ┌─────────┐    ┌──────────┐                                             »
-q_0: ──┤ unitary ├────┤1         ├─────────────────────────────────────────────»
-       └─────────┘    │  unitary │ ┌──────────┐                                »
-q_1: ─────────────────┤0         ├─┤1         ├────────────────────────────────»
-                      └──────────┘ │  unitary │                                »
-q_2: ──────────────────────────────┤0         ├──────────────────────────────■─»
-       ┌─────────┐    ┌──────────┐ └──────────┘                 ┌──────────┐ │ »
-q_3: ──┤ unitary ├────┤1         ├────────────────────────────■─┤1         ├─┼─»
-       └─────────┘    │  unitary │                            │ │  unitary │ │ »
-q_4: ─────────────────┤0         ├─────────────────────────■──┼─┤0         ├─┼─»
-       ┌─────────┐    └──────────┘             ┌─────────┐ │  │ └──────────┘ │ »
-q_5: ──┤ unitary ├──────────────────────■──────┤ unitary ├─┼──┼──────────────┼─»
-      ┌┴─────────┴─┐ ┌────────────┐     │      └─────────┘ │  │              │ »
-q_6: ─┤ RY(2.0481) ├─┤ RZ(1.4809) ├─────X──────────────────┼──X──────────────┼─»
-      ├────────────┤┌┴────────────┤     │                  │  │              │ »
-q_7: ─┤ RY(1.7431) ├┤ RZ(-2.2791) ├─────X──────────────────X──┼──────────────┼─»
-     ┌┴────────────┤├─────────────┤                        │  │              │ »
-q_8: ┤ RY(0.95046) ├┤ RZ(-0.5727) ├────────────────────────X──X──────────────X─»
-     ├─────────────┤├─────────────┤                                          │ »
-q_9: ┤ RY(0.40226) ├┤ RZ(-1.2166) ├──────────────────────────────────────────X─»
-     └─────────────┘└─────────────┘                                            »
-«                                  ┌──────────┐┌─────────┐
-«q_0: ───────────────■─────────────┤1         ├┤ unitary ├
-«                    │ ┌──────────┐│  unitary │└─────────┘
-«q_1: ────────────■──┼─┤1         ├┤0         ├───────────
-«                 │  │ │  unitary │└──────────┘           
-«q_2: ────────────┼──┼─┤0         ├───────────────────────
-«     ┌─────────┐ │  │ └──────────┘                       
-«q_3: ┤ unitary ├─┼──┼────────────────────────────────────
-«     └─────────┘ │  │                                    
-«q_4: ────────────┼──┼────────────────────────────────────
-«                 │  │                                    
-«q_5: ────────────┼──┼────────────────────────────────────
-«                 │  │                                    
-«q_6: ────────────┼──X────────────────────────────────────
-«                 │  │                                    
-«q_7: ────────────X──┼────────────────────────────────────
-«                 │  │                                    
-«q_8: ────────────┼──┼────────────────────────────────────
-«                 │  │                                    
-«q_9: ────────────X──X────────────────────────────────────
-«                                                         
-overlap between actual and expected: 0.9904
+<pre>time evolved probabilities: [0.33529641 0.03289149 0.37199529 0.2598168 ]
 </pre>
 </div>
 </div>
@@ -13885,8 +14082,109 @@ overlap between actual and expected: 0.9904
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Bibliography">Bibliography<a class="anchor-link" href="#Bibliography">&#182;</a></h2><p><a href="https://arxiv.org/abs/quant-ph/0212143">Symmetrization and Entanglement of Arbitrary States of Qubits</a></p>
-<p><a href="refs/Stabilization_of_Quantum_Compu.pdf">Stabilization of Quantum Computations By Symmetrization</a></p>
+<p>But we could also express this in terms of conditional probabilities:</p>
+<p>$u(j|i) = \frac{1}{d}tr(U\Pi_{i}U^{\dagger}\Pi_{j})$</p>
+<p>As:</p>
+<p>$p_{t}(j) = \sum_{i}^{d^2} \big{(}(d+1)p(i) - \frac{1}{d}\big{)}u(j|i)$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[171]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[(</span><span class="mi">1</span><span class="o">/</span><span class="n">d</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">U</span><span class="o">*</span><span class="n">ref_povm</span><span class="p">[</span><span class="s2">&quot;projectors&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">U</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">ref_povm</span><span class="p">[</span><span class="s2">&quot;projectors&quot;</span><span class="p">][</span><span class="n">j</span><span class="p">])</span><span class="o">.</span><span class="n">tr</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span><span class="o">.</span><span class="n">real</span>
+<span class="n">pt2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">sum</span><span class="p">([((</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="n">d</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span><span class="o">.</span><span class="n">real</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;time evolved probabilities: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">pt2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>time evolved probabilities: [0.33529641 0.03289149 0.37199529 0.2598168 ]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can compare this to the standard rule for stochastic evolution:</p>
+<p>$p_{t}(j) = \sum_{i} p(i)u(j|i)$</p>
+<p>And see how it is deformed in exactly the same way. Indeed $u(j|i)$ is a doubly stochastic matrix: it's rows and colums all sum to 1.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[174]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1. 1. 1. 1.]
+[1. 1. 1. 1.]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There's much more to say here about this formalism for quantum mechanics, and the state of art with regard to SIC-POVM's, about which there are many conjectures. But let's now turn to the philosophy.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="The-Philosophy">The Philosophy<a class="anchor-link" href="#The-Philosophy">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>...</p>
 
 </div>
 </div>

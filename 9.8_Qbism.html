@@ -13150,7 +13150,7 @@ expectation value again: -0.821
 
 <p>But there is a more general notion of measurement: a POVM (a positive operator valued measure). A POVM consists in a set of positive semidefinite operators that sum to the identity, i.e., a set $\{E_{i}\}$ such that $\sum_{i} E_{i} = I$. Each <em>operator</em> corresponds to a possible outcome of the experiment, and whereas for a Von Neumann measurement, there would be $d$ possible outcomes, corresponding to the dimension of the Hilbert space, there can be <em>any</em> number of outcomes to a POVM measurement, as long as they all sum to the identity. The probability of an outcome, however, is similarly given by $Pr(i) = tr(E_{i}\rho)$. If we write each $E_{i}$ as a product of so-called Krauss operators $E_{i} = A_{i}^{\dagger}A_{i}$, then the state after measurement will be: $\frac{A_{i}\rho A_{i}^{\dagger}}{tr(E_{i}\rho)}$.</p>
 <p>In the case we'll be considering, however, the $\{E_{i}\}$ will be rank-1, and so the state after measurement will be $\frac{\Pi_{i}\rho \Pi_{i}}{tr(\Pi_{i}\rho)}$ as before, where $\Pi_{i}$ are normalized projectors. (More on this later.)</p>
-<p>To implement POVM's, one often will couple a system to an auxilliary system and make a measurement on the latter. The details need not concern us.</p>
+<p>To implement POVM's, one will couple a system to an auxilliary system and make a measurement on the latter. We'll show how to do that in a little bit!</p>
 <p>We've already seen examples of such things in our travels. Recall that the spin coherent states form an "overcomplete" basis, or frame, for spin states of a given $j$ value. In this case, the frame has an infinite number of elements: and the integral over the sphere gives $1$.</p>
 
 </div>
@@ -13383,10 +13383,10 @@ $$tr(\Pi_{k}\Pi_{l}) = \frac{d\delta_{k,l} + 1}{d+1} $$
 
 
 
-<div id="35363fb3-a095-4ec5-9ddf-e52f1b7f14af"></div>
+<div id="da0038f1-565a-481d-b1e1-2d6c983bccb0"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#35363fb3-a095-4ec5-9ddf-e52f1b7f14af');
+var element = $('#da0038f1-565a-481d-b1e1-2d6c983bccb0');
 if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container: $("#glowscript").removeAttr("id")};}else{ element.textContent = ' ';}
 </script>
 </div>
@@ -13454,7 +13454,7 @@ if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[106]:</div>
+<div class="prompt input_prompt">In&nbsp;[276]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">rho_prob</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">povm</span><span class="p">):</span>
@@ -13481,7 +13481,7 @@ if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container:
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>probabilities: [0.05952271 0.2400031  0.26988065 0.43059354]
+<pre>probabilities: [0.15830158 0.34169842 0.15830158 0.34169842]
 sum to 1? True
 </pre>
 </div>
@@ -14037,7 +14037,7 @@ povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 
-<p>Finally, consider time evolution in this picture. We evolve our $\rho$ by some unitary:</p>
+<p>By the way, consider time evolution in this picture. We evolve our $\rho$ by some unitary:</p>
 <p>$\rho_{t} = U \rho U^{\dagger}$</p>
 <p>Naturally, we can calculate the new probabilities with reference to our SIC-POVM in the sky as we did before.</p>
 
@@ -14173,7 +14173,310 @@ povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>There's much more to say here about this formalism for quantum mechanics, and the state of art with regard to SIC-POVM's, about which there are many conjectures. But let's now turn to the philosophy.</p>
+<hr>
+
+<p>Finally, here's a thing. Having specified a SIC-POVM with $n$ elements and then an additional measurement (Von Neumann or POVM), we can construct the matrix $r(j|i)$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[477]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">ref_povm</span> <span class="o">=</span> <span class="n">sic_povm</span><span class="p">(</span><span class="n">load_sic_states</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+<span class="n">von_neumann</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_herm</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ref_povm</span><span class="p">[</span><span class="s2">&quot;elements&quot;</span><span class="p">])</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">vn_conditional_probs</span><span class="p">(</span><span class="n">von_neumann</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">)</span>
+<span class="n">r</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[477]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[0.75656753, 0.36200095, 0.78815889, 0.09327263],
+       [0.24343247, 0.63799905, 0.21184111, 0.90672737]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can then consider its rows, and extract a set of vectors $s_{j}$, each of which sums to 1:</p>
+<p>$r(j|i) = n\gamma_{j} s_{j}(i)$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[478]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">row</span><span class="o">/</span><span class="nb">sum</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">r</span><span class="p">])</span>
+<span class="n">gammas</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sum</span><span class="p">(</span><span class="n">row</span><span class="p">)</span><span class="o">/</span><span class="n">n</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+<span class="n">gammas</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[478]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[0.5000000000000001, 0.5]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[479]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">n</span><span class="o">*</span><span class="n">gammas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">row</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">s</span><span class="p">)])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[479]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[0.75656753, 0.36200095, 0.78815889, 0.09327263],
+       [0.24343247, 0.63799905, 0.21184111, 0.90672737]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We'll call these vectors $s_{j}$ "measurement vectors."</p>
+<p>Suppose we're completely indifferent to the outcomes of the POVM in the sky. We could represent this by: $c(i) = \frac{1}{n}$. In other words, equal probability for each outcome.</p>
+<p>The probabilities for outcomes to the later Von Neumann measurement would be:</p>
+<p>$q(j) = \frac{1}{n}\sum_{i}r(j|i)$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[480]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="n">n</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+<span class="n">vn_probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">sum</span><span class="p">([</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">r</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)])</span>
+<span class="n">vn_probs</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[480]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([0.5, 0.5])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We could describe this assigning to $\rho$ the maximally mixed state.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[481]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">max_mixed</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">/</span><span class="n">d</span>
+<span class="n">vn_born</span><span class="p">(</span><span class="n">max_mixed</span><span class="p">,</span> <span class="n">von_neumann</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[481]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([0.5, 0.5])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>But we could also rewrite $q(j)$ as:</p>
+<p>$q(j) = \frac{1}{n} \sum_{i} n\gamma_{j} s_{j}(i) = \gamma_{j} \sum_{i} s_{j}(i)$</p>
+<p>And since the $s_{j}(i)$ sum to 1:</p>
+<p>$q(j) = \gamma_{j}$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[482]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">gammas</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="nb">sum</span><span class="p">([</span><span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[482]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([0.5, 0.5])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[475]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gammas</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[475]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[0.5000000000000001, 0.5000000000000001]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Thus we can interpret the $\gamma_{j}$'s as: the probabilities of obtaining the $j^{th}$ outcome on the ground when you're completely indifferent to the potential outcomes in the sky.</p>
+<p>Now let's rewrite:</p>
+<p>$r(j|i) = n\gamma_{j} s_{j}(i)$</p>
+<p>as</p>
+<p>$s_{j}(i) = \frac{\frac{1}{n}r(j|i)}{\gamma_{j}}$</p>
+<p>We know that $\gamma_{j}$ is the probability of obtaining $j$ on the ground, given complete ignorance about the potential outcomes of the sky experiment. We also know that $\frac{1}{n}$ is the probability assigned to each outcome of the sky experiment from complete indifference.</p>
+<p>So write $Pr_{CI}(i)= \frac{1}{n}$ and $Pr_{CI}(j) = \gamma_{i}$, where $CI$ stands for complete ignorance/indifference. And we could apply the same notation: $Pr_{CI}(j|i) = r(j|i)$:</p>
+<p>$s_{j}(i) = \frac{Pr_{CI}(i)Pr_{CI}(j|i)}{Pr_{CI}(j)}$</p>
+<p>But this is just the Baysian formula for inverting conditional probabilities:</p>
+<p>$Pr_{CI}(i|j) = \frac{Pr_{CI}(i)Pr_{CI}(j|i)}{Pr_{CI}(j)}$</p>
+<p><img src="img/fuchs.png"></p>
 
 </div>
 </div>
@@ -14181,14 +14484,298 @@ povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="The-Philosophy">The Philosophy<a class="anchor-link" href="#The-Philosophy">&#182;</a></h2>
+<hr>
+
+<p>There's much more to say here about this formalism for quantum mechanics, and the state of art with regard to SIC-POVM's, about which there are many conjectures. But let's go on!</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>...</p>
+<hr>
+
+<h2 id="Interlude:-Implementing-POVM's">Interlude: Implementing POVM's<a class="anchor-link" href="#Interlude:-Implementing-POVM's">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It's worth mentioning how POVM's are actually implemented in practice. Here's the simplest way of thinking about it. Suppose we have a system with Hilbert space dimension $d$, and then we have a POVM with $n$ elements. (In the case of our SIC-POVM's, we'd have $d^2$ elements.) We then adjoint an auxilliary system with Hilbert space dimension $n$: as many dimensions as POVM elements. So now we're working with $\mathcal{H}_{d} \otimes \mathcal{H}_{n}$.</p>
+<p>Now let's define projectors onto the basis states of the auxilliary system: $\Xi_{i} = I_{d} \otimes \mid i \rangle \langle i \mid$. If we denote the elements of the POVM by $\{ E_{i} \}$, then we can construct an isometry:</p>
+<p>$V = \sum_{i}^{n} \sqrt{E_{i}} \otimes \mid i \rangle$</p>
+<p>Such that any element of the POVM can be written:</p>
+<p>$E_{i} = V^{\dagger}\Xi_{i}V $</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[326]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">my_povm</span> <span class="o">=</span> <span class="n">sic_povm</span><span class="p">(</span><span class="n">load_sic_states</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">my_povm</span><span class="p">[</span><span class="s2">&quot;elements&quot;</span><span class="p">])</span>
+
+<span class="n">aux_projectors</span> <span class="o">=</span> <span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">())</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+<span class="n">V</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">my_povm</span><span class="p">[</span><span class="s2">&quot;elements&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">sqrtm</span><span class="p">(),</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+
+<span class="n">povm_elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">V</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">aux_projectors</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">V</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;recovered povm elements? </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">my_povm</span><span class="p">[</span><span class="s2">&quot;elements&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">povm_elements</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>recovered povm elements? True
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So this isometry $V$ takes us from $\mathcal{H}_{d}$ to $\mathcal{H}_{d} \otimes \mathcal{H}_{n}$.
+We can extend this to a unitary $U$ (that takes $\mathcal{H}_{d} \otimes \mathcal{H}_{n}$ to $\mathcal{H}_{d} \otimes \mathcal{H}_{n}$) using the QR decomposition. In essence, we use the Gram-Schmidt procedure to fill out the rectangular matrix to a square matrix with extra orthogonal columns. (And then we have to rearrange the columns so that the columns of $V$ appear every $n^{th}$ column, in order to take into account the tensor product structure.) (And also, it doesn't matter that much, but due to a numpy convention, we should multiply by -1.)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[334]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Q</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;complete&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="n">Q</span><span class="o">.</span><span class="n">T</span><span class="p">[[</span><span class="n">i</span><span class="p">,</span><span class="n">n</span><span class="o">*</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Q</span><span class="o">.</span><span class="n">T</span><span class="p">[[</span><span class="n">n</span><span class="o">*</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]]</span>
+    
+<span class="n">U</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="o">-</span><span class="n">Q</span><span class="p">)</span>
+<span class="n">U</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[[</span><span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">],[</span><span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">]]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can check our work. It should be the case that:</p>
+<p>$V = U(I_{d} \otimes \mid 0 \rangle)$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[338]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;recovered V?: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">U</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n_povm_elements</span><span class="p">,</span> <span class="mi">0</span><span class="p">))))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>recovered V?: True
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now for the finale. We know how to calculate the probabilities for each of the POVM outcomes. It's just:</p>
+<p>$Pr(i) = tr(E_{i}\rho)$</p>
+<p>To actually implement this, we start off with our auxilliary system in the $\mid 0 \rangle$ state, so that the overall density matrix is: $\rho \otimes \mid 0 \rangle \langle 0 \mid$. We then evolve the system and the auxilliary with our unitary $U$:</p>
+$$U [\rho \otimes \mid 0 \rangle \langle 0 \mid] U^{\dagger} $$<p>We then perform a standard Von Neumann measurement on the auxilliary system (whose outcomes correspond to the basis states we've been using). Recalling that we defined the projectors on to the auxilliary basis states as $\Xi_{i} = I_{d} \otimes \mid i \rangle \langle i \mid$, we can  write then write probabilities for each outcome:</p>
+<p>$Pr(i) = tr(\Xi_{i} U [\rho \otimes \mid 0 \rangle \langle 0 \mid] U^{\dagger} )$</p>
+<p>These are the same probabilities as above.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[345]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rho</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_dm</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">povm_probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">my_povm</span><span class="p">[</span><span class="s2">&quot;elements&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">rho</span><span class="p">)</span><span class="o">.</span><span class="n">tr</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span><span class="o">.</span><span class="n">real</span>
+
+<span class="n">system_aux_probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">aux_projectors</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span>\
+                        <span class="n">U</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">())</span><span class="o">*</span><span class="n">U</span><span class="o">.</span><span class="n">dag</span><span class="p">())</span><span class="o">.</span><span class="n">tr</span><span class="p">()</span>\
+                            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span><span class="o">.</span><span class="n">real</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;povm probs</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">povm_probs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;system and aux probs</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">system_aux_probs</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>povm probs
+[0.045222   0.07470642 0.18482115 0.1140116  0.08392382 0.08600801
+ 0.20329371 0.07962296 0.12839034]
+system and aux probs
+[0.045222   0.07470642 0.18482115 0.1140116  0.08392382 0.08600801
+ 0.20329371 0.07962296 0.12839034]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<h2 id="The-Philosophy">The Philosophy<a class="anchor-link" href="#The-Philosophy">&#182;</a></h2><ol>
+<li>Quantum Theory Is Normative, Not Descriptive</li>
+<li>My Probabilities Cannot Tell Nature What To Do</li>
+<li>A Measuring Device Is Literally an Extension of the Agent</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>"Two orthogonal quantum states are perfectly distinguish- able with respect to some experiment, yet in terms of the reference measurement, they are inevitably overlapping probability distributions. The idea that any two valid probability distributions for the reference measurement must overlap, and that the minimal overlap in fact corresponds to distinguishability with respect to some other test, expresses the fact that quantum probability is not about hidden variables."</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="William-James:">William James:<a class="anchor-link" href="#William-James:">&#182;</a></h3><p>"The history of philosophy is to a great extent that of a certain clash of human temperaments. Undignified as such a treatment may seem to some of my colleagues, I shall have to take account of this clash and explain a good many of the divergencies of philosophies by it. Of whatever temperament a professional philosopher is, he tries, when philosophizing, to sink the fact of his temperament. Temperament is no conventionally recognized reason, so he urges impersonal reasons only for his conclusions. Yet his temperament really gives him a stronger bias than any of his more strictly objective premises. It loads the evidence for him one way or the other ... just as this fact or that principle would. He trusts his temperament. Wanting a universe that suits it, he believes in any representation of the universe that does suit it."</p>
+<p>"Why does Clifford fearlessly proclaim his belief in the conscious-automaton theory, although the ‘proofs’ before him are the same which make Mr. Lewes reject it? Why does he believe in primordial units of ‘mind-stuff’ on evidence which would seem quite worthless to Professor Bain? Simply because, like every human being of the slightest mental originality, he is peculiarly sensitive to evidence that bears in some one direction. It is utterly hopeless to try to exorcise such sensitiveness by calling it the disturbing subjective factor, and branding it as the root of all evil. ‘Subjective’ be it called! and ‘disturbing’ to those whom it foils! But if it helps those who, as Cicero says, “vim naturae magis sentiunt” [feel the force of nature more], it is good and not evil. Pretend what we may, the whole man within us is at work when we form our philosophical opinions. Intellect, will, taste, and passion co-operate just as they do in practical affairs...[I]n the forum [one] can make no claim, on the bare ground of his temperament, to superior discernment or authority. There arises thus a certain insincerity in our philosophic discussions: the potentest of all our premises is never mentioned. I am sure it would contribute to clearness if in these lectures we should break this rule and mention it, and I accordingly feel free to do so."</p>
+<hr>
+
+<p>"You know how men have always hankered after unlawful magic, and you know what a great part in magic words have always played. If you have his name, . . . you can control the spirit, genie, afrite, or whatever the power may be. Solomon knew the names of all the spirits, and having their names, he held them subject to his will. So the universe has always appeared to the natural mind as a kind of enigma, of which the key must be sought in the shape of some illuminating or power-bringing word or name. That word names the universe’s principle, and to possess it is after a fashion to possess the universe itself.</p>
+<p>"But if you follow the pragmatic method, you cannot look on any such word as closing your quest. You must bring out of each word its practical cash-value, set it at work within the stream of your experience. It ap- pears less as a solution, then, than as a program for more work, and more particularly as an indication of the ways in which existing realities may be changed.
+Theories thus become instruments, not answers to enigmas, in which we can rest. We don’t lie back upon them, we move forward, and, on occasion, make nature over again by their aid."</p>
+<hr>
+
+<p>"Chance] is a purely negative and relative term, giving us no information about that of which it is predicated, except that it happens to be disconnected with something else—not controlled, secured, or necessitated by other things in advance of its own actual presence. . . . What I say is that it tells us nothing about what a thing may be in itself to call it “chance.” . . . All you mean by calling it “chance” is that this is not guaranteed, that it may also fall out otherwise. For the system of other things has no positive hold on the chance-thing. Its origin is in a certain fash- ion negative: it escapes, and says, Hands off! coming, when it comes, as a free gift, or not at all."</p>
+<p>"This negativeness, however, and this opacity of the chance-thing when thus considered ab extra, or from the point of view of previous things or distant things, do not preclude its having any amount of positiveness and lumi- nosity from within, and at its own place and moment. All that its chance-character asserts about it is that there is something in it really of its own, something that is not the uncon- ditional property of the whole. If the whole wants this property, the whole must wait till it can get it, if it be a matter of chance. That the universe may actually be a sort of joint- stock society of this sort, in which the sharers have both limited liabilities and limited powers, is of course a simple and conceivable notion."</p>
+<hr>
+
+<p>"Why may not the world be a sort of republican banquet of this sort, where all the qualities of being respect one another’s personal sacredness, yet sit at the common table of space and time?
+To me this view seems deeply probable. Things cohere, but the act of cohesion itself implies but few conditions, and leaves the rest of their qualifications indeterminate. As the first three notes of a tune comport many end- ings, all melodious, but the tune is not named till a particular ending has actually come,—so the parts actually known of the universe may comport many ideally possible complements. But as the facts are not the complements, so the knowledge of the one is not the knowledge of the other in anything but the few necessary elements of which all must partake in order to be together at all. Why, if one act of knowl- edge could from one point take in the total perspective, with all mere possibilities abol- ished, should there ever have been anything more than that act? Why duplicate it by the tedious unrolling, inch by inch, of the foredone reality? No answer seems possible. On the other hand, if we stipulate only a partial community of partially independent powers, we see perfectly why no one part controls the whole view, but each detail must come and be actually given, before, in any special sense, it can be said to be determined at all. This is the moral view, the view that gives to other powers the same freedom it would have itself."</p>
+<hr>
+
+<p>"Does our act then create the world’s salvation so far as it makes room for itself, so far as it leaps into the gap? Does it create, not the whole world’s salvation of course, but just so much of this as itself covers of the world’s extent? Here I take the bull by the horns, and in spite of the whole crew of rationalists and monists, of whatever brand they be, I ask why not? Our acts, our turning-places, where we seem to ourselves to make ourselves and grow, are the parts of the world to which we are closest, the parts of which our knowledge is the most intimate and complete. Why should we not take them at their facevalue? Why may they not be the actual turning-places and growing-places which they seem to be, of the world—why not the workshop of being, where we catch fact in the making, so that nowhere may the world grow in any other kind of way than this?"</p>
+<p>"Irrational! we are told. How can new being come in local spots and patches which add themselves or stay away at random, independently of the rest? There must be a reason for our acts, and where in the last resort can any reason be looked for save in the material pressure or the logical compulsion of the total nature of the world? There can be but one real agent of growth, or seeming growth, anywhere, and that agent is the integral world itself. It may grow all-over, if growth there be, but that single parts should grow per se is irrational."</p>
+<p>"But if one talks of rationality—and of reasons for things, and insists that they can’t just come in spots, what kind of a reason can there ultimately be why anything should come at all?"</p>
+<hr>
+
+<p>"What does determinism profess? It professes that those parts of the universe already laid down absolutely appoint and decree what the other parts shall be. The future has no ambiguous possibilities hidden in its womb; the part we call the present is compatible with only one totality. Any other future complement than the one fixed from eternity is impossible. The whole is in each and every part, and welds it with the rest into an absolute unity, an iron block, in which there can be no equivocation or shadow of turning."</p>
+<p>"Indeterminism, on the contrary, says that the parts have a certain amount of loose play on one another, so that the laying down of one of them does not necessarily determine what the others shall be. It admits that possibilities may be in excess of actualities, and that things not yet revealed to our knowledge may really in themselves be ambiguous. Of two alternative futures which we conceive, both may now be really possible; and the one become impossible only at the very moment when the other excludes it by becoming real itself. Indeterminism thus denies the world to be one unbending unit of fact. It says there is a certain ultimate pluralism in it."</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Oliver-Wendell-Holmes,-Jr.">Oliver Wendell Holmes, Jr.<a class="anchor-link" href="#Oliver-Wendell-Holmes,-Jr.">&#182;</a></h3><p>"Chauncey Wright a nearly forgotten philosopher of real merit, taught me when young that I must not say necessary about the universe, that we don’t know whether anything is necessary or not. So I describe myself as a bettabilitarian. I believe that we can bet on the behavior of the universe in its contact with us."</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="John-Wheeler">John Wheeler<a class="anchor-link" href="#John-Wheeler">&#182;</a></h3><p><img src="img/wheeler.png"></p>
+<p>"How did the universe come into being? Is that some strange, far-off process beyond hope of analysis? Or is the mechanism that comes into play one which all the time shows itself? Of all the signs that testify to “quantum phenomenon” as being the elementary act and building block of existence, none is more striking than its utter absence of internal structure and its untouchability. For a process of creation that can and does operate anywhere, that is more basic than particles or fields or spacetime geometry themselves, a process that reveals and yet hides itself, what could one have dreamed up out of pure imagination more magic and more fitting than this?"</p>
+<p>"“Law without law”: It is difficult to see what else than that can be the “plan” for physics. It is preposterous to think of the laws of physics as installed by a Swiss watchmaker to endure from everlasting to everlasting when we know that the universe began with a big bang. The laws must have come into being. Therefore they could not have been always a hundred percent accurate. That means that they are derivative, not primary. Also derivative, also not primary is the statistical law of distribution of the molecules of a dilute gas between two intersecting portions of a total volume. This law is always violated and yet always upheld. The individual molecules laugh at it; yet as they laugh they find themselves obeying it. ... Are the laws of physics of a similar statistical character? And if so, statistics of what? Of billions and billions of acts of observer-participancy which individually defy all law? . . . [Might] the entirety of existence, rather than [be] built on particles or fields or multidimensional geometry, [be] built on billions upon billions of elementary quantum phenomena, those elementary acts of observer-participancy?"</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Bibliography">Bibliography<a class="anchor-link" href="#Bibliography">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="https://arxiv.org/abs/0906.1968">Delirium Quantum</a></p>
+<p><a href="https://arxiv.org/abs/1003.5209">QBism, the Perimeter of Quantum Bayesianism</a></p>
+<p><a href="https://arxiv.org/abs/1301.3274">Quantum-Bayesian Coherence: The No-Nonsense Version</a></p>
+<p><a href="https://arxiv.org/abs/1311.5253">An Introduction to QBism with an Application to the Locality of Quantum Mechanics</a></p>
+<p><a href="https://arxiv.org/abs/1401.7254">Some Negative Remarks on Operational Approaches to Quantum Theory</a></p>
+<p><a href="https://arxiv.org/abs/1405.2390">My Struggles with the Block Universe</a></p>
+<p><a href="https://arxiv.org/abs/1412.4209">Quantum Measurement and the Paulian Idea</a></p>
+<p><a href="https://arxiv.org/abs/quant-ph/0105039">Notes on a Paulian Idea</a></p>
+<p><a href="https://arxiv.org/abs/1601.04360">On Participatory Realism</a></p>
+<p><a href="https://arxiv.org/abs/1612.03234">Introducing the Qplex: A Novel Arena for Quantum Theory</a></p>
+<p><a href="https://arxiv.org/abs/1612.07308">QBism: Quantum Theory as a Hero’s Handbook</a></p>
+<p><a href="https://arxiv.org/abs/1703.07901">The SIC Question: History and State of Play</a></p>
+<p><a href="https://arxiv.org/abs/1705.03483">Notwithstanding Bohr, the Reasons for QBism</a></p>
+<p><a href="https://arxiv.org/abs/2012.14397">The Born Rule as Dutch-Book Coherence (and only a little more)</a></p>
+<p><a href="https://arxiv.org/abs/quant-ph/0205039">Quantum Mechanics as Quantum Information (and only a little more)</a></p>
+<p><a href="https://arxiv.org/abs/1907.02432">Quantum Theory as Symmetry Broken by Vitality</a></p>
+<p><a href="https://en.wikipedia.org/wiki/POVM">https://en.wikipedia.org/wiki/POVM</a></p>
+<p><a href="https://en.wikipedia.org/wiki/SIC-POVM">https://en.wikipedia.org/wiki/SIC-POVM</a></p>
+<p><a href="refs/wheeler_law_without_law.pdf">Law without Law</a></p>
 
 </div>
 </div>

@@ -13092,7 +13092,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="The-Math">The Math<a class="anchor-link" href="#The-Math">&#182;</a></h2><p>A Von Neumann measurement consists in a choice of observable represented by a Hermitian operator $H$. Such an operator will have real eigenvalues and orthogonal eigenvectors. For example, $H$ could be the energy operator. Then the eigenvectors would represent possible energy states (assuming no degeneracies), and the eigenvalues would represent possible value of the energy. According to textbook quantum mechanics, which state the system ends up in after the measurement will in general be random, and quantum mechanics allows you to calculate the probabilities. The Hermitian observable provides what is known as a "projection valued measure."</p>
+<h2 id="The-Math">The Math<a class="anchor-link" href="#The-Math">&#182;</a></h2><p>A Von Neumann measurement consists in a choice of observable represented by a Hermitian operator $H$. Such an operator will have real eigenvalues and orthogonal eigenvectors. For example, $H$ could be the energy operator. Then the eigenvectors would represent possible energy states, and the eigenvalues would represent possible values of the energy (assuming no degeneracies). According to textbook quantum mechanics, which state the system ends up in after the measurement will in general be random, and quantum mechanics allows you to calculate the probabilities. The Hermitian observable provides what is known as a "projection valued measure."</p>
 <p>Suppose our system was represented by a density matrix $\rho$. We could form the projectors $P_{i} = \mid v_{i} \rangle \langle v_{i} \mid$, where $\mid v_{i} \rangle$ is the $i^{th}$ eigenvector. Then the probability for the $i^{th}$ outcome would be given by $Pr(i) = tr(P_{i}\rho)$, and the state after measurement would be given by $\frac{P_{i} \rho P_{i}}{tr(P_{i}\rho)}$. The expectation value of the observable $\langle H \rangle$ is given by $tr(H\rho)$, and it amounts to a sum over the eigenvalues weighted by the corresponding probabilities.</p>
 
 </div>
@@ -13100,7 +13100,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[54]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
@@ -13132,9 +13132,9 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>probabilities: [0.6648866882772335, 0.3351133117227665]
-expectation value: -0.821
-expectation value again: -0.821
+<pre>probabilities: [0.27360424638488434, 0.7263957536151159]
+expectation value: 0.047
+expectation value again: 0.047
 </pre>
 </div>
 </div>
@@ -13151,7 +13151,7 @@ expectation value again: -0.821
 <p>But there is a more general notion of measurement: a POVM (a positive operator valued measure). A POVM consists in a set of positive semidefinite operators that sum to the identity, i.e., a set $\{E_{i}\}$ such that $\sum_{i} E_{i} = I$. Each <em>operator</em> corresponds to a possible outcome of the experiment, and whereas for a Von Neumann measurement, there would be $d$ possible outcomes, corresponding to the dimension of the Hilbert space, there can be <em>any</em> number of outcomes to a POVM measurement, as long as they all sum to the identity. The probability of an outcome, however, is similarly given by $Pr(i) = tr(E_{i}\rho)$. If we write each $E_{i}$ as a product of so-called Krauss operators $E_{i} = A_{i}^{\dagger}A_{i}$, then the state after measurement will be: $\frac{A_{i}\rho A_{i}^{\dagger}}{tr(E_{i}\rho)}$.</p>
 <p>In the case we'll be considering, however, the $\{E_{i}\}$ will be rank-1, and so the state after measurement will be $\frac{\Pi_{i}\rho \Pi_{i}}{tr(\Pi_{i}\rho)}$ as before, where $\Pi_{i}$ are normalized projectors. (More on this later.)</p>
 <p>To implement POVM's, one will couple a system to an auxilliary system and make a measurement on the latter. We'll show how to do that in a little bit!</p>
-<p>We've already seen examples of such things in our travels. Recall that the spin coherent states form an "overcomplete" basis, or frame, for spin states of a given $j$ value. In this case, the frame has an infinite number of elements: and the integral over the sphere gives $1$.</p>
+<p>We've already seen examples of such things in our travels. Recall that the spin coherent states form an "overcomplete" basis, or frame, for spin states of a given $j$ value. In this case, the frame has an infinite number of elements, one for each point on the sphere: and the integral over the sphere gives $1$.</p>
 
 </div>
 </div>
@@ -13162,7 +13162,7 @@ expectation value again: -0.821
 <hr>
 
 <p>A very special kind of POVM is a so-called SIC-POVM: a symmetric informationally complete positive operator valued measure. They've been conjectured to exist in all dimensions, and numerical evidence suggests this is the case. For a given Hilbert space of dimension $d$, a SIC is a set of $d^2$ rank-one projection operators $\Pi_{i} = \mid \psi_{i} \rangle \langle \psi_{i} \mid$ such that:</p>
-$$tr(\Pi_{k}\Pi_{l}) = \frac{d\delta_{k,l} + 1}{d+1} $$<p>Such a set of operators will be linearly independent, and if you rescale them to $\frac{1}{d}\Pi_{i}$, then form a POVM: $\sum_{i} \frac{1}{d} \Pi_{i} = I$. For any quantum state $\rho$, a SIC specifies a measurement <em>for which the probabilities of outcomes $p(i)$ specify $\rho$ itself</em>. Normally, say in the case of a qubit, we'd have to measure expectation values $(\langle X \rangle, \langle Y \rangle, \langle Z \rangle)$ to nail down the state: in other words, we'd have to repeat many times three <em>different</em> measurements. But for a SIC-POVM, the probabilities on each of the elements of the POVM fully determine the state: we're talking here about a <em>single</em> type of measurement.</p>
+$$tr(\Pi_{k}\Pi_{l}) = \frac{d\delta_{k,l} + 1}{d+1} $$<p>Such a set of projectors will be linearly independent, and if you rescale they to $\frac{1}{d}\Pi_{i}$, they form a POVM: $\sum_{i} \frac{1}{d} \Pi_{i} = I$. For any quantum state $\rho$, a SIC specifies a measurement <em>for which the probabilities of outcomes $p(i)$ specify $\rho$ itself</em>. Normally, say in the case of a qubit, we'd have to measure expectation values $(\langle X \rangle, \langle Y \rangle, \langle Z \rangle)$ to nail down the state: in other words, we'd have to repeat many times three <em>different</em> measurements. But for a SIC-POVM, the probabilities on each of the elements of the POVM fully determine the state: we're talking here about a <em>single</em> type of measurement.</p>
 
 </div>
 </div>
@@ -13172,7 +13172,7 @@ $$tr(\Pi_{k}\Pi_{l}) = \frac{d\delta_{k,l} + 1}{d+1} $$<p>Such a set of operator
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 
-<p>Thanks to Chris Fuchs and Co. we have a repository of SIC-POVM's in a variety of dimensions. One can download them <a href="http://www.physics.umb.edu/Research/QBism/solutions.html">here</a>. You'll get a zip of text files, one for each dimension: and in each text file is a single complex vector: the "fiducial" vector. From this vector, the SIC can be derived.</p>
+<p>Thanks to Chris Fuchs &amp; Co., we have a repository of SIC-POVM's in a variety of dimensions. One can download them <a href="http://www.physics.umb.edu/Research/QBism/solutions.html">here</a>. You'll get a zip of text files, one for each dimension: and in each text file is a single complex vector: the "fiducial" vector. From this vector, the SIC can be derived.</p>
 <p>In order to do this, we first define (with Sylvester) the clock and shift matrices for a given dimension $d$:</p>
 $$Z = 
 \begin{pmatrix}
@@ -13197,7 +13197,7 @@ $$<p>Where $\omega = e^{\frac{2\pi i}{d}}$.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">clock</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
@@ -13226,7 +13226,7 @@ $$D_{a,b} = (-e^{\frac{i\pi}{d}})^{ab}X^{b}Z^{a} $$<p>For $a, b$ each from $0$ t
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">displace</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
@@ -13245,14 +13245,14 @@ $$D_{a,b} = (-e^{\frac{i\pi}{d}})^{ab}X^{b}Z^{a} $$<p>For $a, b$ each from $0$ t
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Finally, if we act on the fiducial vector with each of the displacement operators, we obtain the $d^2$ pure states, whoe projectors, weighted by $\frac{1}{d}$ form the SIC-POVM.</p>
+<p>Finally, if we act on the fiducial vector with each of the displacement operators, we obtain the $d^2$ pure states, whose projectors, weighted by $\frac{1}{d}$, form the SIC-POVM.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">load_sic_states</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
@@ -13281,7 +13281,7 @@ $$tr(\Pi_{k}\Pi_{l}) = \frac{d\delta_{k,l} + 1}{d+1} $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[147]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_sic_states</span><span class="p">(</span><span class="n">sic</span><span class="p">):</span>
@@ -13291,7 +13291,7 @@ $$tr(\Pi_{k}\Pi_{l}) = \frac{d\delta_{k,l} + 1}{d+1} $$
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%d</span><span class="s2">, </span><span class="si">%d</span><span class="s2">): </span><span class="si">%.4f</span><span class="s2"> | should be: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">overlap</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="n">should_be</span><span class="p">))</span>
 
 <span class="n">sic_states</span> <span class="o">=</span> <span class="n">load_sic_states</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">test_sic</span><span class="p">(</span><span class="n">sic_states</span><span class="p">)</span>
+<span class="n">test_sic_states</span><span class="p">(</span><span class="n">sic_states</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13335,14 +13335,14 @@ $$tr(\Pi_{k}\Pi_{l}) = \frac{d\delta_{k,l} + 1}{d+1} $$
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In the case of a the two dimensional Hilbert space, the SIC-POVM's will form a tetrahedron in the Bloch sphere:</p>
+<p>In the case of a two dimensional Hilbert space, the SIC-POVM states will form a tetrahedron in the Bloch sphere:</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">vpython</span> <span class="k">as</span> <span class="nn">vp</span>
@@ -13383,11 +13383,149 @@ $$tr(\Pi_{k}\Pi_{l}) = \frac{d\delta_{k,l} + 1}{d+1} $$
 
 
 
-<div id="6664d71b-4e71-4f73-97aa-8c0e8b6d79db"></div>
+<div id="da82a33e-c61a-472b-8f2f-24b157db3ca5"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#6664d71b-4e71-4f73-97aa-8c0e8b6d79db');
+var element = $('#da82a33e-c61a-472b-8f2f-24b157db3ca5');
 if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container: $("#glowscript").removeAttr("id")};}else{ element.textContent = ' ';}
+</script>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div id="glowscript" class="glowscript"></div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+
+<div id="0f1b9618-849f-4ed4-95d9-7dceee0b9776"></div>
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+var element = $('#0f1b9618-849f-4ed4-95d9-7dceee0b9776');
+if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container: $("#glowscript").removeAttr("id")};}else{ element.textContent = ' ';}
+</script>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+
+<div id="4438fa83-ebba-467b-90e3-a709c0e8d54e"></div>
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+var element = $('#4438fa83-ebba-467b-90e3-a709c0e8d54e');
+if (typeof Jupyter !== "undefined") {require.undef("nbextensions/vpython_libraries/glow.min");}else{element.textContent = ' ';}
+</script>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+
+<div id="a5123b10-7089-4369-9b84-2b47712e8223"></div>
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+var element = $('#a5123b10-7089-4369-9b84-2b47712e8223');
+if (typeof Jupyter !== "undefined") {require.undef("nbextensions/vpython_libraries/glowcomm");}else{element.textContent = ' ';}
+</script>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+
+<div id="455b6688-3656-4b3b-b469-179aea821175"></div>
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+var element = $('#455b6688-3656-4b3b-b469-179aea821175');
+if (typeof Jupyter !== "undefined") {require.undef("nbextensions/vpython_libraries/jquery-ui.custom.min");}else{element.textContent = ' ';}
+</script>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+
+<div id="970c5f36-5c20-47d8-b715-433048560531"></div>
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+var element = $('#970c5f36-5c20-47d8-b715-433048560531');
+if (typeof Jupyter !== "undefined") {require(["nbextensions/vpython_libraries/glow.min"], function(){console.log("GLOW LOADED");});}else{element.textContent = ' ';}
+</script>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+
+<div id="5c436b34-a6f6-4cbb-a8cd-6a6caf05922e"></div>
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+var element = $('#5c436b34-a6f6-4cbb-a8cd-6a6caf05922e');
+if (typeof Jupyter !== "undefined") {require(["nbextensions/vpython_libraries/glowcomm"], function(){console.log("GLOWCOMM LOADED");});}else{element.textContent = ' ';}
+</script>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+
+<div id="4dafe355-cf33-4d82-8a40-020e5efc2063"></div>
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+var element = $('#4dafe355-cf33-4d82-8a40-020e5efc2063');
+if (typeof Jupyter !== "undefined") {require(["nbextensions/vpython_libraries/jquery-ui.custom.min"], function(){console.log("JQUERY LOADED");});}else{element.textContent = ' ';}
 </script>
 </div>
 
@@ -13407,7 +13545,7 @@ if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[148]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">sic_povm</span><span class="p">(</span><span class="n">sic_states</span><span class="p">):</span>
@@ -13454,7 +13592,7 @@ if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[276]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">rho_prob</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">povm</span><span class="p">):</span>
@@ -13481,7 +13619,7 @@ if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container:
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>probabilities: [0.15830158 0.34169842 0.15830158 0.34169842]
+<pre>probabilities: [0.35457152 0.14542848 0.35457152 0.14542848]
 sum to 1? True
 </pre>
 </div>
@@ -13503,7 +13641,7 @@ $$\rho = (d+1) \sum_{i} p(i)\Pi_{i} - I $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[91]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">prob_rho</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">povm</span><span class="p">):</span>
@@ -13551,16 +13689,16 @@ $$\rho = (d+1) \sum_{i} p(i)\Pi_{i} - I $$
 <p>This is just standard probability theory: the law of total probability. The probability for an outcome $j$ of the Von Neumann measurement is the sum over all the conditional probabilities for $j$, given some outcome $i$ of the SIC-POVM, multiplied by the probability that $i$ occured.</p>
 <p>The standard way of thinking about this would be that:</p>
 <p>$\rho^{\prime} = \sum_{i} p(i)\Pi_{i}$</p>
-<p>In other words, $\rho$ becomes a mixture of outcome states weighted by the probability of them occuring. In this simple case, where we aren't consider a subsystem of larger system, we can just use the projectors $\Pi_{j}$ corresponding to the SIC-POVM outcome states. Then the probabilities for the Von Neumann measurement are:</p>
-<p>$s(j) = tr(\tilde{\Pi_{j}}\rho^{\prime})$</p>
-<p>Where $\tilde{\Pi_{j}}$ is the projector for the $j^{th}$ Von Neumann outcome.</p>
+<p>In other words, $\rho$ becomes a mixture of outcome states weighted by the probability of them occuring. In this simple case, where we aren't considering a subsystem of larger system, we can just use the projectors $\Pi_{j}$ corresponding to the SIC-POVM outcome states. Then the probabilities for the Von Neumann measurement are:</p>
+<p>$s(j) = tr(\tilde{\Pi}_{j}\rho^{\prime})$</p>
+<p>Where $\tilde{\Pi}_{j}$ is the projector for the $j^{th}$ Von Neumann outcome.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[117]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">von_neumann</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_herm</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
@@ -13586,7 +13724,7 @@ $$\rho = (d+1) \sum_{i} p(i)\Pi_{i} - I $$
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>vn probabilities after sic: [0.59849402 0.40150598]
+<pre>vn probabilities after sic: [0.37925121 0.62074879]
 </pre>
 </div>
 </div>
@@ -13600,7 +13738,8 @@ $$\rho = (d+1) \sum_{i} p(i)\Pi_{i} - I $$
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Alternatively, however, we could form conditional probabilities directly:</p>
 <p>$r(j|i) = \sum_{i}^{d^2} tr(\Pi_{i}\tilde{\Pi}_{j})$</p>
-<p>And then use the formula:</p>
+<p>Where $\Pi_{i}$ is the projector for the $i^{th}$ POVM outcome (in the sky), and $\tilde{\Pi}_{j}$ is the projector for the $j^{th}$ Von Neumann outcome (on the ground).</p>
+<p>Then we can use the formula:</p>
 <p>$s(j) = \sum_{i}^{d^2} p(i)r(j|i)$</p>
 
 </div>
@@ -13608,7 +13747,7 @@ $$\rho = (d+1) \sum_{i} p(i)\Pi_{i} - I $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[118]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">vn_conditional_probs</span><span class="p">(</span><span class="n">von_neumann</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">):</span>
@@ -13639,7 +13778,7 @@ $$\rho = (d+1) \sum_{i} p(i)\Pi_{i} - I $$
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>vn probabilities after sic: [0.59849402 0.40150598]
+<pre>vn probabilities after sic: [0.37925121 0.62074879]
 </pre>
 </div>
 </div>
@@ -13651,7 +13790,7 @@ $$\rho = (d+1) \sum_{i} p(i)\Pi_{i} - I $$
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Incidentally, there's no need to confine ourselves to the case of Von Neumann measurements. Suppose the "measurement on the ground" is given by another POVM. In fact, we can get one by just rotating our SIC-POVM by some random unitary.</p>
+<p>Incidentally, there's no need to confine ourselves to the case of Von Neumann measurements. Suppose the "measurement on the ground" is given by another POVM. In fact, we can get one by just rotating our SIC-POVM by some random unitary. We'd the obtain another SIC-POVM $\{E_{j}\}$.</p>
 <p>We'd form $\rho^{\prime} = \sum_{i} p(i)\Pi_{i}$ just as before, and then take $s(j) = tr(E_{j}\rho^{\prime})$.</p>
 
 </div>
@@ -13659,7 +13798,7 @@ $$\rho = (d+1) \sum_{i} p(i)\Pi_{i} - I $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[136]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">U</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_unitary</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
@@ -13686,7 +13825,7 @@ $$\rho = (d+1) \sum_{i} p(i)\Pi_{i} - I $$
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
+<pre>povm probabilities after sic: [0.28881132 0.2784066  0.20439704 0.22838503]
 </pre>
 </div>
 </div>
@@ -13709,7 +13848,7 @@ $$\rho = (d+1) \sum_{i} p(i)\Pi_{i} - I $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[175]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">povm_conditional_probs</span><span class="p">(</span><span class="n">povm</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">):</span>
@@ -13739,7 +13878,7 @@ $$\rho = (d+1) \sum_{i} p(i)\Pi_{i} - I $$
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
+<pre>povm probabilities after sic: [0.28881132 0.2784066  0.20439704 0.22838503]
 </pre>
 </div>
 </div>
@@ -13761,7 +13900,7 @@ $$\rho = (d+1) \sum_{i} p(i)\Pi_{i} - I $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[176]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">vn_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">proj</span><span class="o">*</span><span class="n">rho</span><span class="p">)</span><span class="o">.</span><span class="n">tr</span><span class="p">()</span> <span class="k">for</span> <span class="n">proj</span> <span class="ow">in</span> <span class="n">vn_projectors</span><span class="p">])</span><span class="o">.</span><span class="n">real</span>
@@ -13782,7 +13921,7 @@ $$\rho = (d+1) \sum_{i} p(i)\Pi_{i} - I $$
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>vn probabilities (no sic in the sky): [0.79548205 0.20451795]
+<pre>vn probabilities (no sic in the sky): [0.13775362 0.86224638]
 </pre>
 </div>
 </div>
@@ -13802,7 +13941,7 @@ $$\rho = (d+1) \sum_{i} p(i)\Pi_{i} - I $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[177]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">vn_born</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">von_neumann</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">):</span>
@@ -13828,7 +13967,7 @@ $$\rho = (d+1) \sum_{i} p(i)\Pi_{i} - I $$
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>vn probabilities (no sic in the sky): [0.79548205 0.20451795]
+<pre>vn probabilities (no sic in the sky): [0.13775362 0.86224638]
 </pre>
 </div>
 </div>
@@ -13840,7 +13979,7 @@ $$\rho = (d+1) \sum_{i} p(i)\Pi_{i} - I $$
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In other words, we can express the usual quantum probabilities in a way that looks <em>ridiculously</em> close to our formula from before. We sum over <em>hypothetical</em> outcomes of the SIC-POVM, multiplying the probability of each outcome, given our state $\rho$, by the conditional probability for the Von Neumann measurement giving the $j^{th}$ outcome, given that the SIC-POVM outcome was $i$. Except it is somewhat deformed by the the $(d+1)$ and the $-1$. Clearly, this is equivalent to the usual Born Rule: but it's expressed entirely in terms of probabilities and conditional probabilities. It makes sense, in the end, that you can do this, given that the probabilities for the SIC-POVM measurement completely nail down the state. So we can just work with the probabilities instead. We could just pick a SIC-POVM to be our "reference apparatus", and describe any quantum state we're ever interested in terms of probabilities with reference to it, and any measurement in terms of conditional probabilities.</p>
+<p>In other words, we can express the usual quantum probabilities in a way that looks <em>ridiculously</em> close to our formula from before. We sum over <em>hypothetical</em> outcomes of the SIC-POVM, multiplying the probability of each outcome, given our state $\rho$, by the conditional probability for the Von Neumann measurement giving the $j^{th}$ outcome, given that the SIC-POVM outcome was $i$. Except it is somewhat deformed by the the $(d+1)$ and the $-1$. Clearly, this is equivalent to the usual Born Rule: but it's expressed entirely in terms of probabilities and conditional probabilities. It makes sense, in the end, that you can do this, given that the probabilities for the SIC-POVM measurement completely nail down the state. So we can just work with the probabilities instead! We could just pick a SIC-POVM to be our "reference apparatus", and describe any quantum state we're ever interested in terms of probabilities with reference to it, and any measurement in terms of conditional probabilities.</p>
 <p>Operationally, what <em>is</em> difference between:</p>
 <p>$s(j) = \sum_{i}^{d^2} p(i)r(j|i)$</p>
 <p>and</p>
@@ -13865,7 +14004,7 @@ $$\rho = (d+1) \sum_{i} p(i)\Pi_{i} - I $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[145]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;povm probabilities (no sic in the sky): </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">rho_prob</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">ground_povm</span><span class="p">))</span>
@@ -13885,7 +14024,7 @@ $$\rho = (d+1) \sum_{i} p(i)\Pi_{i} - I $$
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>povm probabilities (no sic in the sky): [0.08465191 0.21809837 0.24475145 0.45249827]
+<pre>povm probabilities (no sic in the sky): [0.36643396 0.33521981 0.11319113 0.18515509]
 </pre>
 </div>
 </div>
@@ -13896,7 +14035,7 @@ $$\rho = (d+1) \sum_{i} p(i)\Pi_{i} - I $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[146]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">povm_born</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">povm</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">):</span>
@@ -13922,7 +14061,7 @@ $$\rho = (d+1) \sum_{i} p(i)\Pi_{i} - I $$
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>povm probabilities (no sic in the sky): [0.08465191 0.21809837 0.24475145 0.45249827]
+<pre>povm probabilities (no sic in the sky): [0.36643396 0.33521981 0.11319113 0.18515509]
 </pre>
 </div>
 </div>
@@ -13945,7 +14084,7 @@ $$\rho = (d+1) \sum_{i} p(i)\Pi_{i} - I $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[150]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">vn_born_matrix</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">von_neumann</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">):</span>
@@ -13981,8 +14120,8 @@ $$\rho = (d+1) \sum_{i} p(i)\Pi_{i} - I $$
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>vn probabilities (no sic in the sky): [0.79548205 0.20451795]
-povm probabilities (no sic in the sky): [0.08465191 0.21809837 0.24475145 0.45249827]
+<pre>vn probabilities (no sic in the sky): [0.13775362 0.86224638]
+povm probabilities (no sic in the sky): [0.36643396 0.33521981 0.11319113 0.18515509]
 </pre>
 </div>
 </div>
@@ -14001,7 +14140,7 @@ povm probabilities (no sic in the sky): [0.08465191 0.21809837 0.24475145 0.4524
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[163]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;vn probabilities after sic: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">vn_conditional_probs</span><span class="p">(</span><span class="n">von_neumann</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">)</span> <span class="o">@</span> <span class="n">rho_prob</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">)))</span>
@@ -14022,8 +14161,8 @@ povm probabilities (no sic in the sky): [0.08465191 0.21809837 0.24475145 0.4524
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>vn probabilities after sic: [0.59849402 0.40150598]
-povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
+<pre>vn probabilities after sic: [0.37925121 0.62074879]
+povm probabilities after sic: [0.28881132 0.2784066  0.20439704 0.22838503]
 </pre>
 </div>
 </div>
@@ -14046,7 +14185,7 @@ povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[169]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">U</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_unitary</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
@@ -14070,7 +14209,7 @@ povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>time evolved probabilities: [0.33529641 0.03289149 0.37199529 0.2598168 ]
+<pre>time evolved probabilities: [0.38904956 0.126779   0.30952956 0.17464187]
 </pre>
 </div>
 </div>
@@ -14092,7 +14231,7 @@ povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[182]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">temporal_conditional_probs</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">ref_povm</span><span class="p">):</span>
@@ -14118,7 +14257,7 @@ povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>time evolved probabilities: [0.33529641 0.03289149 0.37199529 0.2598168 ]
+<pre>time evolved probabilities: [0.38904956 0.126779   0.30952956 0.17464187]
 </pre>
 </div>
 </div>
@@ -14132,14 +14271,14 @@ povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We can compare this to the standard rule for stochastic evolution:</p>
 <p>$p_{t}(j) = \sum_{i} p(i)u(j|i)$</p>
-<p>And see how it is deformed in exactly the same way. Indeed $u(j|i)$ is a doubly stochastic matrix: its rows and colums all sum to 1. And we can describe the time evolution of the quantum system in terms of it.</p>
+<p>And see how the expression is deformed in exactly the same way. Indeed $u(j|i)$ is a doubly stochastic matrix: its rows and colums all sum to 1. And we can describe the time evolution of the quantum system in terms of it.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[174]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
@@ -14182,7 +14321,7 @@ povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[477]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>
@@ -14204,14 +14343,14 @@ povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[477]:</div>
+    <div class="prompt output_prompt">Out[23]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[0.75656753, 0.36200095, 0.78815889, 0.09327263],
-       [0.24343247, 0.63799905, 0.21184111, 0.90672737]])</pre>
+<pre>array([[0.78867513, 0.21132487, 0.78867513, 0.21132487],
+       [0.21132487, 0.78867513, 0.21132487, 0.78867513]])</pre>
 </div>
 
 </div>
@@ -14231,7 +14370,7 @@ povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[478]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">row</span><span class="o">/</span><span class="nb">sum</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">r</span><span class="p">])</span>
@@ -14249,13 +14388,13 @@ povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[478]:</div>
+    <div class="prompt output_prompt">Out[24]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[0.5000000000000001, 0.5]</pre>
+<pre>[0.5000000000000001, 0.5000000000000001]</pre>
 </div>
 
 </div>
@@ -14266,7 +14405,7 @@ povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[479]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">n</span><span class="o">*</span><span class="n">gammas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">row</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">s</span><span class="p">)])</span>
@@ -14282,14 +14421,14 @@ povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[479]:</div>
+    <div class="prompt output_prompt">Out[25]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[0.75656753, 0.36200095, 0.78815889, 0.09327263],
-       [0.24343247, 0.63799905, 0.21184111, 0.90672737]])</pre>
+<pre>array([[0.78867513, 0.21132487, 0.78867513, 0.21132487],
+       [0.21132487, 0.78867513, 0.21132487, 0.78867513]])</pre>
 </div>
 
 </div>
@@ -14311,7 +14450,7 @@ povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[480]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="n">n</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
@@ -14329,7 +14468,7 @@ povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[480]:</div>
+    <div class="prompt output_prompt">Out[26]:</div>
 
 
 
@@ -14347,14 +14486,14 @@ povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We could describe this assigning to $\rho$ the maximally mixed state.</p>
+<p>We could describe this by assigning to $\rho$ the maximally mixed state.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[481]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">max_mixed</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">/</span><span class="n">d</span>
@@ -14371,7 +14510,7 @@ povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[481]:</div>
+    <div class="prompt output_prompt">Out[27]:</div>
 
 
 
@@ -14399,7 +14538,7 @@ povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[482]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">gammas</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="nb">sum</span><span class="p">([</span><span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)])</span>
@@ -14415,7 +14554,7 @@ povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[482]:</div>
+    <div class="prompt output_prompt">Out[28]:</div>
 
 
 
@@ -14432,7 +14571,7 @@ povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[475]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">gammas</span>
@@ -14448,7 +14587,7 @@ povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[475]:</div>
+    <div class="prompt output_prompt">Out[29]:</div>
 
 
 
@@ -14486,14 +14625,14 @@ povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 
-<p>There's much more to say here about this formalism for quantum mechanics, and the state of art with regard to SIC-POVM's, about which there are many conjectures. But before we go, let's visualize SIC-POVM's using the Majorana representation! Choose a dimensionality and see a sphere with all the contellations of all the SIC states: each state gets a constellation with different color. Click one of the stars to highlight the whole constellation.</p>
+<p>There's much more to say here about this formalism for quantum mechanics, and the state of art with regard to SIC-POVM's, about which there are many conjectures. But before we go, let's visualize SIC-POVM's using the Majorana representation! Choose a dimensionality and see a sphere with all the contellations corresponding to all the SIC states: each state gets a constellation with different color. Click one of the stars to highlight the whole constellation.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">spheres</span> <span class="k">import</span> <span class="o">*</span>
@@ -14557,25 +14696,14 @@ povm probabilities after sic: [0.19488397 0.23936612 0.24825048 0.31749942]
 
 
 
-<div id="2a0555b1-3277-40a0-821a-54535cd4241e"></div>
+<div id="3777c556-b273-4eb0-be6e-42bbb025a9c8"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#2a0555b1-3277-40a0-821a-54535cd4241e');
+var element = $('#3777c556-b273-4eb0-be6e-42bbb025a9c8');
 if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container: $("#glowscript").removeAttr("id")};}else{ element.textContent = ' ';}
 </script>
 </div>
 
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>ERROR! Session/line number was not unique in database. History logging moved to new session 1245
-</pre>
-</div>
 </div>
 
 </div>
@@ -14605,7 +14733,7 @@ if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[326]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="mi">3</span>
@@ -14653,7 +14781,7 @@ We can extend this to a unitary $U$ (that takes $\mathcal{H}_{d} \otimes \mathca
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[334]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">Q</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;complete&quot;</span><span class="p">)</span>
@@ -14681,10 +14809,10 @@ We can extend this to a unitary $U$ (that takes $\mathcal{H}_{d} \otimes \mathca
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[338]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;recovered V?: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">U</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n_povm_elements</span><span class="p">,</span> <span class="mi">0</span><span class="p">))))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;recovered V?: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">U</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">))))</span>
 </pre></div>
 
     </div>
@@ -14716,7 +14844,7 @@ We can extend this to a unitary $U$ (that takes $\mathcal{H}_{d} \otimes \mathca
 <p>Now for the finale. We know how to calculate the probabilities for each of the POVM outcomes. It's just:</p>
 <p>$Pr(i) = tr(E_{i}\rho)$</p>
 <p>To actually implement this, we start off with our auxilliary system in the $\mid 0 \rangle$ state, so that the overall density matrix is: $\rho \otimes \mid 0 \rangle \langle 0 \mid$. We then evolve the system and the auxilliary with our unitary $U$:</p>
-$$U [\rho \otimes \mid 0 \rangle \langle 0 \mid] U^{\dagger} $$<p>We then perform a standard Von Neumann measurement on the auxilliary system (whose outcomes correspond to the basis states we've been using). Recalling that we defined the projectors on to the auxilliary basis states as $\Xi_{i} = I_{d} \otimes \mid i \rangle \langle i \mid$, we can  write then write probabilities for each outcome:</p>
+$$U [\rho \otimes \mid 0 \rangle \langle 0 \mid] U^{\dagger} $$<p>We then perform a standard Von Neumann measurement on the auxilliary system (whose outcomes correspond to the basis states we've been using). Recalling that we defined the projectors on to the auxilliary basis states as $\Xi_{i} = I_{d} \otimes \mid i \rangle \langle i \mid$, we can  then write probabilities for each outcome:</p>
 <p>$Pr(i) = tr(\Xi_{i} U [\rho \otimes \mid 0 \rangle \langle 0 \mid] U^{\dagger} )$</p>
 <p>These are the same probabilities as above.</p>
 
@@ -14725,7 +14853,7 @@ $$U [\rho \otimes \mid 0 \rangle \langle 0 \mid] U^{\dagger} $$<p>We then perfor
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[345]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">rho</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_dm</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
@@ -14735,8 +14863,8 @@ $$U [\rho \otimes \mid 0 \rangle \langle 0 \mid] U^{\dagger} $$<p>We then perfor
                         <span class="n">U</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">())</span><span class="o">*</span><span class="n">U</span><span class="o">.</span><span class="n">dag</span><span class="p">())</span><span class="o">.</span><span class="n">tr</span><span class="p">()</span>\
                             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span><span class="o">.</span><span class="n">real</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;povm probs</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">povm_probs</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;system and aux probs</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">system_aux_probs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;povm probs:</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">povm_probs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;system and aux probs:</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">system_aux_probs</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14753,12 +14881,12 @@ $$U [\rho \otimes \mid 0 \rangle \langle 0 \mid] U^{\dagger} $$<p>We then perfor
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>povm probs
-[0.045222   0.07470642 0.18482115 0.1140116  0.08392382 0.08600801
- 0.20329371 0.07962296 0.12839034]
-system and aux probs
-[0.045222   0.07470642 0.18482115 0.1140116  0.08392382 0.08600801
- 0.20329371 0.07962296 0.12839034]
+<pre>povm probs:
+[0.12834196 0.12428931 0.1057183  0.18190402 0.09148053 0.06936688
+ 0.18434689 0.07672876 0.03782334]
+system and aux probs:
+[0.12834196 0.12428931 0.1057183  0.18190402 0.09148053 0.06936688
+ 0.18434689 0.07672876 0.03782334]
 </pre>
 </div>
 </div>
@@ -14784,7 +14912,7 @@ system and aux probs
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>"Two orthogonal quantum states are perfectly distinguish- able with respect to some experiment, yet in terms of the reference measurement, they are inevitably overlapping probability distributions. The idea that any two valid probability distributions for the reference measurement must overlap, and that the minimal overlap in fact corresponds to distinguishability with respect to some other test, expresses the fact that quantum probability is not about hidden variables."</p>
+<p>"Two orthogonal quantum states are perfectly distinguishable with respect to some experiment, yet in terms of the reference measurement, they are inevitably overlapping probability distributions. The idea that any two valid probability distributions for the reference measurement must overlap, and that the minimal overlap in fact corresponds to distinguishability with respect to some other test, expresses the fact that quantum probability is not about hidden variables."</p>
 
 </div>
 </div>

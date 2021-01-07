@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>9.6_Photonic_SpinJ</title>
+<title>POSTSCRIPT</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13077,246 +13077,8 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="How-To-Prepare-a-Spin-j-State-on-a-Photonic-Quantum-Computer">How To Prepare a Spin-j State on a Photonic Quantum Computer<a class="anchor-link" href="#How-To-Prepare-a-Spin-j-State-on-a-Photonic-Quantum-Computer">&#182;</a></h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>By now we all know and love how a spin-j state can be decomposed into 2j "stars" on the sphere. We've used this decomposition to prepare spin-j states in the form of 2j permutation symmetric qubits on IBM's quantum computer. Here we'll see how we can use the same decomposition to prepare a spin-j state on a photonic quantum computer, in terms of oscillator modes.</p>
-<p>For this, we'll need to recall the "Schwinger oscillator" formulation of spin, which as we've seen can be thought of as the second quantization of a qubit. We introduce two harmonic oscillators for each basis state of a qubit (the fundamental, spin-$\frac{1}{2}$ representation). This actually gives us all the higher spin representations for free. You can think of it like one oscillator counts the number of "$\uparrow$" quanta and one oscillator counts the number of "$\downarrow$" quanta. The resulting Fock space can be interpreted as describing a theory of a variable number of bosonic spin-$\frac{1}{2}$ quanta (aka a theory of symmetric multiqubit states with different numbers of qubits), or more simply as a tower of spin states, one for each $j$.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>The easiest way to see this is to rearrange the Fock space of the two oscillators in the follow perspicacious form:</p>
-<p>$\{\mid 00 \rangle, \mid 10 \rangle, \mid 01 \rangle, \mid 20 \rangle, \mid 11 \rangle, \mid 02 \rangle, \mid 30 \rangle, \mid 21 \rangle, \mid 12 \rangle, \mid 03 \rangle, \dots  \}$</p>
-<p>In other words, we can consider the subspaces with a fixed total number of quanta:</p>
-<p>$\{ \mid 00 \rangle \}$</p>
-<p>$\{ \mid 10 \rangle, \mid 01 \rangle \}$</p>
-<p>$\{ \mid 20 \rangle, \mid 11 \rangle, \mid 02 \rangle \}$</p>
-<p>$\{ \mid 30 \rangle, \mid 21 \rangle, \mid 12 \rangle, \mid 03 \rangle \}$</p>
-<p>The first subspace is 1 dimensional, and corresponds to a spin-$0$ state. The second subspace is 2 dimensional, and corresponds to a spin-$\frac{1}{2}$ state. The third subspace is 3 dimensional, and corresponds to a spin-$1$ state. The fourth subspace is 4 dimensional, and corresponds to a spin-$\frac{3}{2}$ state. And so on.</p>
-<p>In other words, say, for spin-$\frac{3}{2}$, we have the correspondence:</p>
-<p>$\mid \frac{3}{2}, \frac{3}{2} \rangle \rightarrow \mid 30 \rangle$</p>
-<p>$\mid \frac{3}{2}, \frac{1}{2} \rangle \rightarrow \mid 21 \rangle$</p>
-<p>$\mid \frac{3}{2}, -\frac{1}{2} \rangle \rightarrow \mid 12 \rangle$</p>
-<p>$\mid \frac{3}{2}, -\frac{3}{2} \rangle \rightarrow \mid 03 \rangle$</p>
-<p>And indeed, if we visualize these basis states, they correspond to: 3 stars at the North Pole; 2 stars at the North Pole, 1 star at the South Pole; 1 star at the North Pole, 2 stars at the South Pole; and 3 stars at the South Pole.</p>
-<p>For comparison, here's the same correspondence in terms of symmetric multiqubit states:</p>
-<p>$\mid \frac{3}{2}, \frac{3}{2}\rangle \rightarrow \ \mid \uparrow \uparrow \uparrow\rangle$</p>
-<p>$\mid \frac{3}{2}, \frac{1}{2}\rangle \rightarrow \frac{1}{\sqrt{3}} \Big{(} \mid \uparrow \uparrow \downarrow\rangle + \mid \uparrow \downarrow \uparrow \rangle + \mid \downarrow \uparrow \uparrow \rangle \Big{)}$</p>
-<p>$\mid \frac{3}{2}, -\frac{1}{2}\rangle \rightarrow \frac{1}{\sqrt{3}} \Big{(} \mid \downarrow \downarrow \uparrow \rangle + \mid \downarrow \uparrow \downarrow \rangle + \mid \uparrow \downarrow \downarrow \rangle \Big{)}$</p>
-<p>$\mid \frac{3}{2}, -\frac{3}{2}\rangle \rightarrow \ \mid \downarrow \downarrow \downarrow \rangle$</p>
-<p>We can see the basis states correspond to a sum over all the states where $n$ qubits are $\uparrow$ and $2j-n$ qubits are down. We can upgrade a spin-j state to the symmetric multiqubit representation by exploiting this correspondence between basis states, or by preparing 2j qubits pointed in the Majorana directions and taking the permutation symmetric tensor product.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>The justification for doing this comes from considering the Majorana polynomial.</p>
-<p>Given a spin state in the $\mid j, m \rangle$ representation: $\mid \psi \rangle = \begin{pmatrix}a_{0} \\ a_{1} \\ a_{2} \\a_{3} \\ \vdots\end{pmatrix}  $, we form a polynomial in a complex variable $z$:</p>
-<p>$p(z) = \sum_{m=-j}^{m=j} (-1)^{j+m} \sqrt{\binom{2j}{j-m}} a_{j+m} z^{j-m}$</p>
-<p>Its roots, stereographically projected from the complex plane to the sphere, yield the constellation. And note if you lose a degree, you add a root at "infinity" (conventionally, the South Pole).</p>
-<p>In other words:</p>
-<p><img src="img/majorana_doodle.png" alt="Majorana Doodle"></p>
-<p>By the fundamental theorem of algebra, a spin-j state factorizes into 2j pieces: clearly the product of the monomials is independent of the order of multiplication. This corresponds to the permutation symmetric tensor product of qubits, one for each star.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>In a second quantization context, we can upgrade a first quantized operator $\hat{O}$ to a second quantized operator $\hat{\textbf{O}}$ in an intuitive way:</p>
-<p>$\hat{\textbf{O}} = \sum_{i, j} \hat{a}_{i}^{\dagger}O_{ij}\hat{a}_{j}$</p>
-<p>This can also be interpreting wedging the operator $\hat{O}$ between a row vector of creation operators and a column vector of annihilation operators.</p>
-<p>We can thus construct second quantized representations of the Pauli matrices, which are the generators of $SU(2)$ rotations. Given two oscillators with annihilation operators $\hat{a}_{0}$ and $\hat{a}_{1}$:</p>
-<p>$\hat{\sigma_{X}} \rightarrow \hat{a}_{1}^{\dagger}\hat{a}_{0} + \hat{a}_{0}^{\dagger}\hat{a}_{1}$</p>
-<p>$\hat{\sigma_{Y}} \rightarrow i(\hat{a}_{1}^{\dagger}\hat{a}_{0} - \hat{a}_{0}^{\dagger}\hat{a}_{1})$</p>
-<p>$\hat{\sigma_{Z}} \rightarrow \hat{a}_{0}^{\dagger}\hat{a}_{0} - \hat{a}_{1}^{\dagger}\hat{a}_{1}$</p>
-<p>The resulting operators will be block diagonal in terms of the different spin sectors, and perform separate rotations in each sector.</p>
-<p>We can also construct creation operators which add a "star."</p>
-<p>Specifically, given a spin-$\frac{1}{2}$ state $\begin{pmatrix}\alpha \\ \beta \end{pmatrix}$, we can upgrade it to the operator $\alpha \hat{a}_{0}^{\dagger} + \beta \hat{a}_{1}^{\dagger}$.</p>
-<p>Repeated applications of such star operators allow one to build up a constellation one star at a time. Another way of thinking about this is that we can build an operator which raises an entire constellation in the form of a polynomial in the creation and annihilation operators:</p>
-<p>$(\alpha_{0} \hat{a}^{\dagger} + \beta_{0} \hat{b}^{\dagger})(\alpha_{1} \hat{a}^{\dagger} + \beta_{1} \hat{b}^{\dagger})(\alpha_{2} \hat{a}^{\dagger} + \beta_{2} \hat{b}^{\dagger})\dots$</p>
-<p>And this turns out to be the Majorana polynomial in disguise:</p>
-<p>$\sum_{m=-j}^{m=j} \sqrt{\binom{2j}{j-m}} a_{j+m} (\hat{a}^{\dagger})^{j-m}(\hat{b}^{\dagger})^{j+m}$</p>
-<p>Note the $(-1)^{j+m}$ factor dissapears. Why? Consider that if we have $\alpha z + \beta = z + \frac{\beta}{\alpha} = 0$, we have a root at $-\frac{\beta}{\alpha}$, and the $(-1)^{j+m}$ corrects for this negative sign. So we need the $(-1)^{j+m}$  when we're converting from a spin state to a polynomial to get the correct results. But here we're working directly with spin states, first and second quantized, so no need for the $(-1)^{j+m}$.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>So that's all well and good, we can "raise" a spin-j state from the vacuum of two harmonic oscillators using a special "constellation creation operator." But how do we actually prepare such states in practice on a photonic quantum computer? We can't just arbitrarily apply creation and annihilation operators--after all, they are neither Hermitian, nor unitary! We need a way of formulating this entirely in terms of what a photonic quantum computer gives us: the ability to start with a certain Fock state, the ability to apply unitary transformations, and the ability to make measurements (for example, photon number measurements).</p>
-<p>Intuitively, what we need to do is prepare our 2j "single star" states separately and then somehow combine them together into a single constellation.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>The first thing to realize is that we can perform $SU(2)$ rotations with beamsplitters.</p>
-<p>The beamsplitter gate can be written:</p>
-<p>$BS(\theta, \phi) = e^{\theta(e^{i\phi}\hat{a}_{0}\hat{a}_{1}^{\dagger} - e^{-i\phi}\hat{a}_{0}^{\dagger}\hat{a}_{1})}$</p>
-<p>Here $\hat{a}_{0}$ and $\hat{a}_{1}$ refer to two photonic modes. $\theta$ is the transmittivity angle. Then the transmission amplitude is $T=\cos{\theta}$. For $\theta = \frac{\pi}{4}$, we have the 50/50 beamsplitter. $\phi$ is the phase angle. The reflection amplitude is then $r=e^{i\phi}\sin{\theta}$, and $\phi=0$ gives the 50/50 beamsplitter.</p>
-<p><img src="img/beam_splitter_two_inputs.png" alt="Beamsplitter"></p>
-<p>Now suppose we have a star whose coordinates on the sphere are written in terms of spherical coordinates $\theta, \phi$. If we start in the Fock state of two oscillators $\mid 1 0 \rangle$, which corresponds to a single star at the North Pole, aka the $\mid \uparrow \rangle$ state, then applying the beamsplitter $BS(\frac{\theta}{2}, \phi)$ will rotate the star into the desired direction.</p>
-<p>Let's check it out with StrawberryFields!</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">spheres</span> <span class="k">import</span> <span class="o">*</span>
-
-<span class="kn">import</span> <span class="nn">strawberryfields</span> <span class="k">as</span> <span class="nn">sf</span>
-<span class="kn">from</span> <span class="nn">strawberryfields.ops</span> <span class="k">import</span> <span class="o">*</span>
-
-<span class="n">star</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">theta</span><span class="p">,</span> <span class="n">phi</span> <span class="o">=</span> <span class="n">spinor_sph</span><span class="p">(</span><span class="n">star</span><span class="p">)</span>
-
-<span class="n">prog</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="n">Program</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="k">with</span> <span class="n">prog</span><span class="o">.</span><span class="n">context</span> <span class="k">as</span> <span class="n">q</span><span class="p">:</span>
-    <span class="n">Fock</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">BSgate</span><span class="p">(</span><span class="n">theta</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    
-<span class="n">eng</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="n">Engine</span><span class="p">(</span><span class="s2">&quot;fock&quot;</span><span class="p">,</span> <span class="n">backend_options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;cutoff_dim&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">})</span>
-<span class="n">state</span> <span class="o">=</span> <span class="n">eng</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">prog</span><span class="p">)</span><span class="o">.</span><span class="n">state</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;qubit xyz: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">spinj_xyz</span><span class="p">(</span><span class="n">star</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;oscillator xyz: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">spinj_xyz_strawberryfields</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>qubit xyz: [-0.48754591  0.11075614  0.00566234]
-oscillator xyz: [-0.48754591  0.11075614  0.00566234]
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Here in order to calculate the $X, Y, Z$ expectation values, we use a trick: refer to the notes on <a href="https://heyredhat.github.io/9.1_Gaussian_QM_and_Negative_Probabilities.html">Gaussian Quantum Mechanics</a> for more information. In short:</p>
-<p>The idea is to take the Pauli matrices (divided by $\frac{1}{8}$ actually, for normalization), and first upgrade them to the form: $\textbf{H} = \begin{pmatrix} O &amp; 0 \\ 0 &amp; O^{*} \end{pmatrix}$, where $O$ is the Pauli matrix, so that we can represent them in the general form for Gaussian operators (ignoring displacements):</p>
-$$H = \frac{1}{2}\xi^{\dagger}\textbf{H}\xi$$<p>Here $\xi = \begin{pmatrix}\hat{a}_{0} \\ \hat{a}_{1} \\ \vdots \\ \hat{a}_{0}^{\dagger} \\ \hat{a}_{1}^{\dagger} \\ \vdots \end{pmatrix}$ is a vector of annihilation and creation operators.</p>
-<p>The action of $H$ can also be written:</p>
-$$e^{iH} \xi e^{-iH} = \textbf{S}\xi$$<p>Where $S$ is a complex symplectic matrix: $\textbf{S} = e^{-i\Omega_{c}\textbf{H}}$ and $\Omega_{c} = \begin{pmatrix}I_{n} &amp; 0 \\ 0 &amp; -I_{n} \end{pmatrix}$, the complex symplectic form. (And actually, since we're here only concerned with the Pauli matrices themselves, we don't need to take the exponential.)</p>
-<p>$S$ can be converted into a real symplectic matrix acting on a vector of position and momentum operators, $\begin{pmatrix} \hat{Q_{0}} \\ \hat{Q_{1}} \\ \hat{Q_{2}} \\ \vdots \\ \hat{P_{0}} \\ \hat{P_{1}} \\ \hat{P_{2}} \\ \vdots \end{pmatrix}$
- via:</p>
-$$\textbf{R} = L\textbf{S}L^{\dagger}$$<p></p>
-<p>Where $L = \frac{1}{\sqrt{2}}\begin{pmatrix} I_{n} &amp; I_{n} \\ -iI_{n} &amp; iI_{n} \end{pmatrix}$.</p>
-<p>Once we have $R$, we can feed it into StrawberryField's method <code>state.poly_quad_expectations</code>, which calculates the expectation value for operators built out of position and momentum operators, to obtain $\langle \hat{X} \rangle, \langle \hat{Y} \rangle, \langle \hat{Z} \rangle$. This is what the function <code>sf_state_xyz</code> does.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<p>Okay, so we can load in a spin-$\frac{1}{2}$ state. But how do we generalize this for any spin-$j$?</p>
-<p>The idea is we're going to use $2j$ <em>pairs</em> of oscillators, one pair for each star. Each pair is going to begin in the $\mid 10 \rangle$ state, aka the spin-$\frac{1}{2}$ $\mid \uparrow \rangle$ state, and we'll use a beamsplitter on each pair to rotate them to point in the direction of one of the 2j stars of the constellation.</p>
-<p>Then we'll pick one pair of oscillators to be special: this is the pair we're going to load our spin-$j$ state into. Let's call its modes $a_{0}$ and $a_{1}$. We're going apply 50/50 beamsplitters to the first of each (other) pair and $a_{0}$, and also 50/50 beamsplitters to the second of each (other) pair and $a_{1}$. This combines the modes in an even-handed way. Then we're going to post-select on all the other modes (that is, all the modes except $a_{0}$ and $a_{1}$) having 0 photons. If none of those other modes have any photons after going through the 50/50 beamsplitters, then all the photons must have ended up in $a_{0}$ and $a_{1}$, and indeed: we find that $a_{0}$ and $a_{1}$ are then in the desired state, encoding the spin-$j$ constellation.</p>
-<p>There's no getting around the post-selection, which is analogous to the post-selection necessary in the symmetric multiqubit circuit we discussed before. What's nice in this case, however, is that the permutation symmetry itself is handled automatically for us, so no need for all those controlled swaps!</p>
-<p>As a tabletop experiment, it might look something like this:</p>
-<p><img src="img/tabletop_spin.png" alt="Tabletop"></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Depicted is a photonic preparation of a spin-$\frac{3}{2}$ state. The state is determined (up to phase) by three stars given in spherical coordinates by $(\theta_{0}, \phi_{0}), (\theta_{1}, \phi_{1}), (\theta_{2}, \phi_{2})$. These values determine the parameters of the three beamsplitters in blue along the diagonal: $BS(\frac{\theta_{0}}{2}, \phi_{0}), BS(\frac{\theta_{1}}{2}, \phi_{1}), BS(\frac{\theta_{2}}{2}, \phi_{2})$. On the other hand, the green beamsplitters are 50/50 beamsplitters: $BS(\frac{\pi}{4}, 0)$. Each pair of modes ($a_{0}/a_{1}$, $a_{2}/a_{3}$, $a_{4}/a_{5}$) starts off in the $\mid 10 \rangle$ state, and each pair is sent through a corresponding beamsplitter to rotate in a star. Then all the even numbered modes (if you like) are 50/50'd with $a_{0}$, and all the odd numbered modes are 50/50'd with $a_{1}$. Then $a_{2}, a_{3}, a_{4}, a_{5}$ are all sent into photon detectors, and we throw out the experiment unless all the photon counts are 0. Then the spin-$\frac{3}{2}$ state given by the three stars will be encoded in the two modes $a_{0}$ and $a_{1}$. One can then easily imagine the corresponding diagram for any spin-$j$: just add more blue beamsplitters corresponding to stars along the diagonal, etc.</p>
-<p>In StrawberryFields code:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">spheres</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">import</span> <span class="nn">strawberryfields</span> <span class="k">as</span> <span class="nn">sf</span>
-<span class="kn">from</span> <span class="nn">strawberryfields.ops</span> <span class="k">import</span> <span class="o">*</span>
-
-<span class="n">spin</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">sph</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">theta_phi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">theta_phi</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span> <span class="k">for</span> <span class="n">theta_phi</span> <span class="ow">in</span> <span class="n">spin_sph</span><span class="p">(</span><span class="n">spin</span><span class="p">)]</span>
-
-<span class="n">j</span> <span class="o">=</span> <span class="p">(</span><span class="n">spin</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
-<span class="n">n_modes</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="p">)</span>
-<span class="n">cutoff_dim</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="n">prog</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="n">Program</span><span class="p">(</span><span class="n">n_modes</span><span class="p">)</span>
-<span class="k">with</span> <span class="n">prog</span><span class="o">.</span><span class="n">context</span> <span class="k">as</span> <span class="n">q</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_modes</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-        <span class="n">Fock</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="n">theta</span><span class="p">,</span> <span class="n">phi</span> <span class="o">=</span> <span class="n">sph</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>
-        <span class="n">BSgate</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_modes</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-        <span class="n">BSgate</span><span class="p">()</span> <span class="o">|</span> <span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-        <span class="n">BSgate</span><span class="p">()</span> <span class="o">|</span> <span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_modes</span><span class="p">):</span>
-        <span class="n">MeasureFock</span><span class="p">(</span><span class="n">select</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">|</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-
-<span class="n">eng</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="n">Engine</span><span class="p">(</span><span class="s2">&quot;fock&quot;</span><span class="p">,</span> <span class="n">backend_options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;cutoff_dim&quot;</span><span class="p">:</span> <span class="n">cutoff_dim</span><span class="p">})</span>
-<span class="n">state</span> <span class="o">=</span> <span class="n">eng</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">prog</span><span class="p">)</span><span class="o">.</span><span class="n">state</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's confirm that our expected spin axis is correct:</p>
+<p>Incidentally, it's worth thinking about the fact that this whole recipe is <em>not</em> reversible. Suppose we wanted to go from our symmetrized state of $n$ qubits back to the separable state of $n$ qubits. If we've performed the measurement, and indeed, ended up in the symmetrized state, what happens? We apply the inverse of <code>QFT.dag()*CPERMS*QFT</code>: our control ends up in an even superposition as before, and then we condition the permutations on it... but we're in the permutation symmetric state, so it has no effect!</p>
+<p>On the other hand, if we <em>don't</em> make that final measurement, then everything is perfectly reversible. Because of linearity, if we apply operations on the qubits, those operations are applied "in each possible world," including the one where they end up totally symmetrized, so a) we can always wait until later to actually measure the control, if we want, and it'll be just as if we measured the control, and then manipulated the symmetrized state; and b) we can apply the above circuit in reverse, and obtain a state of separable qubits whose "stars" have evolved in just the right way. E.g.:</p>
 
 </div>
 </div>
@@ -13326,8 +13088,37 @@ $$\textbf{R} = L\textbf{S}L^{\dagger}$$<p></p>
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;spin xyz: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">spinj_xyz</span><span class="p">(</span><span class="n">spin</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;oscillator xyz: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">spinj_xyz_strawberryfields</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span>
+<span class="n">j</span> <span class="o">=</span> <span class="p">(</span><span class="n">d</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+
+<span class="n">spin</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1"># create a spin</span>
+<span class="n">qubits</span> <span class="o">=</span> <span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">xyz_spinor</span><span class="p">(</span><span class="n">star</span><span class="p">))</span>\
+              <span class="k">for</span> <span class="n">star</span> <span class="ow">in</span> <span class="n">spin_XYZ</span><span class="p">(</span><span class="n">spin</span><span class="p">)]</span> <span class="c1"># get qubits</span>
+
+<span class="n">S</span> <span class="o">=</span> <span class="n">spin_sym</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_herm</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="c1">#qt.jmat(j, &#39;x&#39;)</span>
+<span class="n">U</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">H</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">.</span><span class="n">expm</span><span class="p">()</span>
+<span class="n">spin2</span> <span class="o">=</span> <span class="n">U</span><span class="o">*</span><span class="n">spin</span> <span class="c1"># apply random unitary to spin</span>
+
+<span class="n">state</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="o">*</span><span class="n">qubits</span><span class="p">)</span>
+<span class="c1"># apply symmetrization circuit, then upgraded unitary,</span>
+<span class="c1"># the the inverse of the sym circuit</span>
+<span class="n">CIRCUIT</span> <span class="o">=</span> <span class="n">QFT</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">CPERMS</span><span class="o">*</span><span class="n">QFT</span>
+<span class="n">bigH</span> <span class="o">=</span> <span class="n">S</span><span class="o">*</span><span class="n">H</span><span class="o">*</span><span class="n">S</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
+<span class="n">bigU</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">dp</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">bigH</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">.</span><span class="n">expm</span><span class="p">())</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">CIRCUIT</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">bigU</span><span class="o">*</span><span class="n">CIRCUIT</span><span class="o">*</span><span class="n">state</span>
+
+<span class="n">final_state</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">ptrace</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span>
+<span class="c1"># convert the final sym state into a spin state</span>
+<span class="c1"># for comparison</span>
+<span class="n">final_spin</span> <span class="o">=</span> <span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">final_state</span><span class="o">*</span><span class="n">S</span><span class="p">)</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;original spin probs:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">((</span><span class="n">spin</span><span class="o">*</span><span class="n">spin</span><span class="o">.</span><span class="n">dag</span><span class="p">())</span><span class="o">.</span><span class="n">full</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;evolved spin probs:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">((</span><span class="n">spin2</span><span class="o">*</span><span class="n">spin2</span><span class="o">.</span><span class="n">dag</span><span class="p">())</span><span class="o">.</span><span class="n">full</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;evolved sym probs:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">final_spin</span><span class="o">.</span><span class="n">full</span><span class="p">()))</span>
 </pre></div>
 
     </div>
@@ -13344,8 +13135,12 @@ $$\textbf{R} = L\textbf{S}L^{\dagger}$$<p></p>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>spin xyz: [-0.3972139   0.59242125  0.08100696]
-oscillator xyz: [-0.3972139   0.59242125  0.08100696]
+<pre>original spin probs:
+[0.29278106+0.j 0.26911552+0.j 0.20033854+0.j 0.23776488+0.j]
+evolved spin probs:
+[0.53636766+0.j 0.21956477+0.j 0.06337357+0.j 0.180694  +0.j]
+evolved sym probs:
+[0.53636765+0.j 0.21956477+0.j 0.06337357+0.j 0.180694  +0.j]
 </pre>
 </div>
 </div>
@@ -13357,67 +13152,26 @@ oscillator xyz: [-0.3972139   0.59242125  0.08100696]
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>And that we get the correct probabilities:</p>
-
+<h1 id="Postscript-on-Perception">Postscript on Perception<a class="anchor-link" href="#Postscript-on-Perception">&#182;</a></h1>
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;correct probabilities:&quot;</span><span class="p">)</span>
-<span class="n">dirac</span><span class="p">(</span><span class="n">spin_osc</span><span class="p">(</span><span class="n">spin</span><span class="p">,</span> <span class="n">cutoff_dim</span><span class="o">=</span><span class="n">cutoff_dim</span><span class="p">),</span> <span class="n">probabilities</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">sf probabilities:&quot;</span><span class="p">)</span>
-<span class="n">fock_probs</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cutoff_dim</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cutoff_dim</span><span class="p">):</span>
-        <span class="n">fock_state</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">n_modes</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> 
-        <span class="n">fock_probs</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)]</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">fock_prob</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">fock_state</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">fock_probs</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;|</span><span class="si">%s%s</span><span class="s2">&gt;: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">fock_probs</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)]))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>correct probabilities:
-|03&gt;: 0.132
-|12&gt;: 0.315
-|21&gt;: 0.393
-|30&gt;: 0.160
-
-sf probabilities:
-|03&gt;: 0.132
-|12&gt;: 0.315
-|21&gt;: 0.393
-|30&gt;: 0.160
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><code>spheres.spin_circuits.strawberryfields</code> provides the function <code>spin_osc_strawberryfields(spin)</code>, which takes a spin as input and returns the StrawberryField program above, as well as <code>spinj_xyz_strawberryfields(state, on_modes=[0,1])</code> which takes a StrawberryFields state and a list of two modes for which to calculate the $X$, $Y$, $Z$ expectation values.</p>
-<p>And there you have it! Now all you need is access to a real photonic quantum computer and the sky's the limit.</p>
+<p>Now in quantum field theory, one often works in the approximation where special relativity holds. Great effort is spent obtaining unitary representations of the Poincare group of space/time translations, rotations and boosts, and the resulting Minkowski vacuum is Poincare invariant. In other words, all observers who are just translated, rotated and boosted from each other agree on the vacuum state, and hence: on what constitutes a particle.</p>
+<p>But when we consider curved spacetimes and in general accelerated reference frames, it turns out  observers disagree on the vacuum state, and on what constitutes a particle. A famous example is the Unruh radiation. It is predicted that compared to an observer moving inertially, an accelerated observer moving through the same space will detect particles, whereas the inertial observer wouldn't. An observer moving with a constant acceleration divides the world into parts: for example, those parts in the past which can't ever catch up to this observer, and those parts in the future the observer will never be able to reach, due to the finite speed of light, and the fact of they're accelerating. And speaking very broadly, there's a map from the creation and annihilation operators in the inertial frame to creation and annihilation operators in the accelerated frame, and they're related by a linear Bogoliobov transformation, which is a symplectic transformation, which means that it preserves the relationship between position and momentum, creation and annihilation, for all the operators: so that the commutation relations are satisfied on both sides. And there is a whole very deep theory there. In the end, it's like the vacuum in one frame is built out of particle states in the other frame, and particle states in the one frame might correspond to the vacuum state of another. The same trick is used in condensed matter systems. A Bogoliubov transformation can diagonalize any quadratic energy operator: but one ends up with a system "made" of different kinds of particles!</p>
+<p>In our wormhole case specifically, we have one frame: the frame, as it were, from outside the whole system, where the left black hole and the right black hole can be distinguished, and our qubit enters on the left, and comes out on the right. And before things begin, the two black holes (at infinite temperature) are in the maximally entangled CUP state. But there's another frame where the complex fermion number operator is diagonal: there, before the qubit insertion, we're just sitting in the vacuum, a vacuum which is made of equal parts left and right from the other perspective. After all, if you lived your whole life inside the wormhole, you'd never even know there was necessarily a "left" and "right" side. And the whole wormhole protocol works because we, from the outside, are able to implement the number operator coupling, which is precisely diagonal "from the inside perspective." There's two ways to over come left and right: to be "inside" it and so unaware of the difference, or to be "outside" it by bringing left and right together to interact.</p>
+<p>So: whether something is a cup or a cap depends on the particular observer. Different observers in general motion can disagree about what consitutes a particle, disagree about the string diagram that represents the situation. Different observers may join unlike things, cleave other things apart, open themselves up for entry here, closing themselves off there...</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Markov blankets.</p>
+<p>Relativistic wave equation for any spin.</p>
 
 </div>
 </div>
@@ -13427,10 +13181,156 @@ sf probabilities:
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 
-<h2 id="Bibliography">Bibliography<a class="anchor-link" href="#Bibliography">&#182;</a></h2><p><a href="https://arxiv.org/abs/1302.2475">Synthesis of arbitrary, two-mode, high visibility N-photon interference patterns</a></p>
-<p><a href="https://arxiv.org/abs/quant-ph/0110138">Conditional generation of N-photon entangled states of light</a></p>
-<p><a href="https://arxiv.org/abs/quant-ph/0110149">Generation of entangled states of two traveling modes for fixed number of photon</a></p>
-<p><a href="https://www.diva-portal.org/smash/get/diva2:1091994/FULLTEXT01.pdf">Majorana Representation in Quantum Optics</a></p>
+
+
+<p>In a sense, I've established four dialectical axioms. These are not axioms in the usual sense of formal objects, upon which well defined operations act, from which we can mechanically deduce theorems. Instead, they establish the rules of the dialectic: and unlike a monologue, the results of a dialogue cannot be anticipated beforehand. They are best explained by using them.</p>
+<h3 id="The-Four-Axioms-of-the-Dialectic-of-Number">The Four Axioms of the Dialectic of Number<a class="anchor-link" href="#The-Four-Axioms-of-the-Dialectic-of-Number">&#182;</a></h3><ul>
+<li>You can do something or not.</li>
+<li>Anything you can do, you can do again.</li>
+<li>Anything you can do, you can undo.</li>
+<li>Anything you can do in sequence, you can do simultaneously.</li>
+</ul>
+<p>We can actually be more specific:</p>
+<ul>
+<li>You can make a mark.</li>
+<li>You can make another mark.</li>
+<li>You can erase a mark.</li>
+<li>You can symbolize a sequence of marks with a mark.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<p>With that, we should conclude this journey, at least for now.</p>
+<p>Space, time, particle: all are contextualized with reference to some observer. What I see as some particles in some space, you might see as some other particles in some other space. Exactly how this all works we don't yet fully know and won't until we more completely understand the interplay between quantum spacetime and matter, the theory of quantum gravity.</p>
+<p>But we can make a general comment with regard to our theme of "atoms":</p>
+<p>Even as the notion of "atoms" pervades every stage of the progression of mathematical thought, at the end of the day, there are no atoms in themselves, nothing absolutely indivisible from all perspectives. The fate of the periodic table in the face of the transmutation of the elements is quite general.</p>
+<p>Step by step, as it has unfolded, our story has been as much about translating between the perspective of observers as it has been about the pebbles which are passed between them. Our theories of physics allow observers to come to agreement about the way the world is independent of their perspectives, using mathematics to represent the relationship between their points of view. But the observers themselves, as it were, stand outside the theory as such, as <em>users</em> of the theory, which provides a reliable means of guaranteeing communication and agreement.</p>
+<p>This may seem like a limitation, but the underlying message of modern physics is that of relativity: everything that we can reliably communicate about is always a relative phenomenon. Science is the attempt to communicate clearly about the relationships between things, not the "things themselves." Indeed, the success of science doesn't necessarily imply that <em>everything</em> is communicable. After all, nothing in physics can predict that <em>you</em> would be you, it can only predict your future observations given your past observations. One of the great features of modern physics is that, even as it blows our mind with previously inconceivable magic tricks, it is at its core deeply modest. It knows quite well what it can't talk about. The rest, as they say, is metaphysics.</p>
+<p>In other words, if there is anything atomic left in physics, it's <em>you</em>, right here, right now.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<p>On Stories. Loops stories. Circuits closing.</p>
+<p>We’re swimming upstream</p>
+<p>Evolutionary stories.</p>
+<p>Rovelli on time: entropy in the eye of the beholder.</p>
+<p>Language and tensors.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+
+<pre><code>continuous evolution is like falling thru empty time
+collapse is like a boundary in time
+
+free fall is falling thru empty space
+horizons are boundaries in space</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<p>```In the end how to be ready for love.
+How to love.
+To get everything else out of the way.
+To build one's statue.</p>
+<p>To bring here and there
+a wormhole.</p>
+<p>How to make a wormhole, the ultimate "communication"-- aligning here and there and now.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<p>In a relativistic world, two things without a relationship which interact can only lead to a random outcome, since there is literally no prior reason. We can shear of relationships and so create these situations.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<p>The "observer" represents the physical world for that observer, and not the perceptions of the observer? But then there is the question of: what one knows vs. what it is possible to know.</p>
+<p>We after do seem to be able to perceive "multiple possibilities." Distinguishing mind, open mind.</p>
+<p>Consider the lack of orientation w/r/t to the outside of one's "inner world."</p>
+<p>Telepathy is possible, but others can't confirm it?</p>
+<p>What provides context to the matrices? Connection to experience.
+The character of physics : what is invariant under perspectives.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<p>Now there could be some restrictions on where a “cut” can take place. Here’s one idea I keep tossing around in my head. One could imagine dividing the world into SUBJECT BODY WORLD, all entangled, and we set up the formalism so that projections all take place on the BODY (including clocks if we’re working with timeless QM, and in general, including all the past choices relevant to the moment being considered), and the rule is that only cuts which are permissible are those that lead to SUBJECT and WORLD being in separable states (of course, having been steered appropriately). This is just one spin on the Heisenberg/Von Neumann cut. Is it paradoxical that the SUBJECT could itself split into multiple disconnected pieces? Finally, in this scheme, one is tempted to interpret the quantum states of the SUBJECT, in their own entangled superposition, in terms of perceptual gestalts rather than “superpositions over outcomes” (re: the theory of constellations). And yet: there is a fixed point, which is our gestalt perception of: multiple possibilities unfolding itself.)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><hr>
+For Irving.</p>
+<p>Any theory of the mind has as its empirical basis a list of correlations: between the body and experience.</p>
+<p>I poke your brain with some electricity, and ask you: Did I trigger some perception, like the smell of your mother’s cooking? Or no? I’m going over your brain, poking here and there, to figure out which parts of the brain correspond to what we are actually conscious of. The thing is: I can’t directly observe your experience itself. So I have to ask you: Did my poke do anything or not? And you have to tell me.</p>
+<p>Well, you aren’t satisfied with that, so you start monitoring the neurons that control my mouth, and learn to decode what I’m about to say it just before my mouth actually moves. And then you press inward into the brain, trying to predict whether I say yes or no before I actually say it.</p>
+<p>Maybe this proves in practice impossible, if for example the signal from the poked neuron bubbles out over the whole brain, and bounces around, and then refocuses itself near the part where I tell my mouth what to do so that it would be practically impossible to actually trace the causation the full yway. Or if for example, the brain is highly entangled, so that the the relevant occurrences are taking place at a deeper level of entanglement (correspondingly larger scale of the brain). And if, whether due to quantum effects or semiclassical effects, any attempt to fully map out the firing of our neurons necessarily alters their firing pattern.</p>
+<p>But Irving makes an even more profound point about self-consciousness.</p>
+<p>So we ask you: Tell me if you feel something, yes or no. And then we poke a neuron, and then that neuron fires, and then another neuron fires … and then we hit a fork in the road, if neuron A fires, then...you say yes! but if neuron B fires, then..you say no! We’ve done the experiment many times, and have in fact observed this correlation. Great! So we don’t actually need your personal experience anymore, we just poke you, and if neuron A fires, there was a conscious perception associated to the poke; and if neuron B fires, then there wasn’t.</p>
+<p>The issue, however, is: what if we hadn’t asked the question?</p>
+<p>We asked you a yes/no question, and this prepared you to be in the mindset of answering that question, monitoring your perceptions for any change, while we poke you. And this has a neural correlate: neuron A fires if yes, neuron B fires if no. And so we think we don’t need you to introspect anymore, we can just look at your brain and guess: ah, the person associated to this brain will be experiencing this right now.</p>
+<p>But if we hadn’t asked the question, and you hadn’t been in that discriminatory mindset, then there would be no neuron A to trace and no neuron B to trace. There would just be you having an experience, and its neural correlates meanwhile in the brain, but there would be no way to tell from looking at the brain whether the poke was experienced consciously or not.</p>
+<p>In other words, we can’t get rid of introspection. The ability to assign neuron A to CONSCIOUS and neuron B to UNCONSCIOUS depends on the subject of the experiment themselves asking the question. (It’s possible that not all brains can ask themselves such questions!) If they aren’t asking themselves the question, then there won’t be any neural correlate to CONSCIOUS vs UNCONSCIOUS. And therefore, we can’t just study brains in isolation from the self. And we have to be sensitive to the fact that “asking yourself whether you are having a perception or not” is not the same experience as “having a perception per se.”</p>
+<p>Of course, this doesn’t rule out broader analysis, like: generally speaking, when the visual cortex is firing this way, people see this sort of thing. But that’s a prediction. Even if we know about convolutional neural networks, and watch an image being processed layer by layer, and see the same kinds of connectivity and activation in the visual cortex, in the end, it is self-reporting that is the basis for the study of brain/mind correlations.</p>
+<p>One might say: well, what calculation is happening when we poke you, and neuron A fires or neuron B fires. Like what computation is that the result of? If we know what computation it was, and its meaning, then we maybe could say: well, since this computes whether the poke was experienced or not, then by understanding its meaning (probably having to do with attention), we could then understand why some things are conscious or not, and then predict that directly from the brain.</p>
+<p>But that perhaps jumps the gun. Since it could be that: when we have a perception that we are conscious of, it bounces around, and gets into our rhythm, and induces all sorts of correlations are are good proxies for the thing having been perceived; but that ultimately there is no rule able to be given in the sense of a computation, but only a correlation between body and mind.</p>
+<p>It’s still not clear if actually we are conscious of our entire brains/bodies, only most of it is “folded up” in our perception, in the background, in the white noise, encrypted as it were, and what we are really doing is folding and unfolding, expanding things out, or scrambling them across, so that we are really conscious of our whole selves (even the whole world), but most of it its compressed down into the fringes of our experience, or is perceived as “scaffolding,” like “spacetime.” So that the question isn’t: what parts of our brain are we conscious of and which parts aren’t we conscious of. But the same question as in quantum mechanics: why do we have this perspective, as opposed to any other? And nothing in science offers any answer to that.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<p>19th century context. Kant and Darwin.</p>
+<p>On: <a href="https://experts.illinois.edu/en/publications/transfinite-life-oskar-goldberg-and-the-vitalist-imagination">"Transfinite Life: Oskar Goldberg and the Vitalist Imagination"</a></p>
+<p>The book is perhaps more interesting for its contextualization of the guy rather than the guy himself! There's an interesting genealogy of late 19th / early 20th century vitalist thinkers that evidently runs through the "phenomenologists" like Brentano and Husserl as well as the "embryologists" which I hadn't quite realized. It's the end of the 19th century. Everyone's obsessed with the mechanism/vitalism duality: physics seems mechanical and yet look at how in perception the whole comes before the parts, which therefore can't be separated mechanically question mark. Everyone's trying to define what makes an organic whole. But it's the end of the 19th century. We haven't proven atoms exist yet. There's probably an ether. No word yet on anything like DNA. One scientists takes a fertilized frog egg, lets it split for a bit, and then separates it into two pieces. Half a frog grows out of each. Another scientist takes a sea urchin and lets a fertilized egg split for a bit, then gives it a shake to separate it into many pieces, each of which grow into their own smaller sea urchin. The latter is taken by some people to be evidence that the sea urchin is contained "holistically" in each of its cells in an "organic" non-mechanical way. Well, now we have a more mechanistic explanation in terms of DNA. But at the time, it was seen as part of the argument for holistic, top-down causation--along with the nonseparability of the perceptual gestalt, where the whole perception of seeing you sitting on a chair comes prior to being analyzed into its component pieces, and the pieces only make sense with regard to the perceptual whole. Remember we're converging on whether the world is made of "atoms" or not in the science of the time. It's a very live possibility that it isn't, that actually perhaps some kind of "continuous"/"organic?" math governs the world. Then some Jewish/very neoKantian German thinkers get excited by that and also Cantor's discovery that there are transfinite numbers, where are kinda like "organic wholes" in the sense that they "contain" for example "the completed infinity of 1,2,3,4,..." or "the completed infinity of the continuous line," and also by the late 19th / early 20 century obsession with myth in the context of the colonial era which made all Europeans fantasize about what made them so different in their bourgeois lives from the tribal peoples out yonder, and speculate about "organic" forms of collective social organizations, tribes, etc. Our Oskar Goldberg decides to tell a post-WW1 story about how the nation-states lost their way, turned into capitalistic killing machines, divorced from their origins in the holistically unified tribal state, each Nation a God to its people, but sort of in an almost to me comic book like setting, where YHVH manifests in the world at Sinai, the one true God, but the way God set up the world was that if He could Enter it, Any Other Transcendental Powers could also enter it, and so they do, and gather up people of their own, whose lives become holistically organized around sacrifices to that God, etc (I suppose you don't have to read this as a "racist" story per se, although he tries to suggest that this is the origin of ethnicities, which in his mind grew up around charismatic leaders in touch with the relevant Transcendental Power, and helping holistically organize the people)--and anyway the one true God YHVH who is the One True God because he is the only Unique One cleaves his people to him, and he's on a metaphysical war against the false gods. 5000 years of civilization go by, and all the old Tribes are scattered and lost, and although the Transcendental Powers are still active, they aren't organized in an obvious tribal fashion, and we still have to join YHVH on his mission to save the world by having everyone appreciate how transcendentally unique YHVH is re: the other gods. And so now we need an organic politics in the aftermath of the Great War.</p>
+<p>Meanwhile, I'm thinking:</p>
+<p>In other news, James Joyce shows you can have your cake and eat it two, walking around Greece and Dublin simultaneously. It's the 1920's. And on the other side of the stage, the physicists are just then actually answering the question. Is the universe continuous or discrete, vitalist or mechanical? And the answer is drumroll: both! The universe is actually quantum mechanical! It's made up of quanta, in the sense that measurements always reveal some definite number of quanta, but the math that governs how they evolve in time is continuous! The quanta can join together into complexes called atoms that explain all of chemistry and familiar matter. And in fact, you can have holistic organic wholes in the other sense too! That's just entanglement: there is more information in two entangled particles together, than there is apart. The two parts are defined in terms of the whole; rather than the whole being defined in terms of its parts. So that at its deepest level, the world is not "mechanical"-- but there are good arguments that you can use to show why the world looks mechanical in many common circumstances! In other words, the organic-ness is generically <em>very fragile</em>. And yet evolution is very powerful... Am I holistically contained in each of my cells? I'm still not sure! But a lot can be explained mechanically via DNA at least with regard to embryos, as I said, so the proof will be trickier. We're probably going to discover all sorts of funny entanglement effects across our bodies. But no one has yet really figured out how to relate all this to perceptual gestalts although of course that is the dream. Von Neumann had his interesting thought about "psychophysical parallelism" but I say no one has really been able to unpack it in a truly satisfying way.</p>
+<p>Quantum mechanics unifies the continuous and the discrete, the vitalist and the mechanical, but it doesn't pretend yet to have all the metaphysical answers. In fact, it spends most of its time worrying about the difference between what it doesn't know and what it can't know. Anyway, that's what I was thinking about as I was reading this book! It's a little repetition in a disseration kind of way, but contains lots of interesting details.</p>
 
 </div>
 </div>

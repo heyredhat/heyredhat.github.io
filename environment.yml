@@ -8,4 +8,6 @@ dependencies:
   - qutip
   - pyaudio
   - sympy
-  - spheres
+  - pip
+  - pip:
+    - spheres

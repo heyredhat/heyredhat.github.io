@@ -13084,7 +13084,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I've made a big deal over the fact that one can represent a spin-$j$ state equivalently as a permutation symmetric state of $2j$ qubits, not least because given that our quantum computers (mostly) work with qubits, we need a way to represent everything we might care about in terms of them.</p>
+<p>It turns out that one can represent a spin-$j$ state equivalently as a permutation symmetric state of $2j$ qubits. And this is good because given that our quantum computers (mostly) work with qubits, we need a way to represent everything we might care about in terms of them.</p>
 <p>For example, if we have a spin-$\frac{3}{2}$ state, we could express it in the usual $\mid j, m \rangle$ basis as:</p>
 $$ a\mid \frac{3}{2}, \frac{3}{2}\rangle + b\mid \frac{3}{2}, \frac{1}{2}\rangle + c\mid \frac{3}{2}, -\frac{1}{2}\rangle + d\mid \frac{3}{2}, -\frac{3}{2}\rangle $$<p>or in terms of symmeterized qubits:</p>
 $$ a\mid \uparrow \uparrow \uparrow \rangle + b\frac{1}{\sqrt{3}}(\mid \uparrow \uparrow \downarrow \rangle + \mid \uparrow \downarrow \uparrow \rangle + \mid \downarrow \uparrow \uparrow \rangle) + c\frac{1}{\sqrt{3}}(\mid \downarrow \downarrow \uparrow \rangle + \mid \downarrow \uparrow \downarrow \rangle + \mid \uparrow \downarrow \downarrow \rangle) + d\mid \downarrow \downarrow \downarrow \rangle $$<p>In other words, there's a one-to-one correspondence between the four $\mid j, m \rangle$ basis states and the four symmetric basis states of three qubits. To wit: the states with $3 \uparrow$, with $2 \uparrow, 1 \downarrow$, with $2 \downarrow, 1 \uparrow$, and with $3 \downarrow$.</p>
@@ -13156,10 +13156,10 @@ $$ a\mid \uparrow \uparrow \uparrow \rangle + b\frac{1}{\sqrt{3}}(\mid \uparrow 
 
 
 
-<div id="86b68e14-35ec-43b9-8d74-bba36341d729"></div>
+<div id="d7db95e0-e0d6-49aa-a81a-e536a80370fd"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#86b68e14-35ec-43b9-8d74-bba36341d729');
+var element = $('#d7db95e0-e0d6-49aa-a81a-e536a80370fd');
 if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container: $("#glowscript").removeAttr("id")};}else{ element.textContent = ' ';}
 </script>
 </div>
@@ -13209,6 +13209,7 @@ transformation an isometry?: True
 <p>Another way of obtaining the same result is to find the roots of the Majorana polynomial of the spin, map the complex roots to the sphere, convert each resulting point into a qubit, and then symmeterize those separable qubits. Well, technically, if we do this, we lose the overall phase information of the original spin, but such is life.</p>
 <p>Just for reference, again here's the Majorana polynomial:</p>
 $$ p(z) = \sum_{m=-j}^{m=j} (-1)^{j+m} \sqrt{\frac{(2j)!}{(j-m)!(j+m)!}} a_{j+m} z^{j-m} $$<p>Where the $a$'s run through the components of the spin. Recall that if we have an $d$ dimensional spin vector, but end up with a less than $d$ degree polynomial, we add a root at infinity for each missing degree. Having obtained the roots, we stereographically project them to the sphere to get $(x, y, z)$ points, which we enjoy poetically calling "stars."</p>
+<p>The connection to permutation symmetry is that the roots are contained "unordered" in the polynomial!</p>
 <p>Below we take a spin, finds its stars, convert them into qubits, symmeterize the qubits, then use the inverse of the transformation above to get back the spin state, and find the stars again. We see we recover the original stars exactly. So we get the right result up to phase. (Note we could have converted the complex roots directly to qubits, as we've seen, insofar as each complex root is to be the ratio between the two components of the qubit.)</p>
 
 </div>

@@ -13146,10 +13146,10 @@ div#notebook {
 
 
 
-<div id="a1e3f898-b4ea-4c59-9fb5-61b4785c8c46"></div>
+<div id="b02132f6-2733-46e2-a318-7926e1618f5e"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#a1e3f898-b4ea-4c59-9fb5-61b4785c8c46');
+var element = $('#b02132f6-2733-46e2-a318-7926e1618f5e');
 if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container: $("#glowscript").removeAttr("id")};}else{ element.textContent = ' ';}
 </script>
 </div>
@@ -13205,7 +13205,7 @@ $$tr(\Pi_{k}\Pi_{l}) = \frac{d\delta_{k,l} + 1}{d+1} $$<p>Such a set of projecto
 
 <p>Thanks to Chris Fuchs &amp; Co., we have a repository of SIC-POVM's in a variety of dimensions. One can download them <a href="http://www.physics.umb.edu/Research/QBism/solutions.html">here</a>. You'll get a zip of text files, one for each dimension: and in each text file is a single complex vector: the "fiducial" vector. From this vector, the SIC can be derived.</p>
 <p>In order to do this, we first define (with Sylvester) the clock and shift matrices for a given dimension $d$:</p>
-$$Z = 
+$$X = 
 \begin{pmatrix}
 0      &amp; 0      &amp; 0      &amp; \cdots &amp; 0     &amp; 1\\
 1      &amp; 0      &amp; 0      &amp; \cdots &amp; 0     &amp; 0\\
@@ -13213,7 +13213,7 @@ $$Z =
 0      &amp; 0      &amp; 1      &amp; \cdots &amp; 0     &amp; 0\\
 \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp;\vdots &amp;\vdots\\
 0      &amp; 0      &amp; 0      &amp; \cdots &amp; 1     &amp; 0\\ 
-\end{pmatrix}$$$$X = 
+\end{pmatrix}$$$$Z = 
 \begin{pmatrix}
 1      &amp; 0      &amp; 0        &amp; \cdots &amp; 0\\
 0      &amp; \omega &amp; 0        &amp; \cdots &amp; 0\\
@@ -13231,12 +13231,12 @@ $$<p>Where $\omega = e^{\frac{2\pi i}{d}}$.</p>
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">clock</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">shift</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>\
                     <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">d</span><span class="o">-</span><span class="mi">1</span> <span class="k">else</span> <span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>\
                         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)])</span><span class="o">/</span><span class="n">d</span>
 
-<span class="k">def</span> <span class="nf">shift</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">clock</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
     <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">1</span><span class="n">j</span><span class="o">/</span><span class="n">d</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="n">w</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)]))</span>
 </pre></div>
@@ -13416,10 +13416,10 @@ $$tr(\Pi_{k}\Pi_{l}) = \frac{d\delta_{k,l} + 1}{d+1} $$
 
 
 
-<div id="89c394fc-2f55-4c61-a870-43812e1f94bf"></div>
+<div id="3f5a51e3-3280-443a-9973-ec0ed7ceb2e0"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#89c394fc-2f55-4c61-a870-43812e1f94bf');
+var element = $('#3f5a51e3-3280-443a-9973-ec0ed7ceb2e0');
 if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container: $("#glowscript").removeAttr("id")};}else{ element.textContent = ' ';}
 </script>
 </div>
@@ -13434,10 +13434,10 @@ if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container:
 
 
 
-<div id="621995af-be61-4b8f-bffe-3a09a752802c"></div>
+<div id="a07a8a33-51a2-4fe2-bcc6-d1192b79323d"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#621995af-be61-4b8f-bffe-3a09a752802c');
+var element = $('#a07a8a33-51a2-4fe2-bcc6-d1192b79323d');
 if (typeof Jupyter !== "undefined") {require.undef("nbextensions/vpython_libraries/glow.min");}else{element.textContent = ' ';}
 </script>
 </div>
@@ -13452,10 +13452,10 @@ if (typeof Jupyter !== "undefined") {require.undef("nbextensions/vpython_librari
 
 
 
-<div id="a43c91e0-25e2-4e13-b307-a827db85dfd3"></div>
+<div id="1f066ff8-9b2f-439a-91b1-cebdec144ac6"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#a43c91e0-25e2-4e13-b307-a827db85dfd3');
+var element = $('#1f066ff8-9b2f-439a-91b1-cebdec144ac6');
 if (typeof Jupyter !== "undefined") {require.undef("nbextensions/vpython_libraries/glowcomm");}else{element.textContent = ' ';}
 </script>
 </div>
@@ -13470,10 +13470,10 @@ if (typeof Jupyter !== "undefined") {require.undef("nbextensions/vpython_librari
 
 
 
-<div id="c1d9210e-71da-4d46-b359-b522c1c781e1"></div>
+<div id="41094b41-23da-444c-b693-462fd91e8d18"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#c1d9210e-71da-4d46-b359-b522c1c781e1');
+var element = $('#41094b41-23da-444c-b693-462fd91e8d18');
 if (typeof Jupyter !== "undefined") {require.undef("nbextensions/vpython_libraries/jquery-ui.custom.min");}else{element.textContent = ' ';}
 </script>
 </div>
@@ -13488,10 +13488,10 @@ if (typeof Jupyter !== "undefined") {require.undef("nbextensions/vpython_librari
 
 
 
-<div id="3b69438d-ab78-4892-8516-9932c5160ff9"></div>
+<div id="c8a47665-80d0-4a23-8a95-6e393455f2c1"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#3b69438d-ab78-4892-8516-9932c5160ff9');
+var element = $('#c8a47665-80d0-4a23-8a95-6e393455f2c1');
 if (typeof Jupyter !== "undefined") {require(["nbextensions/vpython_libraries/glow.min"], function(){console.log("GLOW LOADED");});}else{element.textContent = ' ';}
 </script>
 </div>
@@ -13506,10 +13506,10 @@ if (typeof Jupyter !== "undefined") {require(["nbextensions/vpython_libraries/gl
 
 
 
-<div id="1b3f2028-f127-4e48-8120-2806cdfc95c3"></div>
+<div id="8cb0e7fd-005c-411a-80af-325215933e54"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#1b3f2028-f127-4e48-8120-2806cdfc95c3');
+var element = $('#8cb0e7fd-005c-411a-80af-325215933e54');
 if (typeof Jupyter !== "undefined") {require(["nbextensions/vpython_libraries/glowcomm"], function(){console.log("GLOWCOMM LOADED");});}else{element.textContent = ' ';}
 </script>
 </div>
@@ -13524,10 +13524,10 @@ if (typeof Jupyter !== "undefined") {require(["nbextensions/vpython_libraries/gl
 
 
 
-<div id="6877a78f-c521-4f1c-afae-d2115599a9ca"></div>
+<div id="a08a1b82-39d6-4a11-9df7-9e21f9f3197a"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#6877a78f-c521-4f1c-afae-d2115599a9ca');
+var element = $('#a08a1b82-39d6-4a11-9df7-9e21f9f3197a');
 if (typeof Jupyter !== "undefined") {require(["nbextensions/vpython_libraries/jquery-ui.custom.min"], function(){console.log("JQUERY LOADED");});}else{element.textContent = ' ';}
 </script>
 </div>

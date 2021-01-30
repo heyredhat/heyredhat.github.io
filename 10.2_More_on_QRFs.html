@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>index</title>
+<title>10.2_More_on_QRFs</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13077,32 +13077,21 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><style>
-    .container {
-        top: 0px;
-    }
-</style></p>
-<div style="display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 70%;"><a href="http://heyredhat.github.io/">
-                            <img  width=800 src="img/front_logo.png" />
-                         </a>
-</div>
+<h1 id="(A-Little)-More-on-Quantum-Reference-Frames">(A Little) More on Quantum Reference Frames<a class="anchor-link" href="#(A-Little)-More-on-Quantum-Reference-Frames">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Essays-on-Quantum-Physics"><div align="center">Essays on Quantum Physics</div><a class="anchor-link" href="#Essays-on-Quantum-Physics">&#182;</a></h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><center>Check out my libraries: <a href="https://github.com/heyredhat/spheres">spheres</a> and <a href="https://heyredhat.github.io/qbism/">qbism</a>!</p>
+<p><img src="img/position_qrf.png"></p>
+<p>Following Giacomini, Castro-Ruiz and Brukner (as well as others including Galley and de la Hamette), the basic principle here is that of a "coherent change of reference frame." Above, we see an example in terms of position, but the notion can be generalized for other observables related to other symmetry groups.</p>
+<p>We have three systems $A, B,$ and $C$. In (a), $C$ is regarded as the reference, and so <em>by definition</em>, it's at the origin and in a separable state. From $C$'s point of view, $A$ and $B$ are wavepackets located to the right. If instead we take $A$'s perspective, $A$ would be regarded as the origin, and $C$ would be to its left and $B$ would be to its right. This is no different from a classical change of reference frame.</p>
+<p>The interesting case, however, is: what if $A$ is in a superposition of two wavepackets, and we want to jump from $C$'s perspective to $A$'s perspective? Since $C$ regards $A$ and $B$ as being in (basically) two locations each, $A$ conversely would regard $C$ and $B$ as being in two locations, and moreover in an entangled state, so that the two possible locations for $B$ and $C$ are correlated.</p>
+<p>In other words, the supposition being made in this kind of work is that entanglement and superposition are entirely reference frame dependent. If a quantum system is chosen as a reference, <em>what that means</em> is that it's regarded as the "origin," as separable, in the "0" state, no entanglement, no superposition, nothing. If from another perspective, that system had been entangled and in superposition, that "quantumness" is precisely externalized to the systems coordinatized relative to the reference.</p>
+<p>We could think in terms of spins: suppose $A$ is regarded as the reference, and therefore it's always just in the $\mid \uparrow \rangle$ state (or any other arbitrarily chosen state), and suppose $B$ and $C$ are in the $\mid \uparrow \uparrow \rangle + \mid \downarrow \downarrow \rangle$ state. If we switch to $B$'s reference frame, then now $B$ must be regarded as in the $\mid \uparrow \rangle$ state. Since $B$ and $C$ were in the entangled state $\mid \uparrow \uparrow \rangle + \mid \downarrow \downarrow \rangle$ relative to $A$, then $C$ must agree with $B$, and since $B$ is $\uparrow$, so $C$ must be be $\uparrow$. So $B$ and $C$ are in the $\mid \uparrow \uparrow \rangle$ state. But what about $A$'s state relative to $B$? From $A$'s perspective it was 50/50 whether $B$ (and $C$) were going to be $\uparrow$ or $\downarrow$, and so if now we regard $B$ (and $C$) to be $\uparrow$, then $A$ must be in the state $\mid \uparrow \rangle + \mid \downarrow \rangle$.</p>
+<p>Lest this seem ad hoc, this procedure can be formalized as a certain unitary transformation. The argument of course depends on these systems all having essentially the same Hilbert space, with states being representations of the same symmetry group, and it's an interesting question how to fully generalize the idea when the reference system has many different kinds of systems associated with it. In the general case, it's possible the transformations won't necessarily by unitary.</p>
+<p>Incidentally, this formulation of QRF's relates quantum states, each explitly from a "point of view," to each other, but the whole construction can be placed in a reference frame independent context. In other words, one can consider Dirac-type quantization, where one imagines, that for example, the overall momentum of all particles (say 3 particles) must be $0$ insofar as there is no external reference frame to distinguish anything other than that. Then one can posit that one of the particles is "standing still at the origin," and describe the quantum state of the other particles with reference to that particle.</p>
 
 </div>
 </div>
@@ -13110,56 +13099,61 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ol>
-<li><a href="1_Introduction.html">Introduction</a> (<a href="1_Introduction.ipynb">notebook</a>)</li>
-<li><a href="2_Yanking.html"><em>How to Make a Wormhole</em>: Yanking</a> (<a href="2_Yanking.ipynb">notebook</a>)</li>
-<li><a href="2.1_Teleportation.html"><em>How to Make a Wormhole</em>: Teleportation</a> (<a href="2.1_Teleportation.ipynb">notebook</a>)</li>
-<li><a href="2.2_Time_Evolution.html"><em>How to Make a Wormhole</em>: Time Evolution</a> (<a href="2.2_Time_Evolution.ipynb">notebook</a>)</li>
-<li><a href="2.3_The_TFD.html"><em>How to Make a Wormhole</em>: The TFD</a> (<a href="2.3_The_TFD.ipynb">notebook</a>)</li>
-<li><a href="2.4_Scrambling_and_Winding.html"><em>How to Make a Wormhole</em>: Scrambling and Winding</a> (<a href="2.4_Scrambling_and_Winding.ipynb">notebook</a>)</li>
-<li><a href="2.5_Wormhole_Experiments.html"><em>How to Make a Wormhole</em>: Wormhole Experiments</a> (<a href="2.5_Wormhole_Experiments.ipynb">notebook</a>)</li>
-<li><a href="2.6_Geometrical_Sketch.html"><em>How to Make a Wormhole</em>: Geometrical Sketch</a> (<a href="2.6_Geometrical_Sketch.ipynb">notebook</a>)</li>
-<li><a href="3_Diagrams_Etc.html"><em>How to Continue Making a Wormhole</em>: Diagrams Etc.</a> (<a href="3_Diagrams_Etc.ipynb">notebook</a>)</li>
-<li><a href="3.2_A_Really_Existing_Quantum_Computer.html"><em>How to Continue Making a Wormhole</em>: A Really Existing Quantum Computer</a> (<a href="3.2_A_Really_Existing_Quantum_Computer.ipynb">notebook</a>)</li>
-<li><a href="4_Spheres_and_Ellipsoids.html"><em>How to Think about Entanglement</em>: Spheres and Ellipsoids</a> (<a href="4_Spheres_and_Ellipsoids.ipynb">notebook</a>)</li>
-<li><a href="4.1_Quantum_Clocks.html"><em>How to Think about Entanglement</em>: Quantum Clocks</a> (<a href="4.1_Quantum_Clocks.ipynb">notebook</a>) </li>
-<li><a href="4.2_On_Representations.html"><em>How to Think about Entanglement</em>: On Representations</a> (<a href="4.2_On_Representations.ipynb">notebook</a>) [in progress]</li>
-<li><a href="5_What_is_an_Atom.html"><em>How to Think about Atoms</em>: 0: What is an Atom?</a> (<a href="5_What_is_an_Atom.ipynb">notebook</a>)</li>
-<li><a href="5.1_A_Pebble.html"><em>How to Think about Atoms</em>: I: A pebble? </a> (<a href="5.1_A_Pebble.ipynb">notebook</a>)</li>
-<li><a href="5.2_A_Counting_Number.html"><em>How to Think about Atoms</em>: II: A counting number?</a> (<a href="5.2_A_Counting_Number.ipynb">notebook</a>)</li>
-<li><a href="5.3_An_Integer.html"><em>How to Think about Atoms</em>: III: An integer?</a> (<a href="5.3_An_Integer.ipynb">notebook</a>)</li>
-<li><a href="5.4_A_Rational.html"><em>How to Think about Atoms</em>: IV: A rational?</a> (<a href="5.4_A_Rational.ipynb">notebook</a>)</li>
-<li><a href="5.5_A_Star.html"><em>How to Think about Atoms</em>: V: $\mathbb{C} + \infty$?</a> (<a href="5.5_A_Star.ipynb">notebook</a>)</li>
-<li><a href="5.6_A_Polynomial.html"><em>How to Think about Atoms</em>: VI: A polynomial?</a> (<a href="5.6_A_Polynomial.ipynb">notebook</a>)</li>
-<li><a href="5.7_A_Matrix.html"><em>How to Think about Atoms</em>: VII: A matrix?</a> (<a href="5.7_A_Matrix.ipynb">notebook</a>)</li>
-<li><a href="5.8_A_Tensor.html"><em>How to Think about Atoms</em>: VIII: A tensor?</a> (<a href="5.8_A_Tensor.ipynb">notebook</a>)</li>
-<li><a href="5.8.1_Polyhedral_Interlude.html"><em>How to Think about Atoms</em>: Polyhedral Interlude</a> (<a href="5.8.1_Polyhedral_Interlude.ipynb">notebook</a>)</li>
-<li><a href="7_Quantum_Reference_Frames.html">What is a Quantum Reference Frame?</a> (<a href="7_Quantum_Reference_Frames.ipynb">notebook</a>) [in progress]</li>
-<li><a href="8_Why_I_am_not_a_Bohmian.html">Why I'm Not a Bohmian</a> (<a href="8_Why_I_am_not_a_Bohmian.ipynb">notebook</a>)</li>
-<li><a href="8.1_Impossibility_of_Stealth_Communication.html">On the Impossibility of Stealth Communication</a> (<a href="8.1_Impossibility_of_Stealth_Communication.ipynb">notebook</a>)</li>
-<li><a href="5.9_A_Quantum.html"><em>How to Think about Atoms</em>: IX: A quantum?</a> (<a href="5.9_A_Quantum.ipynb">notebook</a>)</li>
-<li><a href="7.1_More_Fun_With_Coherent_States.html">More Fun with Coherent States</a> (<a href="7.1_More_Fun_With_Coherent_States.ipynb">notebook</a>)</li>
-<li><a href="6.1_Countability.html">On Counting in Quantum Mechanics</a> (<a href="6.1_Countability.ipynb">notebook</a>)</li>
-<li><a href="6.2_Fermionic_Quantization.html">Fermionic Quantization (and the Spin Statistics Theorem)</a> (<a href="6.2_Fermionic_Quantization.ipynb">notebook</a>)</li>
-<li><a href="6.3_Atiyah.html">Berry / Robbins / Atiyah </a> (<a href="6.3_Atiyah.ipynb">notebook</a>)</li>
-<li><a href="6_An_Observer.html"><em>How to Think about Atoms</em>: X: Well, it depends on an observer's state of motion!</a> (<a href="6_An_Observer.ipynb">notebook</a>)</li>
-<li><a href="https://github.com/heyredhat/vqe_tutorial">Variational Quantum Eigensolver Tutorial</a></li>
-<li><a href="3.1_Majorana_Fermions_and_SYK.html"><em>How to Continue Making a Wormhole</em>: Majorana Fermions and SYK</a> (<a href="3.1_Majorana_Fermions_and_SYK.ipynb">notebook</a>)</li>
-<li><a href="9_Symmetrized_Qubits.html">How to Prepare a Permutation Symmetric Multiqubit State on an Actual Quantum Computer</a> (<a href="9_Symmetrized_Qubits.ipynb">notebook</a>)</li>
-<li><a href="9.1_Gaussian_QM_and_Negative_Probabilities.html">Gaussian Quantum Mechanics and Negative Probabilities</a> (<a href="9.1_Gaussian_QM_and_Negative_Probabilities.ipynb">notebook</a>)</li>
-<li><a href="9.2_Majorana_Stars_and_Structured_Gaussian_Beams.html">Majorana Stars and Structured Gaussian Beams</a> (<a href="9.2_Majorana_Stars_and_Structured_Gaussian_Beams.ipynb">notebook</a>)</li>
-<li><a href="9.3_Envariance.html">Envariance and the Origin of Probabilities in Quantum Mechanics</a> (<a href="9.3_Envariance.ipynb">notebook</a>)</li>
-<li><a href="9.4_Puzzles_of_Supervenience.html">Quantum Mechanical Puzzles of Supervenience</a> (<a href="9.4_Puzzles_of_Supervenience.ipynb">notebook</a>)</li>
-<li><a href="9.5_Puzzles_of_Supervenience_Pt2.html">Quantum Mechanical Puzzles of Supervenience, Pt. 2</a> (<a href="9.5_Puzzles_of_Supervenience_Pt2.ipynb">notebook</a>)</li>
-<li><a href="9.6_Photonic_SpinJ.html">How To Prepare a Spin-j State on a Photonic Quantum Computer</a> (<a href="9.6_Photonic_SpinJ.ipynb">notebook</a>)</li>
-<li><a href="9.7_Majorana_for_Mixed_States.html">Generalizing the Majorana Representation for Mixed States and Operators</a> (<a href="9.7_Majorana_for_Mixed_States.ipynb">notebook</a>)</li>
-<li><a href="9.8_Qbism.html">QBism</a> (<a href="9.8_Qbism.ipynb">notebook</a>)</li>
-<li><a href="10_Introduction_to_Majorana_Stars.html">Introduction to the Majorana Stellar Representation</a> (<a href="10_Introduction_to_Majorana_Stars.ipynb">notebook</a>)</li>
-<li><a href="10.1_Stabilization_via_Symmetrization.html">Stabilization via Symmetrization</a> (<a href="10.1_Stabilization_via_Symmetrization.ipynb">notebook</a>)</li>
-<li><a href="10.2_More_on_QRFs.html">(A Little) More on Quantum Reference Frames</a> (<a href="10.2_More_on_QRFs.ipynb">notebook</a>)</li>
-<li>...</li>
-</ol>
-<p>Also: <a href="0_Bibliography.html">Bibliography</a> (<a href="0_Bibliography.ipynb">notebook</a>)</p>
+<hr>
+
+<p>The code below implements the "coherent change of reference" operator, given a state from some perspective, a subsystem index specifying the perspective to which to switch, a function $G(i)$ which takes basis state indices as input and returns the group element that prepares that basis state from a reference basis state, and a list of basis states (computational basis by default).</p>
+<p>In the case of systems on a discrete circle, $G(i)$ is just $T^{i}$ where $T$ is the shift operator, while for qubits with $Z+$ as a reference state, $G(i)$ is $I$ if $i=0$ and $X$ if $i=1$.</p>
+<p>The basic idea: If we want to switch from POV $a$ to POV $b$, for each basis state $\mid i \rangle$, we form the operator:</p>
+$$O_{i} = I_{a} \otimes [G(i)^{\dagger}\mid 0 \rangle\langle i \mid]_{b} \otimes [G(i)^{\dagger}]^{\otimes rest} $$<p>We then add up all these operators, and swap $a$ and $b$: $U_{a\rightarrow b} = SWAP_{a,b}\sum_{i} O_{i}$. The effect is to push $b$ into the reference basis state, while dragging everybody else along with it. It implements the basic principle of "coherent change of reference":</p>
+<p>If $\mid \psi \rangle^{a} \rightarrow \mid \psi \rangle^{b}$ and $\mid \phi \rangle^{a} \rightarrow \mid \phi \rangle^{b}$, then $(\alpha \mid \psi \rangle + \beta \mid \psi \rangle)^{a} \rightarrow (\alpha \mid \phi \rangle + \beta \mid \phi \rangle)^{b}$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">permutations</span><span class="p">,</span> <span class="n">product</span>
+
+<span class="k">def</span> <span class="nf">construct_swap</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">dims</span><span class="p">):</span>
+    <span class="n">perm</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dims</span><span class="p">)))</span>
+    <span class="n">perm</span><span class="p">[</span><span class="n">a</span><span class="p">],</span> <span class="n">perm</span><span class="p">[</span><span class="n">b</span><span class="p">]</span> <span class="o">=</span> <span class="n">perm</span><span class="p">[</span><span class="n">b</span><span class="p">],</span> <span class="n">perm</span><span class="p">[</span><span class="n">a</span><span class="p">]</span>
+    <span class="n">tensor_indices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="p">[[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dims</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">perm</span><span class="p">))]))</span>
+    <span class="n">ptensor_indices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="p">[[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dims</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">perm</span><span class="p">]))</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">tensor_indices</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">tensor_indices</span><span class="p">)))</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">pind</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ptensor_indices</span><span class="p">):</span>
+        <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">[</span><span class="n">tensor_indices</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">pind</span><span class="p">)</span> <span class="k">if</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">tensor_indices</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">M</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">[</span><span class="n">dims</span><span class="p">,</span> <span class="n">dims</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">M</span>
+
+<span class="k">def</span> <span class="nf">take_pov</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">from_pov</span><span class="p">,</span> <span class="n">to_pov</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">return_map</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">from_pov</span> <span class="o">==</span> <span class="n">to_pov</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">state</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">basis</span> <span class="o">=</span> <span class="n">basis</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">basis</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)]</span>
+    <span class="n">g_inv</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">G</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span><span class="o">*</span><span class="n">basis</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">O</span> <span class="o">=</span> <span class="n">construct_swap</span><span class="p">(</span><span class="n">from_pov</span><span class="p">,</span> <span class="n">to_pov</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span>\
+        <span class="nb">sum</span><span class="p">([</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">from_pov</span> \
+                        <span class="k">else</span> <span class="n">g_inv</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="n">basis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span> <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">to_pov</span> \
+                        <span class="k">else</span> <span class="n">G</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="n">O</span> <span class="k">if</span> <span class="n">return_map</span> <span class="k">else</span> <span class="n">O</span><span class="o">*</span><span class="n">state</span>    
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Check out <a href="examples/ring_qrf.py">ring_qrf.py</a> for a visualization of QRF shifts in the case of discrete quantum systems on a circle, and <a href="examples/qbit_qrf.py">qbit_qrf.py</a> for a qubit based example!</p>
 
 </div>
 </div>
@@ -13167,16 +13161,16 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div align="center"><a href="https://mybinder.org/v2/gh/heyredhat/heyredhat.github.io/master"><img src="https://mybinder.org/badge_logo.svg" /></a>
-<div align="center">&copy; 2020 heyredhat @ gmail.com</div>
+<h2 id="Bibliography">Bibliography<a class="anchor-link" href="#Bibliography">&#182;</a></h2><p><a href="https://arxiv.org/abs/1712.07207">Quantum mechanics and the covariance of physical laws in quantum reference frames</a></p>
+<p><a href="https://arxiv.org/abs/2004.14292">Quantum reference frames for general symmetry groups</a></p>
+
 </div>
 </div>
 </div>
     </div>
   </div>
 </body>
-
- 
-
-
-</html>
+        <div id="logo">
+            <a href="index.html"><img src="img/logo.png"/></a>
+        </div>
+        

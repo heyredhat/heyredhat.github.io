@@ -36,11 +36,11 @@ Zbasis = qt.sigmaz().eigenstates()[1][::-1]
 
 ######################################################
 
-#G = lambda i: qt.identity(2) if i == 0 else qt.sigmaz()
-#basis = Xbasis
+G = lambda i: qt.identity(2) if i == 0 else qt.sigmaz()
+basis = Xbasis
 
 #state = qt.tensor(Xbasis[0], qt.rand_ket(2), qt.rand_ket(2))
-#state = qt.tensor(Xbasis[0], Zbasis[1], Xbasis[0])
+state = qt.tensor(Xbasis[0], Zbasis[1], Xbasis[0])
 #state = qt.tensor(Xbasis[0], qt.bell_state("00"))
 
 ######################################################
@@ -54,12 +54,12 @@ Zbasis = qt.sigmaz().eigenstates()[1][::-1]
 
 ######################################################
 
-G = lambda i: qt.identity(2) if i == 0 else qt.sigmax()
-basis = Zbasis
+#G = lambda i: qt.identity(2) if i == 0 else qt.sigmax()
+#basis = Zbasis
 
-state = qt.tensor(Zbasis[0], qt.rand_ket(2), qt.rand_ket(2))
+#state = qt.tensor(Zbasis[0], qt.rand_ket(2), qt.rand_ket(2))
 #state = qt.tensor(Zbasis[0], Zbasis[1], Xbasis[0])
-#state = qt.tensor(Zbasis[0], qt.bell_state("00"))
+#state = qt.tensor(Zbasis[0], qt.bell_state("11"))
 
 ######################################################
 

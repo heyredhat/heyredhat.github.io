@@ -12947,8 +12947,13 @@ ul.typeahead-list  > li > a.pull-right {
 /*# sourceMappingURL=style.min.css.map */
     </style>
 <style type="text/css">
-    .highlight .hll { background-color: #ffffcc }
-.highlight  { background: #f8f8f8; }
+    pre { line-height: 125%; margin: 0; }
+td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
+td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.highlight .hll { background-color: #ffffcc }
+.highlight { background: #f8f8f8; }
 .highlight .c { color: #408080; font-style: italic } /* Comment */
 .highlight .err { border: 1px solid #FF0000 } /* Error */
 .highlight .k { color: #008000; font-weight: bold } /* Keyword */
@@ -13105,7 +13110,7 @@ div#notebook {
 <p>In the case of systems on a discrete circle, $G(i)$ is just $T^{i}$ where $T$ is the shift operator, while for qubits with $Z+$ as a reference state, $G(i)$ is $I$ if $i=0$ and $X$ if $i=1$.</p>
 <p>The basic idea: If we want to switch from POV $a$ to POV $b$, for each basis state $\mid i \rangle$, we form the operator:</p>
 $$O_{i} = I_{a} \otimes [G(i)^{\dagger}\mid 0 \rangle\langle i \mid]_{b} \otimes [G(i)^{\dagger}]^{\otimes rest} $$<p>We then add up all these operators, and swap $a$ and $b$: $U_{a\rightarrow b} = SWAP_{a,b}\sum_{i} O_{i}$. The effect is to push $b$ into the reference basis state, while dragging everybody else along with it. It implements the basic principle of "coherent change of reference":</p>
-<p>If $\mid \psi \rangle^{a} \rightarrow \mid \psi \rangle^{b}$ and $\mid \phi \rangle^{a} \rightarrow \mid \phi \rangle^{b}$, then $(\alpha \mid \psi \rangle + \beta \mid \psi \rangle)^{a} \rightarrow (\alpha \mid \phi \rangle + \beta \mid \phi \rangle)^{b}$.</p>
+<p>If $\mid \psi \rangle^{a} \rightarrow \mid \psi \rangle^{b}$ and $\mid \phi \rangle^{a} \rightarrow \mid \phi \rangle^{b}$, then $(\alpha \mid \psi \rangle + \beta \mid \phi \rangle)^{a} \rightarrow (\alpha \mid \psi \rangle + \beta \mid \phi \rangle)^{b}$.</p>
 
 </div>
 </div>
@@ -13117,7 +13122,7 @@ $$O_{i} = I_{a} \otimes [G(i)^{\dagger}\mid 0 \rangle\langle i \mid]_{b} \otimes
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">permutations</span><span class="p">,</span> <span class="n">product</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">permutations</span><span class="p">,</span> <span class="n">product</span>
 
 <span class="k">def</span> <span class="nf">construct_swap</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">dims</span><span class="p">):</span>
     <span class="n">perm</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dims</span><span class="p">)))</span>

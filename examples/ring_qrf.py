@@ -66,7 +66,7 @@ def create_viz():
     n = len(state.dims[0])
     d = state.dims[0][0]
     coords = [vp.vector(root.real, root.imag, 0) for root in [np.exp(1j*2*np.pi*i/d)for i in range(d)]]
-	colors = [vp.color.red, vp.color.green, vp.color.blue] if n == 3 else\
+    colors = [vp.color.red, vp.color.green, vp.color.blue] if n == 3 else\
              [vp.vector(*np.random.random(3)) for i in range(n)]  
 
     vpts = {}

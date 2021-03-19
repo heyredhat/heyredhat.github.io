@@ -13092,7 +13092,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -13114,14 +13114,14 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[2]:</div>
+    <div class="prompt output_prompt">Out[11]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 3.3985,  0.5472, -1.311 , -2.1751, -1.2055],
-       [-0.2292,  0.6647,  0.552 , -0.727 ,  0.3015]])</pre>
+<pre>array([[-1.0498,  0.4192,  0.3598, -0.3203, -1.1067],
+       [ 0.5574, -0.4075,  2.0128,  1.245 ,  1.0094]])</pre>
 </div>
 
 </div>
@@ -13140,7 +13140,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">R</span><span class="p">;</span> <span class="n">G</span>
@@ -13156,17 +13156,17 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[3]:</div>
+    <div class="prompt output_prompt">Out[12]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[11.6021,  1.7072, -4.582 , -7.2253, -4.1661],
-       [ 1.7072,  0.7412, -0.3504, -1.6733, -0.4592],
-       [-4.582 , -0.3504,  2.0235,  2.4503,  1.747 ],
-       [-7.2253, -1.6733,  2.4503,  5.2594,  2.4029],
-       [-4.1661, -0.4592,  1.747 ,  2.4029,  1.5442]])</pre>
+<pre>array([[ 1.4128, -0.6672,  0.7443,  1.0303,  1.7244],
+       [-0.6672,  0.3418, -0.6693, -0.6416, -0.8752],
+       [ 0.7443, -0.6693,  4.1809,  2.3907,  1.6335],
+       [ 1.0303, -0.6416,  2.3907,  1.6527,  1.6112],
+       [ 1.7244, -0.8752,  1.6335,  1.6112,  2.2436]])</pre>
 </div>
 
 </div>
@@ -13185,7 +13185,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">G</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
@@ -13201,13 +13201,13 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[10]:</div>
+    <div class="prompt output_prompt">Out[13]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([19.7524,  1.4181,  0.    ,  0.    ,  0.    ])</pre>
+<pre>array([7.5904, 2.2413, 0.    , 0.    , 0.    ])</pre>
 </div>
 
 </div>
@@ -13226,7 +13226,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">R</span> <span class="o">@</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span>
@@ -13242,14 +13242,14 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[4]:</div>
+    <div class="prompt output_prompt">Out[14]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[6.2372, 3.9943],
-       [3.9943, 5.1159]])</pre>
+<pre>array([[ 2.7346, -1.5476],
+       [-1.5476,  7.0971]])</pre>
 </div>
 
 </div>
@@ -13268,7 +13268,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">R</span> <span class="o">@</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
@@ -13284,13 +13284,13 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[5]:</div>
+    <div class="prompt output_prompt">Out[15]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>15.954517221735468</pre>
+<pre>17.012389286631418</pre>
 </div>
 
 </div>
@@ -13318,7 +13318,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">point</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> <span class="n">point</span>
@@ -13334,13 +13334,13 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[6]:</div>
+    <div class="prompt output_prompt">Out[16]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([0.9111, 0.1327])</pre>
+<pre>array([-0.3741, -1.3575])</pre>
 </div>
 
 </div>
@@ -13359,7 +13359,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">point</span><span class="p">;</span> <span class="n">c</span>
@@ -13375,13 +13375,13 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[7]:</div>
+    <div class="prompt output_prompt">Out[17]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([ 1.5651,  0.3171, -1.3609,  1.0362, -0.8707])</pre>
+<pre>array([-0.364 ,  0.3963, -2.867 , -1.5703, -0.9563])</pre>
 </div>
 
 </div>
@@ -13403,7 +13403,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">R</span><span class="p">);</span> <span class="n">D</span>
@@ -13419,17 +13419,17 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[8]:</div>
+    <div class="prompt output_prompt">Out[18]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.3851, -0.1916],
-       [ 0.2694, -0.3142],
-       [-0.1968, -0.032 ],
-       [ 0.1321,  0.0498],
-       [ 0.2087, -0.502 ]])</pre>
+<pre>array([[-0.3872, -0.0059],
+       [ 0.1378, -0.0274],
+       [ 0.3332,  0.3563],
+       [-0.0204,  0.171 ],
+       [-0.3698,  0.0616]])</pre>
 </div>
 
 </div>
@@ -13440,7 +13440,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sum</span><span class="p">([</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
@@ -13456,13 +13456,13 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[9]:</div>
+    <div class="prompt output_prompt">Out[19]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([0.9111, 0.1327])</pre>
+<pre>array([-0.3741, -1.3575])</pre>
 </div>
 
 </div>
@@ -13481,7 +13481,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">D</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">c</span>
@@ -13497,13 +13497,13 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[10]:</div>
+    <div class="prompt output_prompt">Out[20]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([0.9111, 0.1327])</pre>
+<pre>array([-0.3741, -1.3575])</pre>
 </div>
 
 </div>
@@ -13530,434 +13530,10 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">D</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[11]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>array([[ 1., -0.],
-       [ 0.,  1.]])</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Conversely, we could have expanded in the dual basis:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">D</span> <span class="o">@</span> <span class="n">point</span><span class="p">;</span> <span class="n">c</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[12]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>array([ 0.3254,  0.2038, -0.1835,  0.127 ,  0.1236])</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">R</span> <span class="o">@</span> <span class="n">c</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[13]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>array([0.9111, 0.1327])</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Another way of thinking about this "recovery" procedure: instead, we could take the pseudo-inverse of the Gram matrix.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Ginv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">G</span><span class="p">);</span> <span class="n">Ginv</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[14]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.185 ,  0.164 , -0.0696,  0.0413,  0.1766],
-       [ 0.164 ,  0.1713, -0.043 ,  0.0199,  0.214 ],
-       [-0.0696, -0.043 ,  0.0397, -0.0276, -0.025 ],
-       [ 0.0413,  0.0199, -0.0276,  0.0199,  0.0026],
-       [ 0.1766,  0.214 , -0.025 ,  0.0026,  0.2955]])</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>If we have our frame coordinates:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">point</span><span class="p">;</span> <span class="n">c</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[15]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>array([ 1.5651,  0.3171, -1.3609,  1.0362, -0.8707])</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Acting with $G^{-1}$ will give us the coordinates in the dual basis:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Ginv</span> <span class="o">@</span> <span class="n">c</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[16]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>array([ 0.3254,  0.2038, -0.1835,  0.127 ,  0.1236])</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>So that:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">R</span> <span class="o">@</span> <span class="n">Ginv</span> <span class="o">@</span> <span class="n">c</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[17]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>array([0.9111, 0.1327])</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>In other words, using $G^{-1}$, we can avoid explicitly invoking the dual basis.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<h2 id="Tight-Frames">Tight Frames<a class="anchor-link" href="#Tight-Frames">&#182;</a></h2><p>We might consider restrictions on our frames. Different kinds of frames are useful for different purposes.</p>
-<p>For example, everyone loves tight frames. We can get one via a generalization of a polar decomposition for rectangular matrices. Starting with a random $d \times n$ matrix $R$, we decompose as $R = UH$, where the rows of $U$ are orthonormal, and $H$ is Hermitian. Then we throw out the $H$ part.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-<span class="n">R</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">polar</span><span class="p">(</span><span class="n">R</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span> <span class="n">R</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[18]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.1363,  0.2695, -0.3138, -0.2464,  0.8658],
-       [-0.4682, -0.2761,  0.1246, -0.8295, -0.0313]])</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">R</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[19]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.2378,  0.166 , -0.1011,  0.3548,  0.1326],
-       [ 0.166 ,  0.1488, -0.119 ,  0.1626,  0.242 ],
-       [-0.1011, -0.119 ,  0.114 , -0.026 , -0.2756],
-       [ 0.3548,  0.1626, -0.026 ,  0.7488, -0.1874],
-       [ 0.1326,  0.242 , -0.2756, -0.1874,  0.7506]])</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The point is that:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">R</span> <span class="o">@</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[20]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>array([[ 1., -0.],
-       [-0.,  1.]])</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>So the frame is the same as its dual! In other words, the analysis operator is <code>R.T</code> and the synthesis operator is <code>R</code>.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 <div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">point</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">D</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span> 
 </pre></div>
 
     </div>
@@ -13976,7 +13552,8 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([0.9111, 0.1327])</pre>
+<pre>array([[1., 0.],
+       [0., 1.]])</pre>
 </div>
 
 </div>
@@ -13984,13 +13561,21 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Conversely, we could have expanded in the dual basis:</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">point</span><span class="p">;</span> <span class="n">c</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">D</span> <span class="o">@</span> <span class="n">point</span><span class="p">;</span> <span class="n">c</span>
 </pre></div>
 
     </div>
@@ -14009,7 +13594,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([ 0.062 ,  0.2089, -0.2693, -0.3346,  0.7847])</pre>
+<pre>array([ 0.1529, -0.0144, -0.6083, -0.2245,  0.0548])</pre>
 </div>
 
 </div>
@@ -14042,7 +13627,422 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([0.9111, 0.1327])</pre>
+<pre>array([-0.3741, -1.3575])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Another way of thinking about this "recovery" procedure: instead, we could take the pseudo-inverse of the Gram matrix.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Ginv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">G</span><span class="p">);</span> <span class="n">Ginv</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[24]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[ 0.15  , -0.0532, -0.1311,  0.0069,  0.1429],
+       [-0.0532,  0.0197,  0.0362, -0.0075, -0.0527],
+       [-0.1311,  0.0362,  0.238 ,  0.0541, -0.1013],
+       [ 0.0069, -0.0075,  0.0541,  0.0297,  0.0181],
+       [ 0.1429, -0.0527, -0.1013,  0.0181,  0.1406]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If we have our frame coordinates:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">point</span><span class="p">;</span> <span class="n">c</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[25]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([-0.364 ,  0.3963, -2.867 , -1.5703, -0.9563])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Acting with $G^{-1}$ will give us the coordinates in the dual basis:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Ginv</span> <span class="o">@</span> <span class="n">c</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[26]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([ 0.1529, -0.0144, -0.6083, -0.2245,  0.0548])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So that:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">R</span> <span class="o">@</span> <span class="n">Ginv</span> <span class="o">@</span> <span class="n">c</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[27]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([-0.3741, -1.3575])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In other words, using $G^{-1}$, we can avoid explicitly invoking the dual basis.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<h2 id="Tight-Frames">Tight Frames<a class="anchor-link" href="#Tight-Frames">&#182;</a></h2><p>We might consider restrictions on our frames. Different kinds of frames are useful for different purposes.</p>
+<p>For example, everyone loves tight frames. We can get one via a generalization of a polar decomposition for rectangular matrices. Starting with a random $d \times n$ matrix $R$, we decompose as $R = UH$, where the rows of $U$ are orthonormal, and $H$ is Hermitian. Then we throw out the $H$ part.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">polar</span><span class="p">(</span><span class="n">R</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span> <span class="n">R</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[28]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[ 0.7192,  0.6138,  0.1819, -0.2684,  0.0295],
+       [-0.3509, -0.0555,  0.4236, -0.8042, -0.2183]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">R</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[29]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[ 0.6404,  0.4609, -0.0178,  0.0892,  0.0978],
+       [ 0.4609,  0.3798,  0.0882, -0.1201,  0.0302],
+       [-0.0178,  0.0882,  0.2125, -0.3895, -0.0871],
+       [ 0.0892, -0.1201, -0.3895,  0.7187,  0.1676],
+       [ 0.0978,  0.0302, -0.0871,  0.1676,  0.0485]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The point is that:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">R</span> <span class="o">@</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[30]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[ 1., -0.],
+       [-0.,  1.]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So the frame is the same as its dual! In other words, the analysis operator is <code>R.T</code> and the synthesis operator is <code>R</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">point</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[31]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([-0.3741, -1.3575])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">point</span><span class="p">;</span> <span class="n">c</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[32]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([ 0.2073, -0.1543, -0.6431,  1.192 ,  0.2853])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">R</span> <span class="o">@</span> <span class="n">c</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[33]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([-0.3741, -1.3575])</pre>
 </div>
 
 </div>
@@ -14077,7 +14077,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">random_funtf</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-15</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-15</span><span class="p">):</span>
@@ -14097,7 +14097,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">R</span> <span class="o">=</span> <span class="n">random_funtf</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span> <span class="n">R</span>
@@ -14113,14 +14113,14 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[25]:</div>
+    <div class="prompt output_prompt">Out[35]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.4363,  0.9974, -0.5217,  0.5581, -0.8551],
-       [-0.8998, -0.0724, -0.8531,  0.8298,  0.5184]])</pre>
+<pre>array([[-0.9986, -0.8349,  0.0026, -0.8914, -0.1059],
+       [-0.0524, -0.5505, -1.    ,  0.4533,  0.9944]])</pre>
 </div>
 
 </div>
@@ -14131,7 +14131,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">R</span>
@@ -14147,17 +14147,17 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[26]:</div>
+    <div class="prompt output_prompt">Out[36]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 1.    ,  0.5004,  0.54  , -0.5031, -0.8396],
-       [ 0.5004,  1.    , -0.4585,  0.4965, -0.8905],
-       [ 0.54  , -0.4585,  1.    , -0.9991,  0.0039],
-       [-0.5031,  0.4965, -0.9991,  1.    , -0.0471],
-       [-0.8396, -0.8905,  0.0039, -0.0471,  1.    ]])</pre>
+<pre>array([[ 1.    ,  0.8626,  0.0498,  0.8664,  0.0536],
+       [ 0.8626,  1.    ,  0.5483,  0.4947, -0.459 ],
+       [ 0.0498,  0.5483,  1.    , -0.4556, -0.9947],
+       [ 0.8664,  0.4947, -0.4556,  1.    ,  0.5451],
+       [ 0.0536, -0.459 , -0.9947,  0.5451,  1.    ]])</pre>
 </div>
 
 </div>
@@ -14168,7 +14168,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">R</span> <span class="o">@</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span>
@@ -14184,14 +14184,14 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[27]:</div>
+    <div class="prompt output_prompt">Out[37]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 2.5, -0. ],
-       [-0. ,  2.5]])</pre>
+<pre>array([[2.5, 0. ],
+       [0. , 2.5]])</pre>
 </div>
 
 </div>
@@ -14210,7 +14210,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">point</span>
@@ -14226,13 +14226,13 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[28]:</div>
+    <div class="prompt output_prompt">Out[38]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([0.9111, 0.1327])</pre>
+<pre>array([-0.3741, -1.3575])</pre>
 </div>
 
 </div>
@@ -14243,7 +14243,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">point</span><span class="p">;</span> <span class="n">c</span>
@@ -14259,13 +14259,13 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[29]:</div>
+    <div class="prompt output_prompt">Out[39]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([ 0.2781,  0.8991, -0.5885,  0.6186, -0.7103])</pre>
+<pre>array([ 0.4447,  1.0596,  1.3565, -0.2819, -1.3103])</pre>
 </div>
 
 </div>
@@ -14276,7 +14276,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="n">d</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">R</span> <span class="o">@</span> <span class="n">c</span>
@@ -14292,13 +14292,13 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[30]:</div>
+    <div class="prompt output_prompt">Out[40]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([0.9111, 0.1327])</pre>
+<pre>array([-0.3741, -1.3575])</pre>
 </div>
 
 </div>
@@ -14328,7 +14328,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">r</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">imag</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">i</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]])</span><span class="o">.</span><span class="n">T</span><span class="p">;</span> <span class="n">R</span>
@@ -14344,7 +14344,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[31]:</div>
+    <div class="prompt output_prompt">Out[41]:</div>
 
 
 
@@ -14362,7 +14362,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">R</span>
@@ -14378,7 +14378,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[32]:</div>
+    <div class="prompt output_prompt">Out[42]:</div>
 
 
 
@@ -14397,7 +14397,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">R</span> <span class="o">@</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span>
@@ -14413,7 +14413,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[33]:</div>
+    <div class="prompt output_prompt">Out[43]:</div>
 
 
 
@@ -14451,7 +14451,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">circular_shifts</span><span class="p">(</span><span class="n">v</span><span class="p">):</span> 
@@ -14496,7 +14496,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">R</span> <span class="o">=</span> <span class="n">icosahedron_frame</span><span class="p">();</span> <span class="n">R</span>
@@ -14512,7 +14512,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[35]:</div>
+    <div class="prompt output_prompt">Out[45]:</div>
 
 
 
@@ -14531,7 +14531,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">R</span>
@@ -14547,7 +14547,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[36]:</div>
+    <div class="prompt output_prompt">Out[46]:</div>
 
 
 
@@ -14569,7 +14569,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">R</span> <span class="o">@</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span>
@@ -14585,7 +14585,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[37]:</div>
+    <div class="prompt output_prompt">Out[47]:</div>
 
 
 
@@ -14622,7 +14622,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span> <span class="n">R</span>
@@ -14638,14 +14638,14 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[38]:</div>
+    <div class="prompt output_prompt">Out[48]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.5859, -0.1563, -0.2126],
-       [ 0.2646, -0.7488, -0.3448]])</pre>
+<pre>array([[ 0.116 ,  0.7711, -1.794 ],
+       [ 1.193 ,  0.1818, -0.6445]])</pre>
 </div>
 
 </div>
@@ -14656,7 +14656,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">point</span>
@@ -14672,13 +14672,13 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[39]:</div>
+    <div class="prompt output_prompt">Out[49]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([0.9111, 0.1327])</pre>
+<pre>array([-0.3741, -1.3575])</pre>
 </div>
 
 </div>
@@ -14697,7 +14697,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="prompt input_prompt">In&nbsp;[50]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">r</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">r</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">r</span><span class="p">))</span><span class="nd">@point</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span><span class="p">])</span>
@@ -14713,15 +14713,15 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[40]:</div>
+    <div class="prompt output_prompt">Out[50]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[0.8065, 0.3642],
-       [0.0646, 0.3094],
-       [0.3102, 0.5032]])</pre>
+<pre>array([[-0.1343, -1.3808],
+       [-0.6576, -0.155 ],
+       [-0.7633, -0.2742]])</pre>
 </div>
 
 </div>
@@ -14740,7 +14740,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="prompt input_prompt">In&nbsp;[51]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">point</span><span class="p">;</span> <span class="n">c</span>
@@ -14756,13 +14756,13 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[41]:</div>
+    <div class="prompt output_prompt">Out[51]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([ 0.569 , -0.2418, -0.2394])</pre>
+<pre>array([-1.6628, -0.5352,  1.546 ])</pre>
 </div>
 
 </div>
@@ -14781,7 +14781,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="prompt input_prompt">In&nbsp;[52]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">R</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)])</span>
@@ -14797,15 +14797,15 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[42]:</div>
+    <div class="prompt output_prompt">Out[52]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[0.8065, 0.3642],
-       [0.0646, 0.3094],
-       [0.3102, 0.5032]])</pre>
+<pre>array([[-0.1343, -1.3808],
+       [-0.6576, -0.155 ],
+       [-0.7633, -0.2742]])</pre>
 </div>
 
 </div>
@@ -14825,7 +14825,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="prompt input_prompt">In&nbsp;[53]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">c</span>
@@ -14841,13 +14841,13 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[43]:</div>
+    <div class="prompt output_prompt">Out[53]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([ 0.569 , -0.2418, -0.2394])</pre>
+<pre>array([-1.6628, -0.5352,  1.546 ])</pre>
 </div>
 
 </div>
@@ -14866,7 +14866,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">R</span><span class="p">);</span> <span class="n">D</span>
@@ -14882,15 +14882,15 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[44]:</div>
+    <div class="prompt output_prompt">Out[54]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 1.8282, -0.4893],
-       [ 0.7435, -1.3414],
-       [-0.2116, -0.3624]])</pre>
+<pre>array([[-0.2929,  0.8619],
+       [ 0.2317, -0.0805],
+       [-0.4768,  0.0212]])</pre>
 </div>
 
 </div>
@@ -14909,7 +14909,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="prompt input_prompt">In&nbsp;[55]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">D</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">@</span> <span class="n">c</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span>
@@ -14925,13 +14925,13 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[45]:</div>
+    <div class="prompt output_prompt">Out[55]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[array([ 0.4228,  0.1719, -0.0489]), array([-0.0299, -0.082 , -0.0222])]</pre>
+<pre>[array([ 0.2987, -0.2363,  0.4862]), array([-1.5604,  0.1457, -0.0383])]</pre>
 </div>
 
 </div>
@@ -14950,7 +14950,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="prompt input_prompt">In&nbsp;[56]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="p">[</span><span class="n">point</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">D</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span>
@@ -14966,13 +14966,13 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[46]:</div>
+    <div class="prompt output_prompt">Out[56]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[array([ 0.4228,  0.1719, -0.0489]), array([-0.0299, -0.082 , -0.0222])]</pre>
+<pre>[array([ 0.2987, -0.2363,  0.4862]), array([-1.5604,  0.1457, -0.0383])]</pre>
 </div>
 
 </div>
@@ -15021,7 +15021,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="prompt input_prompt">In&nbsp;[57]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
@@ -15039,7 +15039,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[47]:</div>
+    <div class="prompt output_prompt">Out[57]:</div>
 
 
 
@@ -15057,7 +15057,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In&nbsp;[58]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">E</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span><span class="p">]</span>
@@ -15074,7 +15074,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[48]:</div>
+    <div class="prompt output_prompt">Out[58]:</div>
 
 
 
@@ -15100,7 +15100,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In&nbsp;[59]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">rand_dm</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
@@ -15122,14 +15122,14 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[49]:</div>
+    <div class="prompt output_prompt">Out[59]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.3135, -0.3308],
-       [-0.3308,  0.6865]])</pre>
+<pre>array([[ 0.9548, -0.1295],
+       [-0.1295,  0.0452]])</pre>
 </div>
 
 </div>
@@ -15148,7 +15148,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="prompt input_prompt">In&nbsp;[60]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">e</span> <span class="o">@</span> <span class="n">rho</span><span class="p">)</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">E</span><span class="p">]);</span> <span class="n">p</span>
@@ -15164,13 +15164,13 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[50]:</div>
+    <div class="prompt output_prompt">Out[60]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([0.8339, 0.1088, 0.0573])</pre>
+<pre>array([0.7141, 0.2213, 0.0645])</pre>
 </div>
 
 </div>
@@ -15181,7 +15181,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="prompt input_prompt">In&nbsp;[61]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sum</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
@@ -15197,13 +15197,13 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[51]:</div>
+    <div class="prompt output_prompt">Out[61]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>1.0000000000000004</pre>
+<pre>1.0</pre>
 </div>
 
 </div>
@@ -15230,7 +15230,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">F</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">E</span><span class="p">])</span>
@@ -15253,7 +15253,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="prompt input_prompt">In&nbsp;[63]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">rho</span>
@@ -15269,14 +15269,14 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[53]:</div>
+    <div class="prompt output_prompt">Out[63]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.3135, -0.3308],
-       [-0.3308,  0.6865]])</pre>
+<pre>array([[ 0.9548, -0.1295],
+       [-0.1295,  0.0452]])</pre>
 </div>
 
 </div>
@@ -15287,7 +15287,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[54]:</div>
+<div class="prompt input_prompt">In&nbsp;[64]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sum</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
@@ -15303,14 +15303,14 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[54]:</div>
+    <div class="prompt output_prompt">Out[64]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.3135, -0.3308],
-       [-0.3308,  0.6865]])</pre>
+<pre>array([[ 0.9548, -0.1295],
+       [-0.1295,  0.0452]])</pre>
 </div>
 
 </div>
@@ -15329,7 +15329,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="prompt input_prompt">In&nbsp;[65]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">e</span> <span class="o">@</span> <span class="n">rho</span><span class="p">)</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">D</span><span class="p">]);</span> <span class="n">q</span>
@@ -15345,13 +15345,13 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[55]:</div>
+    <div class="prompt output_prompt">Out[65]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([ 0.8284, -0.7341,  3.0963])</pre>
+<pre>array([ 1.4418, -0.3911,  0.0653])</pre>
 </div>
 
 </div>
@@ -15370,7 +15370,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[56]:</div>
+<div class="prompt input_prompt">In&nbsp;[66]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sum</span><span class="p">([</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
@@ -15386,14 +15386,14 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[56]:</div>
+    <div class="prompt output_prompt">Out[66]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.3135, -0.3308],
-       [-0.3308,  0.6865]])</pre>
+<pre>array([[ 0.9548, -0.1295],
+       [-0.1295,  0.0452]])</pre>
 </div>
 
 </div>
@@ -15428,7 +15428,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="prompt input_prompt">In&nbsp;[67]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">rho</span>
@@ -15444,14 +15444,14 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[57]:</div>
+    <div class="prompt output_prompt">Out[67]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.3135, -0.3308],
-       [-0.3308,  0.6865]])</pre>
+<pre>array([[ 0.9548, -0.1295],
+       [-0.1295,  0.0452]])</pre>
 </div>
 
 </div>
@@ -15462,7 +15462,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="prompt input_prompt">In&nbsp;[68]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">p</span>
@@ -15478,13 +15478,13 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[58]:</div>
+    <div class="prompt output_prompt">Out[68]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([0.8339, 0.1088, 0.0573])</pre>
+<pre>array([0.7141, 0.2213, 0.0645])</pre>
 </div>
 
 </div>
@@ -15495,7 +15495,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="prompt input_prompt">In&nbsp;[69]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">R</span>
@@ -15509,7 +15509,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="prompt input_prompt">In&nbsp;[70]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">Gsq_inv</span> <span class="o">@</span> <span class="n">p</span><span class="p">;</span> <span class="n">q</span>
@@ -15525,13 +15525,13 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[60]:</div>
+    <div class="prompt output_prompt">Out[70]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([ 0.8284, -0.7341,  3.0963])</pre>
+<pre>array([ 1.4418, -0.3911,  0.0653])</pre>
 </div>
 
 </div>
@@ -15550,7 +15550,7 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="prompt input_prompt">In&nbsp;[71]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sum</span><span class="p">([</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
@@ -15566,14 +15566,14 @@ $$ a ||u||^2 \leq \sum_{i} |\langle u|v_{i}\rangle|^2 \leq b||u||^2 $$<p>The $a$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[61]:</div>
+    <div class="prompt output_prompt">Out[71]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.3135, -0.3308],
-       [-0.3308,  0.6865]])</pre>
+<pre>array([[ 0.9548, -0.1295],
+       [-0.1295,  0.0452]])</pre>
 </div>
 
 </div>
@@ -15596,7 +15596,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="prompt input_prompt">In&nbsp;[72]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">E_given_E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[(</span><span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">@</span><span class="p">(</span><span class="n">E</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">E</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">trace</span><span class="p">()))</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]);</span> <span class="n">E_given_E</span>
@@ -15612,15 +15612,15 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[62]:</div>
+    <div class="prompt output_prompt">Out[72]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[0.9897, 0.0031, 0.0324],
-       [0.0024, 0.7696, 0.727 ],
-       [0.0079, 0.2273, 0.2406]])</pre>
+<pre>array([[0.7371, 0.5634, 0.0154],
+       [0.2432, 0.3182, 0.0399],
+       [0.0197, 0.1184, 0.9448]])</pre>
 </div>
 
 </div>
@@ -15640,7 +15640,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[63]:</div>
+<div class="prompt input_prompt">In&nbsp;[73]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">E_given_E</span><span class="p">);</span> <span class="n">phi</span>
@@ -15656,15 +15656,15 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[63]:</div>
+    <div class="prompt output_prompt">Out[73]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[  1.0188,   0.3381,  -1.1584],
-       [  0.2629,  12.1479, -36.7369],
-       [ -0.2816, -11.4859,  38.8953]])</pre>
+<pre>array([[ 3.3097, -5.9342,  0.1966],
+       [-2.5616,  7.786 , -0.2869],
+       [ 0.2519, -0.8518,  1.0903]])</pre>
 </div>
 
 </div>
@@ -15683,7 +15683,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[64]:</div>
+<div class="prompt input_prompt">In&nbsp;[74]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">rho</span>
@@ -15699,14 +15699,14 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[64]:</div>
+    <div class="prompt output_prompt">Out[74]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.3135, -0.3308],
-       [-0.3308,  0.6865]])</pre>
+<pre>array([[ 0.9548, -0.1295],
+       [-0.1295,  0.0452]])</pre>
 </div>
 
 </div>
@@ -15725,7 +15725,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="prompt input_prompt">In&nbsp;[75]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">p</span>
@@ -15741,13 +15741,13 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[65]:</div>
+    <div class="prompt output_prompt">Out[75]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([0.8339, 0.1088, 0.0573])</pre>
+<pre>array([0.7141, 0.2213, 0.0645])</pre>
 </div>
 
 </div>
@@ -15766,7 +15766,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[66]:</div>
+<div class="prompt input_prompt">In&nbsp;[76]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">phi</span> <span class="o">@</span> <span class="n">p</span><span class="p">;</span> <span class="n">q</span>
@@ -15782,13 +15782,13 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[66]:</div>
+    <div class="prompt output_prompt">Out[76]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([ 0.8199, -0.565 ,  0.7451])</pre>
+<pre>array([ 1.0627, -0.1244,  0.0617])</pre>
 </div>
 
 </div>
@@ -15799,7 +15799,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="prompt input_prompt">In&nbsp;[77]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sum</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
@@ -15815,13 +15815,13 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[67]:</div>
+    <div class="prompt output_prompt">Out[77]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0.9999999999999998</pre>
+<pre>1.0</pre>
 </div>
 
 </div>
@@ -15841,7 +15841,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="prompt input_prompt">In&nbsp;[78]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sum</span><span class="p">([</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
@@ -15857,14 +15857,14 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[68]:</div>
+    <div class="prompt output_prompt">Out[78]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.3135, -0.3308],
-       [-0.3308,  0.6865]])</pre>
+<pre>array([[ 0.9548, -0.1295],
+       [-0.1295,  0.0452]])</pre>
 </div>
 
 </div>
@@ -15883,7 +15883,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[69]:</div>
+<div class="prompt input_prompt">In&nbsp;[79]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="p">[</span><span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span><span class="o">*</span><span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
@@ -15900,7 +15900,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[69]:</div>
+    <div class="prompt output_prompt">Out[79]:</div>
 
 
 
@@ -15918,7 +15918,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[70]:</div>
+<div class="prompt input_prompt">In&nbsp;[80]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">D_given_D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[(</span><span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">@</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">D</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">trace</span><span class="p">()))</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]);</span> <span class="n">D_given_D</span>
@@ -15934,15 +15934,15 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[70]:</div>
+    <div class="prompt output_prompt">Out[80]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[  1.0188,   0.3381,  -1.1584],
-       [  0.2629,  12.1479, -36.7369],
-       [ -0.2816, -11.4859,  38.8953]])</pre>
+<pre>array([[ 3.3097, -5.9342,  0.1966],
+       [-2.5616,  7.786 , -0.2869],
+       [ 0.2519, -0.8518,  1.0903]])</pre>
 </div>
 
 </div>
@@ -15961,7 +15961,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[71]:</div>
+<div class="prompt input_prompt">In&nbsp;[81]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">d</span> <span class="o">@</span> <span class="n">rho</span><span class="p">)</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">D</span><span class="p">]);</span> <span class="n">q</span>
@@ -15977,13 +15977,13 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[71]:</div>
+    <div class="prompt output_prompt">Out[81]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([ 0.8199, -0.565 ,  0.7451])</pre>
+<pre>array([ 1.0627, -0.1244,  0.0617])</pre>
 </div>
 
 </div>
@@ -16002,7 +16002,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="prompt input_prompt">In&nbsp;[82]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sum</span><span class="p">([</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
@@ -16018,14 +16018,14 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[72]:</div>
+    <div class="prompt output_prompt">Out[82]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.3135, -0.3308],
-       [-0.3308,  0.6865]])</pre>
+<pre>array([[ 0.9548, -0.1295],
+       [-0.1295,  0.0452]])</pre>
 </div>
 
 </div>
@@ -16044,7 +16044,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[73]:</div>
+<div class="prompt input_prompt">In&nbsp;[83]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sum</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
@@ -16060,14 +16060,14 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[73]:</div>
+    <div class="prompt output_prompt">Out[83]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.3135, -0.3308],
-       [-0.3308,  0.6865]])</pre>
+<pre>array([[ 0.9548, -0.1295],
+       [-0.1295,  0.0452]])</pre>
 </div>
 
 </div>
@@ -16094,7 +16094,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[74]:</div>
+<div class="prompt input_prompt">In&nbsp;[84]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
@@ -16109,7 +16109,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[75]:</div>
+<div class="prompt input_prompt">In&nbsp;[85]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">rho</span>
@@ -16125,14 +16125,14 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[75]:</div>
+    <div class="prompt output_prompt">Out[85]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.3135, -0.3308],
-       [-0.3308,  0.6865]])</pre>
+<pre>array([[ 0.9548, -0.1295],
+       [-0.1295,  0.0452]])</pre>
 </div>
 
 </div>
@@ -16151,7 +16151,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[76]:</div>
+<div class="prompt input_prompt">In&nbsp;[86]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">p_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">a</span> <span class="o">@</span> <span class="n">rho</span><span class="p">)</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">A</span><span class="p">]);</span> <span class="n">p_A</span>
@@ -16167,13 +16167,13 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[76]:</div>
+    <div class="prompt output_prompt">Out[86]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([0.0557, 0.2778, 0.6665])</pre>
+<pre>array([0.0382, 0.8644, 0.0974])</pre>
 </div>
 
 </div>
@@ -16194,7 +16194,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[77]:</div>
+<div class="prompt input_prompt">In&nbsp;[87]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">B_given_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[(</span><span class="n">b</span><span class="nd">@a</span><span class="o">/</span><span class="n">a</span><span class="o">.</span><span class="n">trace</span><span class="p">())</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">A</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">B</span><span class="p">]);</span> <span class="n">B_given_A</span>
@@ -16210,15 +16210,15 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[77]:</div>
+    <div class="prompt output_prompt">Out[87]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[0.3624, 0.7349, 0.09  ],
-       [0.1179, 0.2567, 0.0383],
-       [0.5196, 0.0084, 0.8717]])</pre>
+<pre>array([[0.0964, 0.0075, 0.1241],
+       [0.888 , 0.1795, 0.4162],
+       [0.0157, 0.813 , 0.4597]])</pre>
 </div>
 
 </div>
@@ -16238,7 +16238,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[78]:</div>
+<div class="prompt input_prompt">In&nbsp;[88]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">B_given_A</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -16254,7 +16254,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[78]:</div>
+    <div class="prompt output_prompt">Out[88]:</div>
 
 
 
@@ -16279,7 +16279,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[79]:</div>
+<div class="prompt input_prompt">In&nbsp;[89]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">p_AB</span> <span class="o">=</span> <span class="n">B_given_A</span> <span class="o">@</span> <span class="n">p_A</span><span class="p">;</span> <span class="n">p_AB</span>
@@ -16295,13 +16295,13 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[79]:</div>
+    <div class="prompt output_prompt">Out[89]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([0.2843, 0.1034, 0.6123])</pre>
+<pre>array([0.0222, 0.2296, 0.7482])</pre>
 </div>
 
 </div>
@@ -16312,7 +16312,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[80]:</div>
+<div class="prompt input_prompt">In&nbsp;[90]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sum</span><span class="p">(</span><span class="n">p_AB</span><span class="p">)</span>
@@ -16328,13 +16328,13 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[80]:</div>
+    <div class="prompt output_prompt">Out[90]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>1.0000000000000009</pre>
+<pre>0.9999999999999997</pre>
 </div>
 
 </div>
@@ -16346,14 +16346,14 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can check this. After the measurement of $A$, our system will be in a statistical mixture of $A$'s outcomes, weighted by the probability of their occurance:</p>
+<p>We can check this. After the measurement of $A$, we should regard our system's state as a statistical mixture of $A$'s outcomes, weighted by the probability of their occurance:</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[81]:</div>
+<div class="prompt input_prompt">In&nbsp;[91]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">rho_post_A</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">p_A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">a</span><span class="o">/</span><span class="n">a</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">A</span><span class="p">)]);</span> <span class="n">rho_post_A</span>
@@ -16369,14 +16369,14 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[81]:</div>
+    <div class="prompt output_prompt">Out[91]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.3238, -0.1016],
-       [-0.1016,  0.6762]])</pre>
+<pre>array([[ 0.8742, -0.0714],
+       [-0.0714,  0.1258]])</pre>
 </div>
 
 </div>
@@ -16395,7 +16395,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[82]:</div>
+<div class="prompt input_prompt">In&nbsp;[92]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">p_AB2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">b</span> <span class="o">@</span> <span class="n">rho_post_A</span><span class="p">)</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">B</span><span class="p">]);</span> <span class="n">p_AB2</span>
@@ -16411,13 +16411,13 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[82]:</div>
+    <div class="prompt output_prompt">Out[92]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([0.2843, 0.1034, 0.6123])</pre>
+<pre>array([0.0222, 0.2296, 0.7482])</pre>
 </div>
 
 </div>
@@ -16428,7 +16428,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[83]:</div>
+<div class="prompt input_prompt">In&nbsp;[93]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sum</span><span class="p">(</span><span class="n">p_AB2</span><span class="p">)</span>
@@ -16444,13 +16444,13 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[83]:</div>
+    <div class="prompt output_prompt">Out[93]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>1.0000000000000007</pre>
+<pre>0.9999999999999996</pre>
 </div>
 
 </div>
@@ -16474,7 +16474,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[84]:</div>
+<div class="prompt input_prompt">In&nbsp;[94]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">p_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">b</span> <span class="o">@</span> <span class="n">rho</span><span class="p">)</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">B</span><span class="p">]);</span> <span class="n">p_B</span>
@@ -16490,13 +16490,13 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[84]:</div>
+    <div class="prompt output_prompt">Out[94]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([0.3501, 0.1306, 0.5193])</pre>
+<pre>array([0.0154, 0.1457, 0.8389])</pre>
 </div>
 
 </div>
@@ -16516,7 +16516,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[85]:</div>
+<div class="prompt input_prompt">In&nbsp;[95]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">([[(</span><span class="n">a1</span> <span class="o">@</span> <span class="n">a0</span><span class="o">/</span><span class="n">a0</span><span class="o">.</span><span class="n">trace</span><span class="p">())</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span> <span class="k">for</span> <span class="n">a0</span> <span class="ow">in</span> <span class="n">A</span><span class="p">]</span> <span class="k">for</span> <span class="n">a1</span> <span class="ow">in</span> <span class="n">A</span><span class="p">])</span>
@@ -16537,7 +16537,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[86]:</div>
+<div class="prompt input_prompt">In&nbsp;[96]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">B_given_A</span> <span class="o">@</span> <span class="n">p_A</span> 
@@ -16553,13 +16553,13 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[86]:</div>
+    <div class="prompt output_prompt">Out[96]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([0.2843, 0.1034, 0.6123])</pre>
+<pre>array([0.0222, 0.2296, 0.7482])</pre>
 </div>
 
 </div>
@@ -16578,7 +16578,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[87]:</div>
+<div class="prompt input_prompt">In&nbsp;[97]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">B_given_A</span> <span class="o">@</span> <span class="n">phi</span> <span class="o">@</span> <span class="n">p_A</span> 
@@ -16594,13 +16594,13 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[87]:</div>
+    <div class="prompt output_prompt">Out[97]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([0.3501, 0.1306, 0.5193])</pre>
+<pre>array([0.0154, 0.1457, 0.8389])</pre>
 </div>
 
 </div>
@@ -16620,7 +16620,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[88]:</div>
+<div class="prompt input_prompt">In&nbsp;[98]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">phi</span> <span class="o">@</span> <span class="n">p_A</span><span class="p">;</span> <span class="n">q</span>
@@ -16636,13 +16636,13 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[88]:</div>
+    <div class="prompt output_prompt">Out[98]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([-0.3314,  0.5434,  0.7881])</pre>
+<pre>array([-0.0942,  0.9549,  0.1393])</pre>
 </div>
 
 </div>
@@ -16653,7 +16653,7 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[89]:</div>
+<div class="prompt input_prompt">In&nbsp;[99]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sum</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
@@ -16669,13 +16669,13 @@ $$ Pr(E_{i}|E_{j}) = tr(E_{i}\frac{E_{j}}{tr(E_{j})})$$<p>After the first measur
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[89]:</div>
+    <div class="prompt output_prompt">Out[99]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>1.0</pre>
+<pre>0.9999999999999999</pre>
 </div>
 
 </div>
@@ -16702,7 +16702,7 @@ $$ Qr(B_{i}|\tilde{A}_{j}) = tr(B_{i}\frac{\tilde{A}_{j}}{tr(\tilde{A}_{j})})$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[90]:</div>
+<div class="prompt input_prompt">In&nbsp;[100]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">FA</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">A</span><span class="p">])</span>
@@ -16721,15 +16721,15 @@ $$ Qr(B_{i}|\tilde{A}_{j}) = tr(B_{i}\frac{\tilde{A}_{j}}{tr(\tilde{A}_{j})})$$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[90]:</div>
+    <div class="prompt output_prompt">Out[100]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[-0.2105,  1.1648,  0.0574],
-       [-0.1058,  0.4184,  0.0303],
-       [ 1.3163, -0.5832,  0.9123]])</pre>
+<pre>array([[ 0.0436, -0.0101,  0.2298],
+       [ 1.664 ,  0.1645, -0.6158],
+       [-0.7076,  0.8456,  1.386 ]])</pre>
 </div>
 
 </div>
@@ -16748,7 +16748,7 @@ $$ Qr(B_{i}|\tilde{A}_{j}) = tr(B_{i}\frac{\tilde{A}_{j}}{tr(\tilde{A}_{j})})$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[91]:</div>
+<div class="prompt input_prompt">In&nbsp;[101]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">B_given_DA</span> <span class="o">@</span> <span class="n">p_A</span>
@@ -16764,13 +16764,13 @@ $$ Qr(B_{i}|\tilde{A}_{j}) = tr(B_{i}\frac{\tilde{A}_{j}}{tr(\tilde{A}_{j})})$$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[91]:</div>
+    <div class="prompt output_prompt">Out[101]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([0.3501, 0.1306, 0.5193])</pre>
+<pre>array([0.0154, 0.1457, 0.8389])</pre>
 </div>
 
 </div>
@@ -16789,7 +16789,7 @@ $$ Qr(B_{i}|\tilde{A}_{j}) = tr(B_{i}\frac{\tilde{A}_{j}}{tr(\tilde{A}_{j})})$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[92]:</div>
+<div class="prompt input_prompt">In&nbsp;[102]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">B_given_DA</span><span class="p">,</span> <span class="n">B_given_A</span><span class="nd">@phi</span><span class="p">)</span>
@@ -16805,7 +16805,7 @@ $$ Qr(B_{i}|\tilde{A}_{j}) = tr(B_{i}\frac{\tilde{A}_{j}}{tr(\tilde{A}_{j})})$$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[92]:</div>
+    <div class="prompt output_prompt">Out[102]:</div>
 
 
 
@@ -16852,7 +16852,7 @@ $$ \rho \rightarrow  \sum_{i} \big{(} \sum_{j} Qr(B_{i}|\tilde{A}_{j}) Pr(A_{j}|
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[93]:</div>
+<div class="prompt input_prompt">In&nbsp;[103]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">quantumness</span><span class="p">(</span><span class="n">E</span><span class="p">):</span>
@@ -16867,7 +16867,7 @@ $$ \rho \rightarrow  \sum_{i} \big{(} \sum_{j} Qr(B_{i}|\tilde{A}_{j}) Pr(A_{j}|
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[94]:</div>
+<div class="prompt input_prompt">In&nbsp;[104]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">quantumness</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">quantumness</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
@@ -16883,13 +16883,13 @@ $$ \rho \rightarrow  \sum_{i} \big{(} \sum_{j} Qr(B_{i}|\tilde{A}_{j}) Pr(A_{j}|
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[94]:</div>
+    <div class="prompt output_prompt">Out[104]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(3.5274677026652363, 2090.9600094450248)</pre>
+<pre>(4.339944904790864, 17.066025672275895)</pre>
 </div>
 
 </div>

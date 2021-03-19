@@ -12947,13 +12947,8 @@ ul.typeahead-list  > li > a.pull-right {
 /*# sourceMappingURL=style.min.css.map */
     </style>
 <style type="text/css">
-    pre { line-height: 125%; margin: 0; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-.highlight .hll { background-color: #ffffcc }
-.highlight { background: #f8f8f8; }
+    .highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
 .highlight .c { color: #408080; font-style: italic } /* Comment */
 .highlight .err { border: 1px solid #FF0000 } /* Error */
 .highlight .k { color: #008000; font-weight: bold } /* Keyword */
@@ -13245,8 +13240,8 @@ is own antiparticle?: True
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span>
-<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">combinations</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">reduce</span> 
 
 <span class="k">def</span> <span class="nf">majorana_basis</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
@@ -13875,8 +13870,8 @@ testing XYZ_R: [True, True, True, True, True]
 <div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
-<span class="kn">from</span> <span class="nn">qutip.qip.operations.gates</span> <span class="kn">import</span> <span class="n">swap</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">product</span>
+<span class="kn">from</span> <span class="nn">qutip.qip.operations.gates</span> <span class="k">import</span> <span class="n">swap</span>
 
 <span class="k">def</span> <span class="nf">pauli_basis</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">IXYZ</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;I&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">(),</span> <span class="s2">&quot;Y&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmay</span><span class="p">(),</span> <span class="s2">&quot;Z&quot;</span><span class="p">:</span> <span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">()}</span>

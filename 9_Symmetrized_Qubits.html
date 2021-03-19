@@ -12947,13 +12947,8 @@ ul.typeahead-list  > li > a.pull-right {
 /*# sourceMappingURL=style.min.css.map */
     </style>
 <style type="text/css">
-    pre { line-height: 125%; margin: 0; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-.highlight .hll { background-color: #ffffcc }
-.highlight { background: #f8f8f8; }
+    .highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
 .highlight .c { color: #408080; font-style: italic } /* Comment */
 .highlight .err { border: 1px solid #FF0000 } /* Error */
 .highlight .k { color: #008000; font-weight: bold } /* Keyword */
@@ -13103,7 +13098,7 @@ $$ a\mid \uparrow \uparrow \uparrow \rangle + b\frac{1}{\sqrt{3}}(\mid \uparrow 
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">spheres</span> <span class="kn">import</span> <span class="o">*</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">spheres</span> <span class="k">import</span> <span class="o">*</span>
 
 <span class="k">def</span> <span class="nf">symmetrize</span><span class="p">(</span><span class="n">pieces</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">pieces</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">perm</span><span class="p">])</span> <span class="k">for</span> <span class="n">perm</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pieces</span><span class="p">)))])</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>
@@ -13161,10 +13156,10 @@ $$ a\mid \uparrow \uparrow \uparrow \rangle + b\frac{1}{\sqrt{3}}(\mid \uparrow 
 
 
 
-<div id="15ad67b8-4702-4c37-ab7e-657b56af51bf"></div>
+<div id="25e718a1-137f-4575-8bf9-4bc1bda8cb5e"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#15ad67b8-4702-4c37-ab7e-657b56af51bf');
+var element = $('#25e718a1-137f-4575-8bf9-4bc1bda8cb5e');
 if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container: $("#glowscript").removeAttr("id")};}else{ element.textContent = ' ';}
 </script>
 </div>
@@ -13318,7 +13313,7 @@ $$\begin{bmatrix} 1&amp;0&amp;0&amp;0\\0&amp;0&amp;1&amp;0\\0&amp;1&amp;0&amp;0\
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">block_diag</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="k">import</span> <span class="n">block_diag</span>
 
 <span class="c1"># construct our operators</span>
 <span class="n">H</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>\
@@ -13416,7 +13411,7 @@ $$ \sum_{p_{i} \in perm} \sum_{j=0}^{2^n} \mid i \rangle P_{i}\mid j \rangle \la
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">product</span>
 
 <span class="c1"># constructs a unitary operation that performs</span>
 <span class="c1"># the provided permutation of qubit subsystems</span>
@@ -13531,7 +13526,7 @@ $$ \frac{1}{\sqrt{k+1}}(\mid 00 \dots 0 \rangle + \mid 10 \dots 0 \rangle + \mid
 <div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qutip.qip.operations</span> <span class="kn">import</span> <span class="n">fredkin</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qutip.qip.operations</span> <span class="k">import</span> <span class="n">fredkin</span>
 
 <span class="k">def</span> <span class="nf">Rk</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="p">)],</span>\
@@ -13619,17 +13614,17 @@ got the right permutation symmetric state?: True
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
 
-<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">factorial</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">factorial</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">product</span>
 
-<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">execute</span><span class="p">,</span> <span class="n">ClassicalRegister</span>
-<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">Aer</span><span class="p">,</span> <span class="n">IBMQ</span><span class="p">,</span> <span class="n">transpile</span>
-<span class="kn">from</span> <span class="nn">qiskit.providers.ibmq.managed</span> <span class="kn">import</span> <span class="n">IBMQJobManager</span>
-<span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators</span> <span class="kn">import</span> <span class="n">Operator</span>
-<span class="kn">from</span> <span class="nn">qiskit.ignis.verification.tomography</span> <span class="kn">import</span> <span class="n">state_tomography_circuits</span><span class="p">,</span> <span class="n">StateTomographyFitter</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">execute</span><span class="p">,</span> <span class="n">ClassicalRegister</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">Aer</span><span class="p">,</span> <span class="n">IBMQ</span><span class="p">,</span> <span class="n">transpile</span>
+<span class="kn">from</span> <span class="nn">qiskit.providers.ibmq.managed</span> <span class="k">import</span> <span class="n">IBMQJobManager</span>
+<span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators</span> <span class="k">import</span> <span class="n">Operator</span>
+<span class="kn">from</span> <span class="nn">qiskit.ignis.verification.tomography</span> <span class="k">import</span> <span class="n">state_tomography_circuits</span><span class="p">,</span> <span class="n">StateTomographyFitter</span>
 
-<span class="kn">from</span> <span class="nn">spheres</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">spheres</span> <span class="k">import</span> <span class="o">*</span>
 
 <span class="c1">############################################################################</span>
 
@@ -13848,7 +13843,7 @@ overlap between actual and expected: 0.9918
 <div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">spheres</span> <span class="kn">import</span> <span class="o">*</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">spheres</span> <span class="k">import</span> <span class="o">*</span>
 
 <span class="n">spin</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">rand_ket</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">correct_dm</span> <span class="o">=</span> <span class="n">spin</span><span class="o">*</span><span class="n">spin</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>

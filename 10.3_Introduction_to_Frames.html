@@ -13092,7 +13092,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -13114,14 +13114,14 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[1]:</div>
+    <div class="prompt output_prompt">Out[2]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 1.6365,  0.4254, -1.3553,  1.0233, -0.703 ],
-       [ 0.5579, -0.5314, -0.9499,  0.7827, -1.7342]])</pre>
+<pre>array([[ 3.3985,  0.5472, -1.311 , -2.1751, -1.2055],
+       [-0.2292,  0.6647,  0.552 , -0.727 ,  0.3015]])</pre>
 </div>
 
 </div>
@@ -13140,55 +13140,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">R</span><span class="p">;</span> <span class="n">G</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[2]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>array([[ 2.9894,  0.3998, -2.7478,  2.1113, -2.118 ],
-       [ 0.3998,  0.4633, -0.0719,  0.0194,  0.6224],
-       [-2.7478, -0.0719,  2.739 , -2.1303,  2.6   ],
-       [ 2.1113,  0.0194, -2.1303,  1.6597, -2.0768],
-       [-2.118 ,  0.6224,  2.6   , -2.0768,  3.5016]])</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>One condition for everything being kosher is that the Gram matrix ought to be a rank-$d$ projector:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">G</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">R</span><span class="p">;</span> <span class="n">G</span>
 </pre></div>
 
     </div>
@@ -13207,7 +13162,52 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([9.7101, 1.6431, 0.    , 0.    , 0.    ])</pre>
+<pre>array([[11.6021,  1.7072, -4.582 , -7.2253, -4.1661],
+       [ 1.7072,  0.7412, -0.3504, -1.6733, -0.4592],
+       [-4.582 , -0.3504,  2.0235,  2.4503,  1.747 ],
+       [-7.2253, -1.6733,  2.4503,  5.2594,  2.4029],
+       [-4.1661, -0.4592,  1.747 ,  2.4029,  1.5442]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>One condition for everything being kosher is that the Gram matrix ought to be rank-$d$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">G</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[10]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([19.7524,  1.4181,  0.    ,  0.    ,  0.    ])</pre>
 </div>
 
 </div>

@@ -243,7 +243,7 @@ def random_frame(d, n=None):
     R = np.random.randn(d, n)
     return R
 
-vframe = FrameViz2D(random_frame(2, 3))
+vframe = FrameViz2D(random_unbiased_tight_frame(2, 5))
 
 print("c: cartesian")
 print("f: frame")

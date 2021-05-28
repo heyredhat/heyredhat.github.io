@@ -13083,7 +13083,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[101]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -13112,7 +13112,7 @@ $$ \sum_{i,j} |\langle \psi_{i} | \psi_{j} \rangle|^{2t} $$<p></p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[102]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">jax</span>
@@ -13158,7 +13158,7 @@ $$ \sum_{i,j} |\langle \psi_{i} | \psi_{j} \rangle|^{2t} $$<p></p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[103]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span>
@@ -13178,38 +13178,27 @@ $$ \sum_{i,j} |\langle \psi_{i} | \psi_{j} \rangle|^{2t} $$<p></p>
     <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>WARNING:absl:No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Optimization terminated successfully.    (Exit mode 0)
-            Current function value: 7.20006799697876
-            Iterations: 189
-            Function evaluations: 368
-            Gradient evaluations: 189
+            Current function value: 7.2000274658203125
+            Iterations: 178
+            Function evaluations: 437
+            Gradient evaluations: 178
 </pre>
 </div>
 </div>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[3]:</div>
+    <div class="prompt output_prompt">Out[103]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.141466, -0.764595,  0.493451,  0.108714,  0.543034, -0.918396],
-       [ 0.094842,  0.37202 ,  0.643439,  0.92968 , -0.712555, -0.261404],
-       [ 0.985389,  0.526303, -0.585228,  0.35196 ,  0.444274, -0.297012]])</pre>
+<pre>array([[ 0.654425, -0.138834, -0.029355, -0.804426, -0.871627, -0.378888],
+       [ 0.251973, -0.97831 ,  0.589923,  0.586375, -0.381487,  0.378301],
+       [-0.712908,  0.153738,  0.806925,  0.095198, -0.307788, -0.84459 ]])</pre>
 </div>
 
 </div>
@@ -13228,7 +13217,7 @@ $$ \sum_{i,j} |\langle \psi_{i} | \psi_{j} \rangle|^{2t} $$<p></p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[104]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">poly</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">xyz</span><span class="p">:</span> <span class="n">xyz</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">xyz</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">xyz</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">6</span><span class="o">*</span><span class="n">xyz</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="n">xyz</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">xyz</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">xyz</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
@@ -13249,7 +13238,7 @@ $$ \sum_{i,j} |\langle \psi_{i} | \psi_{j} \rangle|^{2t} $$<p></p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[105]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">quadpy</span>
@@ -13271,7 +13260,7 @@ $$ \sum_{i,j} |\langle \psi_{i} | \psi_{j} \rangle|^{2t} $$<p></p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[106]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="nb">sum</span><span class="p">([</span><span class="n">poly</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span><span class="p">])</span>
@@ -13287,13 +13276,13 @@ $$ \sum_{i,j} |\langle \psi_{i} | \psi_{j} \rangle|^{2t} $$<p></p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[6]:</div>
+    <div class="prompt output_prompt">Out[106]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>2.6671563241558744</pre>
+<pre>2.6670280946135927</pre>
 </div>
 
 </div>
@@ -13312,7 +13301,7 @@ $$ \sum_{i,j} |\langle \psi_{i} | \psi_{j} \rangle|^{2t} $$<p></p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[107]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span><span class="o">*</span><span class="n">scheme</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">poly</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
@@ -13328,7 +13317,7 @@ $$ \sum_{i,j} |\langle \psi_{i} | \psi_{j} \rangle|^{2t} $$<p></p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[7]:</div>
+    <div class="prompt output_prompt">Out[107]:</div>
 
 
 
@@ -13353,7 +13342,7 @@ $$ \sum_{i,j} |\langle \psi_{i} | \psi_{j} \rangle|^{2t} $$<p></p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[108]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">vpython</span> <span class="k">as</span> <span class="nn">vp</span>
@@ -13390,149 +13379,11 @@ $$ \sum_{i,j} |\langle \psi_{i} | \psi_{j} \rangle|^{2t} $$<p></p>
 
 
 
-<div id="a09073e8-895e-44f4-8626-7c233357b6c3"></div>
+<div id="6dea1924-7954-45ab-bd7a-7e3622bb5993"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#a09073e8-895e-44f4-8626-7c233357b6c3');
+var element = $('#6dea1924-7954-45ab-bd7a-7e3622bb5993');
 if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container: $("#glowscript").removeAttr("id")};}else{ element.textContent = ' ';}
-</script>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<div id="glowscript" class="glowscript"></div>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-
-<div id="13ee3d95-1ba5-4f97-af3a-902fbf4a8e5b"></div>
-<div class="output_subarea output_javascript ">
-<script type="text/javascript">
-var element = $('#13ee3d95-1ba5-4f97-af3a-902fbf4a8e5b');
-if (typeof Jupyter !== "undefined") { window.__context = { glowscript_container: $("#glowscript").removeAttr("id")};}else{ element.textContent = ' ';}
-</script>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-
-<div id="d6565db8-cc87-4aef-9368-d96df2475ff3"></div>
-<div class="output_subarea output_javascript ">
-<script type="text/javascript">
-var element = $('#d6565db8-cc87-4aef-9368-d96df2475ff3');
-if (typeof Jupyter !== "undefined") {require.undef("nbextensions/vpython_libraries/glow.min");}else{element.textContent = ' ';}
-</script>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-
-<div id="e8e3df0f-20dc-42da-8bdd-40a2de733347"></div>
-<div class="output_subarea output_javascript ">
-<script type="text/javascript">
-var element = $('#e8e3df0f-20dc-42da-8bdd-40a2de733347');
-if (typeof Jupyter !== "undefined") {require.undef("nbextensions/vpython_libraries/glowcomm");}else{element.textContent = ' ';}
-</script>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-
-<div id="22e7d4b6-72e4-4025-9a90-2d4a41adea9c"></div>
-<div class="output_subarea output_javascript ">
-<script type="text/javascript">
-var element = $('#22e7d4b6-72e4-4025-9a90-2d4a41adea9c');
-if (typeof Jupyter !== "undefined") {require.undef("nbextensions/vpython_libraries/jquery-ui.custom.min");}else{element.textContent = ' ';}
-</script>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-
-<div id="69aae833-c5f4-41d9-8cb9-c125fda3855a"></div>
-<div class="output_subarea output_javascript ">
-<script type="text/javascript">
-var element = $('#69aae833-c5f4-41d9-8cb9-c125fda3855a');
-if (typeof Jupyter !== "undefined") {require(["nbextensions/vpython_libraries/glow.min"], function(){console.log("GLOW LOADED");});}else{element.textContent = ' ';}
-</script>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-
-<div id="ad261d9d-9922-4f9f-a166-a2934ffd1591"></div>
-<div class="output_subarea output_javascript ">
-<script type="text/javascript">
-var element = $('#ad261d9d-9922-4f9f-a166-a2934ffd1591');
-if (typeof Jupyter !== "undefined") {require(["nbextensions/vpython_libraries/glowcomm"], function(){console.log("GLOWCOMM LOADED");});}else{element.textContent = ' ';}
-</script>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-
-<div id="fe6b4a10-0ee5-4068-a066-ac84e005f1bf"></div>
-<div class="output_subarea output_javascript ">
-<script type="text/javascript">
-var element = $('#fe6b4a10-0ee5-4068-a066-ac84e005f1bf');
-if (typeof Jupyter !== "undefined") {require(["nbextensions/vpython_libraries/jquery-ui.custom.min"], function(){console.log("JQUERY LOADED");});}else{element.textContent = ' ';}
 </script>
 </div>
 
@@ -13656,7 +13507,7 @@ $$ \sum_{i} w_{i} (|\psi_{i} \rangle \langle \psi_{i}|)^{\otimes t} = \binom{t+d
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[109]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">jax</span>
@@ -13703,7 +13554,7 @@ $$ \sum_{i} w_{i} (|\psi_{i} \rangle \langle \psi_{i}|)^{\otimes t} = \binom{t+d
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[110]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>
@@ -13726,10 +13577,10 @@ $$ \sum_{i} w_{i} (|\psi_{i} \rangle \langle \psi_{i}|)^{\otimes t} = \binom{t+d
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Optimization terminated successfully.    (Exit mode 0)
-            Current function value: 5.333332061767578
-            Iterations: 130
-            Function evaluations: 242
-            Gradient evaluations: 130
+            Current function value: 5.3333353996276855
+            Iterations: 247
+            Function evaluations: 1842
+            Gradient evaluations: 247
 </pre>
 </div>
 </div>
@@ -13748,7 +13599,7 @@ $$ \sum_{i} w_{i} (|\psi_{i} \rangle \langle \psi_{i}|)^{\otimes t} = \binom{t+d
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[111]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
@@ -13764,7 +13615,7 @@ $$ \sum_{i} w_{i} (|\psi_{i} \rangle \langle \psi_{i}|)^{\otimes t} = \binom{t+d
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[11]:</div>
+    <div class="prompt output_prompt">Out[111]:</div>
 
 
 
@@ -13789,7 +13640,7 @@ $$ \binom{t+d-1}{d-1}^{-1} = \binom{d+1}{d-1}^{-1} = \frac{(d-1)!(d+1 -d +1)}{(d
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[112]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">permutations</span><span class="p">,</span> <span class="n">product</span>
@@ -13825,7 +13676,7 @@ $$ \binom{t+d-1}{d-1}^{-1} = \binom{d+1}{d-1}^{-1} = \frac{(d-1)!(d+1 -d +1)}{(d
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[113]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">symmetric_projector</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
@@ -13841,7 +13692,7 @@ $$ \binom{t+d-1}{d-1}^{-1} = \binom{d+1}{d-1}^{-1} = \frac{(d-1)!(d+1 -d +1)}{(d
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[13]:</div>
+    <div class="prompt output_prompt">Out[113]:</div>
 
 
 
@@ -13862,7 +13713,7 @@ $$ \binom{t+d-1}{d-1}^{-1} = \binom{d+1}{d-1}^{-1} = \frac{(d-1)!(d+1 -d +1)}{(d
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[114]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">d</span><span class="o">*</span><span class="p">(</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span><span class="o">*</span><span class="n">symmetric_projector</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
@@ -13878,7 +13729,7 @@ $$ \binom{t+d-1}{d-1}^{-1} = \binom{d+1}{d-1}^{-1} = \frac{(d-1)!(d+1 -d +1)}{(d
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[14]:</div>
+    <div class="prompt output_prompt">Out[114]:</div>
 
 
 
@@ -13898,7 +13749,7 @@ $$ \binom{t+d-1}{d-1}^{-1} = \binom{d+1}{d-1}^{-1} = \frac{(d-1)!(d+1 -d +1)}{(d
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[115]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="nb">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">conj</span><span class="p">()),</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">conj</span><span class="p">()))</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">SIC</span><span class="o">.</span><span class="n">T</span><span class="p">]),</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
@@ -13914,16 +13765,16 @@ $$ \binom{t+d-1}{d-1}^{-1} = \binom{d+1}{d-1}^{-1} = \frac{(d-1)!(d+1 -d +1)}{(d
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[15]:</div>
+    <div class="prompt output_prompt">Out[115]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.333+0.j, -0.   +0.j, -0.   +0.j,  0.   +0.j],
-       [-0.   -0.j,  0.167+0.j,  0.167+0.j,  0.   -0.j],
-       [-0.   -0.j,  0.167+0.j,  0.167+0.j,  0.   -0.j],
-       [ 0.   -0.j,  0.   +0.j,  0.   +0.j,  0.333+0.j]], dtype=complex64)</pre>
+<pre>array([[ 0.333+0.j,  0.   +0.j,  0.   +0.j, -0.   +0.j],
+       [ 0.   -0.j,  0.167+0.j,  0.167+0.j, -0.   +0.j],
+       [ 0.   -0.j,  0.167+0.j,  0.167+0.j, -0.   +0.j],
+       [-0.   -0.j, -0.   -0.j, -0.   -0.j,  0.333+0.j]], dtype=complex64)</pre>
 </div>
 
 </div>
@@ -13957,7 +13808,7 @@ $$\mathcal{I} = I_{d} \odot I_{d} = |I_{d})(I_{d}|$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[116]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
@@ -13973,7 +13824,7 @@ $$\mathcal{I} = I_{d} \odot I_{d} = |I_{d})(I_{d}|$$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[16]:</div>
+    <div class="prompt output_prompt">Out[116]:</div>
 
 
 
@@ -14001,7 +13852,7 @@ $$\textbf{I} = \sum_{i} |H_{i})(H_{i}| = I_{n}$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[117]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">operator_basis</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
@@ -14021,7 +13872,7 @@ $$\textbf{I} = \sum_{i} |H_{i})(H_{i}| = I_{n}$$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[17]:</div>
+    <div class="prompt output_prompt">Out[117]:</div>
 
 
 
@@ -14049,7 +13900,7 @@ $$\textbf{I} = \sum_{i} |H_{i})(H_{i}| = I_{n}$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[118]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[(</span><span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">H</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span>
@@ -14065,7 +13916,7 @@ $$\textbf{I} = \sum_{i} |H_{i})(H_{i}| = I_{n}$$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[18]:</div>
+    <div class="prompt output_prompt">Out[118]:</div>
 
 
 
@@ -14117,7 +13968,7 @@ $$\sum_{i} |D_{i})(E_{i}| = \sum_{i} F^{-1}|E_{i})(E_{i}| = F^{-1}F = \textbf{I}
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[119]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">E</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">d</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)]</span>
@@ -14141,7 +13992,7 @@ $$\sum_{i} |D_{i})(E_{i}| = \sum_{i} F^{-1}|E_{i})(E_{i}| = F^{-1}F = \textbf{I}
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[120]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="n">E</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">D</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span>
@@ -14157,13 +14008,13 @@ $$\sum_{i} |D_{i})(E_{i}| = \sum_{i} F^{-1}|E_{i})(E_{i}| = F^{-1}F = \textbf{I}
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[20]:</div>
+    <div class="prompt output_prompt">Out[120]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(0.9999999999999987+1.6653345369377348e-16j)</pre>
+<pre>(1+9.71445146547012e-17j)</pre>
 </div>
 
 </div>
@@ -14182,7 +14033,7 @@ $$\sum_{i} |D_{i})(E_{i}| = \sum_{i} F^{-1}|E_{i})(E_{i}| = F^{-1}F = \textbf{I}
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[121]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">rand_dm</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
@@ -14198,7 +14049,7 @@ $$\sum_{i} |D_{i})(E_{i}| = \sum_{i} F^{-1}|E_{i})(E_{i}| = F^{-1}F = \textbf{I}
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[122]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">rho</span> <span class="o">=</span> <span class="n">rand_dm</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> <span class="n">rho</span>
@@ -14214,14 +14065,14 @@ $$\sum_{i} |D_{i})(E_{i}| = \sum_{i} F^{-1}|E_{i})(E_{i}| = F^{-1}F = \textbf{I}
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[22]:</div>
+    <div class="prompt output_prompt">Out[122]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[0.827253+0.j      , 0.252922+0.095884j],
-       [0.252922-0.095884j, 0.172747+0.j      ]])</pre>
+<pre>array([[0.74103 +0.j      , 0.327131+0.000948j],
+       [0.327131-0.000948j, 0.25897 +0.j      ]])</pre>
 </div>
 
 </div>
@@ -14240,7 +14091,7 @@ $$\sum_{i} |D_{i})(E_{i}| = \sum_{i} F^{-1}|E_{i})(E_{i}| = F^{-1}F = \textbf{I}
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[124]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">e</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">rho</span><span class="p">)</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">E</span><span class="p">]);</span> <span class="n">p</span>
@@ -14256,14 +14107,14 @@ $$\sum_{i} |D_{i})(E_{i}| = \sum_{i} F^{-1}|E_{i})(E_{i}| = F^{-1}F = \textbf{I}
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[23]:</div>
+    <div class="prompt output_prompt">Out[124]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([0.365006+1.427955j, 0.197898-1.036759j, 0.345425+0.348595j,
-       1.609071+0.166822j])</pre>
+<pre>array([ 0.719634-0.767312j, -0.784941+0.288272j,  0.685088+0.385522j,
+        0.75119 -1.772347j])</pre>
 </div>
 
 </div>
@@ -14282,7 +14133,7 @@ $$\sum_{i} |D_{i})(E_{i}| = \sum_{i} F^{-1}|E_{i})(E_{i}| = F^{-1}F = \textbf{I}
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[125]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">e</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">rho</span><span class="p">)</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">D</span><span class="p">]);</span> <span class="n">q</span>
@@ -14298,14 +14149,14 @@ $$\sum_{i} |D_{i})(E_{i}| = \sum_{i} F^{-1}|E_{i})(E_{i}| = F^{-1}F = \textbf{I}
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[24]:</div>
+    <div class="prompt output_prompt">Out[125]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([-0.226956-0.658645j,  0.376152-0.004795j, -0.391755+0.25892j ,
-        1.181752-0.311709j])</pre>
+<pre>array([-0.257759-0.021812j,  0.31128 +0.661881j,  0.234991+0.431962j,
+        0.442281-0.221602j])</pre>
 </div>
 
 </div>
@@ -14324,7 +14175,7 @@ $$\sum_{i} |D_{i})(E_{i}| = \sum_{i} F^{-1}|E_{i})(E_{i}| = F^{-1}F = \textbf{I}
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[127]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sum</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span>
@@ -14340,14 +14191,14 @@ $$\sum_{i} |D_{i})(E_{i}| = \sum_{i} F^{-1}|E_{i})(E_{i}| = F^{-1}F = \textbf{I}
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[25]:</div>
+    <div class="prompt output_prompt">Out[127]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[0.827253+0.j      , 0.252922+0.095884j],
-       [0.252922-0.095884j, 0.172747+0.j      ]])</pre>
+<pre>array([[0.74103 -0.j      , 0.327131+0.000948j],
+       [0.327131-0.000948j, 0.25897 +0.j      ]])</pre>
 </div>
 
 </div>
@@ -14366,7 +14217,7 @@ $$\sum_{i} |D_{i})(E_{i}| = \sum_{i} F^{-1}|E_{i})(E_{i}| = F^{-1}F = \textbf{I}
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[128]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sum</span><span class="p">([</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span>
@@ -14382,14 +14233,14 @@ $$\sum_{i} |D_{i})(E_{i}| = \sum_{i} F^{-1}|E_{i})(E_{i}| = F^{-1}F = \textbf{I}
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[26]:</div>
+    <div class="prompt output_prompt">Out[128]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[0.827253-0.j      , 0.252922+0.095884j],
-       [0.252922-0.095884j, 0.172747-0.j      ]])</pre>
+<pre>array([[0.74103 -0.j      , 0.327131+0.000948j],
+       [0.327131-0.000948j, 0.25897 -0.j      ]])</pre>
 </div>
 
 </div>
@@ -14408,7 +14259,7 @@ $$\sum_{i} |D_{i})(E_{i}| = \sum_{i} F^{-1}|E_{i})(E_{i}| = F^{-1}F = \textbf{I}
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In&nbsp;[129]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span>
@@ -14424,16 +14275,16 @@ $$\sum_{i} |D_{i})(E_{i}| = \sum_{i} F^{-1}|E_{i})(E_{i}| = F^{-1}F = \textbf{I}
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[27]:</div>
+    <div class="prompt output_prompt">Out[129]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 1.+0.j, -0.+0.j,  0.+0.j, -0.-0.j],
-       [ 0.+0.j,  1.+0.j,  0.-0.j, -0.+0.j],
-       [ 0.+0.j,  0.-0.j,  1.-0.j,  0.+0.j],
-       [-0.+0.j,  0.+0.j,  0.-0.j,  1.-0.j]])</pre>
+<pre>array([[ 1.+0.j,  0.-0.j,  0.-0.j,  0.-0.j],
+       [-0.-0.j,  1.-0.j,  0.+0.j, -0.+0.j],
+       [ 0.+0.j,  0.-0.j,  1.-0.j,  0.-0.j],
+       [ 0.+0.j, -0.-0.j,  0.-0.j,  1.+0.j]])</pre>
 </div>
 
 </div>
@@ -14454,7 +14305,7 @@ $$ |E_{i}) \rightarrow F^{-\frac{1}{2}}|E_{i})$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In&nbsp;[131]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">Fsqrt</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">fractional_matrix_power</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
@@ -14476,7 +14327,7 @@ $$ |E_{i}) \rightarrow F^{-\frac{1}{2}}|E_{i})$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[132]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">TF</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="n">e</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">T</span><span class="p">]);</span> <span class="n">TF</span>
@@ -14492,16 +14343,16 @@ $$ |E_{i}) \rightarrow F^{-\frac{1}{2}}|E_{i})$$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[29]:</div>
+    <div class="prompt output_prompt">Out[132]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 1.+0.j, -0.+0.j,  0.-0.j, -0.-0.j],
-       [-0.-0.j,  1.+0.j,  0.-0.j, -0.+0.j],
-       [ 0.+0.j,  0.+0.j,  1.+0.j,  0.+0.j],
-       [-0.+0.j, -0.-0.j,  0.-0.j,  1.+0.j]])</pre>
+<pre>array([[ 1.+0.j,  0.+0.j, -0.+0.j, -0.+0.j],
+       [ 0.-0.j,  1.+0.j, -0.-0.j, -0.-0.j],
+       [-0.-0.j, -0.+0.j,  1.+0.j,  0.+0.j],
+       [-0.-0.j, -0.+0.j,  0.-0.j,  1.+0.j]])</pre>
 </div>
 
 </div>
@@ -14520,7 +14371,7 @@ $$ |E_{i}) \rightarrow F^{-\frac{1}{2}}|E_{i})$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="prompt input_prompt">In&nbsp;[133]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">rho</span>
@@ -14536,14 +14387,14 @@ $$ |E_{i}) \rightarrow F^{-\frac{1}{2}}|E_{i})$$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[30]:</div>
+    <div class="prompt output_prompt">Out[133]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[0.827253+0.j      , 0.252922+0.095884j],
-       [0.252922-0.095884j, 0.172747+0.j      ]])</pre>
+<pre>array([[0.74103 +0.j      , 0.327131+0.000948j],
+       [0.327131-0.000948j, 0.25897 +0.j      ]])</pre>
 </div>
 
 </div>
@@ -14554,7 +14405,7 @@ $$ |E_{i}) \rightarrow F^{-\frac{1}{2}}|E_{i})$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[134]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">e</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">rho</span><span class="p">)</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">T</span><span class="p">]);</span> <span class="n">p</span>
@@ -14570,14 +14421,14 @@ $$ |E_{i}) \rightarrow F^{-\frac{1}{2}}|E_{i})$$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[31]:</div>
+    <div class="prompt output_prompt">Out[134]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([ 0.070676+0.220495j,  0.260488-0.296622j, -0.084169+0.135832j,
-        0.786375-0.08452j ])</pre>
+<pre>array([ 0.079125-0.187423j, -0.098291+0.344842j,  0.231467+0.281337j,
+        0.382004-0.61774j ])</pre>
 </div>
 
 </div>
@@ -14596,7 +14447,7 @@ $$ |E_{i}) \rightarrow F^{-\frac{1}{2}}|E_{i})$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="prompt input_prompt">In&nbsp;[135]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sum</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span>
@@ -14612,14 +14463,14 @@ $$ |E_{i}) \rightarrow F^{-\frac{1}{2}}|E_{i})$$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[32]:</div>
+    <div class="prompt output_prompt">Out[135]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[0.827253-0.j      , 0.252922+0.095884j],
-       [0.252922-0.095884j, 0.172747-0.j      ]])</pre>
+<pre>array([[0.74103 +0.j      , 0.327131+0.000948j],
+       [0.327131-0.000948j, 0.25897 -0.j      ]])</pre>
 </div>
 
 </div>
@@ -14639,7 +14490,7 @@ $$ \sum_{i,j} |(E_{i}|E_{j})|^2 \ge \frac{(Tr[F])^2}{d^2} $$<p>With equality for
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[136]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sum</span><span class="p">([</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">vdot</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span>
@@ -14655,13 +14506,13 @@ $$ \sum_{i,j} |(E_{i}|E_{j})|^2 \ge \frac{(Tr[F])^2}{d^2} $$<p>With equality for
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[33]:</div>
+    <div class="prompt output_prompt">Out[136]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>4.00000000000003</pre>
+<pre>3.999999999999968</pre>
 </div>
 
 </div>
@@ -14672,7 +14523,7 @@ $$ \sum_{i,j} |(E_{i}|E_{j})|^2 \ge \frac{(Tr[F])^2}{d^2} $$<p>With equality for
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="prompt input_prompt">In&nbsp;[137]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="n">TF</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span>
@@ -14688,13 +14539,13 @@ $$ \sum_{i,j} |(E_{i}|E_{j})|^2 \ge \frac{(Tr[F])^2}{d^2} $$<p>With equality for
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[34]:</div>
+    <div class="prompt output_prompt">Out[137]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(4.00000000000003+0j)</pre>
+<pre>(3.999999999999969+0j)</pre>
 </div>
 
 </div>
@@ -14716,7 +14567,7 @@ $$ \sum_{i,j} |(E_{i}|E_{j})|^2 \ge \frac{(Tr[F])^2}{d^2} $$<p>With equality for
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="prompt input_prompt">In&nbsp;[139]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">random_haar_povm</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
@@ -14742,7 +14593,7 @@ $$ \sum_{i,j} |(E_{i}|E_{j})|^2 \ge \frac{(Tr[F])^2}{d^2} $$<p>With equality for
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="prompt input_prompt">In&nbsp;[140]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">E</span> <span class="o">=</span> <span class="n">random_haar_povm</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
@@ -14763,7 +14614,7 @@ $$ \sum_{i,j} |(E_{i}|E_{j})|^2 \ge \frac{(Tr[F])^2}{d^2} $$<p>With equality for
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="prompt input_prompt">In&nbsp;[141]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span><span class="o">/</span><span class="n">e</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">E</span><span class="p">]</span>
@@ -14784,7 +14635,7 @@ $$ F = \sum_{i} tr[E_{i}]|P_{i})(P_{i}| $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[142]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">F</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span>
@@ -14801,21 +14652,21 @@ $$ F = \sum_{i} tr[E_{i}]|P_{i})(P_{i}| $$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[38]:</div>
+    <div class="prompt output_prompt">Out[142]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(array([1.      +0.j, 0.237878-0.j, 0.136397-0.j, 0.00094 +0.j]),
- array([[ 0.707107-0.j      , -0.64438 +0.j      , -0.280364+0.005246j,
-          0.00524 -0.0782j  ],
-        [ 0.      +0.j      , -0.276715+0.090568j,  0.648675-0.024283j,
-          0.70275 +0.j      ],
-        [ 0.      -0.j      , -0.276715-0.090568j,  0.649129+0.j      ,
-         -0.696468-0.093754j],
-        [ 0.707107+0.j      ,  0.64438 +0.j      ,  0.280364-0.005246j,
-         -0.00524 +0.0782j  ]]))</pre>
+<pre>(array([1.      -0.j, 0.200444-0.j, 0.046406+0.j, 0.060062-0.j]),
+ array([[ 0.707107+0.j      ,  0.430302+0.033293j, -0.363281-0.310925j,
+         -0.080389-0.280396j],
+        [-0.      +0.j      ,  0.560117+0.j      ,  0.080418+0.51467j ,
+          0.64414 +0.j      ],
+        [-0.      -0.j      ,  0.553451+0.086159j,  0.520915+0.j      ,
+         -0.546292+0.341293j],
+        [ 0.707107-0.j      , -0.430302-0.033293j,  0.363281+0.310925j,
+          0.080389+0.280396j]]))</pre>
 </div>
 
 </div>
@@ -14834,7 +14685,7 @@ $$ F = \sum_{i} tr[E_{i}]|P_{i})(P_{i}| $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="prompt input_prompt">In&nbsp;[143]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">F</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
@@ -14850,13 +14701,13 @@ $$ F = \sum_{i} tr[E_{i}]|P_{i})(P_{i}| $$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[39]:</div>
+    <div class="prompt output_prompt">Out[143]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([1.-0.j, 0.+0.j, 0.-0.j, 1.+0.j])</pre>
+<pre>array([ 1.+0.j, -0.+0.j, -0.-0.j,  1.-0.j])</pre>
 </div>
 
 </div>
@@ -14875,7 +14726,7 @@ $$ F = \sum_{i} tr[E_{i}]|P_{i})(P_{i}| $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="prompt input_prompt">In&nbsp;[144]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Generates a random unit norm tight (vector) frame aka a rank-1 equal weight POVM.</span>
@@ -14903,14 +14754,14 @@ $$ F = \sum_{i} tr[E_{i}]|P_{i})(P_{i}| $$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[40]:</div>
+    <div class="prompt output_prompt">Out[144]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[1.+0.j, 0.-0.j],
-       [0.+0.j, 1.+0.j]])</pre>
+<pre>array([[ 1.+0.j, -0.-0.j],
+       [-0.+0.j,  1.+0.j]])</pre>
 </div>
 
 </div>
@@ -14929,7 +14780,7 @@ $$ F = \frac{d}{n} \sum_{i} |P_{i})(P_{i}| $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="prompt input_prompt">In&nbsp;[145]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">((</span><span class="n">d</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="nb">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="n">e</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">P</span><span class="p">]))[</span><span class="mi">0</span><span class="p">]</span>
@@ -14945,13 +14796,13 @@ $$ F = \frac{d}{n} \sum_{i} |P_{i})(P_{i}| $$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[41]:</div>
+    <div class="prompt output_prompt">Out[145]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([1.      +0.j, 0.185944-0.j, 0.200549-0.j, 0.613506+0.j])</pre>
+<pre>array([1.      -0.j, 0.670354-0.j, 0.194656-0.j, 0.13499 +0.j])</pre>
 </div>
 
 </div>
@@ -14984,7 +14835,7 @@ $$ \rho \rightarrow \rho - \frac{1}{d}I $$<p>We have the Hilbert-Schmidt inner p
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="prompt input_prompt">In&nbsp;[146]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">rho</span> <span class="o">=</span> <span class="n">rand_dm</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># pure state</span>
@@ -15001,13 +14852,13 @@ $$ \rho \rightarrow \rho - \frac{1}{d}I $$<p>We have the Hilbert-Schmidt inner p
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[42]:</div>
+    <div class="prompt output_prompt">Out[146]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0.7071067811865476</pre>
+<pre>0.7071067811865475</pre>
 </div>
 
 </div>
@@ -15018,7 +14869,7 @@ $$ \rho \rightarrow \rho - \frac{1}{d}I $$<p>We have the Hilbert-Schmidt inner p
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="prompt input_prompt">In&nbsp;[147]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">d</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">)</span> <span class="c1"># radius</span>
@@ -15034,7 +14885,7 @@ $$ \rho \rightarrow \rho - \frac{1}{d}I $$<p>We have the Hilbert-Schmidt inner p
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[43]:</div>
+    <div class="prompt output_prompt">Out[147]:</div>
 
 
 
@@ -15068,7 +14919,7 @@ $$ F = \frac{1}{d}\mathcal{I} + \sum_{i}Tr[E_{i}]|P_{i} - \frac{1}{d}I)(P_{i} - 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="prompt input_prompt">In&nbsp;[148]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">E</span> <span class="o">=</span> <span class="n">random_haar_povm</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
@@ -15082,7 +14933,7 @@ $$ F = \frac{1}{d}\mathcal{I} + \sum_{i}Tr[E_{i}]|P_{i} - \frac{1}{d}I)(P_{i} - 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="prompt input_prompt">In&nbsp;[150]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">F</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)]);</span> <span class="n">F</span>
@@ -15098,20 +14949,20 @@ $$ F = \frac{1}{d}\mathcal{I} + \sum_{i}Tr[E_{i}]|P_{i} - \frac{1}{d}I)(P_{i} - 
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[45]:</div>
+    <div class="prompt output_prompt">Out[150]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.546694-0.j      , -0.031522+0.037252j, -0.031522-0.037252j,
-         0.453306+0.j      ],
-       [-0.031522-0.037252j,  0.24209 -0.j      ,  0.148806+0.029259j,
-         0.031522+0.037252j],
-       [-0.031522+0.037252j,  0.148806-0.029259j,  0.24209 -0.j      ,
-         0.031522-0.037252j],
-       [ 0.453306-0.j      ,  0.031522-0.037252j,  0.031522+0.037252j,
-         0.546694+0.j      ]])</pre>
+<pre>array([[ 0.535329-0.j      ,  0.002444-0.034646j,  0.002444+0.034646j,
+         0.464671+0.j      ],
+       [ 0.002444+0.034646j,  0.116376-0.j      , -0.045241-0.050318j,
+        -0.002444-0.034646j],
+       [ 0.002444-0.034646j, -0.045241+0.050318j,  0.116376-0.j      ,
+        -0.002444+0.034646j],
+       [ 0.464671-0.j      , -0.002444+0.034646j, -0.002444-0.034646j,
+         0.535329-0.j      ]])</pre>
 </div>
 
 </div>
@@ -15122,7 +14973,7 @@ $$ F = \frac{1}{d}\mathcal{I} + \sum_{i}Tr[E_{i}]|P_{i} - \frac{1}{d}I)(P_{i} - 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="prompt input_prompt">In&nbsp;[151]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ID</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">));</span> <span class="n">ID</span>
@@ -15138,7 +14989,7 @@ $$ F = \frac{1}{d}\mathcal{I} + \sum_{i}Tr[E_{i}]|P_{i} - \frac{1}{d}I)(P_{i} - 
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[46]:</div>
+    <div class="prompt output_prompt">Out[151]:</div>
 
 
 
@@ -15158,7 +15009,7 @@ $$ F = \frac{1}{d}\mathcal{I} + \sum_{i}Tr[E_{i}]|P_{i} - \frac{1}{d}I)(P_{i} - 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="prompt input_prompt">In&nbsp;[152]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ID</span><span class="o">/</span><span class="n">d</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">([</span><span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">((</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span>
@@ -15174,20 +15025,20 @@ $$ F = \frac{1}{d}\mathcal{I} + \sum_{i}Tr[E_{i}]|P_{i} - \frac{1}{d}I)(P_{i} - 
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[47]:</div>
+    <div class="prompt output_prompt">Out[152]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.546694-0.j      , -0.031522+0.037252j, -0.031522-0.037252j,
-         0.453306+0.j      ],
-       [-0.031522-0.037252j,  0.24209 -0.j      ,  0.148806+0.029259j,
-         0.031522+0.037252j],
-       [-0.031522+0.037252j,  0.148806-0.029259j,  0.24209 -0.j      ,
-         0.031522-0.037252j],
-       [ 0.453306+0.j      ,  0.031522-0.037252j,  0.031522+0.037252j,
-         0.546694-0.j      ]])</pre>
+<pre>array([[ 0.535329-0.j      ,  0.002444-0.034646j,  0.002444+0.034646j,
+         0.464671+0.j      ],
+       [ 0.002444+0.034646j,  0.116376-0.j      , -0.045241-0.050318j,
+        -0.002444-0.034646j],
+       [ 0.002444-0.034646j, -0.045241+0.050318j,  0.116376-0.j      ,
+        -0.002444+0.034646j],
+       [ 0.464671+0.j      , -0.002444+0.034646j, -0.002444-0.034646j,
+         0.535329-0.j      ]])</pre>
 </div>
 
 </div>
@@ -15206,7 +15057,7 @@ $$ F = \frac{1}{d}\mathcal{I} + \sum_{i}Tr[E_{i}]|P_{i} - \frac{1}{d}I)(P_{i} - 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In&nbsp;[153]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">ID</span><span class="o">/</span><span class="n">d</span><span class="p">)</span>
@@ -15222,7 +15073,7 @@ $$ F = \frac{1}{d}\mathcal{I} + \sum_{i}Tr[E_{i}]|P_{i} - \frac{1}{d}I)(P_{i} - 
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[48]:</div>
+    <div class="prompt output_prompt">Out[153]:</div>
 
 
 
@@ -15252,7 +15103,7 @@ $$ \Pi_{0} = \mathbf{I} - \frac{1}{d}\mathcal{I}$$<p>This operator projects onto
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In&nbsp;[154]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">PI0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">ID</span><span class="o">/</span><span class="n">d</span><span class="p">;</span> <span class="n">PI0</span>
@@ -15268,7 +15119,7 @@ $$ \Pi_{0} = \mathbf{I} - \frac{1}{d}\mathcal{I}$$<p>This operator projects onto
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[49]:</div>
+    <div class="prompt output_prompt">Out[154]:</div>
 
 
 
@@ -15288,7 +15139,7 @@ $$ \Pi_{0} = \mathbf{I} - \frac{1}{d}\mathcal{I}$$<p>This operator projects onto
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="prompt input_prompt">In&nbsp;[155]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">PI0</span><span class="p">)</span>
@@ -15304,7 +15155,7 @@ $$ \Pi_{0} = \mathbf{I} - \frac{1}{d}\mathcal{I}$$<p>This operator projects onto
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[50]:</div>
+    <div class="prompt output_prompt">Out[155]:</div>
 
 
 
@@ -15333,7 +15184,7 @@ $$ \Pi_{0} | \rho ) = |\rho - \frac{1}{d}I)$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="prompt input_prompt">In&nbsp;[156]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">rho</span> <span class="o">=</span> <span class="n">rand_dm</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> <span class="n">rho</span>
@@ -15349,14 +15200,14 @@ $$ \Pi_{0} | \rho ) = |\rho - \frac{1}{d}I)$$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[51]:</div>
+    <div class="prompt output_prompt">Out[156]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.319287+0.j      , -0.279747+0.224692j],
-       [-0.279747-0.224692j,  0.680713+0.j      ]])</pre>
+<pre>array([[ 0.752401+0.j      , -0.104281+0.165283j],
+       [-0.104281-0.165283j,  0.247599+0.j      ]])</pre>
 </div>
 
 </div>
@@ -15367,7 +15218,7 @@ $$ \Pi_{0} | \rho ) = |\rho - \frac{1}{d}I)$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="prompt input_prompt">In&nbsp;[157]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">PI0</span> <span class="o">@</span> <span class="n">rho</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
@@ -15383,14 +15234,14 @@ $$ \Pi_{0} | \rho ) = |\rho - \frac{1}{d}I)$$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[52]:</div>
+    <div class="prompt output_prompt">Out[157]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([-0.180713+0.j      , -0.279747+0.224692j, -0.279747-0.224692j,
-        0.180713+0.j      ])</pre>
+<pre>array([ 0.252401+0.j      , -0.104281+0.165283j, -0.104281-0.165283j,
+       -0.252401+0.j      ])</pre>
 </div>
 
 </div>
@@ -15401,7 +15252,7 @@ $$ \Pi_{0} | \rho ) = |\rho - \frac{1}{d}I)$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="prompt input_prompt">In&nbsp;[158]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="n">rho</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
@@ -15417,14 +15268,14 @@ $$ \Pi_{0} | \rho ) = |\rho - \frac{1}{d}I)$$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[53]:</div>
+    <div class="prompt output_prompt">Out[158]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([-0.180713+0.j      , -0.279747+0.224692j, -0.279747-0.224692j,
-        0.180713+0.j      ])</pre>
+<pre>array([ 0.252401+0.j      , -0.104281+0.165283j, -0.104281-0.165283j,
+       -0.252401+0.j      ])</pre>
 </div>
 
 </div>
@@ -15438,7 +15289,7 @@ $$ \Pi_{0} | \rho ) = |\rho - \frac{1}{d}I)$$
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We denote $ \textbf{I}_{0}$ the left/right identity superoperator for the space of traceless Hermitian operators.</p>
 <p>Okay, so now for the punch line:</p>
-<p>A tight IC-POVM is one for which the elements $P-\frac{1}{d}I$ form a tight operator frame <em>for the space of traceless Hermitian operators</em>. I.e.:</p>
+<p>A tight IC-POVM is one for which the elements $P_{i}-\frac{1}{d}I$ form a tight operator frame <em>for the space of traceless Hermitian operators</em>. I.e.:</p>
 $$ \sum_{i} Tr[E_{i}] |P_{i} - \frac{1}{d}I)(P_{i} - \frac{1}{d}I| = a\textbf{I}_{0}$$<p>Or: $\Pi_{0}F\Pi_{0} = a\Pi_{0}$ for some $a &gt; 0$.</p>
 <p>Anticipating somewhat, let's try it out on the SIC we found before:</p>
 
@@ -15447,7 +15298,7 @@ $$ \sum_{i} Tr[E_{i}] |P_{i} - \frac{1}{d}I)(P_{i} - \frac{1}{d}I| = a\textbf{I}
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[54]:</div>
+<div class="prompt input_prompt">In&nbsp;[160]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">E</span> <span class="o">=</span> <span class="p">[(</span><span class="n">d</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">SIC</span><span class="o">.</span><span class="n">T</span><span class="p">]</span>
@@ -15462,7 +15313,7 @@ $$ \sum_{i} Tr[E_{i}] |P_{i} - \frac{1}{d}I)(P_{i} - \frac{1}{d}I| = a\textbf{I}
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="prompt input_prompt">In&nbsp;[164]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">PI0</span> <span class="o">@</span> <span class="n">F</span> <span class="o">@</span> <span class="n">PI0</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
@@ -15478,16 +15329,16 @@ $$ \sum_{i} Tr[E_{i}] |P_{i} - \frac{1}{d}I)(P_{i} - \frac{1}{d}I| = a\textbf{I}
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[55]:</div>
+    <div class="prompt output_prompt">Out[164]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.167+0.j, -0.   -0.j, -0.   +0.j, -0.167+0.j],
-       [-0.   +0.j,  0.333+0.j,  0.   +0.j,  0.   -0.j],
-       [-0.   -0.j,  0.   -0.j,  0.333+0.j,  0.   +0.j],
-       [-0.167+0.j,  0.   +0.j,  0.   -0.j,  0.167+0.j]])</pre>
+<pre>array([[ 0.167+0.j,  0.   +0.j,  0.   -0.j, -0.167+0.j],
+       [ 0.   -0.j,  0.333+0.j, -0.   +0.j, -0.   +0.j],
+       [ 0.   +0.j, -0.   -0.j,  0.333+0.j, -0.   -0.j],
+       [-0.167+0.j, -0.   -0.j, -0.   +0.j,  0.167+0.j]])</pre>
 </div>
 
 </div>
@@ -15498,7 +15349,7 @@ $$ \sum_{i} Tr[E_{i}] |P_{i} - \frac{1}{d}I)(P_{i} - \frac{1}{d}I| = a\textbf{I}
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[56]:</div>
+<div class="prompt input_prompt">In&nbsp;[162]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">PI0</span>
@@ -15514,7 +15365,7 @@ $$ \sum_{i} Tr[E_{i}] |P_{i} - \frac{1}{d}I)(P_{i} - \frac{1}{d}I| = a\textbf{I}
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[56]:</div>
+    <div class="prompt output_prompt">Out[162]:</div>
 
 
 
@@ -15551,7 +15402,7 @@ $$a = \frac{1}{d^2 -1}\sum_{i} Tr[E_{i}](P_{i} - \frac{1}{d}I|P_{i} - \frac{1}{d
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="prompt input_prompt">In&nbsp;[165]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="nb">sum</span><span class="p">([</span><span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">vdot</span><span class="p">((</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)]);</span><span class="n">a</span>
@@ -15567,13 +15418,13 @@ $$a = \frac{1}{d^2 -1}\sum_{i} Tr[E_{i}](P_{i} - \frac{1}{d}I|P_{i} - \frac{1}{d
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[57]:</div>
+    <div class="prompt output_prompt">Out[165]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(0.3333333225530726+0j)</pre>
+<pre>(0.33333332506703606+0j)</pre>
 </div>
 
 </div>
@@ -15592,7 +15443,7 @@ $$a = \frac{1}{d^2 -1}\sum_{i} Tr[E_{i}](P_{i} - \frac{1}{d}I|P_{i} - \frac{1}{d
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="prompt input_prompt">In&nbsp;[166]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="n">PI0</span>
@@ -15608,7 +15459,7 @@ $$a = \frac{1}{d^2 -1}\sum_{i} Tr[E_{i}](P_{i} - \frac{1}{d}I|P_{i} - \frac{1}{d
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[58]:</div>
+    <div class="prompt output_prompt">Out[166]:</div>
 
 
 
@@ -15637,7 +15488,7 @@ $$ F = \frac{1}{d}\mathcal{I} + a\Pi_{0} = a\textbf{I} + \frac{1-a}{ad}\mathcal{
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="prompt input_prompt">In&nbsp;[167]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ID</span><span class="o">/</span><span class="n">d</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">PI0</span>
@@ -15653,7 +15504,7 @@ $$ F = \frac{1}{d}\mathcal{I} + a\Pi_{0} = a\textbf{I} + \frac{1-a}{ad}\mathcal{
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[59]:</div>
+    <div class="prompt output_prompt">Out[167]:</div>
 
 
 
@@ -15673,7 +15524,7 @@ $$ F = \frac{1}{d}\mathcal{I} + a\Pi_{0} = a\textbf{I} + \frac{1-a}{ad}\mathcal{
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="prompt input_prompt">In&nbsp;[168]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
@@ -15689,16 +15540,16 @@ $$ F = \frac{1}{d}\mathcal{I} + a\Pi_{0} = a\textbf{I} + \frac{1-a}{ad}\mathcal{
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[60]:</div>
+    <div class="prompt output_prompt">Out[168]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.667+0.j, -0.   -0.j, -0.   +0.j,  0.333+0.j],
-       [-0.   +0.j,  0.333+0.j,  0.   +0.j,  0.   -0.j],
-       [-0.   -0.j,  0.   -0.j,  0.333+0.j,  0.   +0.j],
-       [ 0.333+0.j,  0.   +0.j,  0.   -0.j,  0.667+0.j]], dtype=complex64)</pre>
+<pre>array([[ 0.667+0.j,  0.   -0.j,  0.   +0.j,  0.333+0.j],
+       [ 0.   +0.j,  0.333+0.j, -0.   +0.j, -0.   +0.j],
+       [ 0.   -0.j, -0.   -0.j,  0.333+0.j, -0.   -0.j],
+       [ 0.333+0.j, -0.   -0.j, -0.   +0.j,  0.666+0.j]], dtype=complex64)</pre>
 </div>
 
 </div>
@@ -15709,7 +15560,7 @@ $$ F = \frac{1}{d}\mathcal{I} + a\Pi_{0} = a\textbf{I} + \frac{1-a}{ad}\mathcal{
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="prompt input_prompt">In&nbsp;[169]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">)</span><span class="o">*</span><span class="n">ID</span>
@@ -15725,7 +15576,7 @@ $$ F = \frac{1}{d}\mathcal{I} + a\Pi_{0} = a\textbf{I} + \frac{1-a}{ad}\mathcal{
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[61]:</div>
+    <div class="prompt output_prompt">Out[169]:</div>
 
 
 
@@ -15754,7 +15605,7 @@ $$ F^{-1} = \frac{1}{a}\textbf{I} - \frac{1-a}{ad}\mathcal{I} $$<p>.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="prompt input_prompt">In&nbsp;[170]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">Finv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">F</span><span class="p">);</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">Finv</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
@@ -15770,16 +15621,16 @@ $$ F^{-1} = \frac{1}{a}\textbf{I} - \frac{1-a}{ad}\mathcal{I} $$<p>.</p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[62]:</div>
+    <div class="prompt output_prompt">Out[170]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 2.001+0.j   ,  0.   +0.001j,  0.   -0.001j, -1.   +0.j   ],
-       [ 0.   -0.001j,  3.   -0.j   , -0.001-0.001j, -0.   +0.j   ],
-       [ 0.   +0.001j, -0.001+0.001j,  3.   -0.j   , -0.   -0.j   ],
-       [-1.   -0.j   , -0.   -0.j   , -0.   +0.j   ,  2.   -0.j   ]],
+<pre>array([[ 2.   +0.j   , -0.   +0.j   , -0.   -0.j   , -1.001+0.j   ],
+       [-0.   -0.j   ,  2.999+0.j   ,  0.002-0.002j,  0.   -0.001j],
+       [-0.   +0.j   ,  0.002+0.002j,  2.999+0.j   ,  0.   +0.001j],
+       [-1.001-0.j   ,  0.   +0.001j,  0.   -0.001j,  2.001+0.j   ]],
       dtype=complex64)</pre>
 </div>
 
@@ -15791,7 +15642,7 @@ $$ F^{-1} = \frac{1}{a}\textbf{I} - \frac{1-a}{ad}\mathcal{I} $$<p>.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[63]:</div>
+<div class="prompt input_prompt">In&nbsp;[172]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">a</span> <span class="o">-</span> <span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">d</span><span class="p">))</span><span class="o">*</span><span class="n">ID</span>
@@ -15807,7 +15658,7 @@ $$ F^{-1} = \frac{1}{a}\textbf{I} - \frac{1-a}{ad}\mathcal{I} $$<p>.</p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[63]:</div>
+    <div class="prompt output_prompt">Out[172]:</div>
 
 
 
@@ -15835,7 +15686,7 @@ $$ D_{i} = \frac{1}{a}P_{i} - \frac{1-a}{ad}I $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[64]:</div>
+<div class="prompt input_prompt">In&nbsp;[173]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="p">[(</span><span class="n">Finv</span> <span class="o">@</span> <span class="n">e</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">P</span><span class="p">];</span> <span class="n">D</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -15851,14 +15702,14 @@ $$ D_{i} = \frac{1}{a}P_{i} - \frac{1-a}{ad}I $$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[64]:</div>
+    <div class="prompt output_prompt">Out[173]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[-0.883105+0.j      , -0.385364-0.434673j],
-       [-0.385364+0.434673j,  1.882958+0.j      ]], dtype=complex64)</pre>
+<pre>array([[ 0.478568+0.j      , -1.109467+1.009989j],
+       [-1.109467-1.009989j,  0.520477+0.j      ]], dtype=complex64)</pre>
 </div>
 
 </div>
@@ -15869,7 +15720,7 @@ $$ D_{i} = \frac{1}{a}P_{i} - \frac{1-a}{ad}I $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="prompt input_prompt">In&nbsp;[174]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">D2</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span><span class="o">/</span><span class="n">a</span> <span class="o">-</span> <span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">d</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">P</span><span class="p">];</span> <span class="n">D2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -15885,14 +15736,14 @@ $$ D_{i} = \frac{1}{a}P_{i} - \frac{1-a}{ad}I $$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[65]:</div>
+    <div class="prompt output_prompt">Out[174]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[-0.882798+0.j      , -0.385525-0.435016j],
-       [-0.385525+0.435016j,  1.882799+0.j      ]])</pre>
+<pre>array([[ 0.47899 +0.j      , -1.108152+1.010721j],
+       [-1.108152-1.010721j,  0.52101 +0.j      ]])</pre>
 </div>
 
 </div>
@@ -15911,7 +15762,7 @@ $$\rho = \frac{1}{a}\sum_{i} p_{i}P_{i} - \frac{1-a}{ad}I$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[66]:</div>
+<div class="prompt input_prompt">In&nbsp;[178]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">e</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">rho</span><span class="p">)</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">E</span><span class="p">])</span><span class="o">.</span><span class="n">real</span><span class="p">;</span> <span class="n">p</span>
@@ -15927,13 +15778,13 @@ $$\rho = \frac{1}{a}\sum_{i} p_{i}P_{i} - \frac{1-a}{ad}I$$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[66]:</div>
+    <div class="prompt output_prompt">Out[178]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([0.336665, 0.068049, 0.363311, 0.232069])</pre>
+<pre>array([0.342437, 0.341537, 0.149521, 0.166767])</pre>
 </div>
 
 </div>
@@ -15944,7 +15795,7 @@ $$\rho = \frac{1}{a}\sum_{i} p_{i}P_{i} - \frac{1-a}{ad}I$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="prompt input_prompt">In&nbsp;[179]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">rho</span>
@@ -15960,14 +15811,14 @@ $$\rho = \frac{1}{a}\sum_{i} p_{i}P_{i} - \frac{1-a}{ad}I$$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[67]:</div>
+    <div class="prompt output_prompt">Out[179]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.319287+0.j      , -0.279747+0.224692j],
-       [-0.279747-0.224692j,  0.680713+0.j      ]])</pre>
+<pre>array([[ 0.752401+0.j      , -0.104281+0.165283j],
+       [-0.104281-0.165283j,  0.247599+0.j      ]])</pre>
 </div>
 
 </div>
@@ -15978,7 +15829,7 @@ $$\rho = \frac{1}{a}\sum_{i} p_{i}P_{i} - \frac{1-a}{ad}I$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="prompt input_prompt">In&nbsp;[180]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="nb">sum</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span> <span class="o">-</span> <span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">d</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
@@ -15994,14 +15845,14 @@ $$\rho = \frac{1}{a}\sum_{i} p_{i}P_{i} - \frac{1-a}{ad}I$$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[68]:</div>
+    <div class="prompt output_prompt">Out[180]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.319487+0.j     , -0.279826+0.22465j],
-       [-0.279826-0.22465j,  0.680793+0.j     ]])</pre>
+<pre>array([[ 0.752979+0.j      , -0.104117+0.165952j],
+       [-0.104117-0.165952j,  0.247807+0.j      ]])</pre>
 </div>
 
 </div>
@@ -16020,7 +15871,7 @@ $$ a = \frac{1}{d+1} $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[69]:</div>
+<div class="prompt input_prompt">In&nbsp;[181]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
@@ -16036,7 +15887,7 @@ $$ a = \frac{1}{d+1} $$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[69]:</div>
+    <div class="prompt output_prompt">Out[181]:</div>
 
 
 
@@ -16061,7 +15912,7 @@ $$F = \frac{\textbf{I}+\mathcal{I}}{d+1}$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[70]:</div>
+<div class="prompt input_prompt">In&nbsp;[182]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">ID</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
@@ -16077,7 +15928,7 @@ $$F = \frac{\textbf{I}+\mathcal{I}}{d+1}$$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[70]:</div>
+    <div class="prompt output_prompt">Out[182]:</div>
 
 
 
@@ -16097,7 +15948,7 @@ $$F = \frac{\textbf{I}+\mathcal{I}}{d+1}$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[71]:</div>
+<div class="prompt input_prompt">In&nbsp;[183]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
@@ -16113,16 +15964,16 @@ $$F = \frac{\textbf{I}+\mathcal{I}}{d+1}$$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[71]:</div>
+    <div class="prompt output_prompt">Out[183]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.667+0.j, -0.   -0.j, -0.   +0.j,  0.333+0.j],
-       [-0.   +0.j,  0.333+0.j,  0.   +0.j,  0.   -0.j],
-       [-0.   -0.j,  0.   -0.j,  0.333+0.j,  0.   +0.j],
-       [ 0.333+0.j,  0.   +0.j,  0.   -0.j,  0.667+0.j]], dtype=complex64)</pre>
+<pre>array([[ 0.667+0.j,  0.   -0.j,  0.   +0.j,  0.333+0.j],
+       [ 0.   +0.j,  0.333+0.j, -0.   +0.j, -0.   +0.j],
+       [ 0.   -0.j, -0.   -0.j,  0.333+0.j, -0.   -0.j],
+       [ 0.333+0.j, -0.   -0.j, -0.   +0.j,  0.666+0.j]], dtype=complex64)</pre>
 </div>
 
 </div>
@@ -16141,7 +15992,7 @@ $$ \rho = (d+1)\sum_{i} p_{i}|\psi_{i}\rangle\langle\psi_{i}| - I $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="prompt input_prompt">In&nbsp;[186]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="nb">sum</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
@@ -16157,14 +16008,14 @@ $$ \rho = (d+1)\sum_{i} p_{i}|\psi_{i}\rangle\langle\psi_{i}| - I $$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[72]:</div>
+    <div class="prompt output_prompt">Out[186]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.319487+0.j     , -0.279826+0.22465j],
-       [-0.279826-0.22465j,  0.680793+0.j     ]])</pre>
+<pre>array([[ 0.752979+0.j      , -0.104117+0.165952j],
+       [-0.104117-0.165952j,  0.247807+0.j      ]])</pre>
 </div>
 
 </div>
@@ -16175,7 +16026,7 @@ $$ \rho = (d+1)\sum_{i} p_{i}|\psi_{i}\rangle\langle\psi_{i}| - I $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[73]:</div>
+<div class="prompt input_prompt">In&nbsp;[187]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">rho</span>
@@ -16191,14 +16042,14 @@ $$ \rho = (d+1)\sum_{i} p_{i}|\psi_{i}\rangle\langle\psi_{i}| - I $$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[73]:</div>
+    <div class="prompt output_prompt">Out[187]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.319287+0.j      , -0.279747+0.224692j],
-       [-0.279747-0.224692j,  0.680713+0.j      ]])</pre>
+<pre>array([[ 0.752401+0.j      , -0.104281+0.165283j],
+       [-0.104281-0.165283j,  0.247599+0.j      ]])</pre>
 </div>
 
 </div>
@@ -16225,7 +16076,7 @@ $$ \sum_{i} Tr[E_{i}]\Pi_{i} \odot \Pi_{i} = \frac{1}{d+1}(\sum_{i} H_{i} \odot 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[74]:</div>
+<div class="prompt input_prompt">In&nbsp;[188]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sum</span><span class="p">([</span><span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span><span class="o">*</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">@</span> <span class="n">rho</span> <span class="o">@</span> <span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span>
@@ -16241,14 +16092,14 @@ $$ \sum_{i} Tr[E_{i}]\Pi_{i} \odot \Pi_{i} = \frac{1}{d+1}(\sum_{i} H_{i} \odot 
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[74]:</div>
+    <div class="prompt output_prompt">Out[188]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.439829-0.j      , -0.093275+0.074883j],
-       [-0.093275-0.074883j,  0.560265+0.j      ]])</pre>
+<pre>array([[ 0.584326+0.j      , -0.034706+0.055317j],
+       [-0.034706-0.055317j,  0.415936-0.j      ]])</pre>
 </div>
 
 </div>
@@ -16259,7 +16110,7 @@ $$ \sum_{i} Tr[E_{i}]\Pi_{i} \odot \Pi_{i} = \frac{1}{d+1}(\sum_{i} H_{i} \odot 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[75]:</div>
+<div class="prompt input_prompt">In&nbsp;[189]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">H</span> <span class="o">=</span> <span class="n">operator_basis</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
@@ -16276,14 +16127,14 @@ $$ \sum_{i} Tr[E_{i}]\Pi_{i} \odot \Pi_{i} = \frac{1}{d+1}(\sum_{i} H_{i} \odot 
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[75]:</div>
+    <div class="prompt output_prompt">Out[189]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.439762+0.j      , -0.093249+0.074897j],
-       [-0.093249-0.074897j,  0.560238+0.j      ]])</pre>
+<pre>array([[ 0.584134+0.j      , -0.03476 +0.055094j],
+       [-0.03476 -0.055094j,  0.415866+0.j      ]])</pre>
 </div>
 
 </div>
@@ -16302,10 +16153,10 @@ $$ \sum_{i} Tr[E_{i}]\Pi_{i} \otimes \Pi_{i} = \frac{1}{d+1}(\sum_{i} H_{i} \oti
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[76]:</div>
+<div class="prompt input_prompt">In&nbsp;[192]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sum</span><span class="p">([</span><span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="nb">sum</span><span class="p">([</span><span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)]),</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -16318,20 +16169,16 @@ $$ \sum_{i} Tr[E_{i}]\Pi_{i} \otimes \Pi_{i} = \frac{1}{d+1}(\sum_{i} H_{i} \oti
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[76]:</div>
+    <div class="prompt output_prompt">Out[192]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 0.666532+0.j      , -0.00004 +0.000114j, -0.00004 +0.000114j,
-         0.000128+0.000116j],
-       [-0.00004 -0.000114j,  0.333386+0.j      ,  0.333386+0.j      ,
-         0.000016-0.000001j],
-       [-0.00004 -0.000114j,  0.333386+0.j      ,  0.333386+0.j      ,
-         0.000016-0.000001j],
-       [ 0.000128-0.000116j,  0.000016+0.000001j,  0.000016+0.000001j,
-         0.666695+0.j      ]], dtype=complex64)</pre>
+<pre>array([[ 0.667+0.j,  0.   +0.j,  0.   +0.j, -0.   +0.j],
+       [ 0.   -0.j,  0.333+0.j,  0.333+0.j, -0.   +0.j],
+       [ 0.   -0.j,  0.333+0.j,  0.333+0.j, -0.   +0.j],
+       [-0.   -0.j, -0.   -0.j, -0.   -0.j,  0.666+0.j]], dtype=complex64)</pre>
 </div>
 
 </div>
@@ -16342,7 +16189,7 @@ $$ \sum_{i} Tr[E_{i}]\Pi_{i} \otimes \Pi_{i} = \frac{1}{d+1}(\sum_{i} H_{i} \oti
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[77]:</div>
+<div class="prompt input_prompt">In&nbsp;[191]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="nb">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="p">)))</span>
@@ -16358,7 +16205,7 @@ $$ \sum_{i} Tr[E_{i}]\Pi_{i} \otimes \Pi_{i} = \frac{1}{d+1}(\sum_{i} H_{i} \oti
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[77]:</div>
+    <div class="prompt output_prompt">Out[191]:</div>
 
 
 
@@ -16459,7 +16306,7 @@ $$ \sum_{i} Tr[E_{i}]\Pi_{i} \otimes \Pi_{i} = \frac{1}{d+1}(T + I \otimes I) = 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[80]:</div>
+<div class="prompt input_prompt">In&nbsp;[198]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">symmetric_projector</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
@@ -16475,7 +16322,7 @@ $$ \sum_{i} Tr[E_{i}]\Pi_{i} \otimes \Pi_{i} = \frac{1}{d+1}(T + I \otimes I) = 
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[80]:</div>
+    <div class="prompt output_prompt">Out[198]:</div>
 
 
 
@@ -16523,7 +16370,7 @@ $$\mathscr{B}_{Z} = \{ \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \begin{pmatrix} 0 \
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[81]:</div>
+<div class="prompt input_prompt">In&nbsp;[194]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span>
@@ -16540,7 +16387,7 @@ $$\mathscr{B}_{Z} = \{ \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \begin{pmatrix} 0 \
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[82]:</div>
+<div class="prompt input_prompt">In&nbsp;[195]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[(</span><span class="n">a</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">MUB</span><span class="p">]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">MUB</span><span class="p">])</span><span class="o">.</span><span class="n">real</span>
@@ -16556,7 +16403,7 @@ $$\mathscr{B}_{Z} = \{ \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \begin{pmatrix} 0 \
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[82]:</div>
+    <div class="prompt output_prompt">Out[195]:</div>
 
 
 
@@ -16578,7 +16425,7 @@ $$\mathscr{B}_{Z} = \{ \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \begin{pmatrix} 0 \
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[83]:</div>
+<div class="prompt input_prompt">In&nbsp;[199]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="nb">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">MUB</span><span class="p">])</span>
@@ -16594,7 +16441,7 @@ $$\mathscr{B}_{Z} = \{ \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \begin{pmatrix} 0 \
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[83]:</div>
+    <div class="prompt output_prompt">Out[199]:</div>
 
 
 
@@ -16614,7 +16461,7 @@ $$\mathscr{B}_{Z} = \{ \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \begin{pmatrix} 0 \
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[84]:</div>
+<div class="prompt input_prompt">In&nbsp;[201]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">F_MUB</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="nb">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="n">e</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">MUB</span><span class="p">]);</span> <span class="n">F_MUB</span>
@@ -16630,7 +16477,7 @@ $$\mathscr{B}_{Z} = \{ \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \begin{pmatrix} 0 \
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[84]:</div>
+    <div class="prompt output_prompt">Out[201]:</div>
 
 
 
@@ -16889,7 +16736,7 @@ $$ F = 1 \cdot \frac{1}{d}\mathcal{I} + \frac{1}{d+1}\cdot\Pi_{0} = \frac{\textb
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[90]:</div>
+<div class="prompt input_prompt">In&nbsp;[202]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">E</span> <span class="o">=</span> <span class="p">[(</span><span class="n">d</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">SIC</span><span class="o">.</span><span class="n">T</span><span class="p">]</span>
@@ -16906,7 +16753,7 @@ $$ F = 1 \cdot \frac{1}{d}\mathcal{I} + \frac{1}{d+1}\cdot\Pi_{0} = \frac{\textb
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[91]:</div>
+<div class="prompt input_prompt">In&nbsp;[203]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">Finv</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span>
@@ -16922,13 +16769,13 @@ $$ F = 1 \cdot \frac{1}{d}\mathcal{I} + \frac{1}{d+1}\cdot\Pi_{0} = \frac{\textb
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[91]:</div>
+    <div class="prompt output_prompt">Out[203]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(10.000003+6.3669386e-23j)</pre>
+<pre>(10.0000105-8.272215e-23j)</pre>
 </div>
 
 </div>
@@ -16939,7 +16786,7 @@ $$ F = 1 \cdot \frac{1}{d}\mathcal{I} + \frac{1}{d+1}\cdot\Pi_{0} = \frac{\textb
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[92]:</div>
+<div class="prompt input_prompt">In&nbsp;[204]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span><span class="o">*</span><span class="p">(</span><span class="n">d</span><span class="o">*</span><span class="p">(</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
@@ -16955,7 +16802,7 @@ $$ F = 1 \cdot \frac{1}{d}\mathcal{I} + \frac{1}{d+1}\cdot\Pi_{0} = \frac{\textb
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[92]:</div>
+    <div class="prompt output_prompt">Out[204]:</div>
 
 
 
